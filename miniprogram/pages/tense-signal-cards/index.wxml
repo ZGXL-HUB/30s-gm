@@ -1,0 +1,61 @@
+<view class="container">
+  <!-- 标题区域 -->
+  <view class="header">
+    <view class="title">时态标志词记忆卡片</view>
+    <view class="subtitle">点击卡片翻转查看标志词</view>
+  </view>
+
+  <!-- 卡片区域 -->
+  <view class="card-container">
+    <view class="card {{isFlipped ? 'flipped' : ''}}" bindtap="flipCard" wx:if="{{cards[currentIndex]}}">
+      <!-- 正面 -->
+      <view class="card-front">
+        <view class="card-content">
+          <view class="tense-title">{{cards[currentIndex].frontTitle}}</view>
+        </view>
+      </view>
+      
+      <!-- 背面 -->
+      <view class="card-back">
+        <view class="card-content">
+          <view class="signal-words">{{cards[currentIndex].backContent}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 进度指示器 -->
+  <view class="progress-indicator">
+    <view class="progress-dots">
+      <view class="dot {{index === currentIndex ? 'active' : ''}}" 
+            wx:for="{{cards}}" 
+            wx:key="id" 
+            wx:for-index="index"></view>
+    </view>
+    <view class="progress-text">{{currentIndex + 1}} / {{totalCards}}</view>
+  </view>
+
+  <!-- 导航按钮 -->
+  <view class="navigation">
+    <button class="nav-btn prev-btn" bindtap="prevCard">
+      <text class="nav-icon">←</text>
+      <text class="nav-text">上一张</text>
+    </button>
+    
+    <button class="nav-btn next-btn" bindtap="nextCard">
+      <text class="nav-text">下一张</text>
+      <text class="nav-icon">→</text>
+    </button>
+  </view>
+
+  <!-- 学习小贴士 -->
+  <view class="tips">
+    <view class="tips-icon">💡</view>
+    <view class="tips-content">
+      <view class="tips-title">学习小贴士</view>
+      <view class="tips-text">• 先看时态名称，回忆标志词，再翻转验证</view>
+      <view class="tips-text">• 重点记忆容易混淆的标志词</view>
+      <view class="tips-text">• 结合例句理解标志词的实际用法</view>
+    </view>
+  </view>
+</view> 

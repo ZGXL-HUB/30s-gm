@@ -1,0 +1,88 @@
+<!--云函数测试页面-->
+<view class="container">
+  <view class="header">
+    <text class="title">云函数测试页面</text>
+    <text class="subtitle">环境ID: cloud1-4gyu3i1id5f4e2fa1</text>
+  </view>
+
+  <view class="button-group">
+    <button class="btn btn-primary" bindtap="runTest" disabled="{{isLoading}}">
+      {{isLoading ? '测试中...' : '运行综合测试'}}
+    </button>
+    
+    <button class="btn btn-secondary" bindtap="testCloudFunctions" disabled="{{isLoading}}">
+      测试云函数
+    </button>
+    
+    <button class="btn btn-secondary" bindtap="testCloudDatabase" disabled="{{isLoading}}">
+      测试云数据库
+    </button>
+    
+    <button class="btn btn-danger" bindtap="clearResults" disabled="{{isLoading}}">
+      清除结果
+    </button>
+  </view>
+
+  <view class="results" wx:if="{{testResults}}">
+    <view class="result-section">
+      <text class="section-title">测试结果</text>
+      
+      <view class="result-item">
+        <text class="result-label">云函数测试:</text>
+        <text class="result-value {{testResults.cloudFunctions.success ? 'success' : 'error'}}">
+          {{testResults.cloudFunctions.success ? '✅ 通过' : '❌ 失败'}}
+        </text>
+      </view>
+      
+      <view class="result-item">
+        <text class="result-label">云数据库测试:</text>
+        <text class="result-value {{testResults.cloudDatabase.success ? 'success' : 'error'}}">
+          {{testResults.cloudDatabase.success ? '✅ 通过' : '❌ 失败'}}
+        </text>
+      </view>
+      
+      <view class="result-item">
+        <text class="result-label">测试时间:</text>
+        <text class="result-value">{{testResults.timestamp}}</text>
+      </view>
+    </view>
+
+    <view class="details" wx:if="{{testResults.cloudFunctions.results}}">
+      <text class="section-title">详细信息</text>
+      
+      <view class="detail-item">
+        <text class="detail-label">登录云函数:</text>
+        <text class="detail-value">{{testResults.cloudFunctions.results.login ? '正常' : '异常'}}</text>
+      </view>
+      
+      <view class="detail-item">
+        <text class="detail-label">helloCloud云函数:</text>
+        <text class="detail-value">{{testResults.cloudFunctions.results.helloCloud ? '正常' : '异常'}}</text>
+      </view>
+      
+      <view class="detail-item">
+        <text class="detail-label">练习进度云函数:</text>
+        <text class="detail-value">{{testResults.cloudFunctions.results.practiceProgress ? '正常' : '异常'}}</text>
+      </view>
+      
+      <view class="detail-item">
+        <text class="detail-label">题目管理云函数:</text>
+        <text class="detail-value">{{testResults.cloudFunctions.results.manageQuestions ? '正常' : '异常'}}</text>
+      </view>
+      
+      <view class="detail-item">
+        <text class="detail-label">题目数据云函数:</text>
+        <text class="detail-value">{{testResults.cloudFunctions.results.getQuestionsData ? '正常' : '异常'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="instructions">
+    <text class="section-title">使用说明</text>
+    <text class="instruction-text">1. 点击"运行综合测试"进行完整测试</text>
+    <text class="instruction-text">2. 查看测试结果和详细信息</text>
+    <text class="instruction-text">3. 如有失败，请检查云函数部署状态</text>
+    <text class="instruction-text">4. 确保云数据库集合权限设置正确</text>
+  </view>
+</view>
+

@@ -1,0 +1,202 @@
+<!--管理员反馈管理页面-->
+<view class="container">
+  <view class="header">
+    <view class="header-title">反馈管理</view>
+    <view class="header-desc">处理用户反馈和问题</view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-section">
+    <view class="stats-card">
+      <view class="stats-number">{{stats.total}}</view>
+      <view class="stats-label">总反馈</view>
+    </view>
+    <view class="stats-card pending">
+      <view class="stats-number">{{stats.pending}}</view>
+      <view class="stats-label">待处理</view>
+    </view>
+    <view class="stats-card processing">
+      <view class="stats-number">{{stats.processing}}</view>
+      <view class="stats-label">处理中</view>
+    </view>
+    <view class="stats-card resolved">
+      <view class="stats-number">{{stats.resolved}}</view>
+      <view class="stats-label">已解决</view>
+    </view>
+  </view>
+
+  <!-- 筛选器 -->
+  <view class="filter-section">
+    <view class="filter-item">
+      <text class="filter-label">状态：</text>
+      <picker bindchange="onStatusChange" value="{{statusIndex}}" range="{{statusOptions}}">
+        <view class="picker-text">{{statusOptions[statusIndex]}}</view>
+      </picker>
+    </view>
+    <view class="filter-item">
+      <text class="filter-label">优先级：</text>
+      <picker bindchange="onPriorityChange" value="{{priorityIndex}}" range="{{priorityOptions}}">
+        <view class="picker-text">{{priorityOptions[priorityIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 反馈列表 -->
+  <view class="feedback-list" wx:if="{{feedbackList.length > 0}}">
+    <view 
+      class="feedback-item priority-{{item.priority}}"
+      wx:for="{{feedbackList}}"
+      wx:key="feedbackId"
+      bindtap="viewFeedbackDetail"
+      data-feedback="{{item}}"
+    >
+      <view class="feedback-header">
+        <view class="feedback-title">{{item.title}}</view>
+        <view class="feedback-status status-{{item.status}}">
+          {{item.statusText}}
+        </view>
+      </view>
+      
+      <view class="feedback-content">{{item.content}}</view>
+      
+      <view class="feedback-meta">
+        <view class="feedback-time">{{item.createTimeText}}</view>
+        <view class="feedback-type">{{item.typeText}}</view>
+        <view class="feedback-priority">优先级: {{item.priority}}</view>
+      </view>
+      
+      <view class="feedback-actions">
+        <button 
+          class="action-btn primary" 
+          bindtap="updateStatus" 
+          data-feedback-id="{{item.feedbackId}}"
+          data-action="processing"
+          wx:if="{{item.status === 'pending'}}"
+        >
+          开始处理
+        </button>
+        <button 
+          class="action-btn success" 
+          bindtap="updateStatus" 
+          data-feedback-id="{{item.feedbackId}}"
+          data-action="resolved"
+          wx:if="{{item.status === 'processing'}}"
+        >
+          标记解决
+        </button>
+        <button 
+          class="action-btn secondary" 
+          bindtap="replyFeedback" 
+          data-feedback-id="{{item.feedbackId}}"
+        >
+          回复
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{feedbackList.length === 0 && !loading}}">
+    <view class="empty-icon">📝</view>
+    <view class="empty-title">暂无反馈</view>
+    <view class="empty-desc">当前筛选条件下没有反馈记录</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 反馈详情模态框 -->
+  <view class="modal-overlay" wx:if="{{showDetailModal}}" bindtap="hideDetailModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">反馈详情</view>
+        <view class="modal-close" bindtap="hideDetailModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <view class="detail-section">
+          <view class="detail-label">反馈类型</view>
+          <view class="detail-value">{{selectedFeedback.typeText}}</view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">优先级</view>
+          <view class="detail-value priority-{{selectedFeedback.priority}}">
+            {{selectedFeedback.priority}} ({{selectedFeedback.urgencyText}})
+          </view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">反馈内容</view>
+          <view class="detail-value">{{selectedFeedback.content}}</view>
+        </view>
+        
+        <view class="detail-section" wx:if="{{selectedFeedback.contact}}">
+          <view class="detail-label">联系方式</view>
+          <view class="detail-value">{{selectedFeedback.contact}}</view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">提交时间</view>
+          <view class="detail-value">{{selectedFeedback.createTimeText}}</view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">处理状态</view>
+          <view class="detail-value status-{{selectedFeedback.status}}">
+            {{selectedFeedback.statusText}}
+          </view>
+        </view>
+        
+        <view class="detail-section" wx:if="{{selectedFeedback.keywords && selectedFeedback.keywords.length > 0}}">
+          <view class="detail-label">关键词</view>
+          <view class="detail-value">
+            <text class="keyword-tag" wx:for="{{selectedFeedback.keywords}}" wx:key="index">
+              {{item}}
+            </text>
+          </view>
+        </view>
+        
+        <view class="detail-section" wx:if="{{selectedFeedback.reply}}">
+          <view class="detail-label">回复内容</view>
+          <view class="detail-value reply-content">{{selectedFeedback.reply}}</view>
+        </view>
+      </view>
+      
+      <view class="modal-actions">
+        <button class="modal-btn secondary" bindtap="hideDetailModal">关闭</button>
+        <button class="modal-btn primary" bindtap="replyFeedback" data-feedback-id="{{selectedFeedback.feedbackId}}">
+          回复用户
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 回复模态框 -->
+  <view class="modal-overlay" wx:if="{{showReplyModal}}" bindtap="hideReplyModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">回复用户</view>
+        <view class="modal-close" bindtap="hideReplyModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <textarea 
+          class="reply-textarea"
+          placeholder="请输入回复内容..."
+          value="{{replyContent}}"
+          bindinput="onReplyInput"
+          maxlength="500"
+        ></textarea>
+        <view class="char-count">{{replyContent.length}}/500</view>
+      </view>
+      
+      <view class="modal-actions">
+        <button class="modal-btn secondary" bindtap="hideReplyModal">取消</button>
+        <button class="modal-btn primary" bindtap="submitReply">发送回复</button>
+      </view>
+    </view>
+  </view>
+</view>

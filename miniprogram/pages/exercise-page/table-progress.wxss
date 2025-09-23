@@ -1,0 +1,243 @@
+/* 表格进度可视化样式 */
+
+.table-progress-container {
+  margin: 20rpx 0;
+  padding: 24rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.progress-section {
+  margin-bottom: 20rpx;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.progress-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-percentage {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.progress-bar-container {
+  margin-bottom: 16rpx;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12rpx;
+  background: #e9ecef;
+  border-radius: 6rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #52c41a 0%, #73d13d 100%);
+  border-radius: 6rpx;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+  padding: 12rpx;
+  background: white;
+  border-radius: 8rpx;
+  box-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+
+.stat-value {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 详细统计 */
+.detailed-stats {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #e9ecef;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  padding: 16rpx;
+  border-radius: 8rpx;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:active {
+  transform: scale(0.98);
+}
+
+.stat-card.correct {
+  background: linear-gradient(135deg, #f6ffed 0%, #e8f5e8 100%);
+  border: 1rpx solid #b7eb8f;
+}
+
+.stat-card.wrong {
+  background: linear-gradient(135deg, #fff2f0 0%, #ffebe6 100%);
+  border: 1rpx solid #ffccc7;
+}
+
+.stat-card.pending {
+  background: linear-gradient(135deg, #fff7e6 0%, #ffe7ba 100%);
+  border: 1rpx solid #ffd591;
+}
+
+.stat-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-number {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.stat-desc {
+  display: block;
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 操作按钮 */
+.progress-actions {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.toggle-stats {
+  background: #f0f0f0;
+  color: #666;
+  border: 1rpx solid #d9d9d9;
+}
+
+.toggle-stats:active {
+  background: #e6f7ff;
+  color: #1890ff;
+  border-color: #91d5ff;
+}
+
+.reset-progress {
+  background: #fff2f0;
+  color: #ff4d4f;
+  border: 1rpx solid #ffccc7;
+}
+
+.reset-progress:active {
+  background: #ffebe6;
+  color: #cf1322;
+  border-color: #ffa39e;
+}
+
+.btn-icon {
+  font-size: 24rpx;
+}
+
+.btn-text {
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 750rpx) {
+  .table-progress-container {
+    margin: 16rpx 0;
+    padding: 20rpx;
+  }
+  
+  .progress-title {
+    font-size: 26rpx;
+  }
+  
+  .progress-percentage {
+    font-size: 28rpx;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12rpx;
+  }
+  
+  .stat-card {
+    padding: 12rpx;
+  }
+  
+  .progress-actions {
+    flex-direction: column;
+  }
+}

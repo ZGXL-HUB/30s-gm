@@ -1,0 +1,64 @@
+<!--pages/grammar-test-sets/index.wxml-->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 测试类型选择界面 -->
+  <view class="type-selection" wx:elif="{{showTypeSelection}}">
+    <view class="header">
+      <text class="title">语法测试</text>
+      <text class="subtitle">请选择测试类型</text>
+    </view>
+    
+    <view class="type-options">
+      <view class="type-option" bindtap="selectTestType" data-type="choice">
+        <view class="type-icon">📝</view>
+        <view class="type-info">
+          <text class="type-name">选择题测试</text>
+          <text class="type-desc">从选项中选择正确答案</text>
+        </view>
+        <view class="type-arrow">></view>
+      </view>
+      
+      <view class="type-option" bindtap="selectTestType" data-type="fill">
+        <view class="type-icon">✏️</view>
+        <view class="type-info">
+          <text class="type-name">填空题测试</text>
+          <text class="type-desc">手动输入答案</text>
+        </view>
+        <view class="type-arrow">></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 测试套题列表界面 -->
+  <view class="test-sets" wx:else>
+    <view class="header">
+      <view class="header-left">
+        <text class="back-btn" bindtap="backToTypeSelection">← 返回</text>
+      </view>
+      <text class="title">语法测试套题</text>
+      <text class="subtitle">请选择一套测试题进行练习</text>
+    </view>
+    
+    <view class="test-sets-list">
+      <view 
+        wx:for="{{testSets}}" 
+        wx:key="id" 
+        class="test-set-item"
+        bindtap="onTestSetTap"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        <view class="set-info">
+          <text class="set-name">{{item.name}}</text>
+          <text class="set-desc">{{item.description}}</text>
+          <text class="set-count">{{item.questionCount}}道题目</text>
+        </view>
+        <view class="set-arrow">></view>
+      </view>
+    </view>
+  </view>
+</view>

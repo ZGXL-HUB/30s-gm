@@ -1,0 +1,3713 @@
+/* 引入表格优化样式 */
+@import './table-optimizations.wxss';
+@import './table-progress.wxss';
+@import './export-modal.wxss';
+
+.container {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.header {
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.question-list {
+  flex: 1;
+  width: 90%;
+  margin: 24rpx auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40rpx;
+}
+
+.question-item {
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%); /* 更现代的渐变背景 */
+  border-radius: 20rpx; /* 增加圆角 */
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.08); /* 增强阴影效果 */
+  padding: 32rpx 28rpx 24rpx 28rpx; /* 增加内边距 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx; /* 增加内部间距 */
+  margin-bottom: 0;
+  transition: all 0.3s ease; /* 添加过渡动画 */
+  border: 1rpx solid rgba(255, 255, 255, 0.8); /* 添加微妙的边框 */
+}
+
+.question-item:hover {
+  transform: translateY(-2rpx);
+  box-shadow: 0 12rpx 40rpx rgba(0,0,0,0.12);
+}
+
+.question-item.correct {
+  border-left: 8rpx solid #4CAF50;
+  background: linear-gradient(135deg, #f8fff8 0%, #f0f8f0 100%); /* 正确题目的特殊背景 */
+  box-shadow: 0 8rpx 32rpx rgba(76, 175, 80, 0.15);
+}
+
+.question-item.wrong {
+  border-left: 8rpx solid #f44336;
+  background: linear-gradient(135deg, #fff8f8 0%, #f8f0f0 100%); /* 错误题目的特殊背景 */
+  box-shadow: 0 8rpx 32rpx rgba(244, 67, 54, 0.15);
+}
+
+.question-content-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10rpx;
+  width: 100%;
+}
+
+.question-number {
+  font-size: 45rpx;
+  color: #1976d2; /* 更现代的蓝色 */
+  font-weight: 600; /* 增加字重 */
+  margin-bottom: 8rpx; /* 添加底部间距 */
+  display: flex;
+  align-items: center;
+  gap: 8rpx; /* 添加间距 */
+}
+
+.question-number::before {
+  content: '';
+  width: 8rpx;
+  height: 32rpx;
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  border-radius: 4rpx;
+  display: inline-block;
+}
+
+.question-text {
+  font-size: 22rpx;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 4rpx;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.answer-input {
+  width: 100%;
+  min-width: 200rpx;
+  min-height: 80rpx; /* 添加最小高度，确保输入框有足够空间 */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 12rpx; /* 增加圆角 */
+  padding: 20rpx 16rpx; /* 增加内边距 */
+  font-size: 30rpx;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+  background: #ffffff; /* 确保背景色 */
+  transition: all 0.3s ease; /* 添加过渡动画 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.answer-input:focus {
+  border-color: #2196f3; /* 焦点时的边框颜色 */
+  box-shadow: 0 0 0 3rpx rgba(33, 150, 243, 0.1); /* 焦点时的外发光效果 */
+  outline: none;
+}
+
+.answer-input:disabled {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* 禁用时的渐变背景 */
+  color: #6c757d;
+  border-color: #dee2e6;
+  cursor: not-allowed;
+}
+
+/* 微信小程序input的placeholder样式需要用::placeholder伪类 */
+.answer-input::placeholder {
+  font-size: 28rpx;
+  color: #bbb;
+  line-height: 1.2;
+}
+
+/* 新增：表格卡片样式 */
+.table-card {
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.table-content {
+  padding: 20rpx;
+}
+
+/* 表格滚动容器 */
+.table-scroll-container {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.interactive-table {
+  margin-top: 20rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 12rpx;
+  overflow: hidden;
+  min-width: 100%;
+  max-width: 100%;
+  background: #f8f9fa;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row.table-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.table-cell.header-cell {
+  background-color: #1890ff;
+  font-weight: bold;
+  color: white;
+}
+
+.header-text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.3;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.table-input {
+  width: 100%;
+  min-height: 80rpx; /* 增加最小高度从60rpx到80rpx */
+  max-width: 100%;
+  border: 1rpx solid #ddd;
+  border-radius: 6rpx;
+  padding: 16rpx 12rpx; /* 增加上下padding从8rpx到16rpx */
+  font-size: 24rpx;
+  text-align: center;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-input.correct {
+  background-color: #e8f5e8;
+  color: #4CAF50;
+  border: 1rpx solid #4CAF50;
+}
+
+.table-input.wrong {
+  background-color: #ffebee;
+  color: #f44336;
+  border: 1rpx solid #f44336;
+}
+
+.table-text {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 介词表格特殊样式 */
+.table-cell:first-child .table-text {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.table-cell:first-child {
+  justify-content: flex-start;
+}
+
+/* 介词表格右边列只显示输入框，不显示提示内容 */
+.preposition-table .table-cell:last-child .table-text {
+  display: none;
+}
+
+.preposition-table .table-cell:last-child .table-answer {
+  display: none;
+}
+
+/* 介词表格左边列文本左对齐 */
+.preposition-table .table-cell:first-child {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.preposition-table .table-cell:first-child .table-text {
+  text-align: left;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* 介词表格特殊样式 - 确保左边列左对齐，右边列只显示输入框 */
+.preposition-table.interactive-table .table-cell:first-child {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.preposition-table.interactive-table .table-cell:first-child .table-text {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+}
+
+.preposition-table.interactive-table .table-cell:last-child .table-text {
+  display: none !important;
+}
+
+.preposition-table.interactive-table .table-cell:last-child .table-answer {
+  display: none !important;
+}
+
+.table-answer {
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.table-answer.correct-answer {
+  color: #4CAF50;
+  background-color: #e8f5e8;
+  padding: 8rpx;
+  border-radius: 4rpx;
+  border: 1rpx solid #4CAF50;
+}
+
+/* 标志词单元格样式 */
+.marker-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  width: 100%;
+}
+
+.marker-hint {
+  font-size: 22rpx;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rpx;
+}
+
+/* 分离显示模式样式 */
+.separated-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.question-text {
+  font-size: 22rpx;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 4rpx;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.answer-display {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  width: 100%;
+  max-width: 100%;
+}
+
+.multi-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  width: 100%;
+  max-width: 100%;
+}
+
+.table-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+  padding: 0 20rpx 20rpx 20rpx;
+}
+
+.table-btn {
+  flex: 1;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+  border: 1rpx solid transparent;
+}
+
+.table-btn.answer-btn {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  color: white;
+  border: 1rpx solid #6c757d;
+}
+
+.table-btn.answer-btn:active {
+  background: linear-gradient(135deg, #5a6268 0%, #495057 100%);
+  transform: translateY(2rpx);
+  box-shadow: 0 1rpx 4rpx rgba(108, 117, 125, 0.4);
+}
+
+.table-btn.practice-btn {
+  background: linear-gradient(135deg, #4096ff 0%, #1677ff 100%);
+  color: white;
+  border: 1rpx solid #4096ff;
+}
+
+.table-btn.practice-btn:active {
+  background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
+  transform: translateY(2rpx);
+  box-shadow: 0 1rpx 4rpx rgba(64, 150, 255, 0.4);
+}
+
+.result {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  border-radius: 12rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1rpx solid #e9ecef;
+}
+
+.correct-text {
+  color: #2e7d32; /* 更深的绿色 */
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 16rpx;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(76, 175, 80, 0.2);
+}
+
+.wrong-text {
+  color: #d32f2f; /* 更深的红色 */
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 16rpx;
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(244, 67, 54, 0.05) 100%);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(244, 67, 54, 0.2);
+}
+
+.answer-text {
+  display: block;
+  color: #424242; /* 更深的文字颜色 */
+  font-size: 26rpx;
+  margin-top: 12rpx; /* 增加间距 */
+  padding: 12rpx 16rpx; /* 添加内边距 */
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); /* 温暖的背景色 */
+  border-radius: 8rpx;
+  border-left: 4rpx solid #ff9800; /* 橙色左边框 */
+  font-weight: 500;
+}
+
+/* 智能滚动提示系统 - 优化版本 */
+.analysis-text {
+  margin-top: 16rpx;
+  padding: 20rpx;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+  border-radius: 12rpx;
+  border-left: 6rpx solid #2196f3;
+  position: relative;
+  max-height: 200rpx;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+/* 滚动提示遮罩 - 更明显的渐变 */
+.analysis-text.has-overflow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 8rpx;
+  height: 50rpx;
+  background: linear-gradient(transparent 0%, rgba(248, 249, 250, 0.8) 50%, rgba(248, 249, 250, 0.95) 100%);
+  pointer-events: none;
+  border-radius: 0 0 12rpx 12rpx;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* 滚动提示文字 - 更醒目 */
+.analysis-text.has-overflow::before {
+  content: '📖 向下滚动查看更多';
+  position: absolute;
+  bottom: 12rpx;
+  right: 16rpx;
+  font-size: 22rpx;
+  color: #1976d2;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6rpx 12rpx;
+  border-radius: 12rpx;
+  z-index: 2;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  border: 1rpx solid rgba(33, 150, 243, 0.2);
+  animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(10rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 多邻国风格的解析容器 - 优化版 */
+.analysis-container {
+  position: relative;
+  margin-top: 16rpx;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.analysis-header {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 12rpx;
+  padding: 10rpx 16rpx;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.05) 100%);
+  border-radius: 20rpx;
+  width: fit-content;
+  border: 1rpx solid rgba(33, 150, 243, 0.2);
+  box-shadow: 0 2rpx 8rpx rgba(33, 150, 243, 0.1);
+}
+
+.analysis-icon {
+  font-size: 26rpx;
+  color: #2196f3;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.analysis-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1976d2;
+  letter-spacing: 0.5rpx;
+}
+
+/* 解析内容样式优化 */
+.analysis-content {
+  font-size: 28rpx;
+  color: #424242;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding-right: 8rpx;
+  display: block;
+  text-align: justify;
+}
+
+/* 滚动条样式优化 - 更现代 */
+.analysis-text::-webkit-scrollbar {
+  width: 10rpx;
+}
+
+.analysis-text::-webkit-scrollbar-track {
+  background: rgba(33, 150, 243, 0.05);
+  border-radius: 5rpx;
+  margin: 4rpx 0;
+}
+
+.analysis-text::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  border-radius: 5rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1rpx 3rpx rgba(0, 0, 0, 0.1);
+}
+
+.analysis-text::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  transform: scale(1.05);
+}
+
+/* 滚动时的视觉反馈 */
+.analysis-text:active {
+  box-shadow: 0 4rpx 16rpx rgba(33, 150, 243, 0.2);
+}
+
+
+
+/* 多邻国风格的解析标签 */
+.analysis-label {
+  font-size: 28rpx; /* 增加字体大小 */
+  font-weight: 600;
+  color: #1976d2; /* 更深的蓝色 */
+  margin-bottom: 12rpx; /* 增加底部间距 */
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 12rpx;
+  background: rgba(33, 150, 243, 0.1);
+  border-radius: 16rpx;
+  width: fit-content;
+}
+
+.analysis-label::before {
+  content: '💡';
+  font-size: 24rpx;
+}
+
+.analysis-content.collapsed {
+  max-height: 120rpx; /* 收起时的高度 */
+  overflow: hidden;
+  position: relative;
+}
+
+.analysis-content.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40rpx;
+  background: linear-gradient(transparent, #f8f9fa);
+  pointer-events: none;
+}
+
+.analysis-content.expanded {
+  max-height: none;
+  overflow: visible;
+}
+
+.analysis-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12rpx;
+  padding: 8rpx 16rpx;
+  background: rgba(33, 150, 243, 0.1);
+  border-radius: 20rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1rpx solid rgba(33, 150, 243, 0.2);
+}
+
+.analysis-toggle:hover {
+  background: rgba(33, 150, 243, 0.15);
+}
+
+.toggle-text {
+  font-size: 24rpx;
+  color: #1976d2;
+  margin-right: 8rpx;
+}
+
+.toggle-icon {
+  font-size: 20rpx;
+  color: #1976d2;
+  transition: transform 0.3s ease;
+}
+
+/* 实时批改状态样式 */
+.real-time-status {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+.status-text {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.status-correct {
+  color: #4CAF50;
+}
+
+.status-wrong {
+  color: #f44336;
+}
+
+/* 表格练习样式 */
+.table-exercise {
+  flex: 1;
+  width: 100%;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 40rpx;
+}
+
+.table-container {
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.table-title {
+  padding: 24rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  background-color: #f8f9fa;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.table-grid {
+  overflow-x: auto;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row.header-row {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.table-cell.header-cell {
+  font-weight: 600;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+.table-input {
+  width: 100%;
+  min-height: 80rpx; /* 增加最小高度从60rpx到80rpx */
+  max-width: 100%;
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 稍微增加圆角 */
+  padding: 20rpx 16rpx; /* 增加上下padding从12rpx到20rpx */
+  font-size: 28rpx; /* 增大字体大小 */
+  text-align: center;
+  background-color: #ffffff; /* 纯白背景 */
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.table-input:focus {
+  border-color: #4096ff;
+  box-shadow: 0 0 0 2rpx rgba(64, 150, 255, 0.2);
+}
+
+.table-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.table-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+  color: #f44336;
+  font-weight: 600;
+}
+
+.table-input.correct::after {
+  content: "✓";
+  position: absolute;
+  right: 8rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #52c41a;
+  font-weight: bold;
+}
+
+.footer {
+  padding: 24rpx 20rpx;
+  background-color: transparent;
+  border-top: none;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(82, 196, 26, 0.3), 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10rpx);
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-btn:active::before {
+  left: 100%;
+}
+
+.submit-btn:active {
+  transform: translateY(2rpx) scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(82, 196, 26, 0.4), 0 1rpx 4rpx rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #389e0d 0%, #237804 100%);
+}
+
+.submit-btn:disabled {
+  background: linear-gradient(135deg, #d9d9d9 0%, #bfbfbf 100%);
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  transform: none;
+}
+
+.submit-btn:disabled::before {
+  display: none;
+}
+
+.submit-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+  animation: pulse 2s infinite;
+}
+
+.submit-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.submit-btn[loading] {
+  background: linear-gradient(135deg, #52c41a 0%, #389e0d 50%, #52c41a 100%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 2s infinite;
+}
+
+/* 双按钮容器 */
+.double-btn-container {
+  display: flex;
+  gap: 12rpx;
+  width: 100%;
+}
+
+.correction-btn {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.variant-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.variant-btn:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.variant-btn.disabled {
+  background: #ccc !important;
+  color: #999 !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.variant-btn.disabled:active {
+  opacity: 0.6;
+  transform: none;
+}
+
+.standard-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: #fff;
+}
+
+.standard-btn:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.correction-btn .btn-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+}
+
+.correction-btn .btn-text {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16rpx;
+  padding: 20rpx 50rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f7f8fa;
+  justify-content: center;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  border: none;
+  transition: all 0.2s ease;
+  min-width: 160rpx;
+  max-width: 220rpx;
+}
+
+.hint-btn {
+  background-color: #fff7e6;
+  color: #fa8c16;
+  border: 1rpx solid #ffd591;
+}
+
+.hint-btn:active {
+  background-color: #ffe7ba;
+}
+
+.answer-btn {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1rpx solid #b7eb8f;
+}
+
+.answer-btn:active {
+  background-color: #d9f7be;
+}
+
+.btn-icon {
+  font-size: 28rpx;
+}
+
+.btn-text {
+  font-weight: 500;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 18rpx;
+  min-width: 540rpx;
+  max-width: 90vw;
+  min-height: 120rpx;
+  max-height: 80vh;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx 32rpx 32rpx 32rpx;
+  box-sizing: border-box;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #222;
+}
+
+.modal-close {
+  font-size: 44rpx;
+  color: #aaa;
+  font-weight: 400;
+  cursor: pointer;
+  position: absolute;
+  right: 32rpx;
+  top: 24rpx;
+  line-height: 1;
+}
+
+.modal-body {
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  word-break: break-all;
+}
+
+.hint-options {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  align-items: center;
+}
+
+.hint-option {
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  padding: 18rpx 40rpx;
+  font-size: 28rpx;
+  color: #333;
+  margin: 0 auto;
+  transition: background 0.2s;
+}
+
+.hint-option:active {
+  background: #e0e0e0;
+}
+
+.answer-modal {
+  min-width: 600rpx;
+  max-width: 96vw;
+  padding: 40rpx 20rpx 32rpx 20rpx;
+}
+
+.answer-table {
+  width: 100%;
+  margin-top: 12rpx;
+}
+
+.table-header, .table-row {
+  display: flex;
+  width: 100%;
+}
+
+.header-cell, .table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.header-cell {
+  font-weight: 600;
+  background: #f7f7f7;
+}
+
+.left-cell {
+  flex: 3;
+  min-width: 200rpx;
+  word-break: break-all;
+  text-align: left;
+}
+
+.right-cell {
+  flex: 1;
+  min-width: 80rpx;
+  text-align: center;
+}
+
+/* noun_002选择题样式 */
+.choice-row {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.choice-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.choice-option {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 16rpx;
+  background-color: #f8f9fa;
+  border-radius: 8rpx;
+  border: 1rpx solid #e9ecef;
+  min-width: 120rpx;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.choice-option:active {
+  transform: scale(0.98);
+}
+
+.choice-option.selected {
+  background-color: #e6f4ff;
+  border-color: #4096ff;
+}
+
+.choice-option.correct {
+  background-color: #f6ffed;
+  border-color: #52c41a;
+}
+
+.choice-option.wrong {
+  background-color: #fff1f0;
+  border-color: #f44336;
+}
+
+.option-label {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #4096ff;
+  background-color: #e6f4ff;
+  border-radius: 50%;
+  width: 32rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.choice-option.selected .option-label {
+  background-color: #4096ff;
+  color: #fff;
+}
+
+.choice-option.correct .option-label {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+.choice-option.wrong .option-label {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.option-text {
+  font-size: 26rpx;
+  color: #333;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.choice-option.selected .option-text {
+  font-size: 26rpx;
+  color: #333;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.choice-option.correct .option-text {
+  font-size: 26rpx;
+  color: #333;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.choice-option.wrong .option-text {
+  font-size: 26rpx;
+  color: #333;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.choice-input {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.choice-input-field {
+  width: 120rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.noun002-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.noun002-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  margin-bottom: 0;
+}
+
+.noun002-cell {
+  flex: 1;
+  min-width: 0;
+  border-radius: 0;
+  border: 1rpx solid #e9ecef;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  transition: all 0.2s;
+  padding: 0;
+  height: 80rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.noun002-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #888;
+  background: none;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  margin-right: 8rpx;
+  display: inline;
+}
+
+.noun002-text {
+  font-size: 28rpx;
+  color: #222;
+  font-weight: 500;
+  display: inline;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.noun002-cell.selected {
+  background: #e6f4ff;
+  border-color: #4096ff;
+}
+.noun002-cell.correct {
+  background: #f6ffed;
+  border-color: #52c41a;
+}
+.noun002-cell.wrong {
+  background: #fff1f0;
+  border-color: #f44336;
+}
+
+.noun002-row + .noun002-row {
+  border-top: none;
+}
+
+.noun002-row.row-correct {
+  background: #f6ffed;
+}
+.noun002-row.row-wrong {
+  background: #fff1f0;
+}
+
+.noun003-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.noun003-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  margin-bottom: 0;
+}
+.noun003-cell {
+  flex: 1;
+  min-width: 0;
+  border-radius: 0;
+  border: 1rpx solid #e9ecef;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  transition: all 0.2s;
+  padding: 0;
+  height: 80rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.noun003-cell.correct {
+  background: #f6ffed;
+  border-color: #52c41a;
+}
+.noun003-cell.wrong {
+  background: #fff1f0;
+  border-color: #f44336;
+}
+.noun003-text {
+  font-size: 28rpx;
+  color: #222;
+  font-weight: 500;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.table-title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+.noun-hint-btn {
+  display: flex;
+  align-items: center;
+  background: #fffbe6;
+  color: #faad14;
+  border: 1rpx solid #ffe58f;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  padding: 8rpx 20rpx;
+  margin-left: 16rpx;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.noun-hint-btn:active {
+  background: #ffe58f;
+}
+.noun-hint-icon {
+  font-size: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+} 
+
+.noun004-grid {
+  width: 100%;
+  box-sizing: border-box;
+}
+.noun004-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+.noun004-rule {
+  width: 33.33%;
+  min-width: 100rpx;
+  max-width: 40%;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: normal;
+  padding-right: 8rpx;
+  color: #faad14;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.noun004-cell {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.noun004-input {
+  width: 95%;
+  padding: 12rpx 10rpx; /* 增加内边距 */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 增加圆角 */
+  font-size: 26rpx;
+  background: #ffffff; /* 纯白背景 */
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+/* 代词表格专属样式 */
+.pronoun-table-header {
+  display: flex;
+  background-color: #f8f9fa;
+  border-bottom: 2rpx solid #e9ecef;
+}
+
+.pronoun-header-cell {
+  flex: 1;
+  padding: 16rpx 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+  border-right: 1rpx solid #e9ecef;
+  word-break: break-all;
+}
+
+.pronoun-header-cell:first-child {
+  flex: 0.8;
+  min-width: 80rpx;
+}
+
+.pronoun-header-cell:last-child {
+  border-right: none;
+}
+
+.pronoun-table-row {
+  display: flex;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.pronoun-table-row:last-child {
+  border-bottom: none;
+}
+
+.pronoun-table-cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  padding: 8rpx 4rpx;
+}
+
+.pronoun-table-cell:first-child {
+  flex: 0.8;
+  min-width: 80rpx;
+}
+
+.pronoun-table-cell:last-child {
+  border-right: none;
+}
+
+.pronoun-label {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.pronoun-input {
+  width: 90%;
+  min-height: 70rpx; /* 增加最小高度从50rpx到70rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 增加圆角 */
+  padding: 16rpx 8rpx; /* 增加上下padding从10rpx到16rpx */
+  font-size: 24rpx; /* 增大字体大小 */
+  text-align: center;
+  background-color: #ffffff; /* 纯白背景 */
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.pronoun-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.pronoun-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+  color: #f44336;
+}
+
+/* 介词表格专属样式 */
+.preposition-table-header {
+  display: flex;
+  background-color: #1890ff;
+  border-bottom: 2rpx solid #e9ecef;
+}
+
+.preposition-header-cell {
+  flex: 1;
+  padding: 16rpx 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #fff;
+  border-right: 1rpx solid #e9ecef;
+  word-break: break-all;
+}
+
+.preposition-header-cell:first-child {
+  flex: 0.6;
+  min-width: 120rpx;
+}
+
+.preposition-header-cell:last-child {
+  border-right: none;
+  flex: 1.4;
+}
+
+.preposition-table-row {
+  display: flex;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.preposition-table-row:last-child {
+  border-bottom: none;
+}
+
+.preposition-table-cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  padding: 8rpx 4rpx;
+}
+
+.preposition-table-cell:first-child {
+  flex: 0.6;
+  min-width: 120rpx;
+}
+
+.preposition-table-cell:last-child {
+  border-right: none;
+  flex: 1.4;
+}
+
+.preposition-hint-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8rpx;
+}
+
+.preposition-hint-text {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  word-break: keep-all;
+  white-space: nowrap;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preposition-input {
+  width: 90%;
+  min-height: 50rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 6rpx;
+  padding: 8rpx 6rpx;
+  font-size: 22rpx;
+  text-align: center;
+  background-color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preposition-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.preposition-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+  color: #f44336;
+}
+
+.preposition-meaning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8rpx;
+}
+
+.preposition-meaning-text {
+  font-size: 22rpx;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 现在分词表格专属样式 */
+.present-participle-grid {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.present-participle-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.present-participle-rule {
+  width: 33.33%;
+  min-width: 100rpx;
+  max-width: 40%;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: normal;
+  padding-right: 8rpx;
+  color: #52c41a;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.present-participle-rule:active {
+  opacity: 0.7;
+}
+
+.present-participle-cell {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.present-participle-input {
+  width: 95%;
+  min-height: 70rpx; /* 添加最小高度 */
+  padding: 20rpx 10rpx; /* 增加上下padding从12rpx到20rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 增加圆角 */
+  font-size: 26rpx;
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.present-participle-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.present-participle-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+}
+
+/* 过去分词表格专属样式 */
+.past-participle-grid {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.past-participle-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.past-participle-rule {
+  width: 33.33%;
+  min-width: 100rpx;
+  max-width: 40%;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: normal;
+  padding-right: 8rpx;
+  color: #fa8c16;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.past-participle-rule:active {
+  opacity: 0.7;
+}
+
+.past-participle-cell {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.past-participle-input {
+  width: 95%;
+  min-height: 70rpx; /* 添加最小高度 */
+  padding: 20rpx 10rpx; /* 增加上下padding从12rpx到20rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 增加圆角 */
+  font-size: 26rpx;
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.past-participle-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.past-participle-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+}
+
+/* 时态表格专属样式 */
+.tense-writing-grid {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1rpx solid #e9ecef;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.tense-header-row {
+  display: flex;
+  background-color: #f8f9fa;
+  border-bottom: 2rpx solid #e9ecef;
+}
+
+.tense-header-cell {
+  flex: 1;
+  padding: 16rpx 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+  border-right: 1rpx solid #e9ecef;
+  word-break: break-all;
+}
+
+.tense-header-cell:first-child {
+  flex: 1.2;
+  min-width: 120rpx;
+}
+
+.tense-header-cell:last-child {
+  border-right: none;
+}
+
+.tense-writing-row {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.tense-writing-row:last-child {
+  border-bottom: none;
+}
+
+.tense-writing-rule {
+  flex: 1.2;
+  min-width: 120rpx;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: normal;
+  padding: 12rpx 8rpx;
+  color: #1890ff;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-right: 1rpx solid #e9ecef;
+  background-color: #f0f5ff;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.tense-writing-rule:active {
+  opacity: 0.7;
+  background-color: #bae7ff;
+}
+
+.tense-writing-cell {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 8rpx 4rpx;
+  border-right: 1rpx solid #e9ecef;
+}
+
+.tense-writing-cell:last-child {
+  border-right: none;
+}
+
+.tense-writing-input {
+  width: 95%;
+  min-height: 70rpx; /* 添加最小高度 */
+  padding: 20rpx 10rpx; /* 增加上下padding从12rpx到20rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 增加圆角 */
+  font-size: 26rpx; /* 增大字体大小 */
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.2s ease;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.tense-writing-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.tense-writing-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+  color: #f44336;
+}
+
+.lightbulb {
+  margin-right: 8rpx;
+  font-size: 28rpx;
+  transition: color 0.2s ease;
+}
+
+/* 前后缀识别表格样式 */
+.prefix-suffix-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  margin-top: 20rpx;
+}
+
+.prefix-suffix-row {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  gap: 20rpx;
+}
+
+.prefix-suffix-examples {
+  flex: 2;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.4;
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.prefix-suffix-cell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 120rpx;
+}
+
+.prefix-suffix-input {
+  width: 100%;
+  height: 80rpx; /* 增加高度从60rpx到80rpx */
+  padding: 12rpx 20rpx; /* 增加上下padding从0到12rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  text-align: center;
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.prefix-suffix-input:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 4rpx rgba(24, 144, 255, 0.1);
+}
+
+.prefix-suffix-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.prefix-suffix-input.wrong {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+/* 比较级最高级表格样式 */
+.comparative-grid, .superlative-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  margin-top: 20rpx;
+}
+
+.comparative-row, .superlative-row {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  gap: 15rpx;
+}
+
+.comparative-rule, .superlative-rule {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  cursor: pointer;
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.4;
+  min-width: 0;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.comparative-cell, .superlative-cell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 80rpx;
+}
+
+.comparative-input, .superlative-input {
+  width: 100%;
+  height: 80rpx; /* 增加高度从60rpx到80rpx */
+  padding: 12rpx 16rpx; /* 增加上下padding从0到12rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  text-align: center;
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.comparative-input:focus, .superlative-input:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 4rpx rgba(24, 144, 255, 0.1);
+}
+
+.comparative-input.correct, .superlative-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.comparative-input.wrong, .superlative-input.wrong {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+/* 新的5列表格样式 */
+.adjective-table-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  margin-top: 20rpx;
+}
+
+.adjective-table-row {
+  display: flex;
+  align-items: stretch;
+  background: #fafafa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  gap: 15rpx;
+}
+
+.adjective-word-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 120rpx;
+  padding: 10rpx;
+}
+
+.adjective-rule-cell {
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+  padding: 10rpx;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.adjective-word-hint {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #1890ff;
+  text-align: center;
+  margin-bottom: 8rpx;
+}
+
+.adjective-table-input {
+  width: 100%;
+  height: 80rpx; /* 增加高度从60rpx到80rpx */
+  padding: 12rpx 16rpx; /* 增加上下padding从0到12rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx;
+  font-size: 26rpx; /* 增大字体大小 */
+  text-align: center;
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.adjective-table-input:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 4rpx rgba(24, 144, 255, 0.1);
+}
+
+.adjective-table-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.adjective-table-input.wrong {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+  color: #ff4d4f;
+  font-weight: 600;
+}
+
+/* 副词表格样式 */
+.adverb-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  margin-top: 20rpx;
+}
+
+.adverb-row {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  gap: 15rpx;
+}
+
+.adverb-rule {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  cursor: pointer;
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.4;
+  min-width: 0;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.adverb-cell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 80rpx;
+}
+
+.adverb-input {
+  width: 100%;
+  height: 80rpx; /* 增加高度从60rpx到80rpx */
+  padding: 12rpx 16rpx; /* 增加上下padding从0到12rpx */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  text-align: center;
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.adverb-input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4rpx rgba(16, 185, 129, 0.1);
+}
+
+.adverb-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.adverb-input.wrong {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+/* 规则说明样式 */
+.rules-section {
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  border-radius: 12rpx;
+  border-left: 6rpx solid #1890ff;
+  box-shadow: 0 4rpx 16rpx rgba(24, 144, 255, 0.1);
+}
+
+.rules-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+}
+
+.rules-icon {
+  font-size: 28rpx;
+  color: #1890ff;
+  flex-shrink: 0;
+  margin-top: 2rpx;
+}
+
+.rules-text {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.6;
+  text-align: justify;
+  flex: 1;
+}
+
+/* 语态表格专属样式 */
+.voice-writing-grid {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1rpx solid #e9ecef;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.voice-header-row {
+  display: flex;
+  background-color: #f8f9fa;
+  border-bottom: 2rpx solid #e9ecef;
+}
+
+.voice-header-cell {
+  flex: 1;
+  padding: 16rpx 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+  border-right: 1rpx solid #e9ecef;
+  word-break: break-all;
+}
+
+.voice-header-cell:last-child {
+  border-right: none;
+}
+
+.voice-writing-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #e9ecef;
+}
+
+.voice-writing-row:last-child {
+  border-bottom: none;
+}
+
+.voice-writing-cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 8rpx;
+  border-right: 1rpx solid #e9ecef;
+}
+
+.voice-writing-cell:last-child {
+  border-right: none;
+}
+
+.voice-word {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.voice-writing-input {
+  width: 95%;
+  padding: 12rpx 10rpx; /* 增加内边距 */
+  border: 2rpx solid #e1e5e9; /* 更柔和的边框颜色 */
+  border-radius: 8rpx; /* 增加圆角 */
+  font-size: 26rpx; /* 增大字体大小 */
+  background: #ffffff; /* 纯白背景 */
+  transition: all 0.2s ease;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333; /* 更深的文字颜色，提高对比度 */
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04); /* 添加微妙的阴影 */
+}
+
+.voice-writing-input:focus {
+  border-color: #722ed1;
+  box-shadow: 0 0 0 2rpx rgba(114, 46, 209, 0.2);
+}
+
+.voice-writing-input.correct {
+  border-color: #52c41a;
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.voice-writing-input.wrong {
+  border-color: #f44336;
+  background-color: #fff1f0;
+  color: #f44336;
+}
+
+/* 特殊类别引导按钮样式 */
+.special-guide-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #fff7e6 0%, #ffeaa7 100%);
+  border-top: 2rpx solid #ffa940;
+  padding: 24rpx 20rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(255, 169, 64, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.guide-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12rpx;
+}
+
+.guide-icon {
+  font-size: 36rpx;
+  opacity: 0.8;
+}
+
+.guide-text {
+  font-size: 28rpx;
+  color: #d48806;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.guide-btn {
+  padding: 16rpx 24rpx;
+  background: linear-gradient(135deg, #ffa940 0%, #ff8a00 100%);
+  color: #fff;
+  border: none;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4rpx 12rpx rgba(255, 169, 64, 0.3);
+  transition: all 0.3s ease;
+}
+
+.guide-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(255, 169, 64, 0.4);
+} 
+
+/* 标志词回顾卡按钮样式 */
+.signal-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12rpx 20rpx;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  box-shadow: 0 4rpx 12rpx rgba(79, 172, 254, 0.3);
+  transition: all 0.3s ease;
+  min-width: 180rpx;
+  height: 60rpx;
+  margin-left: 20rpx;
+}
+
+.signal-card-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(79, 172, 254, 0.4);
+}
+
+.signal-card-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.signal-card-text {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.table-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #e9ecef;
+  margin-bottom: 20rpx;
+} 
+
+/* 新增：知识点双向联动模块样式 */
+
+/* 双功能图标样式 */
+.function-icons {
+  display: flex;
+  gap: 10rpx;
+  margin: 10rpx 0;
+}
+
+.icon-btn {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.4);
+}
+
+.suffix-btn {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  box-shadow: 0 4rpx 12rpx rgba(76, 175, 80, 0.3);
+}
+
+.suffix-btn:active {
+  box-shadow: 0 2rpx 8rpx rgba(76, 175, 80, 0.4);
+}
+
+.rule-btn {
+  background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+  box-shadow: 0 4rpx 12rpx rgba(255, 152, 0, 0.3);
+}
+
+.rule-btn:active {
+  box-shadow: 0 2rpx 8rpx rgba(255, 152, 0, 0.4);
+}
+
+.icon-text {
+  font-size: 24rpx;
+  color: white;
+  font-weight: bold;
+}
+
+/* 知识卡片弹窗样式 */
+.knowledge-card {
+  max-width: 90vw;
+  max-height: 80vh;
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border-radius: 20rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.knowledge-content {
+  padding: 30rpx;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.knowledge-text {
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-line;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.knowledge-actions {
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx 30rpx 30rpx 30rpx;
+  border-top: 1rpx solid #e9ecef;
+  background-color: #f8f9fa;
+}
+
+.knowledge-btn {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 12rpx;
+  border: none;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-btn {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(108, 117, 125, 0.3);
+}
+
+.close-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(108, 117, 125, 0.4);
+}
+
+.practice-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.practice-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(102, 126, 234, 0.4);
+}
+
+/* 响应式调整 */
+@media (max-width: 750rpx) {
+  .knowledge-card {
+    max-width: 95vw;
+    margin: 20rpx;
+  }
+  
+  .knowledge-content {
+    padding: 20rpx;
+  }
+  
+  .knowledge-actions {
+    padding: 15rpx 20rpx 20rpx 20rpx;
+  }
+  
+  .knowledge-btn {
+    height: 70rpx;
+    font-size: 26rpx;
+  }
+}
+
+/* 空状态样式 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 40rpx;
+  text-align: center;
+  background: #fff;
+  border-radius: 16rpx;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin: 20rpx 0;
+}
+
+.empty-text {
+  font-size: 36rpx;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.empty-subtext {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 1.5;
+}
+
+/* 笔记和表格样式 */
+.notes-tables-section {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #e9ecef;
+}
+
+/* 笔记和表格加载状态样式 */
+.note-placeholder, .table-placeholder {
+  opacity: 0.7;
+  background-color: #f8f9fa;
+  border-left: 4rpx solid #ffc107;
+}
+
+.note-loading, .table-loading {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+  padding: 20rpx;
+  background-color: #f8f9fa;
+  border-radius: 8rpx;
+  margin: 10rpx 0;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.notes-section {
+  margin-bottom: 24rpx;
+}
+
+.note-item {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+  border-left: 4rpx solid #007bff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.note-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 12rpx;
+  text-align: left !important;
+}
+
+.note-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-line;
+  text-align: left !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* 新增：原生WXML组件样式，用于显示结构化笔记内容 */
+.structured-note-content {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  text-align: left;
+}
+
+.note-section {
+  margin-bottom: 30rpx;
+  border-left: 4rpx solid #1890ff;
+  padding-left: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 20rpx;
+  padding: 10rpx 0;
+  border-bottom: 2rpx solid #e6f7ff;
+}
+
+/* 考察示例标题样式 */
+.exam-example-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #722ed1;
+  margin-bottom: 15rpx;
+  padding: 8rpx 0;
+  border-left: 4rpx solid #722ed1;
+  padding-left: 15rpx;
+  background-color: #f9f0ff;
+  border-radius: 4rpx;
+}
+
+/* 题目样式 */
+.question-item {
+  font-size: 26rpx;
+  color: #1890ff;
+  margin-bottom: 8rpx;
+  padding: 10rpx 15rpx;
+  line-height: 1.4;
+  background-color: #e6f7ff;
+  border-radius: 6rpx;
+  border-left: 4rpx solid #1890ff;
+}
+
+/* 答案样式 */
+.answer-item {
+  font-size: 26rpx;
+  color: #52c41a;
+  margin-bottom: 8rpx;
+  padding: 10rpx 15rpx;
+  line-height: 1.4;
+  background-color: #f6ffed;
+  border-radius: 6rpx;
+  border-left: 4rpx solid #52c41a;
+}
+
+/* 解析样式 */
+.analysis-item {
+  font-size: 26rpx;
+  color: #722ed1;
+  margin-bottom: 8rpx;
+  padding: 10rpx 15rpx;
+  line-height: 1.4;
+  background-color: #f9f0ff;
+  border-radius: 6rpx;
+  border-left: 4rpx solid #722ed1;
+}
+
+/* 可点击规则样式 */
+.clickable-rule {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 12rpx;
+  background-color: #f8f9fa;
+  border-radius: 6rpx;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickable-rule:hover {
+  background-color: #e9ecef;
+}
+
+.rule-text {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 单词输入框样式 */
+.word-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx;
+}
+
+.word-hint {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #1890ff;
+  text-align: center;
+  margin-bottom: 4rpx;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 单词提示样式 */
+.word-hint-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8rpx;
+  min-height: 60rpx;
+}
+
+.word-hint-text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #1890ff;
+  text-align: center;
+}
+
+.subsection {
+  margin-bottom: 20rpx;
+  padding-left: 20rpx;
+}
+
+.subsection-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #1890ff;
+  margin: 15rpx 0 10rpx 0;
+}
+
+.note-item {
+  margin-bottom: 10rpx;
+}
+
+.list-item {
+  font-size: 26rpx;
+  color: #555;
+  margin-bottom: 8rpx;
+  padding-left: 20rpx;
+  line-height: 1.4;
+}
+
+.text-item {
+  font-size: 26rpx;
+  color: #555;
+  margin-bottom: 8rpx;
+  line-height: 1.4;
+}
+
+.continuous-question-item {
+  font-size: 26rpx;
+  color: #495057;
+  margin-bottom: 8rpx;
+  padding: 10rpx 15rpx;
+  line-height: 1.4;
+  background-color: #f8f9fa;
+  border-radius: 6rpx;
+  border-left: 3rpx solid #6c757d;
+}
+
+.question-item {
+  font-size: 26rpx;
+  color: #856404;
+  margin-bottom: 8rpx;
+  padding: 10rpx 15rpx;
+  line-height: 1.4;
+  background-color: #fff3cd;
+  border-radius: 6rpx;
+  border-left: 3rpx solid #ffc107;
+  font-weight: bold;
+}
+
+.answer-item {
+  font-size: 26rpx;
+  color: #155724;
+  margin-bottom: 8rpx;
+  padding: 10rpx 15rpx;
+  line-height: 1.4;
+  background-color: #d4edda;
+  border-radius: 6rpx;
+  border-left: 3rpx solid #28a745;
+}
+
+.example-item {
+  font-size: 26rpx;
+  color: #e74c3c;
+  margin-bottom: 8rpx;
+  padding-left: 20rpx;
+  line-height: 1.4;
+  background-color: #fdf2f2;
+  padding: 10rpx 15rpx;
+  border-radius: 6rpx;
+  border-left: 3rpx solid #e74c3c;
+}
+
+.correction-item {
+  font-size: 26rpx;
+  color: #dc3545;
+  margin-bottom: 8rpx;
+  padding-left: 20rpx;
+  line-height: 1.4;
+  background-color: #f8d7da;
+  padding: 10rpx 15rpx;
+  border-radius: 6rpx;
+  border-left: 3rpx solid #dc3545;
+}
+
+/* 规则与例子组合样式 */
+.rule-examples-group {
+  margin-bottom: 20rpx;
+  padding: 15rpx;
+  background-color: #f8f9fa;
+  border-radius: 8rpx;
+  border-left: 4rpx solid #17a2b8;
+}
+
+.rule-text {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 题目与答案组合样式 */
+.question-answer-group {
+  margin-bottom: 20rpx;
+  padding: 15rpx;
+  background-color: #fff3cd;
+  border-radius: 8rpx;
+  border-left: 4rpx solid #ffc107;
+}
+
+.question-text {
+  font-size: 22rpx;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 4rpx;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.answer-text {
+  font-size: 26rpx;
+  color: #155724;
+  background-color: #d4edda;
+  padding: 8rpx 12rpx;
+  border-radius: 4rpx;
+  line-height: 1.4;
+}
+
+/* 表格容器样式 */
+.table-container {
+  margin: 20rpx 0;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 练习表格容器样式 */
+.practice-table-container {
+  margin: 20rpx 0;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+}
+
+.practice-table-title {
+  background-color: #6c757d;
+  color: white;
+  padding: 15rpx 20rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row.header {
+  background-color: #1890ff;
+}
+
+.table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.table-cell:last-child {
+  border-right: none;
+}
+
+.table-cell.header-cell {
+  background-color: #1890ff;
+  color: white;
+  font-weight: bold;
+}
+
+.table-text {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.table-text.header-text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.3;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.table-row:nth-child(even):not(.header) {
+  background-color: #f9f9f9;
+}
+
+/* 新增：rich-text组件样式，支持表格显示 */
+.knowledge-rich-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  text-align: left;
+}
+
+/* 表格容器样式 */
+.knowledge-rich-text table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20rpx 0;
+  border: 1rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 表格行样式 */
+.knowledge-rich-text tr {
+  border-bottom: 1rpx solid #e0e0e0;
+}
+
+.knowledge-rich-text tr:last-child {
+  border-bottom: none;
+}
+
+/* 表格头部样式 */
+.knowledge-rich-text thead tr {
+  background-color: #1890ff;
+}
+
+.knowledge-rich-text thead th {
+  color: white;
+  font-weight: bold;
+  padding: 20rpx 15rpx;
+  font-size: 24rpx;
+  text-align: center;
+  border-right: 1rpx solid #e0e0e0;
+  line-height: 1.3;
+  word-break: break-word;
+  min-height: 60rpx;
+}
+
+.knowledge-rich-text thead th:last-child {
+  border-right: none;
+}
+
+/* 表格单元格样式 */
+.knowledge-rich-text td {
+  padding: 20rpx 15rpx;
+  font-size: 24rpx;
+  text-align: center;
+  border-right: 1rpx solid #e0e0e0;
+  line-height: 1.3;
+  word-break: break-word;
+  min-height: 60rpx;
+  vertical-align: middle;
+}
+
+.knowledge-rich-text td:last-child {
+  border-right: none;
+}
+
+/* 表格行交替背景色 */
+.knowledge-rich-text tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.knowledge-rich-text tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* 表格悬停效果 */
+.knowledge-rich-text tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* 笔记卡片中的表格特殊样式 */
+.knowledge-card .table-container {
+  margin: 15rpx 0;
+  border: 1rpx solid #d9d9d9;
+  border-radius: 6rpx;
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.08);
+}
+
+.knowledge-card .table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.knowledge-card .table-cell.header-cell {
+  background-color: #1890ff;
+  color: white;
+  font-weight: 600;
+}
+
+.knowledge-card .table-text {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.knowledge-card .table-text.header-text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.3;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 响应式表格 - 在小屏幕上自动调整 */
+@media (max-width: 750rpx) {
+  .table-cell,
+  .knowledge-rich-text td,
+  .knowledge-rich-text th {
+    padding: 12rpx 8rpx;
+    font-size: 20rpx;
+    min-height: 40rpx;
+  }
+  
+  .table-text,
+  .knowledge-rich-text {
+    font-size: 20rpx;
+  }
+}
+
+
+/* 表格输入框通用样式优化 - 确保所有输入框都有正确的宽度限制 */
+.table-input,
+.adjective-table-input,
+.adverb-input,
+.comparative-input,
+.superlative-input,
+.prefix-suffix-input,
+.tense-writing-input,
+.voice-writing-input,
+.present-participle-input,
+.past-participle-input,
+.pronoun-input,
+.noun004-input {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+
+
+/* 表格文本自动换行处理 */
+.table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.table-cell .table-text,
+.table-cell .table-answer,
+.table-cell .question-text,
+.table-cell .header-text,
+.table-cell .rule-text,
+.table-cell .word-hint,
+.table-cell .pronoun-label,
+.table-cell .voice-word,
+.table-cell .noun002-text,
+.table-cell .noun003-text,
+.table-cell .option-text {
+  font-size: 26rpx;
+  color: #333;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 表格输入框保持不换行（输入框内容不需要换行） */
+.table-input,
+.adjective-table-input,
+.adverb-input,
+.comparative-input,
+.superlative-input,
+.prefix-suffix-input,
+.tense-writing-input,
+.voice-writing-input,
+.present-participle-input,
+.past-participle-input,
+.pronoun-input,
+.noun004-input {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+/* 表格单元格最小宽度设置 */
+.table-cell {
+  flex: 1;
+  min-width: 120rpx;
+  padding: 16rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1rpx solid #e9ecef;
+  font-size: 24rpx;
+  text-align: center;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 60rpx;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* 确保表格行不会因为内容过长而变形 */
+.table-row {
+  min-height: 60rpx;
+  align-items: stretch;
+}
+
+/* 表格容器响应式处理 */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.table-grid {
+  min-width: 600rpx;
+  max-width: 100%;
+}
+
+/* 表格文本内容自动换行优化 */
+.table-text,
+.table-answer,
+.question-text,
+.header-text,
+.rule-text,
+.word-hint,
+.pronoun-label,
+.voice-word,
+.noun002-text,
+.noun003-text,
+.option-text,
+.prefix-suffix-examples,
+.comparative-rule,
+.superlative-rule,
+.adverb-rule,
+.tense-writing-rule,
+.present-participle-rule,
+.past-participle-rule,
+.noun004-rule {
+  width: 33.33%;
+  min-width: 100rpx;
+  max-width: 40%;
+  box-sizing: border-box;
+  word-break: break-word;
+  white-space: normal;
+  padding-right: 8rpx;
+  color: #faad14;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.4;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 表格文本自动换行处理 */
+.table-cell {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  line-height: 1.4 !important;
+}
+
+.table-cell .table-text,
+.table-cell .table-answer,
+.table-cell .question-text,
+.table-cell .header-text,
+.table-cell .rule-text,
+.table-cell .word-hint,
+.table-cell .pronoun-label,
+.table-cell .voice-word,
+.table-cell .noun002-text,
+.table-cell .noun003-text,
+.table-cell .option-text {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  line-height: 1.4 !important;
+  max-width: 100% !important;
+}
+
+/* 表格输入框保持不换行（输入框内容不需要换行） */
+.table-input,
+.adjective-table-input,
+.adverb-input,
+.comparative-input,
+.superlative-input,
+.prefix-suffix-input,
+.tense-writing-input,
+.voice-writing-input,
+.present-participle-input,
+.past-participle-input,
+.pronoun-input,
+.noun004-input {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+/* 表格单元格最小宽度设置 */
+.table-cell {
+  min-width: 80rpx !important;
+  max-width: 100% !important;
+}
+
+/* 确保表格行不会因为内容过长而变形 */
+.table-row {
+  min-height: 60rpx;
+  align-items: stretch;
+}
+
+/* 表格容器响应式处理 */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.table-grid {
+  min-width: 600rpx;
+  max-width: 100%;
+}
+
+/* 表格文本内容自动换行优化 */
+.table-text,
+.table-answer,
+.question-text,
+.header-text,
+.rule-text,
+.word-hint,
+.pronoun-label,
+.voice-word,
+.noun002-text,
+.noun003-text,
+.option-text,
+.prefix-suffix-examples,
+.comparative-rule,
+.superlative-rule,
+.adverb-rule,
+.tense-writing-rule,
+.present-participle-rule,
+.past-participle-rule,
+.noun004-rule {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  line-height: 1.4 !important;
+  max-width: 100% !important;
+}
+
+/* 响应式设计优化 */
+@media (max-width: 750rpx) {
+  .question-list {
+    width: 95%;
+    gap: 32rpx; /* 小屏幕下减少间距 */
+  }
+  
+  .question-item {
+    padding: 24rpx 20rpx 20rpx 20rpx; /* 小屏幕下减少内边距 */
+  }
+  
+  .question-number {
+    font-size: 40rpx; /* 小屏幕下减小字体 */
+  }
+  
+  .answer-input {
+    padding: 16rpx 12rpx; /* 小屏幕下减少内边距 */
+    font-size: 28rpx;
+    min-height: 80rpx; /* 保持最小高度，确保输入框有足够空间 */
+  }
+  
+  .analysis-content {
+    font-size: 26rpx; /* 小屏幕下减小字体 */
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  }
+  
+  .question-item {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    border: 1rpx solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .question-number {
+    color: #3498db;
+  }
+  
+  .answer-input {
+    background: #2c3e50;
+    border-color: #34495e;
+    color: #ecf0f1;
+    min-height: 80rpx; /* 保持最小高度，确保输入框有足够空间 */
+  }
+  
+  .analysis-text {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    border-left-color: #3498db;
+  }
+  
+  .analysis-content {
+    color: #ecf0f1;
+  }
+}
+
+/* 动画优化 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.question-item {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* 加载状态优化 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #2196f3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}

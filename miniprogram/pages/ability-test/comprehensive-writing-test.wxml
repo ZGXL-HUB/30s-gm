@@ -1,0 +1,160 @@
+<!--全面版书写能力测试页面-->
+<view class="container">
+  <!-- 欢迎界面 -->
+  <view class="welcome-screen" wx:if="{{testState === 'welcome'}}">
+    <view class="welcome-content">
+      <view class="welcome-title">🎯 重测书写能力（全面版）</view>
+      <view class="welcome-message">
+        亲爱的用户，现在让我们通过24道题全面测试您的书写能力，我会根据您的测试结果给出针对性的练习建议和表格链接！
+      </view>
+      <view class="test-info">
+        <view class="info-item">📝 题目数量：24道</view>
+        <view class="info-item">⏱️ 预计时间：15-20分钟</view>
+        <view class="info-item">🎯 测试目的：筛查19个表格的掌握情况</view>
+      </view>
+      <button class="start-btn" bindtap="startTest">开始全面测试</button>
+    </view>
+  </view>
+
+  <!-- 测试界面 -->
+  <view class="test-screen" wx:if="{{testState === 'testing'}}">
+    <view class="progress-header">
+      <view class="progress-title">全面版书写能力测试</view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{(currentQuestionIndex + 1) / totalQuestions * 100}}%"></view>
+      </view>
+      <view class="progress-text">第{{currentQuestionIndex + 1}}题 / 共{{totalQuestions}}题</view>
+    </view>
+    
+    <view class="question-card" wx:if="{{currentQuestion}}">
+      <view class="question-header">
+        <text class="question-number">第{{currentQuestionIndex + 1}}题</text>
+        <text class="question-type">书写能力测试</text>
+      </view>
+      
+      <view class="question-content">
+        <text class="question-text">{{currentQuestion.question}}</text>
+      </view>
+      
+      <view class="options-container">
+        <view 
+          class="option-item {{showAnswer && option === currentQuestion.correctAnswer ? 'correct' : ''}} {{showAnswer && option !== currentQuestion.correctAnswer && userAnswer === option ? 'incorrect' : ''}}"
+          wx:for="{{currentQuestion.options}}" 
+          wx:key="index"
+          wx:for-item="option"
+          data-option="{{option}}"
+          bindtap="selectOption"
+        >
+          <text class="option-label">{{option.charAt(0)}}</text>
+          <text class="option-text">{{option.substring(3)}}</text>
+        </view>
+      </view>
+      
+      <!-- 答案反馈 -->
+      <view class="answer-feedback" wx:if="{{showAnswer}}">
+        <view class="feedback-header {{isCorrect ? 'correct' : 'incorrect'}}">
+          <view class="feedback-icon">{{isCorrect ? '✓' : '✗'}}</view>
+          <view class="feedback-text">{{isCorrect ? '回答正确！' : '回答错误'}}</view>
+        </view>
+        
+        <view class="correct-answer" wx:if="{{!isCorrect}}">
+          <text>正确答案：{{currentQuestion.correctAnswer}}</text>
+        </view>
+        
+        <view class="question-analysis" wx:if="{{currentQuestion.analysis}}">
+          <text>{{currentQuestion.analysis}}</text>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="action-buttons">
+        <button wx:if="{{!showAnswer}}" 
+                class="action-btn disabled" 
+                disabled>
+          请选择答案
+        </button>
+        
+        <view wx:if="{{showAnswer}}" class="button-row">
+          <button wx:if="{{canGoBack}}" 
+                  class="action-btn secondary" 
+                  bindtap="prevQuestion">
+            返回上一题
+          </button>
+          
+          <button class="action-btn primary" 
+                  bindtap="nextQuestion">
+            {{currentQuestionIndex + 1 >= totalQuestions ? '完成测试' : '下一题'}}
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结果界面 -->
+  <view class="result-screen" wx:if="{{testState === 'result'}}">
+    <scroll-view class="result-scroll" scroll-y="true" enhanced="true" show-scrollbar="false">
+      <view class="result-content">
+        <view class="result-title">🎉 测试完成！</view>
+        
+        <view class="score-display">
+          <view class="score-circle">
+            <text class="score-number">{{score}}</text>
+            <text class="score-label">分</text>
+          </view>
+          <view class="score-description">
+            <text>正确率：{{score}}%</text>
+            <text>（{{correctCount}}/{{totalQuestions}}题）</text>
+          </view>
+          <view class="empty-answer-info" wx:if="{{emptyAnswerCount > 0}}">
+            <text class="empty-count">空答案：{{emptyAnswerCount}}题</text>
+          </view>
+        </view>
+
+        <view class="result-message">
+          <text wx:if="{{score >= 85}}">🎯 书写能力优秀！您已掌握大部分书写规范。</text>
+          <text wx:elif="{{score >= 70}}">👍 书写能力良好，还有提升空间。</text>
+          <text wx:elif="{{score >= 60}}">📚 书写能力基本合格，需要加强练习。</text>
+          <text wx:else>💪 书写能力需要大幅提升，建议系统学习。</text>
+        </view>
+
+        <view class="action-buttons">
+          <button class="action-btn secondary" bindtap="viewAnalysis">
+            查看解析
+          </button>
+          <button class="action-btn secondary" bindtap="viewReport">
+            查看报告
+          </button>
+          <button class="action-btn primary" bindtap="saveWrongQuestions">
+            保存错题到每日任务
+          </button>
+        </view>
+
+        <!-- 反馈入口 -->
+        <view class="feedback-section">
+          <view class="feedback-title">测试体验如何？</view>
+          <view class="feedback-desc">您的反馈帮助我们不断改进测试质量</view>
+          <button class="feedback-btn" bindtap="goToFeedback" data-type="experience" data-context="comprehensive_writing_test">
+            💬 反馈测试体验
+          </button>
+        </view>
+
+        <!-- 底部操作按钮 -->
+        <view class="bottom-actions">
+          <button class="bottom-btn secondary" bindtap="retakeTest">
+            重新测试
+          </button>
+          <button class="bottom-btn primary" bindtap="goHome">
+            返回主页
+          </button>
+        </view>
+
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-section" wx:if="{{loading}}">
+    <view class="loading-text">正在加载测试题目...</view>
+  </view>
+</view>
+

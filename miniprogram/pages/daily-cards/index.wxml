@@ -1,0 +1,133 @@
+<!--每日卡片系统页面-->
+<view class="container">
+  <!-- 头部信息 -->
+  <view class="header-section">
+    <view class="user-info">
+      <view class="user-level">{{userLevel}}</view>
+      <view class="streak-info">
+        <text class="streak-icon">🔥</text>
+        <text class="streak-days">连续学习{{streakDays}}天</text>
+      </view>
+    </view>
+    
+    <view class="progress-section">
+      <view class="progress-title">今日进度</view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{todayProgress / 200 * 100}}%"></view>
+      </view>
+      <view class="progress-text">{{todayProgress}}/200 XP</view>
+    </view>
+  </view>
+
+  <!-- 今日卡片列表 -->
+  <view class="cards-section">
+    <view class="section-title">
+      <text class="title-text">📅 今日任务</text>
+      <text class="refresh-btn" bindtap="refreshTasks">🔄</text>
+    </view>
+    
+    <view class="cards-container" wx:if="{{!loading}}">
+      <view 
+        class="daily-card {{item.isUnlocked ? 'unlocked' : 'locked'}} {{item.isCompleted ? 'completed' : ''}}"
+        wx:for="{{todayCards}}" 
+        wx:key="id"
+        data-card-id="{{item.id}}"
+        bindtap="onCardTap"
+      >
+        <view class="card-header">
+          <view class="card-icon">{{item.icon}}</view>
+          <view class="card-order">{{item.order}}</view>
+        </view>
+        
+        <view class="card-content">
+          <view class="card-title">{{item.title}}</view>
+          <view class="card-description">{{item.description}}</view>
+          
+          <view class="card-info">
+            <view class="difficulty-badge difficulty-{{item.difficulty}}">
+              {{item.difficulty === 'easy' ? '简单' : item.difficulty === 'medium' ? '中等' : '困难'}}
+            </view>
+            <view class="time-info">⏱️ {{item.estimatedTime}}</view>
+          </view>
+        </view>
+        
+        <view class="card-footer">
+          <view class="xp-reward">+{{item.xpReward}} XP</view>
+          <view class="card-status">
+            <text wx:if="{{item.isCompleted}}" class="status-completed">✓ 已完成</text>
+            <text wx:elif="{{item.isUnlocked}}" class="status-unlocked">开始任务</text>
+            <text wx:else class="status-locked">🔒 未解锁</text>
+          </view>
+        </view>
+        
+        <!-- 锁定遮罩 -->
+        <view class="lock-overlay" wx:if="{{!item.isUnlocked}}">
+          <view class="lock-icon">🔒</view>
+          <view class="unlock-condition">{{item.unlockCondition}}</view>
+        </view>
+        
+        <!-- 完成遮罩 -->
+        <view class="complete-overlay" wx:if="{{item.isCompleted}}">
+          <view class="complete-icon">🎉</view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 加载状态 -->
+    <view class="loading-container" wx:if="{{loading}}">
+      <view class="loading-text">正在生成今日任务...</view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-actions">
+    <button class="action-btn secondary" bindtap="viewAchievements">
+      🏆 查看成就
+    </button>
+    <button class="action-btn primary" bindtap="refreshTasks">
+      🔄 刷新任务
+    </button>
+  </view>
+</view>
+
+<!-- 卡片详情弹窗 -->
+<view class="card-detail-modal" wx:if="{{showCardDetail}}">
+  <view class="modal-overlay" bindtap="closeCardDetail"></view>
+  <view class="modal-content">
+    <view class="modal-header">
+      <view class="modal-title">{{selectedCard.title}}</view>
+      <view class="modal-close" bindtap="closeCardDetail">✕</view>
+    </view>
+    
+    <view class="modal-body">
+      <view class="detail-icon">{{selectedCard.icon}}</view>
+      <view class="detail-description">{{selectedCard.description}}</view>
+      
+      <view class="detail-info">
+        <view class="info-item">
+          <text class="info-label">难度：</text>
+          <text class="info-value difficulty-{{selectedCard.difficulty}}">
+            {{selectedCard.difficulty === 'easy' ? '简单' : selectedCard.difficulty === 'medium' ? '中等' : '困难'}}
+          </text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">预计时间：</text>
+          <text class="info-value">{{selectedCard.estimatedTime}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">经验奖励：</text>
+          <text class="info-value xp-value">+{{selectedCard.xpReward}} XP</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="modal-btn secondary" bindtap="closeCardDetail">
+        取消
+      </button>
+      <button class="modal-btn primary" bindtap="startCardTask">
+        开始任务
+      </button>
+    </view>
+  </view>
+</view>

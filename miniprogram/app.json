@@ -1,0 +1,98 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/grammar-select/index",
+    "pages/grammar-overview/index",
+    "pages/grammar-writing/index",
+    "pages/level-select/index",
+    "pages/exercise-page/index",
+    "pages/mistakes-page/index",
+    "pages/user-center/index",
+    "pages/sumRecord/index",
+    "pages/sumRecordResult/index",
+    "pages/updateRecord/index",
+    "pages/updateRecordResult/index",
+    "pages/updateRecordSuccess/index",
+    "pages/goods-list/index",
+    "pages/business/index",
+    "pages/examples/index",
+    "pages/exampleDetail/index",
+    "pages/custom-combo-setting/index",
+    "pages/noun-rules/index",
+    "pages/present-participle-rules/index",
+    "pages/past-participle-rules/index",
+    "pages/tense-writing-rules/index",
+    "pages/tense-signal-rules/index",
+    "pages/tense-signal-cards/index",
+    "pages/voice-rules/index",
+    "pages/voice-flip-cards/index",
+    "pages/adjective-prefix-suffix-rules/index",
+    "pages/comparison-writing-rules/index",
+    "pages/adverb-writing-rules/index",
+    "pages/special-practice/index",
+    "pages/ability-test/grammar-test",
+    "pages/ability-test/writing-test",
+    "pages/ability-test/simple-writing-test",
+    "pages/ability-test/comprehensive-writing-test",
+    "pages/ability-test/ability-map",
+    "pages/level-test/index",
+    "pages/grammar-test/grammar-test",
+    "pages/grammar-test-sets/index",
+    "pages/grammar-test-sets/test",
+    "pages/feedback/index",
+    "pages/feedback/history",
+    "pages/admin/feedback-management",
+    "pages/test-cloud/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#667eea",
+    "navigationBarTitleText": "语法练习",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/ability-test/ability-map",
+        "text": "能力测试",
+        "iconPath": "images/icons/business.png",
+        "selectedIconPath": "images/icons/business-active.png"
+      },
+      {
+        "pagePath": "pages/grammar-writing/index",
+        "text": "书写练习",
+        "iconPath": "images/icons/goods.png",
+        "selectedIconPath": "images/icons/goods-active.png"
+      },
+      {
+        "pagePath": "pages/user-center/index",
+        "text": "我的",
+        "iconPath": "images/icons/business.png",
+        "selectedIconPath": "images/icons/business-active.png"
+      }
+    ],
+    "color": "#888",
+    "selectedColor": "#667eea",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "lazyCodeLoading": "requiredComponents"
+}

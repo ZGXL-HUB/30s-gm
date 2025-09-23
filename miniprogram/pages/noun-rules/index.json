@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "名词变复数规则",
+  "navigationBarBackgroundColor": "#4A90E2",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "page-header-guide": "/components/page-header-guide/index"
+  }
+} 

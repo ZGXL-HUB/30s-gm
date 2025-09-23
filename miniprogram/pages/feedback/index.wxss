@@ -1,0 +1,358 @@
+/* 意见反馈页面样式 */
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 20rpx;
+}
+
+.feedback-content {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-top: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.feedback-section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.required {
+  color: #ff4757;
+  margin-left: 8rpx;
+}
+
+.optional {
+  color: #999;
+  font-size: 24rpx;
+  font-weight: normal;
+  margin-left: 8rpx;
+}
+
+/* 反馈类型选择 */
+.type-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.type-option {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 15rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s ease;
+}
+
+.type-option:active {
+  transform: scale(0.98);
+}
+
+.type-option.selected {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.type-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.type-content {
+  flex: 1;
+}
+
+.type-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.type-desc {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* 问题描述 */
+.feedback-textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 15rpx;
+  border: 2rpx solid #e0e0e0;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.feedback-textarea:focus {
+  border-color: #2196f3;
+  background: white;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+/* 联系方式 */
+.contact-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  background: #f8f9fa;
+  border-radius: 15rpx;
+  border: 2rpx solid #e0e0e0;
+  font-size: 28rpx;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.contact-input:focus {
+  border-color: #2196f3;
+  background: white;
+}
+
+/* 图片上传 */
+.image-upload {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.upload-item {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 15rpx;
+  object-fit: cover;
+}
+
+.delete-btn {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.upload-btn {
+  width: 160rpx;
+  height: 160rpx;
+  background: #f8f9fa;
+  border: 2rpx dashed #ccc;
+  border-radius: 15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:active {
+  transform: scale(0.98);
+}
+
+.upload-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.upload-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.upload-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.upload-tip {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 15rpx;
+}
+
+/* 提交按钮 */
+.submit-section {
+  margin-top: 60rpx;
+  text-align: center;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.submit-btn.active {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 8rpx 20rpx rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn.active:active {
+  transform: scale(0.98);
+}
+
+.submit-btn.disabled {
+  background: #e0e0e0;
+  color: #999;
+  box-shadow: none;
+}
+
+/* 历史记录按钮 */
+.history-section {
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.history-btn {
+  background: transparent;
+  color: #667eea;
+  border: 2rpx solid #667eea;
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.history-btn:active {
+  background: #667eea;
+  color: white;
+}
+
+/* 成功模态框 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40rpx;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 24rpx;
+  width: 100%;
+  max-width: 600rpx;
+  overflow: hidden;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 40rpx;
+  color: #999;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 40rpx 32rpx;
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 80rpx;
+  margin-bottom: 30rpx;
+}
+
+.success-message {
+  margin-bottom: 40rpx;
+}
+
+.success-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.success-desc {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  border: none;
+}
+
+.modal-btn.primary {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.modal-btn.secondary {
+  background: #f8f9fa;
+  color: #666;
+  border: 2rpx solid #e0e0e0;
+}

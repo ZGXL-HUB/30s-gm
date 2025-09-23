@@ -1,0 +1,105 @@
+{
+  "duplicates": [],
+  "emptyAnswers": [
+    {
+      "file": "writing_comparisons.js",
+      "category": "questions",
+      "index": 0,
+      "question": "形容词前后缀识别",
+      "reason": "表格单元格缺少题目内容"
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "questions",
+      "index": 1,
+      "question": "形容词比较级书写",
+      "reason": "表格单元格缺少题目内容"
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "questions",
+      "index": 2,
+      "question": "形容词最高级书写",
+      "reason": "表格单元格缺少题目内容"
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "questions",
+      "index": 0,
+      "question": "代词训练表",
+      "reason": "表格单元格缺少题目内容"
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "questions",
+      "index": 1,
+      "question": "代词训练表",
+      "reason": "表格单元格缺少题目内容"
+    }
+  ],
+  "formatErrors": [],
+  "tableStructureIssues": [
+    {
+      "file": "writing_comparisons.js",
+      "category": "questions",
+      "index": 0,
+      "issues": [
+        "缺少cell_id",
+        "缺少row",
+        "缺少col",
+        "缺少is_header标识"
+      ]
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "questions",
+      "index": 1,
+      "issues": [
+        "缺少cell_id",
+        "缺少row",
+        "缺少col",
+        "缺少is_header标识"
+      ]
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "questions",
+      "index": 2,
+      "issues": [
+        "缺少cell_id",
+        "缺少row",
+        "缺少col",
+        "缺少is_header标识"
+      ]
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "questions",
+      "index": 0,
+      "issues": [
+        "缺少cell_id",
+        "缺少row",
+        "缺少col",
+        "缺少is_header标识"
+      ]
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "questions",
+      "index": 1,
+      "issues": [
+        "缺少cell_id",
+        "缺少row",
+        "缺少col",
+        "缺少is_header标识"
+      ]
+    }
+  ],
+  "summary": {
+    "totalDuplicates": 0,
+    "totalEmptyAnswers": 5,
+    "totalFormatErrors": 0,
+    "totalTableIssues": 5,
+    "checkedAt": "2025-06-30T07:27:25.980Z"
+  }
+}

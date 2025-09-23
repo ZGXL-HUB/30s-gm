@@ -1,0 +1,73 @@
+<!-- 每日任务卡片组件模板 -->
+<view class="daily-task-card">
+  <!-- 顶部SegmentedControl切换栏（语法/书写） -->
+  <view class="segmented-control">
+    <view 
+      class="segmented-item {{selectedTab === '语法' ? 'active' : ''}}"
+      bindtap="handleTabChange"
+      data-index="0"
+    >
+      语法
+    </view>
+    <view 
+      class="segmented-item {{selectedTab === '书写' ? 'active' : ''}}"
+      bindtap="handleTabChange"
+      data-index="1"
+    >
+      书写
+    </view>
+  </view>
+  
+  <!-- 动态标题（题量+预计时间） -->
+  <view class="card-title">
+    今日{{selectedTab}} {{questionCount}}题·预计{{estimatedTime}}分钟
+  </view>
+  
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-text">正在生成智能推荐...</view>
+  </view>
+  
+  <!-- 题单内容（切换时重新拉取去重题） -->
+  <view class="question-list" wx:elif="{{currentQuestionList.length > 0}}">
+    <view class="question-item" wx:for="{{currentQuestionList}}" wx:key="qid">
+      <view class="question-number">第{{index + 1}}题</view>
+      <view class="question-text">{{item.text}}</view>
+      <view class="question-info">
+        <view class="question-category">{{item.grammar_point}}</view>
+        <view class="question-difficulty">难度{{item.difficulty_level}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:else>
+    <view class="empty-icon">📚</view>
+    <view class="empty-text">暂无推荐题目</view>
+    <view class="empty-desc">请稍后再试或刷新重试</view>
+    <view class="refresh-btn" bindtap="refreshQuestions">刷新</view>
+  </view>
+  
+  <!-- 底部操作按钮 -->
+  <view class="action-buttons" wx:if="{{currentQuestionList.length > 0}}">
+    <view class="btn secondary" bindtap="refreshQuestions">
+      刷新题目
+    </view>
+    <view class="btn primary" bindtap="startPractice">
+      开始练习
+    </view>
+  </view>
+  
+  <!-- 活跃占比信息（调试用） -->
+  <view class="debug-info" wx:if="{{false}}">
+    <view class="debug-title">活跃占比信息</view>
+    <view class="debug-content">
+      语法: {{recentActivityRatio.grammarRatio}}% | 
+      书写: {{recentActivityRatio.writingRatio}}%
+    </view>
+    <view class="debug-content">
+      连续学习: {{continueStudyDays}}天 | 
+      推荐题量: {{getQuestionCountByDay()}}题
+    </view>
+  </view>
+</view>

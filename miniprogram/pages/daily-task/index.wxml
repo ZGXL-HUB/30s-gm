@@ -1,0 +1,57 @@
+<!-- 每日任务页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="page-title">每日任务</view>
+    <view class="page-subtitle">智能推荐，个性化学习</view>
+  </view>
+
+  <!-- 每日任务卡片组件 -->
+  <daily-task-card
+    id="dailyTaskCard"
+    userId="{{userId}}"
+    continueStudyDays="{{continueStudyDays}}"
+    bind:questionsUpdated="onQuestionsUpdated"
+    bind:startPractice="onStartPractice"
+  ></daily-task-card>
+
+  <!-- 调试操作区域 -->
+  <view class="debug-section">
+    <view class="debug-title">调试操作</view>
+    
+    <view class="debug-buttons">
+      <view class="debug-btn" bindtap="refreshComponent">
+        刷新组件
+      </view>
+      <view class="debug-btn" bindtap="getComponentData">
+        获取数据
+      </view>
+    </view>
+    
+    <view class="debug-buttons">
+      <view class="debug-btn" bindtap="testDifferentDays">
+        测试天数
+      </view>
+      <view class="debug-btn" bindtap="testDifferentUsers">
+        测试用户
+      </view>
+    </view>
+  </view>
+
+  <!-- 当前状态信息 -->
+  <view class="status-info">
+    <view class="status-title">当前状态</view>
+    <view class="status-item">
+      <text class="status-label">用户ID:</text>
+      <text class="status-value">{{userId}}</text>
+    </view>
+    <view class="status-item">
+      <text class="status-label">连续天数:</text>
+      <text class="status-value">{{continueStudyDays}}天</text>
+    </view>
+    <view class="status-item">
+      <text class="status-label">推荐题量:</text>
+      <text class="status-value">{{continueStudyDays < 3 ? '8' : continueStudyDays > 7 ? '15' : '10'}}题</text>
+    </view>
+  </view>
+</view>

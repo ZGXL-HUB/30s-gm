@@ -1,0 +1,101 @@
+# 完整云函数终端部署命令
+# 云环境ID: cloud1-4gyu3i1id5f4e2fa1
+# 请在项目根目录执行这些命令
+
+# 确保在项目根目录
+cd "C:\Users\19772\WeChatProjects\miniprogram - 修改主界面 - 未清理数据豆 - 副本"
+
+# 方式1：使用微信开发者工具CLI部署（推荐）
+# 首先安装依赖，然后部署
+
+echo "开始部署所有云函数..."
+
+# 部署最高优先级云函数
+echo "部署 login..."
+cd cloudfunctions\login
+npm install
+cd ..\..
+
+echo "部署 helloCloud..."
+cd cloudfunctions\helloCloud
+npm install
+cd ..\..
+
+# 部署高优先级云函数
+echo "部署 practiceProgress..."
+cd cloudfunctions\practiceProgress
+npm install
+cd ..\..
+
+echo "部署 manageQuestions..."
+cd cloudfunctions\manageQuestions
+npm install
+cd ..\..
+
+echo "部署 getQuestionsData..."
+cd cloudfunctions\getQuestionsData
+npm install
+cd ..\..
+
+# 部署中优先级云函数
+echo "部署 adminAuth..."
+cd cloudfunctions\adminAuth
+npm install
+cd ..\..
+
+echo "部署 importExportQuestions..."
+cd cloudfunctions\importExportQuestions
+npm install
+cd ..\..
+
+echo "部署 initializeQuestions..."
+cd cloudfunctions\initializeQuestions
+npm install
+cd ..\..
+
+# 部署低优先级云函数
+echo "部署 feedbackManager..."
+cd cloudfunctions\feedbackManager
+npm install
+cd ..\..
+
+echo "部署 generateExcel..."
+cd cloudfunctions\generateExcel
+npm install
+cd ..\..
+
+echo "部署 generatePDF..."
+cd cloudfunctions\generatePDF
+npm install
+cd ..\..
+
+echo "部署 generateWord..."
+cd cloudfunctions\generateWord
+npm install
+cd ..\..
+
+echo "部署 quickstartFunctions..."
+cd cloudfunctions\quickstartFunctions
+npm install
+cd ..\..
+
+echo "所有云函数依赖安装完成！"
+echo "请在微信开发者工具中右键每个云函数文件夹选择'上传并部署'"
+
+# 方式2：如果您有微信开发者工具CLI，可以使用以下命令直接部署
+# 注意：需要先登录微信开发者工具CLI
+
+# wx-cli cloud functions deploy login --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy helloCloud --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy practiceProgress --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy manageQuestions --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy getQuestionsData --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy adminAuth --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy importExportQuestions --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy initializeQuestions --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy feedbackManager --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy generateExcel --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy generatePDF --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy generateWord --env cloud1-4gyu3i1id5f4e2fa1
+# wx-cli cloud functions deploy quickstartFunctions --env cloud1-4gyu3i1id5f4e2fa1
+

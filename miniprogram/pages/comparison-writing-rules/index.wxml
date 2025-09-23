@@ -1,0 +1,265 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="比较级最高级规则学习"
+    description="学习形容词比较级和最高级的四大变化规则，掌握规律变化方法"
+    tip="💡 提示：重点理解重读闭音节的判断方法，这是难点"
+    icon="📊"
+    storage-key="comparison-writing-rules-guide"
+  />
+  
+  <view class="content">
+    <view class="title">形容词比较级和最高级的书写规则</view>
+    <text class="description">帮你系统掌握变化规律</text>
+    
+    <!-- 规则变化 -->
+    <view class="section">
+      <view class="section-title">一、规则变化（四大核心类型）</view>
+      
+      <!-- 规则一 -->
+      <view class="rule-item">
+        <view class="rule-header">
+          <text class="rule-number">1.</text>
+          <text class="rule-name">直接加 -er/-est（适用于单音节词及部分双音节词）</text>
+        </view>
+        <view class="rule-details">
+          <view class="rule-pattern">
+            <text class="pattern-label">比较级：</text>
+            <text class="pattern-text">+ er</text>
+          </view>
+          <view class="rule-pattern">
+            <text class="pattern-label">最高级：</text>
+            <text class="pattern-text">+ est</text>
+          </view>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• fast → faster → fastest（快的）</text>
+            <text class="example-item">• hard → harder → hardest（努力的）</text>
+            <text class="example-item">• short → shorter → shortest（短的）</text>
+            <text class="example-item">• clean → cleaner → cleanest（干净的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 规则二 -->
+      <view class="rule-item">
+        <view class="rule-header">
+          <text class="rule-number">2.</text>
+          <text class="rule-name">以不发音的e结尾，加 -r/-st</text>
+        </view>
+        <view class="rule-details">
+          <view class="rule-pattern">
+            <text class="pattern-label">比较级：</text>
+            <text class="pattern-text">+ r</text>
+          </view>
+          <view class="rule-pattern">
+            <text class="pattern-label">最高级：</text>
+            <text class="pattern-text">+ st</text>
+          </view>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• nice → nicer → nicest（好的）</text>
+            <text class="example-item">• large → larger → largest（大的）</text>
+            <text class="example-item">• safe → safer → safest（安全的）</text>
+            <text class="example-item">• cute → cuter → cutest（可爱的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 规则三 -->
+      <view class="rule-item">
+        <view class="rule-header">
+          <text class="rule-number">3.</text>
+          <text class="rule-name">重读闭音节结尾，且词尾只有一个辅音字母，双写辅音字母+er/-est</text>
+        </view>
+        <view class="rule-details">
+          <view class="rule-pattern">
+            <text class="pattern-label">比较级：</text>
+            <text class="pattern-text">双写+ er</text>
+          </view>
+          <view class="rule-pattern">
+            <text class="pattern-label">最高级：</text>
+            <text class="pattern-text">双写+ est</text>
+          </view>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• big → bigger → biggest（大的）</text>
+            <text class="example-item">• hot → hotter → hottest（热的）</text>
+            <text class="example-item">• thin → thinner → thinnest（瘦的）</text>
+            <text class="example-item">• fat → fatter → fattest（胖的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 规则四 -->
+      <view class="rule-item">
+        <view class="rule-header">
+          <text class="rule-number">4.</text>
+          <text class="rule-name">以"辅音字母+y"结尾，变y为i+er/-est</text>
+        </view>
+        <view class="rule-details">
+          <view class="rule-pattern">
+            <text class="pattern-label">比较级：</text>
+            <text class="pattern-text">变y为i+ er</text>
+          </view>
+          <view class="rule-pattern">
+            <text class="pattern-label">最高级：</text>
+            <text class="pattern-text">变y为i+ est</text>
+          </view>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• happy → happier → happiest（快乐的）</text>
+            <text class="example-item">• easy → easier → easiest（容易的）</text>
+            <text class="example-item">• heavy → heavier → heaviest（重的）</text>
+            <text class="example-item">• busy → busier → busiest（忙碌的）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 双音节/多音节词的特殊规则 -->
+    <view class="section">
+      <view class="section-title">二、双音节/多音节词的特殊规则</view>
+      
+      <!-- 部分双音节词 -->
+      <view class="rule-item">
+        <view class="rule-header">
+          <text class="rule-number">1.</text>
+          <text class="rule-name">部分双音节词可加 -er/-est（以"辅音+le""-ow"结尾常见）</text>
+        </view>
+        <view class="rule-details">
+          <view class="rule-pattern">
+            <text class="pattern-label">比较级：</text>
+            <text class="pattern-text">+ er</text>
+          </view>
+          <view class="rule-pattern">
+            <text class="pattern-label">最高级：</text>
+            <text class="pattern-text">+ est</text>
+          </view>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• simple → simpler → simplest（简单的）</text>
+            <text class="example-item">• narrow → narrower → narrowest（狭窄的）</text>
+            <text class="example-item">• gentle → gentler → gentlest（温和的）</text>
+            <text class="example-item">• hollow → hollower → hollowest（中空的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 多音节词 -->
+      <view class="rule-item">
+        <view class="rule-header">
+          <text class="rule-number">2.</text>
+          <text class="rule-name">多音节词和大部分双音节词，加 more/most</text>
+        </view>
+        <view class="rule-details">
+          <view class="rule-pattern">
+            <text class="pattern-label">比较级：</text>
+            <text class="pattern-text">more + 形容词</text>
+          </view>
+          <view class="rule-pattern">
+            <text class="pattern-label">最高级：</text>
+            <text class="pattern-text">most + 形容词</text>
+          </view>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• beautiful → more beautiful → most beautiful（美丽的）</text>
+            <text class="example-item">• dangerous → more dangerous → most dangerous（危险的）</text>
+            <text class="example-item">• intelligent → more intelligent → most intelligent（聪明的）</text>
+            <text class="example-item">• expensive → more expensive → most expensive（昂贵的）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 不规则变化 -->
+    <view class="section">
+      <view class="section-title">三、不规则变化（需单独记忆的核心词汇）</view>
+      
+      <view class="irregular-table">
+        <view class="table-header">
+          <view class="table-cell header-cell">原级</view>
+          <view class="table-cell header-cell">比较级</view>
+          <view class="table-cell header-cell">最高级</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">good/well</view>
+          <view class="table-cell">better</view>
+          <view class="table-cell">best</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">bad/badly</view>
+          <view class="table-cell">worse</view>
+          <view class="table-cell">worst</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">many/much</view>
+          <view class="table-cell">more</view>
+          <view class="table-cell">most</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">little</view>
+          <view class="table-cell">less</view>
+          <view class="table-cell">least</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">far</view>
+          <view class="table-cell">farther/further</view>
+          <view class="table-cell">farthest/furthest</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">old</view>
+          <view class="table-cell">older/elder</view>
+          <view class="table-cell">oldest/eldest</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 特殊注意事项 -->
+    <view class="section">
+      <view class="section-title">四、特殊注意事项</view>
+      
+      <view class="note-item">
+        <view class="note-title">1. -ed/-ing形容词的比较级：</view>
+        <view class="note-examples">
+          <text class="note-example">例：tired → more tired → most tired（疲劳的）</text>
+          <text class="note-example">例：interesting → more interesting → most interesting（有趣的）</text>
+        </view>
+      </view>
+
+      <view class="note-item">
+        <view class="note-title">2. 复合形容词的比较级：</view>
+        <view class="note-examples">
+          <text class="note-example">例：well-known → more well-known → most well-known（著名的）</text>
+        </view>
+      </view>
+
+      <view class="note-item">
+        <view class="note-title">3. 以 -ly 结尾的副词性形容词：</view>
+        <view class="note-examples">
+          <text class="note-example">多数需加 more/most（如 slowly → more slowly），但 early 例外：</text>
+          <text class="note-example">early → earlier → earliest（早的）</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 总结 -->
+    <view class="summary">
+      <view class="summary-text">
+        通过"规则变化+不规则特例"的分类记忆，能快速掌握形容词比较级和最高级的写法。遇到不确定的词时，可先判断音节数和词尾结构哦！
+      </view>
+    </view>
+  </view>
+</view> 

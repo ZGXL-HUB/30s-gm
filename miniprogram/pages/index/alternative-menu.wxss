@@ -1,0 +1,94 @@
+/* 二级菜单替代方案样式 */
+.menu-card {
+  position: relative;
+}
+
+.card-main-action {
+  position: absolute;
+  top: 50%;
+  right: 20rpx;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 16rpx;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #fff;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  box-shadow: 0 2rpx 8rpx rgba(99, 102, 241, 0.3);
+  transition: all 0.2s ease;
+}
+
+.card-main-action:active {
+  transform: translateY(-50%) scale(0.95);
+  box-shadow: 0 1rpx 4rpx rgba(99, 102, 241, 0.4);
+}
+
+.action-icon {
+  font-size: 20rpx;
+  transform: rotate(90deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 20rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
+  border: 1rpx solid #e2e8f0;
+  overflow: hidden;
+  transform: translateY(-8rpx);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+  min-width: 200rpx;
+}
+
+.dropdown-menu.show {
+  transform: translateY(8rpx);
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 24rpx 20rpx;
+  border-bottom: 1rpx solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background-color: #f8fafc;
+}
+
+.menu-icon {
+  font-size: 28rpx;
+  width: 32rpx;
+  text-align: center;
+}
+
+.menu-text {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* 点击遮罩层自动收起 */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+} 

@@ -1,0 +1,1006 @@
+{
+  "comprehensiveCategories": [
+    "综合练习",
+    "介词综合",
+    "代词综合",
+    "并列连词综合",
+    "从属连词综合",
+    "连词与名/动/形/副综合",
+    "冠词综合",
+    "名词综合",
+    "名词复数书写综合",
+    "动词综合",
+    "非谓语综合",
+    "时态综合",
+    "现在分词综合",
+    "过去分词综合",
+    "不定式综合",
+    "形容词综合",
+    "副词综合",
+    "定语从句综合",
+    "状语从句综合"
+  ],
+  "duplicateAnalysis": {
+    "综合练习": {
+      "totalQuestions": 15,
+      "duplicates": {
+        "固定搭配": {
+          "count": 5,
+          "questions": [
+            {
+              "text": "We should be kind ___ animals",
+              "answer": "to",
+              "compCategory": "综合练习",
+              "otherCategory": "固定搭配"
+            },
+            {
+              "text": "He is similar ___ his father in appearance",
+              "answer": "to",
+              "compCategory": "综合练习",
+              "otherCategory": "固定搭配"
+            },
+            {
+              "text": "I'm satisfied ___ my present life",
+              "answer": "with",
+              "compCategory": "综合练习",
+              "otherCategory": "固定搭配"
+            },
+            {
+              "text": "She is afraid ___ being alone at night",
+              "answer": "of",
+              "compCategory": "综合练习",
+              "otherCategory": "固定搭配"
+            },
+            {
+              "text": "He is fond ___ reading books in his free time",
+              "answer": "of",
+              "compCategory": "综合练习",
+              "otherCategory": "固定搭配"
+            }
+          ]
+        },
+        "介词 + 名词/动名词": {
+          "count": 5,
+          "questions": [
+            {
+              "text": "He got into trouble for ___ (argue) with his teacher",
+              "answer": "arguing",
+              "compCategory": "综合练习",
+              "otherCategory": "介词 + 名词/动名词"
+            },
+            {
+              "text": "She has a talent for ___ (paint)",
+              "answer": "painting",
+              "compCategory": "综合练习",
+              "otherCategory": "介词 + 名词/动名词"
+            },
+            {
+              "text": "I have a lot of experience in ___ (organize) events",
+              "answer": "organizing",
+              "compCategory": "综合练习",
+              "otherCategory": "介词 + 名词/动名词"
+            },
+            {
+              "text": "They are excited about ___ (go) on a trip",
+              "answer": "going",
+              "compCategory": "综合练习",
+              "otherCategory": "介词 + 名词/动名词"
+            },
+            {
+              "text": "He is known for ___ (create) beautiful music",
+              "answer": "creating",
+              "compCategory": "综合练习",
+              "otherCategory": "介词 + 名词/动名词"
+            }
+          ]
+        },
+        "人称代词": {
+          "count": 5,
+          "questions": [
+            {
+              "text": "Give ____ (we) some advice on how to learn English well.",
+              "answer": "us",
+              "compCategory": "综合练习",
+              "otherCategory": "人称代词"
+            },
+            {
+              "text": "I met ____ (she) at the park last Sunday.",
+              "answer": "her",
+              "compCategory": "综合练习",
+              "otherCategory": "人称代词"
+            },
+            {
+              "text": "Please tell ____ (I) what happened just now.",
+              "answer": "me",
+              "compCategory": "综合练习",
+              "otherCategory": "人称代词"
+            },
+            {
+              "text": "I saw ____ (he) in the library this morning.",
+              "answer": "him",
+              "compCategory": "综合练习",
+              "otherCategory": "人称代词"
+            },
+            {
+              "text": "Give ____ (they) some apples. They are hungry.",
+              "answer": "them",
+              "compCategory": "综合练习",
+              "otherCategory": "人称代词"
+            }
+          ]
+        }
+      }
+    },
+    "从属连词综合": {
+      "totalQuestions": 30,
+      "duplicates": {
+        "when": {
+          "count": 1,
+          "questions": [
+            {
+              "text": "She was cooking ____ the telephone rang.",
+              "answer": "when",
+              "compCategory": "从属连词综合",
+              "otherCategory": "when"
+            }
+          ]
+        }
+      }
+    },
+    "连词与名/动/形/副综合": {
+      "totalQuestions": 97,
+      "duplicates": {
+        "连词与名词": {
+          "count": 24,
+          "questions": [
+            {
+              "text": "The supermarket sells fresh ____ (fruit) and vegetables.",
+              "answer": "fruits",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "We need to bring our ____ (book) and notebooks to class.",
+              "answer": "books",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The garden is full of colorful ____ (flower) and butterflies.",
+              "answer": "flowers",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The children played with their ____ (toy) and laughed happily.",
+              "answer": "toys",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The beach is covered with golden ____ (sand) and seashells.",
+              "answer": "sand",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The library has a large collection of ____ (magazine) and newspapers.",
+              "answer": "magazines",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The forest is home to various ____ (animal) and birds.",
+              "answer": "animals",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The classroom has desks, chairs ____ blackboards.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The recipe calls for two cups of ____ (flour) and a teaspoon of sugar.",
+              "answer": "flour",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The zoo has lions, tigers ____ elephants.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "She bought new ____ (shoe) and socks for the trip.",
+              "answer": "shoes",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The park is filled with ____ (tree) and benches.",
+              "answer": "trees",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The store sells winter ____ (coat) and scarves.",
+              "answer": "coats",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The project requires both creativity ____ research materials.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The hikers carried backpacks filled with ____ (water bottle) and snacks.",
+              "answer": "water bottles",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The art gallery showcases paintings, sculptures ____ photographs.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The farm has cows, sheep ____ horses.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "We need to buy some ____ (bread) and milk from the store.",
+              "answer": "bread",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The picnic basket contained sandwiches, fruits ____ drinks.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The workshop has tools, machines ____ equipment.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The festival featured music, dance ____ food stalls.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The gardeners planted ____ (rose) and lilies along the path.",
+              "answer": "roses",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The collection includes stamps, coins ____ postcards.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            },
+            {
+              "text": "The classroom activities involve games, discussions ____ presentations.",
+              "answer": "and",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与名词"
+            }
+          ]
+        },
+        "连词与动词": {
+          "count": 30,
+          "questions": [
+            {
+              "text": "He ____ (go) to the store and bought some groceries.",
+              "answer": "went",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The children laughed and ____ (jump) when they saw the clown.",
+              "answer": "jumped",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "If it rains tomorrow, we ____ (stay) at home and watch movies.",
+              "answer": "will stay",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "She opened the window, ____ (breathe) in the fresh air, and sat down.",
+              "answer": "breathed",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "They ____ (not finish) their project yet, but they are working hard.",
+              "answer": "haven't finished",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "When the teacher entered the classroom, the students ____ (stop) talking and focused.",
+              "answer": "stopped",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The team practiced every day, ____ (win) the championship in the end.",
+              "answer": "and won",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "As soon as he ____ (hear) the news, he called his parents.",
+              "answer": "heard",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "We ____ (plan) a trip to the beach, but the weather changed our plans.",
+              "answer": "had planned",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The bird flew up, ____ (circle) the tree, and then landed on a branch.",
+              "answer": "circled",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "She ____ (study) hard and got excellent grades this semester.",
+              "answer": "studied",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "He tried to fix the bike, ____ (fail) several times before succeeding.",
+              "answer": "failing",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "They ____ (start) the meeting an hour ago and it is still going on.",
+              "answer": "started",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "____ (look) around the room, she noticed a strange object on the table.",
+              "answer": "Looking",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "He ran quickly, ____ (catch) up with his friends in no time.",
+              "answer": "catching",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "When I arrived at the station, the train ____ (leave) already.",
+              "answer": "had left",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The company ____ (expand) its business and hired more employees last year.",
+              "answer": "expanded",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "She not only sings well but also ____ (dance) beautifully.",
+              "answer": "dances",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "____ (listen) to the music, he closed his eyes and enjoyed it.",
+              "answer": "Listening",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "They talked for hours, ____ (not solve) the problem in the end.",
+              "answer": "but didn't solve",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "He ____ (break) the vase and felt very guilty.",
+              "answer": "broke",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "As the sun ____ (set), the sky turned orange and red.",
+              "answer": "set",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The students reviewed their lessons, ____ (prepare) for the upcoming exam.",
+              "answer": "preparing",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "____ (find) the key, she opened the door and went inside.",
+              "answer": "Finding",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "We ____ (travel) to many countries and experienced different cultures.",
+              "answer": "have traveled",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "She ____ (wear) a new dress and looked stunning at the party.",
+              "answer": "wore",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "When the bell rang, the students ____ (rush) out of the classroom.",
+              "answer": "rushed",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The dog barked loudly, ____ (scare) away the strangers.",
+              "answer": "scaring",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "He ____ (write) a letter to his friend and sent it by mail.",
+              "answer": "wrote",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            },
+            {
+              "text": "The plants grow quickly, ____ (need) more water and sunlight.",
+              "answer": "needing",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与动词"
+            }
+          ]
+        },
+        "连词与形容词": {
+          "count": 3,
+          "questions": [
+            {
+              "text": "This recipe demands ____ (fresh) ingredients than the basic version.",
+              "answer": "fresher",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与形容词"
+            },
+            {
+              "text": "The beach sand here is ____ (softness) and warm underfoot.",
+              "answer": "soft",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与形容词"
+            },
+            {
+              "text": "Her voice sounds ____ (clear) and more harmonious than before.",
+              "answer": "clearer",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "连词与形容词"
+            }
+          ]
+        },
+        "主从句与动词": {
+          "count": 1,
+          "questions": [
+            {
+              "text": "As soon as he ____ (hear) the news, he called his parents.",
+              "answer": "heard",
+              "compCategory": "连词与名/动/形/副综合",
+              "otherCategory": "主从句与动词"
+            }
+          ]
+        }
+      }
+    },
+    "冠词综合": {
+      "totalQuestions": 26,
+      "duplicates": {
+        "the的特殊用法": {
+          "count": 1,
+          "questions": [
+            {
+              "text": "____ Nile is the longest river in the world.",
+              "answer": "The",
+              "compCategory": "冠词综合",
+              "otherCategory": "the的特殊用法"
+            }
+          ]
+        }
+      }
+    },
+    "动词综合": {
+      "totalQuestions": 65,
+      "duplicates": {
+        "谓语(1)": {
+          "count": 50,
+          "questions": [
+            {
+              "text": "It was snowing slightly when I ____ (reach) the mountain village last winter.",
+              "answer": "reached",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The traditional handicrafts ____ (make) by local artisans are very popular among tourists.",
+              "answer": "made",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "A survey of students ____ (carry) out by the school shows that most of them prefer outdoor activities.",
+              "answer": "carried",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The new material is strong enough ____ (build) a long - lasting bridge.",
+              "answer": "to build",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "We can enjoy a wonderful picnic in the woods without ____ (bring) too much fancy equipment.",
+              "answer": "bringing",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "I ____ (allow) to participate in the international exchange program last year.",
+              "answer": "was allowed",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Her daily tasks at the volunteer center include ____ (help) the elderly with their daily life.",
+              "answer": "helping",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "He was the only student in the class ____ (select) to take part in the national math competition.",
+              "answer": "selected",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Reading books aloud every morning ____ (be) a good way to improve your pronunciation.",
+              "answer": "is",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Whatever the problem is, ____ (find) a solution as soon as possible.",
+              "answer": "find",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "High - quality furniture might ____ (make) of solid wood.",
+              "answer": "be made",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Artists often mix different colors ____ (produce) unique visual effects.",
+              "answer": "to produce",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The children played in the garden, ____ (laugh) and chatting happily.",
+              "answer": "laughing",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Students are expected ____ (finish) their assignments on time.",
+              "answer": "to finish",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When sugar and water ____ (mix) together, they form a sweet liquid.",
+              "answer": "are mixed",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Junk food ____ (be) harmful to our health.",
+              "answer": "is",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "By ____ (exercise) regularly, you can keep fit.",
+              "answer": "exercising",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Electric vehicles ____ (use) more and more widely in recent years.",
+              "answer": "have been used",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Yesterday, the workers ____ (manage) to fix the broken machine.",
+              "answer": "managed",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Tom ____ (tell) that he had won the first prize in the competition.",
+              "answer": "was told",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The report shows that this new method ____ (be) more efficient in solving problems.",
+              "answer": "is",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "To improve your memory, you can do some mental exercises to ____ (sharp) your thinking ability.",
+              "answer": "sharpen",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Since last year, the company ____ (launch) several new products.",
+              "answer": "has launched",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "In 2018, the local government ____ (initiate) a project to protect the historical buildings.",
+              "answer": "initiated",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The small dog ____ (intend) no harm to the little girl, but she was still scared.",
+              "answer": "intended",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "In recent months, some residents in this community ____ (complain) about the noise pollution.",
+              "answer": "have complained",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The teacher allowed the students ____ (discuss) the question in groups.",
+              "answer": "to discuss",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When we received a letter ____ (inform) us of the good news, we were very excited.",
+              "answer": "informing",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Our friends shared their travel stories and ____ (suggest) some interesting places to visit.",
+              "answer": "suggested",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The sculptor was certain he would ____ (select).",
+              "answer": "be selected",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "As she displayed her new creation, the woman ____ (gesture) towards the details.",
+              "answer": "gestured",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The following day, he rented a bike and set off ____ (locate) the famous artist's studio.",
+              "answer": "to locate",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "On the final evening, we ____ (ask) to join an exclusive performance.",
+              "answer": "were asked",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The new policies aim ____ (promote) sustainable development.",
+              "answer": "to promote",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "You can't help pondering how difficult it ____ (be) for them at that time to complete all those tasks.",
+              "answer": "was",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "I was disheartened to discover that many birds eat plastic waste, ____ (consider) it as food.",
+              "answer": "considering",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "I made up my mind to do something ____ (raise) awareness about this issue.",
+              "answer": "to raise",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "One of the largest firms I contacted ____ (be) GlobalTech Solutions.",
+              "answer": "was",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When he noticed a small child dangling from a fifth - floor window, Jack rushed fifty metres, leaped over a 1 - metre barrier, and stretched out his hands to catch the ____ (plunging) child.",
+              "answer": "plunging",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Tom ____ (repair) his motorcycle when he heard the shouts.",
+              "answer": "was repairing",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "He rapidly ____ (cast) his equipment aside.",
+              "answer": "cast",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When she spotted a kitten teetering on the edge of a high - rise rooftop, Lily dashed twenty metres, hurdled over a 0.8 - metre railing, and reached out her hands to grab the ____ (fall) kitten.",
+              "answer": "falling",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Tom ____ (paint) the wall when he heard a loud knock on the door.",
+              "answer": "was painting",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "He promptly ____ (fling) his paintbrush aside.",
+              "answer": "flung",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "Shanghai is a metropolis that has elaborately ______ (construct) a network of subway lines.",
+              "answer": "constructed",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "______ (travel) to this place several times in the past five years, I ______ (impress) by its unique cultural blend.",
+              "answer": "Having traveled; was impressed",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "As a journalist, I have dedicated the past three years ______ (documenting) all the social changes I witnessed.",
+              "answer": "to documenting",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The astonishing growth of this town, which is purposefully developed to preserve its traditions while embracing modernity, _____ (signify) there are always fresh surprises to uncover here.",
+              "answer": "signifies",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The classic storytelling method that has been handed down for generations can still ______ (utilize) today to convey profound messages.",
+              "answer": "be utilized",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "As a young boy, I ____ (aspire) to be an astronaut when I grew up.",
+              "answer": "aspired",
+              "compCategory": "动词综合",
+              "otherCategory": "谓语(1)"
+            }
+          ]
+        }
+      }
+    },
+    "非谓语综合": {
+      "totalQuestions": 10,
+      "duplicates": {
+        "谓语(1)": {
+          "count": 6,
+          "questions": [
+            {
+              "text": "The traditional handicrafts ____ (make) by local artisans are very popular among tourists.",
+              "answer": "made",
+              "compCategory": "非谓语综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "A survey of students ____ (carry) out by the school shows that most of them prefer outdoor activities.",
+              "answer": "carried",
+              "compCategory": "非谓语综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When we received a letter ____ (inform) us of the good news, we were very excited.",
+              "answer": "informing",
+              "compCategory": "非谓语综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "The children played in the garden, ____ (laugh) and chatting happily.",
+              "answer": "laughing",
+              "compCategory": "非谓语综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When he noticed a small child dangling from a fifth - floor window, Jack rushed fifty metres, leaped over a 1 - metre barrier, and stretched out his hands to catch the ____ (plunging) child.",
+              "answer": "plunging",
+              "compCategory": "非谓语综合",
+              "otherCategory": "谓语(1)"
+            },
+            {
+              "text": "When she spotted a kitten teetering on the edge of a high - rise rooftop, Lily dashed twenty metres, hurdled over a 0.8 - metre railing, and reached out her hands to grab the ____ (fall) kitten.",
+              "answer": "falling",
+              "compCategory": "非谓语综合",
+              "otherCategory": "谓语(1)"
+            }
+          ]
+        }
+      }
+    },
+    "时态综合": {
+      "totalQuestions": 29,
+      "duplicates": {
+        "主从句与动词": {
+          "count": 1,
+          "questions": [
+            {
+              "text": "When I got home, my mother ____ (cook) dinner.",
+              "answer": "was cooking",
+              "compCategory": "时态综合",
+              "otherCategory": "主从句与动词"
+            }
+          ]
+        },
+        "现在时": {
+          "count": 1,
+          "questions": [
+            {
+              "text": "I ____ (read) an interesting book these days.",
+              "answer": "am reading",
+              "compCategory": "时态综合",
+              "otherCategory": "现在时"
+            }
+          ]
+        },
+        "谓语(5)": {
+          "count": 1,
+          "questions": [
+            {
+              "text": "I ____ (read) an interesting book these days.",
+              "answer": "am reading",
+              "compCategory": "时态综合",
+              "otherCategory": "谓语(5)"
+            }
+          ]
+        }
+      }
+    },
+    "过去分词综合": {
+      "totalQuestions": 29,
+      "duplicates": {
+        "被动写be吗": {
+          "count": 2,
+          "questions": [
+            {
+              "text": "The car ____ (make) in Germany is very expensive.",
+              "answer": "made",
+              "compCategory": "过去分词综合",
+              "otherCategory": "被动写be吗"
+            },
+            {
+              "text": "The house ____ (pull) down last week was very old.",
+              "answer": "pulled",
+              "compCategory": "过去分词综合",
+              "otherCategory": "被动写be吗"
+            }
+          ]
+        }
+      }
+    },
+    "定语从句综合": {
+      "totalQuestions": 50,
+      "duplicates": {
+        "关系代词": {
+          "count": 2,
+          "questions": [
+            {
+              "text": "The book ____ I bought yesterday is very interesting.",
+              "answer": "which / that",
+              "compCategory": "定语从句综合",
+              "otherCategory": "关系代词"
+            },
+            {
+              "text": "The person ____ you should talk to is Mr. Smith.",
+              "answer": "whom / who / that",
+              "compCategory": "定语从句综合",
+              "otherCategory": "关系代词"
+            }
+          ]
+        },
+        "that能填吗": {
+          "count": 2,
+          "questions": [
+            {
+              "text": "The story ____ he told us was very funny.",
+              "answer": "which",
+              "compCategory": "定语从句综合",
+              "otherCategory": "that能填吗"
+            },
+            {
+              "text": "The book, ____ I borrowed from the library is very useful.",
+              "answer": "which",
+              "compCategory": "定语从句综合",
+              "otherCategory": "that能填吗"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "fullyDuplicateCategories": [
+    {
+      "category": "综合练习",
+      "totalQuestions": 15,
+      "duplicateWith": [
+        "固定搭配",
+        "介词 + 名词/动名词",
+        "人称代词"
+      ]
+    }
+  ]
+}

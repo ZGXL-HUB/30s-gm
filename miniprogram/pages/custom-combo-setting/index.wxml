@@ -1,0 +1,215 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="header-left" bindtap="goBack">
+      <text class="back-icon">←</text>
+      <text class="back-text">返回</text>
+    </view>
+    <view class="header-title">设置我的专属组合</view>
+    <view class="header-right"></view>
+  </view>
+
+  <!-- 主要内容区域 -->
+  <scroll-view scroll-y class="main-content">
+    <!-- 加载状态 -->
+    <view class="loading-container" wx:if="{{loading}}">
+      <text class="loading-text">加载中...</text>
+    </view>
+    
+    <!-- 主要内容 -->
+    <view wx:else>
+              <!-- 组合管理区域 -->
+        <view class="combo-management">
+          <view class="combo-header">
+            <!-- 常态状态：管理组合按钮 -->
+            <button wx:if="{{editingComboIndex === -1}}" class="combo-manage-btn" bindtap="showComboList">
+              <text class="btn-icon">📋</text>
+              <text class="btn-text">管理组合</text>
+            </button>
+            <!-- 编辑状态：正在编辑提示 -->
+            <view wx:if="{{editingComboIndex >= 0}}" class="editing-status">
+              <text class="editing-text">正在编辑：{{savedCombos[editingComboIndex].name}}</text>
+            </view>
+          </view>
+        
+        <!-- 组合列表 -->
+        <view class="combo-list" wx:if="{{showComboList && editingComboIndex === -1}}">
+          <view class="combo-list-header">
+            <text class="list-title">已保存的组合 ({{savedCombos.length}})</text>
+            <text class="close-btn" bindtap="hideComboList">✕</text>
+          </view>
+          <view class="combo-items">
+            <block wx:for="{{savedCombos}}" wx:key="index" wx:for-item="combo">
+              <view class="combo-item">
+                <view class="combo-info">
+                  <text class="combo-name">{{combo.name}}</text>
+                  <text class="combo-count">{{combo.totalCount}}题</text>
+                </view>
+                <view class="combo-actions">
+                  <button class="combo-btn edit-btn" bindtap="editCombo" data-index="{{index}}">
+                    <text>编辑</text>
+                  </button>
+                  <button class="combo-btn delete-btn" bindtap="deleteCombo" data-index="{{index}}">
+                    <text>删除</text>
+                  </button>
+                </view>
+              </view>
+            </block>
+            <view class="no-combo" wx:if="{{savedCombos.length === 0}}">
+              <text class="no-combo-text">暂无保存的组合</text>
+            </view>
+            <!-- 新建组合选项 -->
+            <view class="new-combo-item" bindtap="showNewComboModal">
+              <view class="new-combo-content">
+                <text class="new-combo-icon">➕</text>
+                <text class="new-combo-text">新建组合</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+
+      </view>
+
+      <!-- 新建组合提示弹窗 -->
+      <view class="modal-overlay" wx:if="{{showNewComboModal}}" bindtap="hideNewComboModal">
+        <view class="modal-content" catchtap="stopPropagation">
+          <view class="modal-header">
+            <text class="modal-title">给组合起个好记的名字吧～</text>
+          </view>
+          <view class="modal-body">
+            <text class="modal-text">比如 "周一早练 10 题" "考前动词冲刺"，练起来更有规划～</text>
+          </view>
+          <view class="modal-actions">
+            <button class="modal-btn start-btn" bindtap="startNewCombo">
+              <text class="btn-text">开始选题</text>
+            </button>
+          </view>
+        </view>
+      </view>
+
+      <!-- 组合名称输入框 -->
+      <view class="modal-overlay" wx:if="{{showNameInput}}" bindtap="hideNameInput">
+        <view class="modal-content" catchtap="stopPropagation">
+          <view class="modal-header">
+            <text class="modal-title">给你的组合起个名吧～</text>
+          </view>
+          <view class="modal-body">
+            <input 
+              class="name-input" 
+              placeholder="例如：基础练习、重点突破、综合训练" 
+              value="{{comboName}}"
+              bindinput="onComboNameInput"
+              focus="{{showNameInput}}"
+            />
+          </view>
+          <view class="modal-actions">
+            <button class="modal-btn cancel-btn" bindtap="cancelComboName">取消</button>
+            <button class="modal-btn confirm-btn" bindtap="confirmComboName">确定</button>
+          </view>
+        </view>
+      </view>
+
+      <!-- 说明文字 -->
+      <view class="description">
+        <text class="desc-title">📝 专属组合说明</text>
+        <text class="desc-content">设置偏好语法点组合，系统自动生成题目(最多20题)，可保存多个组合切换练习</text>
+      </view>
+
+      <!-- 总题数显示 -->
+      <view class="total-count-section">
+        <text class="total-label">当前已选题数：</text>
+        <text class="total-number {{totalCount > 0 ? 'active' : ''}}">{{totalCount}}</text>
+        <text class="total-max">/ {{maxTotalCount}} 题</text>
+      </view>
+
+
+
+      <!-- 手风琴式分类设置列表 -->
+      <view class="accordion-list">
+        <block wx:for="{{categories}}" wx:key="index" wx:for-item="category">
+          <view class="accordion-item">
+            <!-- 大类标题栏 -->
+            <view class="category-header" bindtap="toggleCategory" data-index="{{index}}">
+              <view class="category-info">
+                <text class="category-name">{{category}}</text>
+                <text class="category-count" wx:if="{{categoryCounts[index] > 0}}">
+                  已选 {{categoryCounts[index]}} 题
+                </text>
+              </view>
+              <view class="header-controls">
+                <text class="expand-icon {{expandedCategories[index] ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            
+            <!-- 小类列表(手风琴展开内容) -->
+            <view class="sub-categories {{expandedCategories[index] ? 'expanded' : ''}}">
+              <block wx:for="{{subCategories[index]}}" wx:key="subIndex" wx:for-item="subCategory">
+                <!-- 过滤掉被隐藏的语法点 -->
+                <view wx:if="{{!isHiddenPoint(subCategory.name || subCategory)}}" class="sub-category-item">
+                  <view class="sub-category-info">
+                    <text class="sub-category-name">{{subCategory.name || subCategory}}</text>
+                    <text class="high-frequency-tag" wx:if="{{subCategory.isHighFrequency}}">高频</text>
+                  </view>
+                  <view class="count-control">
+                    <view 
+                      class="control-btn decrease {{subCategoryConfigs[subCategory.name || subCategory] <= 0 ? 'disabled' : ''}}" 
+                      bindtap="decreaseSubCount" 
+                      data-sub-category="{{subCategory.name || subCategory}}"
+                    >
+                      <text>-</text>
+                    </view>
+                    <text class="count-display">{{subCategoryConfigs[subCategory.name || subCategory] || 0}}</text>
+                    <view 
+                      class="control-btn increase {{totalCount >= maxTotalCount ? 'disabled' : ''}}" 
+                      bindtap="increaseSubCount" 
+                      data-sub-category="{{subCategory.name || subCategory}}"
+                    >
+                      <text>+</text>
+                    </view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+
+      <!-- 提示信息 -->
+      <view class="tips-section">
+        <text class="tips-title">💡 使用提示</text>
+        <view class="tips-list">
+          <text class="tip-item">• 点击大类标题展开/收起小类列表</text>
+          <text class="tip-item">• 点击 + 号增加该语法点的题目数量</text>
+          <text class="tip-item">• 点击 - 号减少该语法点的题目数量</text>
+          <text class="tip-item">• 设置完成后点击"确认保存"</text>
+          <text class="tip-item">• 可以随时修改或清空重新设置</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <!-- 常态状态：清空设置 + 保存新组合 -->
+    <view wx:if="{{editingComboIndex === -1}}" class="normal-actions">
+      <button class="action-btn clear-btn" bindtap="clearAll" disabled="{{totalCount === 0}}">
+        清空设置
+      </button>
+      <button class="action-btn save-btn" bindtap="showNameInput" disabled="{{totalCount === 0}}">
+        保存新组合
+      </button>
+    </view>
+    <!-- 编辑状态：确认保存 + 取消编辑 -->
+    <view wx:if="{{editingComboIndex >= 0}}" class="edit-actions">
+      <button class="action-btn cancel-edit-btn" bindtap="cancelEdit">
+        <text class="btn-icon">×</text>
+        <text class="btn-text">取消编辑</text>
+      </button>
+      <button class="action-btn confirm-save-btn" bindtap="confirmSave" disabled="{{totalCount === 0}}">
+        <text class="btn-icon">✓</text>
+        <text class="btn-text">确认保存</text>
+      </button>
+    </view>
+  </view>
+</view> 

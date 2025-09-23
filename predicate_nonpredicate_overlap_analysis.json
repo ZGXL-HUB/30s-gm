@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-08-31T02:14:02.385Z",
+  "predicate1Count": 57,
+  "nonPredicateComprehensiveCount": 10,
+  "overlapCount": 6,
+  "overlapRatePredicate1": "10.53",
+  "overlapRateNonPredicate": "60.00",
+  "detailedOverlap": [
+    {
+      "questionText": "The traditional handicrafts ____ (make) by local artisans are very popular among tourists.",
+      "answer": "made",
+      "predicate1Tag": "谓语(1)",
+      "nonPredicateTag": "非谓语综合"
+    },
+    {
+      "questionText": "A survey of students ____ (carry) out by the school shows that most of them prefer outdoor activities.",
+      "answer": "carried",
+      "predicate1Tag": "谓语(1)",
+      "nonPredicateTag": "非谓语综合"
+    },
+    {
+      "questionText": "The children played in the garden, ____ (laugh) and chatting happily.",
+      "answer": "laughing",
+      "predicate1Tag": "谓语(1)",
+      "nonPredicateTag": "非谓语综合"
+    },
+    {
+      "questionText": "When we received a letter ____ (inform) us of the good news, we were very excited.",
+      "answer": "informing",
+      "predicate1Tag": "谓语(1)",
+      "nonPredicateTag": "非谓语综合"
+    },
+    {
+      "questionText": "When he noticed a small child dangling from a fifth - floor window, Jack rushed fifty metres, leaped over a 1 - metre barrier, and stretched out his hands to catch the ____ (plunging) child.",
+      "answer": "plunging",
+      "predicate1Tag": "谓语(1)",
+      "nonPredicateTag": "非谓语综合"
+    },
+    {
+      "questionText": "When she spotted a kitten teetering on the edge of a high - rise rooftop, Lily dashed twenty metres, hurdled over a 0.8 - metre railing, and reached out her hands to grab the ____ (fall) kitten.",
+      "answer": "falling",
+      "predicate1Tag": "谓语(1)",
+      "nonPredicateTag": "非谓语综合"
+    }
+  ]
+}

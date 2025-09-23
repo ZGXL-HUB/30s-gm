@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "page-header-guide": "/components/page-header-guide/index"
+  },
+  "navigationBarTitleText": "被动语态规则"
+} 

@@ -1,0 +1,124 @@
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.header {
+  margin-bottom: 40rpx;
+  padding: 20rpx 0;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.level-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.level-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.level-card:active {
+  transform: scale(0.98);
+}
+
+.level-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-right: 24rpx;
+}
+
+/* 不同等级的图标颜色 */
+.beginner {
+  background: #4CAF50;
+}
+
+.elementary {
+  background: #2196F3;
+}
+
+.intermediate {
+  background: #FF9800;
+}
+
+.upper-intermediate {
+  background: #9C27B0;
+}
+
+.advanced {
+  background: #F44336;
+}
+
+.level-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.level-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.level-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.arrow-icon {
+  width: 40rpx;
+  height: 40rpx;
+  opacity: 0.3;
+}
+
+.level-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin: 30rpx 0;
+}
+
+.level-button {
+  min-width: 200rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 10rpx;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 32rpx;
+  border: none;
+}
+
+.level-button.active {
+  background-color: #007AFF;
+  color: white;
+} 

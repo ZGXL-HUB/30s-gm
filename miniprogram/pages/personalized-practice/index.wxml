@@ -1,0 +1,189 @@
+<!--个性化每日练习页面-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <view class="header-title">个性化每日练习</view>
+    <view class="header-subtitle">基于您的能力水平智能推荐</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-text">分析您的学习数据中...</view>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="content" wx:else>
+    <!-- 能力概览 -->
+    <view class="ability-overview">
+      <view class="overview-title">您的能力概览</view>
+      <view class="ability-cards">
+        <view class="ability-card">
+          <view class="card-label">语法水平</view>
+          <view class="card-value level-{{abilityProfile.grammarLevel}}">
+            {{abilityProfile.grammarLevel === 'level1' ? '较为薄弱' : 
+              abilityProfile.grammarLevel === 'level2' ? '稍弱' : 
+              abilityProfile.grammarLevel === 'level3' ? '不错哦' : 
+              abilityProfile.grammarLevel === 'level4' ? '超棒的' : '简直完美'}}
+          </view>
+        </view>
+        <view class="ability-card">
+          <view class="card-label">书写水平</view>
+          <view class="card-value level-{{abilityProfile.writingLevel}}">
+            {{abilityProfile.writingLevel === 'level1' ? '较为薄弱' : 
+              abilityProfile.writingLevel === 'level2' ? '稍弱' : 
+              abilityProfile.writingLevel === 'level3' ? '不错哦' : 
+              abilityProfile.writingLevel === 'level4' ? '超棒的' : '简直完美'}}
+          </view>
+        </view>
+        <view class="ability-card">
+          <view class="card-label">连续学习</view>
+          <view class="card-value">{{abilityProfile.learningProgress.streakDays}}天</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 每日任务推荐 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">📅 今日推荐任务</view>
+        <view class="section-subtitle">根据您的学习进度智能生成</view>
+      </view>
+      <view class="task-list">
+        <view class="task-item" 
+              wx:for="{{recommendations.dailyTasks}}" 
+              wx:key="index"
+              bindtap="onDailyTaskTap"
+              data-index="{{index}}">
+          <view class="task-icon">{{item.type === 'weak_point_grammar' ? '🎯' : 
+                                   item.type === 'balanced_grammar' ? '📝' : 
+                                   item.type === 'writing_practice' ? '✍️' : '🎯'}}</view>
+          <view class="task-content">
+            <view class="task-title">{{item.title}}</view>
+            <view class="task-desc">{{item.description}}</view>
+            <view class="task-meta">
+              <text class="task-count">{{item.questionCount}}题</text>
+              <text class="task-xp">+{{item.xpReward}} XP</text>
+            </view>
+          </view>
+          <view class="task-priority priority-{{item.priority}}">{{item.priority === 'high' ? '高' : '中'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 专项练习推荐 -->
+    <view class="section" wx:if="{{recommendations.focusedPractice.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">🎯 专项突破练习</view>
+        <view class="section-subtitle">针对您的薄弱环节</view>
+      </view>
+      <view class="practice-list">
+        <view class="practice-item" 
+              wx:for="{{recommendations.focusedPractice}}" 
+              wx:key="index"
+              bindtap="onFocusedPracticeTap"
+              data-index="{{index}}">
+          <view class="practice-icon">🔍</view>
+          <view class="practice-content">
+            <view class="practice-title">{{item.title}}</view>
+            <view class="practice-desc">{{item.description}}</view>
+            <view class="practice-meta">
+              <text class="practice-count">{{item.questionCount}}题</text>
+              <text class="practice-xp">+{{item.xpReward}} XP</text>
+            </view>
+          </view>
+          <view class="practice-arrow">></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 综合练习推荐 -->
+    <view class="section" wx:if="{{recommendations.comprehensivePractice.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">🚀 综合能力提升</view>
+        <view class="section-subtitle">全面提升您的语法能力</view>
+      </view>
+      <view class="practice-list">
+        <view class="practice-item" 
+              wx:for="{{recommendations.comprehensivePractice}}" 
+              wx:key="index"
+              bindtap="onComprehensivePracticeTap"
+              data-index="{{index}}">
+          <view class="practice-icon">🎯</view>
+          <view class="practice-content">
+            <view class="practice-title">{{item.title}}</view>
+            <view class="practice-desc">{{item.description}}</view>
+            <view class="practice-meta">
+              <text class="practice-count">{{item.questionCount}}题</text>
+              <text class="practice-xp">+{{item.xpReward}} XP</text>
+            </view>
+          </view>
+          <view class="practice-arrow">></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 学习路径 -->
+    <view class="section" wx:if="{{recommendations.learningPath.length > 0}}">
+      <view class="section-header">
+        <view class="section-title">📈 推荐学习路径</view>
+        <view class="section-subtitle">为您量身定制的学习计划</view>
+      </view>
+      <view class="path-list">
+        <view class="path-item" 
+              wx:for="{{recommendations.learningPath}}" 
+              wx:key="step">
+          <view class="path-step">{{item.step}}</view>
+          <view class="path-content">
+            <view class="path-action">{{item.action}}</view>
+            <view class="path-target">{{item.target}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <button class="action-btn secondary" bindtap="reassessAbility">
+      重新评估能力
+    </button>
+    <button class="action-btn secondary" bindtap="refreshRecommendations">
+      刷新推荐
+    </button>
+    <button class="action-btn primary" bindtap="viewLearningPath">
+      查看学习路径
+    </button>
+  </view>
+
+  <!-- 任务详情弹窗 -->
+  <view class="task-detail-modal" wx:if="{{showTaskDetail}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <view class="modal-title">{{selectedTask.title}}</view>
+        <view class="modal-close" bindtap="closeTaskDetail">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="modal-desc">{{selectedTask.description}}</view>
+        <view class="modal-meta">
+          <view class="meta-item">
+            <text class="meta-label">题目数量：</text>
+            <text class="meta-value">{{selectedTask.questionCount}}题</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-label">难度等级：</text>
+            <text class="meta-value">{{selectedTask.difficulty === 'easy' ? '简单' : 
+                                     selectedTask.difficulty === 'medium' ? '中等' : '困难'}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-label">经验奖励：</text>
+            <text class="meta-value">+{{selectedTask.xpReward}} XP</text>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn secondary" bindtap="closeTaskDetail">取消</button>
+        <button class="modal-btn primary" bindtap="startPractice">开始练习</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,205 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 20rpx;
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  backdrop-filter: blur(10rpx);
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.description {
+  font-size: 28rpx;
+  color: #7f8c8d;
+  text-align: center;
+  margin-bottom: 40rpx;
+  display: block;
+}
+
+.section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 30rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 3rpx solid #e74c3c;
+}
+
+.rule-item {
+  background: #f8f9fa;
+  border-radius: 15rpx;
+  padding: 25rpx;
+  margin-bottom: 25rpx;
+  border-left: 6rpx solid #e74c3c;
+}
+
+.rule-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15rpx;
+}
+
+.rule-number {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-right: 15rpx;
+  min-width: 40rpx;
+}
+
+.rule-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.rule-details {
+  margin-bottom: 15rpx;
+  padding-left: 20rpx;
+}
+
+.rule-pattern {
+  display: flex;
+  margin-bottom: 8rpx;
+}
+
+.pattern-label {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #8e44ad;
+  margin-right: 10rpx;
+  min-width: 120rpx;
+}
+
+.pattern-text {
+  font-size: 28rpx;
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.examples {
+  margin-top: 15rpx;
+}
+
+.examples-label {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #27ae60;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.example-list {
+  padding-left: 20rpx;
+}
+
+.example-item {
+  font-size: 26rpx;
+  color: #2c3e50;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+/* 不规则变化表格样式 */
+.irregular-table {
+  background: white;
+  border-radius: 15rpx;
+  overflow: hidden;
+  box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+  display: flex;
+  background: #3498db;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1rpx solid #ecf0f1;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 20rpx 15rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.header-cell {
+  color: white;
+  font-weight: bold;
+}
+
+.table-row .table-cell {
+  color: #2c3e50;
+}
+
+.table-row:nth-child(even) {
+  background: #f8f9fa;
+}
+
+/* 特殊注意事项样式 */
+.note-item {
+  background: #fff3cd;
+  border-radius: 15rpx;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  border-left: 6rpx solid #ffc107;
+}
+
+.note-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #856404;
+  margin-bottom: 15rpx;
+}
+
+.note-examples {
+  padding-left: 20rpx;
+}
+
+.note-example {
+  font-size: 26rpx;
+  color: #6c5700;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.summary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+}
+
+.summary-text {
+  font-size: 30rpx;
+  color: white;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+} 

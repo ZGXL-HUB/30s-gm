@@ -1,0 +1,13 @@
+<view class="page-guide-card" wx:if="{{showGuide}}">
+  <view class="guide-content">
+    <view class="guide-icon">{{icon}}</view>
+    <view class="guide-text">
+      <view class="guide-title">{{title}}</view>
+      <view class="guide-desc">{{description}}</view>
+      <view class="guide-tip" wx:if="{{tip}}">{{tip}}</view>
+    </view>
+    <view class="guide-close" bindtap="hideGuide" wx:if="{{showClose}}">
+      <text class="close-icon">×</text>
+    </view>
+  </view>
+</view>

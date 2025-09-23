@@ -1,0 +1,100 @@
+<!--反馈历史页面-->
+<view class="container">
+  <view class="header">
+    <view class="header-title">我的反馈</view>
+    <view class="header-desc">查看反馈处理状态和回复</view>
+  </view>
+
+  <!-- 反馈列表 -->
+  <view class="feedback-list" wx:if="{{feedbackList.length > 0}}">
+    <view 
+      class="feedback-item"
+      wx:for="{{feedbackList}}"
+      wx:key="feedbackId"
+      bindtap="viewFeedbackDetail"
+      data-feedback="{{item}}"
+    >
+      <view class="feedback-header">
+        <view class="feedback-title">{{item.title}}</view>
+        <view class="feedback-status status-{{item.status}}">
+          {{item.statusText}}
+        </view>
+      </view>
+      
+      <view class="feedback-content">{{item.content}}</view>
+      
+      <view class="feedback-meta">
+        <view class="feedback-time">{{item.createTimeText}}</view>
+        <view class="feedback-type">{{item.typeText}}</view>
+      </view>
+      
+      <view class="feedback-arrow">></view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{feedbackList.length === 0 && !loading}}">
+    <view class="empty-icon">📝</view>
+    <view class="empty-title">暂无反馈记录</view>
+    <view class="empty-desc">您还没有提交过任何反馈</view>
+    <button class="empty-btn" bindtap="goToFeedback">去反馈</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 反馈详情模态框 -->
+  <view class="modal-overlay" wx:if="{{showDetailModal}}" bindtap="hideDetailModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">反馈详情</view>
+        <view class="modal-close" bindtap="hideDetailModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <view class="detail-section">
+          <view class="detail-label">反馈类型</view>
+          <view class="detail-value">{{selectedFeedback.typeText}}</view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">反馈内容</view>
+          <view class="detail-value">{{selectedFeedback.content}}</view>
+        </view>
+        
+        <view class="detail-section" wx:if="{{selectedFeedback.contact}}">
+          <view class="detail-label">联系方式</view>
+          <view class="detail-value">{{selectedFeedback.contact}}</view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">提交时间</view>
+          <view class="detail-value">{{selectedFeedback.createTimeText}}</view>
+        </view>
+        
+        <view class="detail-section">
+          <view class="detail-label">处理状态</view>
+          <view class="detail-value status-{{selectedFeedback.status}}">
+            {{selectedFeedback.statusText}}
+          </view>
+        </view>
+        
+        <view class="detail-section" wx:if="{{selectedFeedback.reply}}">
+          <view class="detail-label">回复内容</view>
+          <view class="detail-value reply-content">{{selectedFeedback.reply}}</view>
+        </view>
+        
+        <view class="detail-section" wx:if="{{selectedFeedback.replyTime}}">
+          <view class="detail-label">回复时间</view>
+          <view class="detail-value">{{selectedFeedback.replyTimeText}}</view>
+        </view>
+      </view>
+      
+      <view class="modal-actions">
+        <button class="modal-btn primary" bindtap="hideDetailModal">关闭</button>
+      </view>
+    </view>
+  </view>
+</view>

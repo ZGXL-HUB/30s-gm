@@ -1,0 +1,73 @@
+<!--能力图谱页面 - 小程序版本-->
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <view class="header-title">能力图谱</view>
+    <view class="header-subtitle">发现薄弱点，精准提升</view>
+  </view>
+
+  <!-- 薄弱点列表 -->
+  <view class="weak-points-section">
+    <view class="section-title">
+      <view class="title-icon">🎯</view>
+      <view class="title-text">薄弱语法点</view>
+      <view class="refresh-btn" bindtap="refreshWeakPoints">刷新</view>
+    </view>
+
+    <!-- 薄弱点卡片列表 -->
+    <view class="weak-points-list" wx:if="{{weakPoints.length > 0}}">
+      <view 
+        class="weak-point-card" 
+        wx:for="{{weakPoints}}" 
+        wx:key="id"
+        bindtap="viewWeakPointDetail"
+        data-name="{{item.name}}"
+        data-accuracy="{{item.accuracy}}"
+      >
+        <view class="card-header">
+          <view class="point-name">{{item.name}}</view>
+          <view class="accuracy-badge accuracy-{{item.accuracy < 60 ? 'low' : item.accuracy < 80 ? 'medium' : 'high'}}">
+            {{item.accuracy}}%
+          </view>
+        </view>
+        
+        <view class="card-content">
+          <view class="accuracy-bar">
+            <view class="accuracy-fill" style="width: {{item.accuracy}}%"></view>
+          </view>
+          <view class="practice-btn" 
+                bindtap="gotoPractice" 
+                data-name="{{item.name}}"
+                catchtap="true">
+            立即练5题
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:else>
+      <view class="empty-icon">📊</view>
+      <view class="empty-text">暂无薄弱点数据</view>
+      <view class="empty-desc">请先完成能力测试或练习</view>
+    </view>
+  </view>
+
+  <!-- 整体分析卡片 -->
+  <view class="overall-analysis" bindtap="viewOverallAnalysis">
+    <view class="analysis-header">
+      <view class="analysis-icon">📈</view>
+      <view class="analysis-title">整体能力分析</view>
+      <view class="analysis-arrow">></view>
+    </view>
+    <view class="analysis-desc">查看详细的能力分析和学习建议</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-overlay" wx:if="{{loading}}">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <view class="loading-text">加载中...</view>
+    </view>
+  </view>
+</view>

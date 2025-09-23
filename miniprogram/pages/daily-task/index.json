@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "daily-task-card": "../../components/DailyTaskCard"
+  },
+  "navigationBarTitleText": "每日任务"
+}

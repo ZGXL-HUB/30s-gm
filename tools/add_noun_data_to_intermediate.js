@@ -1,0 +1,188 @@
+const fs = require('fs');
+const path = require('path');
+
+// 读取intermediate_questions.js文件
+const intermediatePath = path.join(__dirname, 'miniprogram/data/intermediate_questions.js');
+const intermediateContent = fs.readFileSync(intermediatePath, 'utf8');
+
+// 找到插入位置（在介词数据之前）
+const insertPosition = intermediateContent.indexOf('// 介词相关表格和笔记');
+
+if (insertPosition === -1) {
+  console.error('未找到插入位置');
+  process.exit(1);
+}
+
+// 名词数据（从questions.js中手动提取）
+const nounData = `// 名词相关表格和笔记
+  "noun_table_002": {
+    "id": "noun_table_002",
+    "frontendName": "名词书写(复数规则)",
+    "content": "名词复数信号词，复数变化规则总表",
+    "category": "名词",
+    "subCategory": "名词(2)",
+    "status": "已创建",
+    "tableData": {
+      "headers": ["规则分类", "变化规则", "示例(单数→复数)"],
+      "rows": [
+        ["一般情况", "直接加 - s", "book→books"],
+        ["以 - s, -x, -ch, -sh 结尾", "加 - es", "bus→buses；box→boxes"],
+        ["以辅音字母 + y 结尾", "变 y 为 i，再加 - es", "city→cities；baby→babies"],
+        ["以元音字母 + y 结尾", "直接加 - s", "boy→boys；toy→toys"],
+        ["以 - f 或 - fe 结尾", "多数变 f/fe 为 v，再加 - es", "leaf→leaves；knife→knives"],
+        ["以 - o 结尾(有生命)", "加 - es", "potato→potatoes；hero→heroes"],
+        ["以 - o 结尾(无生命)", "加 - s", "photo→photos；radio→radios"],
+        ["不规则变化", "无固定规则，需特殊记忆", "man→men；child→children；mouse→mice"]
+      ]
+    }
+  },
+  "noun_note_001": {
+    "id": "noun_note_001",
+    "frontendName": "名词笔记(概述)",
+    "content": "名词分类、名词词块考书写和复数、和连词动词考一致",
+    "category": "名词",
+    "subCategory": "名词(1)",
+    "status": "已创建",
+    "noteContent": "一、名词的分类\\n|举例(中文 + 英文)|类别名称|\\n|------|------|\\n|李白(Li Bai)、北京(Beijing)、春节(Spring Festival)|专有名词|\\n|学生(student)、电脑(computer)、树(tree)|个体名词(可数)|\\n|家庭(family)、团队(team)、班级(class)|集体名词(可单可复)|\\n|水(water)、钢铁(steel)、空气(air)|物质名词(不可数)|\\n|幸福(happiness)、勇气(courage)、知识(knowledge)|抽象名词(不可数)|\\n\\n二、名词的识别与书写(后缀示例)\\n|举例(动词 / 形容词→名词)|名词后缀|\\n|------|------|\\n|失败(fail→failure)、压力(press→pressure)|-ure|\\n|死亡(die→death)、真相(true→truth)|-th|\\n|发展(develop→development)、管理(manage→management)|-ment|\\n|行动(act→action)、讨论(discuss→discussion)|-ion|\\n|善良(kind→kindness)、黑暗(dark→darkness)|-ness|\\n|拒绝(refuse→refusal)、批准(approve→approval)|-al|\\n\\n三、常见考查形式\\n1. 作为词块考查(与介词、冠词、数词、形容词搭配)\\n考查重点：名词的书写(拼写正确性)、复数形式变化。\\n(1)复数信号词\\n数词提示：前面有 one 以外的数词(如 two, three, five 等)。\\n例：three books(三本书)、five cities(五个城市)\\n修饰词提示：被 many, different, several, a lot of 等词修饰。\\n例：many heroes(许多英雄)、different knives(不同的刀)\\n无冠词提示：可数名词前无 a/an，且表泛指(常出现在括号提示中)。\\n例：Please pass me (box) → boxes(提示 box 需用复数)\\n动词提示：后面动词为 are/were 或原形(主语为复数时)。\\n例：The tomatoes are red.(tomato 用复数，对应 are)\\nThese children play...(children 用复数，对应原形 play)\\n(2)复数变化规则总结：\\n一般情况加 -s(book→books)；\\n以 -s, -x, -ch, -sh 结尾加 -es(bus→buses)；\\n辅音字母 + y 结尾，变 y 为 i 加 -es(city→cities)；\\n元音字母 + y 结尾直接加 -s(boy→boys)；\\n以 -f/-fe 结尾，多数变 f/fe 为 v 加 -es(leaf→leaves)；\\n以 -o 结尾：有生命加 -es(potato→potatoes)，无生命加 -s(photo→photos)；\\n不规则变化(man→men, child→children)。\\n\\n考查示例：\\n用所给词的适当形式填空：\\nThere are three ______(knife)on the table.\\n解析：knife 以 -fe 结尾，变 fe 为 v 加 -es，答案为 knives。\\n\\n2. 与连词考查(词性和形式一致)\\n考查重点：并列结构中名词的形式一致(单复数、词性匹配)。\\n\\n考查示例：\\n填空：She bought some apples, ______(banana)and oranges.\\n解析：连词 and 连接并列名词，形式需一致(均为复数)，答案为 bananas。\\n\\n3. 与动词考查(主谓一致)\\n考查重点：名词单复数决定动词形式(单数名词配单数动词，复数名词配复数动词)。\\n\\n考查示例：\\n选择：The family ______(be)watching TV now.\\n解析：family 此处指 \\"家人\\"(复数概念)，动词用复数，答案为 are。\\n\\n4. 名词所有格考查\\n考查重点：'s 所有格和 of 所有格的用法。\\n\\n考查示例：\\n填空：This is ______(Tom)book.\\n解析：表示 \\"汤姆的书\\"，有生命的名词用 's 所有格，答案为 Tom's。"
+  },
+  "noun_note_002": {
+    "id": "noun_note_002",
+    "frontendName": "名词笔记(复数规则)",
+    "content": "名词复数信号词，复数变化规则总表",
+    "category": "名词",
+    "subCategory": "名词(2)",
+    "status": "已创建",
+    "noteContent": "一、复数信号词\\n数词提示：前面有 one 以外的数词(如 two, three, five 等)。\\n例：three books(三本书)、five cities(五个城市)\\n修饰词提示：被 many, different, several, a lot of 等词修饰。\\n例：many heroes(许多英雄)、different knives(不同的刀)\\n无冠词提示：可数名词前无 a/an，且表泛指(常出现在括号提示中)。\\n例：Please pass me (box) → boxes(提示 box 需用复数)\\n动词提示：后面动词为 are/were 或原形(主语为复数时)。\\n例：The tomatoes are red.(tomato 用复数，对应 are)\\nThese children play...(children 用复数，对应原形 play)\\n\\n二、常见名词复数变化规则及示例的表格：\\n|规则分类|变化规则|示例(单数→复数)|\\n|------|------|------|\\n|一般情况|直接加 - s|book→books|\\n|以 - s, -x, -ch, -sh 结尾|加 - es|bus→buses；box→boxes|\\n|以辅音字母 + y 结尾|变 y 为 i，再加 - es|city→cities；baby→babies|\\n|以元音字母 + y 结尾|直接加 - s|boy→boys；toy→toys|\\n|以 - f 或 - fe 结尾|多数变 f/fe 为 v，再加 - es|leaf→leaves；knife→knives|\\n|以 - o 结尾(有生命)|加 - es|potato→potatoes；hero→heroes|\\n|以 - o 结尾(无生命)|加 - s|photo→photos；radio→radios|\\n|不规则变化|无固定规则，需特殊记忆|man→men；child→children；mouse→mice|\\n\\n三、考察示例\\n数词提示\\n题目：I bought two ______ (apple) this morning.\\n答案：apples(数词 two 提示用复数，符合 \\"一般情况加 -s\\" 规则)\\n修饰词提示\\n题目：There are many ______ (brush) in the box.\\n答案：brushes(many 提示用复数，brush 以 -sh 结尾，加 -es)\\n无冠词提示\\n题目：She likes collecting ______ (strawberry) as a hobby.\\n答案：strawberries(无 a/an，表泛指，strawberry 以辅音 + y 结尾，变 y 为 i 加 -es)\\n动词提示\\n题目：The ______ (tomato) are ripe. Let's pick them.\\n答案：tomatoes(动词 are 提示主语为复数，tomato 是有生命的以 -o 结尾，加 -es)"
+  },
+  "noun_table_003": {
+    "id": "noun_table_003",
+    "frontendName": "名词书写(以o结尾)",
+    "content": "以o结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(3)",
+    "status": "已创建",
+    "tableData": {
+      "headers": ["名词原形", "复数形式"],
+      "rows": [
+        ["potato", "potatoes"],
+        ["tomato", "tomatoes"],
+        ["hero", "heroes"],
+        ["Negro", "Negroes"],
+        ["mango", "mangoes"],
+        ["photo", "photos"],
+        ["radio", "radios"],
+        ["video", "videos"],
+        ["piano", "pianos"],
+        ["kilo", "kilos"]
+      ]
+    }
+  },
+  "noun_note_003": {
+    "id": "noun_note_003",
+    "frontendName": "名词笔记(以o结尾)",
+    "content": "以o结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(3)",
+    "status": "已创建",
+    "noteContent": "在英语中，以 o 结尾的名词复数形式，通常会依据其是否具有生命来划分规则，但这一划分并非绝对，存在例外情况。不过，在高中阶段的习题中，遵循 \\"有生命的加 - es，无生命的加 - s\\" 这一规则来解题是没有问题的。​\\n\\n接下来看一些具体的变化示例。有生命的以 o 结尾的名词，复数形式通常加 \\"-es\\"，例如 \\"potato\\"(土豆)的复数是 \\"potatoes\\"，\\"tomato\\"(西红柿)的复数是 \\"tomatoes\\"，\\"hero\\"(英雄)的复数是 \\"heroes\\"。无生命的以 o 结尾的名词，复数形式一般加 \\"-s\\"，像 \\"photo\\"(照片)的复数是 \\"photos\\"，\\"radio\\"(收音机)的复数是 \\"radios\\"，\\"video\\"(视频)的复数是 \\"videos\\"。​\\n\\n为了更好地掌握这一规则，我们来看一些考察示例。​\\n\\n选择题：What are those? They are _______. A. potato  B. potatoes  C. potatos  答案是 B，因为 \\"potato\\" 是有生命的名词(这里可理解为植物类有生命)，复数加 \\"-es\\"。​\\n\\n填空题：There are many _______(radio)in the shop. 答案是 \\"radios\\"，\\"radio\\" 是无生命名词，复数加 \\"-s\\"。​\\n\\n改错题：He has three tomato.  应改为 \\"He has three tomatoes.\\"，\\"tomato\\" 是有生命的名词，复数形式错误，需加 \\"-es\\"。\\n\\n以下是以 \\"o\\" 结尾的名词复数形式练习表格，右边为需要填写的复数形式：\\n|名词原形|复数形式|\\n|------|------|\\n|potato|potatoes|\\n|tomato|tomatoes|\\n|hero|heroes|\\n|Negro|Negroes|\\n|mango|mangoes(注：mangos 也被接受，为美式拼写变体)|\\n|photo|photos|\\n|radio|radios|\\n|video|videos|\\n|piano|pianos|\\n|kilo|kilos|\\n\\n解析：\\n前四个(potato, tomato, hero, Negro)均为有生命类名词(或传统规则中归类为需加 -es 的词)，复数加 -es；\\n后六个(photo, radio, video, piano, kilo, mango)多为无生命名词，复数加 -s(mango 为特殊情况，两种形式均可)。"
+  },
+  "noun_table_004": {
+    "id": "noun_table_004",
+    "frontendName": "名词书写(以y结尾)",
+    "content": "以y结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(4)",
+    "status": "已创建",
+    "tableData": {
+      "headers": ["名词原形", "复数形式"],
+      "rows": [
+        ["boy", "boys"],
+        ["toy", "toys"],
+        ["key", "keys"],
+        ["day", "days"],
+        ["city", "cities"],
+        ["baby", "babies"],
+        ["family", "families"],
+        ["story", "stories"]
+      ]
+    }
+  },
+  "noun_note_004": {
+    "id": "noun_note_004",
+    "frontendName": "名词笔记(以y结尾)",
+    "content": "以y结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(4)",
+    "status": "已创建",
+    "noteContent": "关于以 \\"y\\" 结尾的名词变复数，规则的核心在于 \\"y\\" 前面的字母是元音还是辅音。我们先明确一下常见的元音字母和辅音字母，方便后续判断：\\n常见元音字母：a、e、i、o、u\\n常见辅音字母：除元音字母外的其他字母(如 b、c、d、f、g、h 等)\\n\\n一、以 \\"元音字母 + y\\" 结尾的名词\\n变化规则：直接加 \\"-s\\"\\n常见例子：\\nboy(男孩)→ boys\\ntoy(玩具)→ toys\\nkey(钥匙)→ keys\\nday(天)→ days\\n\\n二、以 \\"辅音字母 + y\\" 结尾的名词\\n变化规则：变 \\"y\\" 为 \\"i\\"，再加 \\"-es\\"\\n常见例子：\\ncity(城市)→ cities\\nbaby(婴儿)→ babies\\nfamily(家庭)→ families\\nstory(故事)→ stories\\n\\n考察示例\\nThere are five ______ (boy) playing basketball on the playground.\\n答案：boys(\\"boy\\" 是 \\"元音字母 o + y\\"，直接加 \\"-s\\")\\n\\nMy sister has three ______ (baby) dolls.\\n答案：babies(\\"baby\\" 是 \\"辅音字母 b + y\\"，变 \\"y\\" 为 \\"i\\" 加 \\"-es\\")\\n\\nHow many ______ (day) are there in a week?\\n答案：days(\\"day\\" 是 \\"元音字母 a + y\\"，直接加 \\"-s\\")\\n\\nThese ______ (city) are all famous for their history.\\n答案：cities(\\"city\\" 是 \\"辅音字母 t + y\\"，变 \\"y\\" 为 \\"i\\" 加 \\"-es\\")\\n\\n以下是以 \\"y\\" 结尾的名词复数形式练习表格，右边为需要填写的复数形式：\\n|名词原形|复数形式|\\n|------|------|\\n|boy|boys|\\n|toy|toys|\\n|key|keys|\\n|day|days|\\n|city|cities|\\n|baby|babies|\\n|family|families|\\n|story|stories|\\n\\n解析：\\n前四个(boy, toy, key, day)均为 \\"元音字母 + y\\" 结尾，直接加 -s；\\n后四个(city, baby, family, story)均为 \\"辅音字母 + y\\" 结尾，变 y 为 i 再加 -es。"
+  },
+  "noun_table_005": {
+    "id": "noun_table_005",
+    "frontendName": "名词书写(s/sh/ch/x结尾)",
+    "content": "s/sh/ch/x结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(5)",
+    "status": "已创建",
+    "tableData": {
+      "headers": ["名词原形", "复数形式"],
+      "rows": [
+        ["bus", "buses"],
+        ["brush", "brushes"],
+        ["watch", "watches"],
+        ["box", "boxes"],
+        ["dish", "dishes"],
+        ["church", "churches"]
+      ]
+    }
+  },
+  "noun_note_005": {
+    "id": "noun_note_005",
+    "frontendName": "名词笔记(s/sh/ch/x结尾)",
+    "content": "s/sh/ch/x结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(5)",
+    "status": "已创建",
+    "noteContent": "以 \\"s, sh, ch, x\\" 结尾的名词变复数，规则较为统一：直接加 \\"-es\\"。\\n\\n常见例子：\\nbus(公共汽车)→ buses\\nbrush(刷子)→ brushes\\nwatch(手表)→ watches\\nbox(盒子)→ boxes\\ndish(盘子)→ dishes\\nchurch(教堂)→ churches\\n\\n考察示例\\nThere are many ______ (bus) at the station during rush hour.\\n答案：buses(\\"bus\\" 以 s 结尾，加 - es)\\n\\nShe bought three ______ (brush) in the supermarket.\\n答案：brushes(\\"brush\\" 以 sh 结尾，加 - es)\\n\\nMy grandpa has two ______ (watch) collection.\\n答案：watches(\\"watch\\" 以 ch 结尾，加 - es)\\n\\nThe teacher put some ______ (box) in the corner of the classroom.\\n答案：boxes(\\"box\\" 以 x 结尾，加 - es)\\n\\n以下是以 \\"s, sh, ch, x\\" 结尾的名词复数形式练习表格，右边为需要填写的复数形式：\\n|名词原形|复数形式|\\n|------|------|\\n|bus|buses|\\n|brush|brushes|\\n|watch|watches|\\n|box|boxes|\\n|dish|dishes|\\n|church|churches|\\n\\n解析：这些名词均以 -s、-x、-ch、-sh 结尾，根据规则，其复数形式需加 -es。"
+  },
+  "noun_table_006": {
+    "id": "noun_table_006",
+    "frontendName": "名词书写(f/fe结尾)",
+    "content": "f/fe结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(6)",
+    "status": "已创建",
+    "tableData": {
+      "headers": ["名词原形", "复数形式"],
+      "rows": [
+        ["leaf", "leaves"],
+        ["knife", "knives"],
+        ["wife", "wives"],
+        ["life", "lives"],
+        ["thief", "thieves"],
+        ["wolf", "wolves"],
+        ["half", "halves"],
+        ["roof", "roofs"],
+        ["proof", "proofs"],
+        ["chief", "chiefs"],
+        ["gulf", "gulfs"]
+      ]
+    }
+  },
+  "noun_note_006": {
+    "id": "noun_note_006",
+    "frontendName": "名词笔记(f/fe结尾)",
+    "content": "f/fe结尾名词复数规则",
+    "category": "名词",
+    "subCategory": "名词(6)",
+    "status": "已创建",
+    "noteContent": "关于以 \\"f\\" 或 \\"fe\\" 结尾的名词变复数，常见规则是 \\"变 f/fe 为 v，再加 - es\\"。不过这一规则并非绝对，存在少数特例直接加 \\"-s\\"。但对于日常学习和习题来说，掌握多数情况和常见特例即可应对，因此该规则仍被广泛使用。\\n\\n一、遵循 \\"变 f/fe 为 v，加 - es\\" 的常见词：\\nleaf(树叶)→ leaves\\nknife(刀)→ knives\\nwife(妻子)→ wives\\nlife(生命)→ lives\\nthief(小偷)→ thieves\\nwolf(狼)→ wolves\\nhalf(一半)→ halves\\n\\n二、常见特例(直接加 \\"-s\\")：\\nroof(屋顶)→ roofs\\nproof(证据)→ proofs\\nchief(首领)→ chiefs\\ngulf(海湾)→ gulfs\\n\\n考察示例\\nThe wind blew down many ______ (leaf) from the tree.\\n答案：leaves(\\"leaf\\" 变 f 为 v，加 - es)\\n\\nMy dad has two ______ (knife) in the kitchen.\\n答案：knives(\\"knife\\" 变 fe 为 v，加 - es)\\n\\nThe ______ (roof) of these houses are all red.\\n答案：roofs(\\"roof\\" 是特例，直接加 - s)\\n\\nHow many ______ (life) did the doctor save last year?\\n答案：lives(\\"life\\" 变 fe 为 v，加 - es)\\n\\nThere are three ______ (chief) attending the meeting.\\n答案：chiefs(\\"chief\\" 是特例，直接加 - s)\\n\\n以下是以 \\"f\\" 或 \\"fe\\" 结尾的名词复数形式练习表格，右边为需要填写的复数形式：\\n|名词原形|复数形式|\\n|------|------|\\n|leaf|leaves|\\n|knife|knives|\\n|wife|wives|\\n|life|lives|\\n|thief|thieves|\\n|wolf|wolves|\\n|half|halves|\\n|roof|roofs|\\n|proof|proofs|\\n|chief|chiefs|\\n|gulf|gulfs|\\n\\n说明：\\n表中前 7 个单词(leaf 至 half)均符合 \\"以 -f 或 -fe 结尾的名词，变复数时将 -f/-fe 改为 -v，再加 -es\\" 的规则。\\n后 4 个单词(roof 至 gulf)虽以 -f 结尾，但复数形式直接加 -s，属于特殊情况，需要单独记忆。"`;
+
+// 插入名词数据
+const newContent = intermediateContent.slice(0, insertPosition) + 
+  nounData + '\n\n  ' +
+  intermediateContent.slice(insertPosition);
+
+// 写入文件
+fs.writeFileSync(intermediatePath, newContent, 'utf8');
+
+console.log('名词数据已成功添加到intermediate_questions.js文件中'); 

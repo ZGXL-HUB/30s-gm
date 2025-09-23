@@ -1,0 +1,259 @@
+<!--index.wxml-->
+<view class="container">
+
+  <!-- 语法能力测试卡片 -->
+  <view class="grammar-test-card" bindtap="navigateToGrammarTest">
+    <view class="test-card-header">
+      <view class="test-icon">📊</view>
+      <view class="test-title">语法能力测评</view>
+      <view class="test-status" wx:if="{{todayStats.grammarLevel}}">{{todayStats.grammarLevelText}}</view>
+    </view>
+    <view class="test-card-content">
+      <view class="test-desc">测测你的语法水平，获取精准练习推荐</view>
+      <view class="test-button">开始测试</view>
+    </view>
+  </view>
+
+  <!-- 每日推荐卡片 -->
+  <view class="daily-recommendation-card" bindtap="goToDailyCards" style="width: 443rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
+    <view class="recommendation-header">
+      <view class="recommendation-icon">🎯</view>
+      <view class="recommendation-title">每日推荐</view>
+      <view class="recommendation-badge">🔥 {{streakDays || 0}}天</view>
+    </view>
+    <view class="recommendation-content">
+      <view class="recommendation-desc">根据你的能力水平，智能推荐今日练习</view>
+      <view class="recommendation-progress">
+        <view class="progress-text">今日进度: {{todayProgress || 0}}/200 XP</view>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{(todayProgress || 0) / 200 * 100}}%"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 语法功能大厅 -->
+  <view class="grammar-hall-card" bindtap="showGrammarHall" style="width: 464rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
+    <view class="hall-header">
+      <view class="hall-icon">🏛️</view>
+      <view class="hall-title">语法功能大厅</view>
+      <view class="hall-arrow">></view>
+    </view>
+    <view class="hall-content">
+      <view class="hall-desc">系统组合、专属组合、错题特训、拍照选题、语法分点、进阶之旅</view>
+      <view class="hall-modules">
+        <view class="module-tag">系统组合</view>
+        <view class="module-tag">专属组合</view>
+        <view class="module-tag">错题特训</view>
+        <view class="module-tag">拍照选题</view>
+        <view class="module-tag">语法分点</view>
+        <view class="module-tag">进阶之旅</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 语法错题本 -->
+  <view class="mistakes-card" bindtap="goToMistakes" style="width: 460rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
+    <view class="mistakes-header">
+      <view class="mistakes-icon">📝</view>
+      <view class="mistakes-title">语法错题本</view>
+      <view class="mistakes-count" wx:if="{{hasWrongQuestions}}">{{wrongQuestionsCount}}道错题</view>
+    </view>
+    <view class="mistakes-content">
+      <view class="mistakes-desc">查看和管理你的错题记录</view>
+      <view class="mistakes-arrow">></view>
+    </view>
+  </view>
+
+  <!-- 语法功能大厅弹窗 -->
+  <view class="grammar-hall-modal" wx:if="{{showGrammarHallModal}}" bindtap="hideGrammarHall">
+    <view class="hall-modal-content" catchtap="stopPropagation">
+      <view class="hall-modal-header">
+        <view class="hall-modal-icon">🏛️</view>
+        <view class="hall-modal-title">语法功能大厅</view>
+        <view class="hall-modal-close" bindtap="hideGrammarHall">×</view>
+      </view>
+      
+      <view class="hall-modal-body">
+        <view class="hall-modules-grid">
+          <!-- 系统组合 -->
+          <view class="hall-module-card" bindtap="showModuleDetail" data-module="system">
+            <view class="module-card-icon">🎯</view>
+            <view class="module-card-title">系统组合</view>
+            <view class="module-card-desc">贴近高考语法题配比</view>
+          </view>
+          
+          <!-- 专属组合 -->
+          <view class="hall-module-card" bindtap="showModuleDetail" data-module="custom">
+            <view class="module-card-icon">⚙️</view>
+            <view class="module-card-title">专属组合</view>
+            <view class="module-card-desc">自定义语法点练习</view>
+            <view class="module-card-status" wx:if="{{isCustomComboSet}}">{{customComboCount > 1 ? customComboCount + '个组合' : '已设置'}}</view>
+          </view>
+          
+          <!-- 错题特训 -->
+          <view class="hall-module-card" bindtap="showModuleDetail" data-module="wrong">
+            <view class="module-card-icon">❌</view>
+            <view class="module-card-title">错题特训</view>
+            <view class="module-card-desc">智能分析错题模式</view>
+            <view class="module-card-status" wx:if="{{hasWrongQuestions}}">{{wrongQuestionsCount}}道错题</view>
+          </view>
+
+          <!-- 拍照选题 -->
+          <view class="hall-module-card hall-module-card-soon" bindtap="showModuleDetail" data-module="photo">
+            <view class="module-card-icon">📸</view>
+            <view class="module-card-title">拍照选题</view>
+            <view class="module-card-desc">即将推出</view>
+            <view class="coming-soon-badge">敬请期待</view>
+          </view>
+
+          <!-- 语法分点 -->
+          <view class="hall-module-card" bindtap="showModuleDetail" data-module="grammar">
+            <view class="module-card-icon">📚</view>
+            <view class="module-card-title">语法分点</view>
+            <view class="module-card-desc">自由选择语法点</view>
+          </view>
+
+          <!-- 进阶之旅 -->
+          <view class="hall-module-card" bindtap="showModuleDetail" data-module="advanced">
+            <view class="module-card-icon">🚀</view>
+            <view class="module-card-title">进阶之旅</view>
+            <view class="module-card-desc">能力诊断与个性化任务</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 模块详情弹窗 -->
+  <view class="module-detail-modal" wx:if="{{showModuleModal}}" bindtap="hideModuleDetail">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <view class="modal-icon">{{currentModule.icon}}</view>
+        <view class="modal-title">{{currentModule.title}}</view>
+        <view class="modal-close" bindtap="hideModuleDetail">×</view>
+      </view>
+      
+      <view class="modal-description">{{currentModule.description}}</view>
+      
+      <view class="modal-actions">
+        <block wx:if="{{currentModule.actions}}">
+          <block wx:for="{{currentModule.actions}}" wx:key="index" wx:for-item="action">
+            <button 
+              class="modal-action-btn {{action.type}}" 
+              bindtap="handleModalAction"
+              data-action="{{action.handler}}"
+              disabled="{{action.disabled}}"
+            >
+              <text class="action-btn-text">{{action.text}}</text>
+            </button>
+          </block>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 新增：系统组合选择卡片 -->
+  <view class="selection-card-modal" wx:if="{{showSelectionCard}}" bindtap="hideSelectionCard">
+    <view class="selection-card-content" catchtap="stopPropagation">
+      <view class="selection-card-header">
+        <view class="selection-card-icon">🎯</view>
+        <view class="selection-card-title">系统组合</view>
+        <view class="selection-card-close" bindtap="hideSelectionCard">×</view>
+      </view>
+      
+      <view class="selection-card-body">
+        <!-- 模块一：高考常见配比 -->
+        <view class="selection-module {{selectedModule === 'module1' ? 'selected' : ''}}" 
+              bindtap="selectModule" data-module="module1">
+          <view class="module-header">
+            <view class="module-title">高考常见配比</view>
+            <view class="module-description">十道题</view>
+          </view>
+          <view class="module-status">
+            <view class="status-icon">{{selectedModule === 'module1' ? '✓' : ''}}</view>
+          </view>
+        </view>
+        
+        <!-- 模块二：选择语法大类 -->
+        <view class="selection-module {{selectedModule === 'module2' ? 'selected' : ''}}" 
+              bindtap="selectModule" data-module="module2">
+          <view class="module-header">
+            <view class="module-title">选择语法大类</view>
+            <view class="module-description">可多选</view>
+          </view>
+          <view class="module-status">
+            <view class="status-icon">{{selectedModule === 'module2' ? '✓' : ''}}</view>
+          </view>
+        </view>
+        
+        <!-- 语法大类标签选择区域 -->
+        <view class="categories-section" wx:if="{{selectedModule === 'module2'}}">
+          <view class="categories-title">选择语法大类：</view>
+          
+          <!-- 选中内容提示 -->
+          <view class="selected-content-hint" wx:if="{{selectedCategories.length > 0}}">
+            <view class="hint-icon">✓</view>
+            <view class="hint-text">已选择：{{selectedCategories.join('、')}}</view>
+          </view>
+          
+          <view class="categories-grid">
+            <view wx:for="{{currentModule.selectionCard.module2.categories}}" 
+                  wx:key="index" 
+                  wx:for-item="category"
+                  class="category-tag {{selectedCategories.indexOf(category) > -1 ? 'selected' : ''}}"
+                  bindtap="toggleCategory"
+                  data-category="{{category}}">
+              <view class="category-name">{{category}}</view>
+              <view class="category-status">
+                <view class="status-indicator {{selectedCategories.indexOf(category) > -1 ? 'selected' : ''}}">
+                  {{selectedCategories.indexOf(category) > -1 ? '✓' : ''}}
+                </view>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 选中数量提示 -->
+          <view class="selected-count" wx:if="{{selectedCategories.length > 0}}">
+            已选择 {{selectedCategories.length}} 个大类
+          </view>
+          
+          <!-- 未选择提示 -->
+          <view class="no-selection-hint" wx:if="{{selectedCategories.length === 0}}">
+            <view class="hint-icon">💡</view>
+            <view class="hint-text">请选择至少一个语法大类开始练习</view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 底部操作按钮 -->
+      <view class="selection-card-actions">
+        <button class="selection-action-btn primary" bindtap="handleSelectionQuickPractice">
+          <text class="action-btn-text">快速练习</text>
+        </button>
+        <button class="selection-action-btn secondary" bindtap="handleSelectionAdjust">
+          <text class="action-btn-text">调整</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户引导 -->
+  <view class="guide-overlay" wx:if="{{showGuide}}">
+    <view class="guide-content">
+      <view class="guide-title">欢迎使用语法专项练习</view>
+      <view class="guide-text">
+        <text>🎯 系统组合：贴近高考语法题配比的十道题</text>
+        <text>⚙️ 专属组合：自定义语法点，个性化学习</text>
+        <text>❌ 错题特训：智能分析错题模式，针对性训练</text>
+        <text>📸 拍照选题：即将推出，敬请期待</text>
+        <text>📚 语法分点：自由选择语法点，无限制组合练习</text>
+        <text>🚀 进阶之旅：能力诊断与个性化每日任务</text>
+      </view>
+      <view class="guide-button" bindtap="closeGuide">开始使用</view>
+    </view>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

@@ -1,0 +1,522 @@
+/* 导出模态框样式 */
+
+.export-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.export-modal-content {
+  background: white;
+  border-radius: 16rpx;
+  width: 100%;
+  max-width: 600rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.2);
+}
+
+.export-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 32rpx 0 32rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  margin-bottom: 24rpx;
+}
+
+.export-modal-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.export-modal-close {
+  font-size: 48rpx;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.export-options {
+  padding: 0 32rpx;
+}
+
+.export-section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+/* 格式选择 */
+.format-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.format-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  border: 2rpx solid #e9ecef;
+  border-radius: 12rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.format-option.selected {
+  border-color: #1890ff;
+  background: #f0f9ff;
+  transform: scale(1.02);
+}
+
+.format-option:active {
+  transform: scale(0.98);
+}
+
+.format-icon {
+  font-size: 32rpx;
+  margin-bottom: 8rpx;
+}
+
+.format-name {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.format-desc {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 模板选择 */
+.template-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.template-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  border: 2rpx solid #e9ecef;
+  border-radius: 8rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.template-option.selected {
+  border-color: #52c41a;
+  background: #f6ffed;
+}
+
+.template-option:active {
+  transform: scale(0.98);
+}
+
+.template-name {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.template-desc {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 筛选选项 */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.filter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-label {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.quantity-btn {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border: 2rpx solid #d9d9d9;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn:not(:disabled):active {
+  background: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-display {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  min-width: 60rpx;
+  text-align: center;
+}
+
+.difficulty-filter {
+  display: flex;
+  gap: 12rpx;
+}
+
+.difficulty-option {
+  padding: 12rpx 20rpx;
+  border: 2rpx solid #e9ecef;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.difficulty-option.selected {
+  border-color: #1890ff;
+  background: #1890ff;
+  color: white;
+}
+
+.difficulty-option:active {
+  transform: scale(0.95);
+}
+
+/* 导出预览 */
+.export-preview {
+  background: #f8f9fa;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+
+.preview-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.preview-item:last-child {
+  margin-bottom: 0;
+}
+
+.preview-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.preview-value {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 权限提示 */
+.limit-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 20rpx;
+  background: #fff7e6;
+  border: 1rpx solid #ffd591;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.limit-icon {
+  font-size: 24rpx;
+}
+
+.limit-text {
+  font-size: 24rpx;
+  color: #d46b08;
+}
+
+.upgrade-prompt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 20rpx;
+  background: #f6ffed;
+  border: 1rpx solid #b7eb8f;
+  border-radius: 8rpx;
+}
+
+.upgrade-text {
+  font-size: 24rpx;
+  color: #52c41a;
+}
+
+.upgrade-btn {
+  padding: 8rpx 16rpx;
+  background: #52c41a;
+  color: white;
+  border: none;
+  border-radius: 4rpx;
+  font-size: 22rpx;
+}
+
+/* 操作按钮 */
+.export-actions {
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx 32rpx 32rpx 32rpx;
+  border-top: 1rpx solid #f0f0f0;
+  margin-top: 24rpx;
+}
+
+.export-btn {
+  flex: 1;
+  padding: 24rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  transition: all 0.3s ease;
+}
+
+.export-btn.primary {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
+}
+
+.export-btn.primary:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.3);
+}
+
+.export-btn.secondary {
+  background: #f5f5f5;
+  color: #666;
+  border: 1rpx solid #d9d9d9;
+}
+
+.export-btn.secondary:active {
+  background: #e6e6e6;
+}
+
+.export-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: 24rpx;
+}
+
+.btn-text {
+  font-size: 26rpx;
+}
+
+/* 导出进度模态框 */
+.export-progress-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.export-progress-content {
+  background: white;
+  border-radius: 16rpx;
+  width: 100%;
+  max-width: 400rpx;
+  padding: 40rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.3);
+}
+
+.progress-header {
+  margin-bottom: 32rpx;
+}
+
+.progress-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-body {
+  margin-bottom: 32rpx;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8rpx;
+  background: #f0f0f0;
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-bottom: 16rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #52c41a 0%, #73d13d 100%);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #52c41a;
+  margin-bottom: 8rpx;
+}
+
+.progress-desc {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.progress-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.progress-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.progress-btn.primary {
+  background: #52c41a;
+  color: white;
+}
+
+.progress-btn:not(.primary) {
+  background: #f5f5f5;
+  color: #666;
+}
+
+/* 导出按钮样式 */
+.export-button-container {
+  position: fixed;
+  bottom: 40rpx;
+  right: 40rpx;
+  z-index: 1000;
+}
+
+.export-button {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 20rpx 32rpx;
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: white;
+  border: none;
+  border-radius: 50rpx;
+  box-shadow: 0 8rpx 24rpx rgba(24, 144, 255, 0.3);
+  font-size: 28rpx;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.export-button:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 16rpx rgba(24, 144, 255, 0.3);
+}
+
+.export-icon {
+  font-size: 32rpx;
+}
+
+.export-text {
+  font-size: 26rpx;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 750rpx) {
+  .export-modal-overlay {
+    padding: 20rpx;
+  }
+  
+  .format-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12rpx;
+  }
+  
+  .difficulty-filter {
+    flex-wrap: wrap;
+  }
+  
+  .export-button-container {
+    bottom: 20rpx;
+    right: 20rpx;
+  }
+  
+  .export-button {
+    padding: 16rpx 24rpx;
+    font-size: 24rpx;
+  }
+}

@@ -1,0 +1,330 @@
+/* 进阶之旅页面样式 - 7天学习路径 */
+
+.container {
+  padding: 20rpx;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* 页面头部 */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 20rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  color: white;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  padding: 10rpx;
+}
+
+.nav-icon {
+  font-size: 32rpx;
+  margin-right: 5rpx;
+}
+
+.nav-text {
+  font-size: 28rpx;
+}
+
+.header-content {
+  flex: 1;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 5rpx;
+}
+
+.header-subtitle {
+  font-size: 24rpx;
+  opacity: 0.9;
+}
+
+.header-refresh {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 20rpx;
+}
+
+/* 学习概览卡片 */
+.overview-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.overview-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.overview-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.overview-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  flex: 1;
+}
+
+.overview-content {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10rpx;
+}
+
+.target-info, .weak-points-info {
+  text-align: center;
+}
+
+.target-label, .weak-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 5rpx;
+}
+
+.target-value, .weak-count {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.overview-arrow {
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 学习计划区域 */
+.plan-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 0 10rpx;
+}
+
+.title-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 学习计划列表 */
+.plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.plan-item {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.plan-item:active {
+  transform: scale(0.98);
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.day-tag {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.plan-status {
+  font-size: 24rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 15rpx;
+  color: white;
+}
+
+.plan-status.completed {
+  background-color: #52c41a;
+}
+
+.plan-status.pending {
+  background-color: #faad14;
+}
+
+.plan-status:not(.completed):not(.pending) {
+  background-color: #667eea;
+}
+
+.plan-content {
+  margin-bottom: 20rpx;
+}
+
+.plan-focus {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.plan-target {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.plan-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-btn {
+  padding: 16rpx 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 25rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 15rpx rgba(102, 126, 234, 0.3);
+}
+
+.plan-arrow {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  background: white;
+  border-radius: 16rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 学习提示卡片 */
+.tips-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.tips-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.tips-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.tips-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.tips-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.tip-item {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 加载状态 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-content {
+  background: white;
+  padding: 40rpx;
+  border-radius: 16rpx;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}

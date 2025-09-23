@@ -1,0 +1,131 @@
+<!-- pages/me/index.wxml -->
+<view class="page_container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="个人中心"
+    description="管理个人信息、联系客服、分享小程序等功能"
+    tip="💡 提示：点击头像可以登录，点击分享可以邀请朋友使用"
+    icon="👤"
+    storage-key="user-center-guide"
+  />
+  
+  <view class="top_bg" />
+  <view class="main_content">
+    <!-- 用户信息区域 -->
+    <view class="userinfo_container">
+      <image class="avatar" src="../../images/icons/avatar.webp" bind:tap="getOpenId" mode="widthFix" />
+      <block wx:if="{{ !isLoggedIn }}">
+        <view class="username" bind:tap="getOpenId">请点击登录</view>
+        <view class="user-desc">登录后可查看学习统计</view>
+      </block>
+      <block wx:else>
+        <view class="username">学习达人</view>
+        <view class="user-desc">已学习 {{ studyStats.studyDays }} 天</view>
+      </block>
+    </view>
+
+    <!-- 学习统计区域 -->
+    <view class="stats_container" wx:if="{{ isLoggedIn }}">
+      <view class="stats_title">学习统计</view>
+      <view class="stats_grid">
+        <view class="stat_item">
+          <view class="stat_number">{{ studyStats.totalQuestions }}</view>
+          <view class="stat_label">总题目</view>
+        </view>
+        <view class="stat_item">
+          <view class="stat_number">{{ studyStats.accuracy }}%</view>
+          <view class="stat_label">正确率</view>
+        </view>
+        <view class="stat_item">
+          <view class="stat_number">{{ studyStats.todayQuestions }}</view>
+          <view class="stat_label">今日练习</view>
+        </view>
+        <view class="stat_item">
+          <view class="stat_number">{{ studyStats.wrongQuestions }}</view>
+          <view class="stat_label">错题数</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 今日成就区域 -->
+    <view class="achievement-section" wx:if="{{ isLoggedIn }}">
+      <view class="achievement-title">
+        <view class="achievement-icon">🏆</view>
+        <view class="achievement-text">今日成就</view>
+      </view>
+      <view class="achievement-cards">
+        <view class="achievement-card">
+          <view class="achievement-number">{{todayStats.grammarCount}}</view>
+          <view class="achievement-label">语法题</view>
+        </view>
+        <view class="achievement-card">
+          <view class="achievement-number">{{todayStats.writingCount}}</view>
+          <view class="achievement-label">书写题</view>
+        </view>
+        <view class="achievement-card">
+          <view class="achievement-number">{{todayStats.wrongQuestionCount}}</view>
+          <view class="achievement-label">错题</view>
+        </view>
+        <view class="achievement-card" wx:if="{{todayStats.grammarLevel}}">
+          <view class="achievement-level">{{todayStats.grammarLevelText}}</view>
+          <view class="achievement-label">语法水平</view>
+        </view>
+      </view>
+      <view class="achievement-progress" wx:if="{{todayStats.grammarCount > 0}}">
+        <view class="progress-text">今日目标：{{todayStats.grammarCount}}/20 题</view>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{progressWidth}}"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="settings_container">
+      <!-- <view class="setting_item">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/setting.svg" />
+          <view class="setting_text">个人信息设置</view>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view> -->
+      <!-- <view class="setting_item">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/question.svg" />
+          <view class="setting_text">常见问题</view>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view> -->
+      <view class="setting_item">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/customer-service.svg" />
+          <!-- <view class="setting_text">联系客服</view> -->
+          <button open-type="contact" class="contact-button">
+            联系客服
+          </button>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view>
+      <view class="setting_item" bind:tap="goToFeedback">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/feedback.svg" />
+          <view class="setting_text">意见反馈</view>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view>
+      <view class="setting_item" bind:tap="gotoWxCodePage">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/share.svg" />
+          <view class="setting_text">分享小程序</view>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view>
+      <view class="setting_item" bind:tap="goToAdmin" wx:if="{{isAdmin}}">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/admin.svg" />
+          <view class="setting_text">反馈管理</view>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view>
+    </view>
+  </view>
+  <!-- cloud-tip-modal组件已删除 -->
+</view>

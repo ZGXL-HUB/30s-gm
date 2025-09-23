@@ -1,0 +1,41 @@
+<!-- 等级选择页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">选择你的等级</text>
+    <text class="subtitle">请选择最适合你的学习等级</text>
+  </view>
+
+  <!-- 等级列表 -->
+  <view class="level-list">
+    <!-- 初级 -->
+    <view class="level-card" bindtap="goToSelect" data-level="初级">
+      <view class="level-icon elementary">初</view>
+      <view class="level-info">
+        <text class="level-name">初级</text>
+        <text class="level-desc">适合英语初学者</text>
+      </view>
+      <image class="arrow-icon" src="/images/arrow.svg" mode="aspectFit"></image>
+    </view>
+
+    <!-- 中级 -->
+    <view class="level-card" bindtap="goToSelect" data-level="中级">
+      <view class="level-icon intermediate">中</view>
+      <view class="level-info">
+        <text class="level-name">中级</text>
+        <text class="level-desc">适合有一定基础的英语学习者</text>
+      </view>
+      <image class="arrow-icon" src="/images/arrow.svg" mode="aspectFit"></image>
+    </view>
+
+    <!-- 高级 -->
+    <view class="level-card" bindtap="goToSelect" data-level="高级">
+      <view class="level-icon advanced">高</view>
+      <view class="level-info">
+        <text class="level-name">高级</text>
+        <text class="level-desc">适合英语水平较高的学习者</text>
+      </view>
+      <image class="arrow-icon" src="/images/arrow.svg" mode="aspectFit"></image>
+    </view>
+  </view>
+</view> 

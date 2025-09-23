@@ -1,0 +1,67 @@
+.page-guide-card {
+  margin: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.guide-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  color: white;
+}
+
+.guide-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+  margin-top: 4rpx;
+  flex-shrink: 0;
+}
+
+.guide-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.guide-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  line-height: 1.3;
+}
+
+.guide-desc {
+  font-size: 26rpx;
+  line-height: 1.4;
+  margin-bottom: 8rpx;
+  opacity: 0.95;
+}
+
+.guide-tip {
+  font-size: 24rpx;
+  opacity: 0.85;
+  line-height: 1.3;
+}
+
+.guide-close {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.close-icon {
+  font-size: 28rpx;
+  color: white;
+  font-weight: bold;
+}

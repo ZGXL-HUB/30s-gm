@@ -1,0 +1,688 @@
+{
+  "tables": {
+    "preposition_table_001": {
+      "id": "preposition_table_001",
+      "frontendName": "介词书写(常见介词)",
+      "content": "常见介词的中译英表格，包含自动判断功能",
+      "category": "介词",
+      "subCategory": "介词(1)",
+      "status": "已创建"
+    },
+    "preposition_table_002": {
+      "id": "preposition_table_002",
+      "frontendName": "介词书写(常见搭配)",
+      "content": "常见介词词组练习，三列格式，自动判断",
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "status": "已创建"
+    },
+    "pronoun_table_001": {
+      "id": "pronoun_table_001",
+      "frontendName": "代词书写(整表)",
+      "content": "人称物主反身代词整表，五列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(1)",
+      "status": "已创建"
+    },
+    "pronoun_table_002": {
+      "id": "pronoun_table_002",
+      "frontendName": "代词书写(人称代词)",
+      "content": "人称代词练习表格",
+      "category": "代词",
+      "subCategory": "代词(2)",
+      "status": "已创建"
+    },
+    "pronoun_table_003": {
+      "id": "pronoun_table_003",
+      "frontendName": "代词书写(物主代词)",
+      "content": "物主代词练习表格",
+      "category": "代词",
+      "subCategory": "代词(3)",
+      "status": "已创建"
+    },
+    "pronoun_table_004": {
+      "id": "pronoun_table_004",
+      "frontendName": "代词书写(反身代词)",
+      "content": "反身代词练习表格",
+      "category": "代词",
+      "subCategory": "代词(4)",
+      "status": "已创建"
+    },
+    "pronoun_table_005": {
+      "id": "pronoun_table_005",
+      "frontendName": "代词书写(关系代词)",
+      "content": "关系代词练习表格",
+      "category": "代词",
+      "subCategory": "代词(5)",
+      "status": "已创建"
+    },
+    "pronoun_table_006": {
+      "id": "pronoun_table_006",
+      "frontendName": "代词书写(it相关)",
+      "content": "it相关用法练习表格",
+      "category": "代词",
+      "subCategory": "代词(6)",
+      "status": "已创建"
+    },
+    "noun_table_001": {
+      "id": "noun_table_001",
+      "frontendName": "名词书写(后缀识别)",
+      "content": "名词后缀识别练习表格",
+      "category": "名词",
+      "subCategory": "名词(1)",
+      "status": "已创建"
+    },
+    "noun_table_002": {
+      "id": "noun_table_002",
+      "frontendName": "名词书写(复数规则)",
+      "content": "名词复数规则练习表格",
+      "category": "名词",
+      "subCategory": "名词(2)",
+      "status": "已创建"
+    },
+    "noun_table_003": {
+      "id": "noun_table_003",
+      "frontendName": "名词书写(以o结尾)",
+      "content": "以o结尾名词复数练习表格",
+      "category": "名词",
+      "subCategory": "名词(3)",
+      "status": "已创建"
+    },
+    "noun_table_004": {
+      "id": "noun_table_004",
+      "frontendName": "名词书写(以y结尾)",
+      "content": "以y结尾名词复数练习表格",
+      "category": "名词",
+      "subCategory": "名词(4)",
+      "status": "已创建"
+    },
+    "noun_table_005": {
+      "id": "noun_table_005",
+      "frontendName": "名词书写(s/sh/ch/x结尾)",
+      "content": "s/sh/ch/x结尾名词复数练习表格",
+      "category": "名词",
+      "subCategory": "名词(5)",
+      "status": "已创建"
+    },
+    "tense_table_001": {
+      "id": "tense_table_001",
+      "frontendName": "时态书写(八大时态主动)",
+      "content": "八大时态主动语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(1)",
+      "status": "已创建"
+    },
+    "tense_table_002": {
+      "id": "tense_table_002",
+      "frontendName": "时态书写(八大时态被动)",
+      "content": "八大时态被动语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(2)",
+      "status": "已创建"
+    },
+    "voice_table_001": {
+      "id": "voice_table_001",
+      "frontendName": "语态书写(一般现在时)",
+      "content": "一般现在时语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(3)",
+      "status": "已创建"
+    },
+    "voice_table_002": {
+      "id": "voice_table_002",
+      "frontendName": "语态书写(一般过去时)",
+      "content": "一般过去时语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(4)",
+      "status": "已创建"
+    },
+    "voice_table_003": {
+      "id": "voice_table_003",
+      "frontendName": "语态书写(现在进行时)",
+      "content": "现在进行时语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(5)",
+      "status": "已创建"
+    },
+    "voice_table_004": {
+      "id": "voice_table_004",
+      "frontendName": "语态书写(过去进行时)",
+      "content": "过去进行时语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(6)",
+      "status": "已创建"
+    },
+    "voice_table_005": {
+      "id": "voice_table_005",
+      "frontendName": "语态书写(现在完成时)",
+      "content": "现在完成时语态练习表格",
+      "category": "谓语",
+      "subCategory": "谓语(7)",
+      "status": "已创建"
+    },
+    "participle_table_001": {
+      "id": "participle_table_001",
+      "frontendName": "分词书写(现在分词)",
+      "content": "现在分词书写练习表格",
+      "category": "非谓语",
+      "subCategory": "非谓语(1)",
+      "status": "已创建"
+    },
+    "participle_table_002": {
+      "id": "participle_table_002",
+      "frontendName": "分词书写(过去分词)",
+      "content": "过去分词书写练习表格",
+      "category": "非谓语",
+      "subCategory": "非谓语(2)",
+      "status": "已创建"
+    },
+    "infinitive_table_001": {
+      "id": "infinitive_table_001",
+      "frontendName": "不定式书写",
+      "content": "不定式书写练习表格",
+      "category": "非谓语",
+      "subCategory": "非谓语(3)",
+      "status": "已创建"
+    },
+    "comparative_table_001": {
+      "id": "comparative_table_001",
+      "frontendName": "比较级书写",
+      "content": "形容词比较级练习表格",
+      "category": "形容词",
+      "subCategory": "形容词(2)",
+      "status": "已创建"
+    },
+    "superlative_table_001": {
+      "id": "superlative_table_001",
+      "frontendName": "最高级书写",
+      "content": "形容词最高级练习表格",
+      "category": "形容词",
+      "subCategory": "形容词(3)",
+      "status": "已创建"
+    },
+    "adverb_table_001": {
+      "id": "adverb_table_001",
+      "frontendName": "副词书写(修饰动词)",
+      "content": "副词修饰动词练习表格",
+      "category": "副词",
+      "subCategory": "副词(1)",
+      "status": "已创建"
+    },
+    "adverb_table_002": {
+      "id": "adverb_table_002",
+      "frontendName": "副词书写(修饰形容词)",
+      "content": "副词修饰形容词练习表格",
+      "category": "副词",
+      "subCategory": "副词(2)",
+      "status": "已创建"
+    },
+    "adverb_table_003": {
+      "id": "adverb_table_003",
+      "frontendName": "副词书写(修饰句子)",
+      "content": "副词修饰句子练习表格",
+      "category": "副词",
+      "subCategory": "副词(3)",
+      "status": "已创建"
+    },
+    "adverb_table_004": {
+      "id": "adverb_table_004",
+      "frontendName": "副词书写(修饰副词)",
+      "content": "副词修饰副词练习表格",
+      "category": "副词",
+      "subCategory": "副词(4)",
+      "status": "已创建"
+    }
+  },
+  "notes": {
+    "preposition_note_001": {
+      "id": "preposition_note_001",
+      "frontendName": "介词笔记(常见介词与用法)",
+      "content": "常见介词和用法讲解",
+      "category": "介词",
+      "subCategory": "介词(1)",
+      "status": "已创建"
+    },
+    "preposition_note_002": {
+      "id": "preposition_note_002",
+      "frontendName": "介词笔记(常见搭配)",
+      "content": "高中常考的介词固定搭配",
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "status": "已创建"
+    },
+    "pronoun_note_001": {
+      "id": "pronoun_note_001",
+      "frontendName": "代词笔记(提示)",
+      "content": "代词使用提示和规则",
+      "category": "代词",
+      "subCategory": "代词(1)",
+      "status": "已创建"
+    },
+    "pronoun_note_002": {
+      "id": "pronoun_note_002",
+      "frontendName": "代词笔记(人称代词)",
+      "content": "人称代词使用规则",
+      "category": "代词",
+      "subCategory": "代词(2)",
+      "status": "已创建"
+    },
+    "pronoun_note_003": {
+      "id": "pronoun_note_003",
+      "frontendName": "代词笔记(物主代词)",
+      "content": "物主代词使用规则",
+      "category": "代词",
+      "subCategory": "代词(3)",
+      "status": "已创建"
+    },
+    "pronoun_note_004": {
+      "id": "pronoun_note_004",
+      "frontendName": "代词笔记(反身代词)",
+      "content": "反身代词使用规则",
+      "category": "代词",
+      "subCategory": "代词(4)",
+      "status": "已创建"
+    },
+    "pronoun_note_005": {
+      "id": "pronoun_note_005",
+      "frontendName": "代词笔记(关系代词)",
+      "content": "关系代词使用规则",
+      "category": "代词",
+      "subCategory": "代词(5)",
+      "status": "已创建"
+    },
+    "pronoun_note_006": {
+      "id": "pronoun_note_006",
+      "frontendName": "代词笔记(it相关)",
+      "content": "it相关用法规则",
+      "category": "代词",
+      "subCategory": "代词(6)",
+      "status": "已创建"
+    },
+    "noun_note_001": {
+      "id": "noun_note_001",
+      "frontendName": "名词笔记(后缀)",
+      "content": "名词后缀识别规则",
+      "category": "名词",
+      "subCategory": "名词(1)",
+      "status": "已创建"
+    },
+    "noun_note_002": {
+      "id": "noun_note_002",
+      "frontendName": "名词笔记(复数规则)",
+      "content": "名词复数变化规则",
+      "category": "名词",
+      "subCategory": "名词(2)",
+      "status": "已创建"
+    },
+    "noun_note_003": {
+      "id": "noun_note_003",
+      "frontendName": "名词笔记(以o结尾)",
+      "content": "以o结尾名词复数规则",
+      "category": "名词",
+      "subCategory": "名词(3)",
+      "status": "已创建"
+    },
+    "noun_note_004": {
+      "id": "noun_note_004",
+      "frontendName": "名词笔记(以y结尾)",
+      "content": "以y结尾名词复数规则",
+      "category": "名词",
+      "subCategory": "名词(4)",
+      "status": "已创建"
+    },
+    "noun_note_005": {
+      "id": "noun_note_005",
+      "frontendName": "名词笔记(s/sh/ch/x结尾)",
+      "content": "s/sh/ch/x结尾名词复数规则",
+      "category": "名词",
+      "subCategory": "名词(5)",
+      "status": "已创建"
+    },
+    "tense_note_001": {
+      "id": "tense_note_001",
+      "frontendName": "时态笔记(标志词)",
+      "content": "时态标志词总结",
+      "category": "谓语",
+      "subCategory": "谓语(1)",
+      "status": "已创建"
+    },
+    "tense_note_002": {
+      "id": "tense_note_002",
+      "frontendName": "时态笔记(八大时态)",
+      "content": "八大时态详细规则",
+      "category": "谓语",
+      "subCategory": "谓语(2)",
+      "status": "已创建"
+    },
+    "voice_note_001": {
+      "id": "voice_note_001",
+      "frontendName": "语态笔记(主动被动)",
+      "content": "主动语态和被动语态规则",
+      "category": "谓语",
+      "subCategory": "谓语(3)",
+      "status": "已创建"
+    },
+    "participle_note_001": {
+      "id": "participle_note_001",
+      "frontendName": "分词笔记(现在分词)",
+      "content": "现在分词变化规则",
+      "category": "非谓语",
+      "subCategory": "非谓语(1)",
+      "status": "已创建"
+    },
+    "participle_note_002": {
+      "id": "participle_note_002",
+      "frontendName": "分词笔记(过去分词)",
+      "content": "过去分词变化规则",
+      "category": "非谓语",
+      "subCategory": "非谓语(2)",
+      "status": "已创建"
+    },
+    "infinitive_note_001": {
+      "id": "infinitive_note_001",
+      "frontendName": "不定式笔记",
+      "content": "不定式使用规则",
+      "category": "非谓语",
+      "subCategory": "非谓语(3)",
+      "status": "已创建"
+    },
+    "comparative_note_001": {
+      "id": "comparative_note_001",
+      "frontendName": "比较级笔记(词缀)",
+      "content": "形容词比较级词缀规则",
+      "category": "形容词",
+      "subCategory": "形容词(1)",
+      "status": "已创建"
+    },
+    "superlative_note_001": {
+      "id": "superlative_note_001",
+      "frontendName": "最高级笔记(词缀)",
+      "content": "形容词最高级词缀规则",
+      "category": "形容词",
+      "subCategory": "形容词(2)",
+      "status": "已创建"
+    },
+    "adverb_note_001": {
+      "id": "adverb_note_001",
+      "frontendName": "副词笔记(修饰动词)",
+      "content": "副词修饰动词的规则",
+      "category": "副词",
+      "subCategory": "副词(1)",
+      "status": "已创建"
+    },
+    "adverb_note_002": {
+      "id": "adverb_note_002",
+      "frontendName": "副词笔记(修饰形容词)",
+      "content": "副词修饰形容词的规则",
+      "category": "副词",
+      "subCategory": "副词(2)",
+      "status": "已创建"
+    },
+    "adverb_note_003": {
+      "id": "adverb_note_003",
+      "frontendName": "副词笔记(修饰句子)",
+      "content": "副词修饰句子的规则",
+      "category": "副词",
+      "subCategory": "副词(3)",
+      "status": "已创建"
+    },
+    "adverb_note_004": {
+      "id": "adverb_note_004",
+      "frontendName": "副词笔记(修饰副词)",
+      "content": "副词修饰副词的规则",
+      "category": "副词",
+      "subCategory": "副词(4)",
+      "status": "已创建"
+    }
+  },
+  "exerciseCategories": {
+    "介词(1)": {
+      "category": "介词",
+      "subCategory": "介词(1)",
+      "description": "介词综合",
+      "relatedNotes": ["preposition_note_001"],
+      "relatedTables": ["preposition_table_001"],
+      "status": "已创建"
+    },
+    "介词(2)": {
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "description": "固定搭配",
+      "relatedNotes": ["preposition_note_002"],
+      "relatedTables": ["preposition_table_002"],
+      "status": "已创建"
+    },
+    "介词(3)": {
+      "category": "介词",
+      "subCategory": "介词(3)",
+      "description": "介词+名词/动名词",
+      "relatedNotes": ["preposition_note_001"],
+      "relatedTables": ["preposition_table_001"],
+      "status": "已创建"
+    },
+    "代词(1)": {
+      "category": "代词",
+      "subCategory": "代词(1)",
+      "description": "代词综合",
+      "relatedNotes": ["pronoun_note_001"],
+      "relatedTables": ["pronoun_table_001"],
+      "status": "已创建"
+    },
+    "代词(2)": {
+      "category": "代词",
+      "subCategory": "代词(2)",
+      "description": "人称代词",
+      "relatedNotes": ["pronoun_note_002"],
+      "relatedTables": ["pronoun_table_002"],
+      "status": "已创建"
+    },
+    "代词(3)": {
+      "category": "代词",
+      "subCategory": "代词(3)",
+      "description": "物主代词",
+      "relatedNotes": ["pronoun_note_003"],
+      "relatedTables": ["pronoun_table_003"],
+      "status": "已创建"
+    },
+    "代词(4)": {
+      "category": "代词",
+      "subCategory": "代词(4)",
+      "description": "反身代词",
+      "relatedNotes": ["pronoun_note_004"],
+      "relatedTables": ["pronoun_table_004"],
+      "status": "已创建"
+    },
+    "代词(5)": {
+      "category": "代词",
+      "subCategory": "代词(5)",
+      "description": "关系代词",
+      "relatedNotes": ["pronoun_note_005"],
+      "relatedTables": ["pronoun_table_005"],
+      "status": "已创建"
+    },
+    "代词(6)": {
+      "category": "代词",
+      "subCategory": "代词(6)",
+      "description": "it相关",
+      "relatedNotes": ["pronoun_note_006"],
+      "relatedTables": ["pronoun_table_006"],
+      "status": "已创建"
+    },
+    "名词(1)": {
+      "category": "名词",
+      "subCategory": "名词(1)",
+      "description": "名词后缀识别",
+      "relatedNotes": ["noun_note_001"],
+      "relatedTables": ["noun_table_001"],
+      "status": "已创建"
+    },
+    "名词(2)": {
+      "category": "名词",
+      "subCategory": "名词(2)",
+      "description": "名词复数书写综合",
+      "relatedNotes": ["noun_note_002"],
+      "relatedTables": ["noun_table_002"],
+      "status": "已创建"
+    },
+    "名词(3)": {
+      "category": "名词",
+      "subCategory": "名词(3)",
+      "description": "以o结尾",
+      "relatedNotes": ["noun_note_003"],
+      "relatedTables": ["noun_table_003"],
+      "status": "已创建"
+    },
+    "名词(4)": {
+      "category": "名词",
+      "subCategory": "名词(4)",
+      "description": "以y结尾",
+      "relatedNotes": ["noun_note_004"],
+      "relatedTables": ["noun_table_004"],
+      "status": "已创建"
+    },
+    "名词(5)": {
+      "category": "名词",
+      "subCategory": "名词(5)",
+      "description": "s/sh/ch/x结尾",
+      "relatedNotes": ["noun_note_005"],
+      "relatedTables": ["noun_table_005"],
+      "status": "已创建"
+    },
+    "名词(6)": {
+      "category": "名词",
+      "subCategory": "名词(6)",
+      "description": "f/fe结尾",
+      "relatedNotes": ["noun_note_006"],
+      "relatedTables": ["noun_table_006"],
+      "status": "已创建"
+    },
+    "谓语(1)": {
+      "category": "谓语",
+      "subCategory": "谓语(1)",
+      "description": "时态综合",
+      "relatedNotes": ["tense_note_001"],
+      "relatedTables": ["tense_table_001"],
+      "status": "已创建"
+    },
+    "谓语(2)": {
+      "category": "谓语",
+      "subCategory": "谓语(2)",
+      "description": "时态综合",
+      "relatedNotes": ["tense_note_002"],
+      "relatedTables": ["tense_table_002"],
+      "status": "已创建"
+    },
+    "谓语(3)": {
+      "category": "谓语",
+      "subCategory": "谓语(3)",
+      "description": "被动语态",
+      "relatedNotes": ["voice_note_001"],
+      "relatedTables": ["voice_table_001"],
+      "status": "已创建"
+    },
+    "谓语(4)": {
+      "category": "谓语",
+      "subCategory": "谓语(4)",
+      "description": "被动语态",
+      "relatedNotes": ["voice_note_001"],
+      "relatedTables": ["voice_table_002"],
+      "status": "已创建"
+    },
+    "谓语(5)": {
+      "category": "谓语",
+      "subCategory": "谓语(5)",
+      "description": "被动语态",
+      "relatedNotes": ["voice_note_001"],
+      "relatedTables": ["voice_table_003"],
+      "status": "已创建"
+    },
+    "谓语(6)": {
+      "category": "谓语",
+      "subCategory": "谓语(6)",
+      "description": "被动语态",
+      "relatedNotes": ["voice_note_001"],
+      "relatedTables": ["voice_table_004"],
+      "status": "已创建"
+    },
+    "谓语(7)": {
+      "category": "谓语",
+      "subCategory": "谓语(7)",
+      "description": "被动语态",
+      "relatedNotes": ["voice_note_001"],
+      "relatedTables": ["voice_table_005"],
+      "status": "已创建"
+    },
+    "非谓语(1)": {
+      "category": "非谓语",
+      "subCategory": "非谓语(1)",
+      "description": "现在分词综合",
+      "relatedNotes": ["participle_note_001"],
+      "relatedTables": ["participle_table_001"],
+      "status": "已创建"
+    },
+    "非谓语(2)": {
+      "category": "非谓语",
+      "subCategory": "非谓语(2)",
+      "description": "过去分词综合",
+      "relatedNotes": ["participle_note_002"],
+      "relatedTables": ["participle_table_002"],
+      "status": "已创建"
+    },
+    "非谓语(3)": {
+      "category": "非谓语",
+      "subCategory": "非谓语(3)",
+      "description": "不定式综合",
+      "relatedNotes": ["infinitive_note_001"],
+      "relatedTables": ["infinitive_table_001"],
+      "status": "已创建"
+    },
+    "形容词(2)": {
+      "category": "形容词",
+      "subCategory": "形容词(1)",
+      "description": "比较级",
+      "relatedNotes": ["comparative_note_001"],
+      "relatedTables": ["comparative_table_001"],
+      "status": "已创建"
+    },
+    "形容词(3)": {
+      "category": "形容词",
+      "subCategory": "形容词(2)",
+      "description": "最高级",
+      "relatedNotes": ["superlative_note_001"],
+      "relatedTables": ["superlative_table_001"],
+      "status": "已创建"
+    },
+    "副词(1)": {
+      "category": "副词",
+      "subCategory": "副词(1)",
+      "description": "副词修饰动词",
+      "relatedNotes": ["adverb_note_001"],
+      "relatedTables": ["adverb_table_001"],
+      "status": "已创建"
+    },
+    "副词(2)": {
+      "category": "副词",
+      "subCategory": "副词(2)",
+      "description": "副词修饰形容词/副词",
+      "relatedNotes": ["adverb_note_002"],
+      "relatedTables": ["adverb_table_002"],
+      "status": "已创建"
+    },
+    "副词(3)": {
+      "category": "副词",
+      "subCategory": "副词(3)",
+      "description": "副词修饰句子",
+      "relatedNotes": ["adverb_note_003"],
+      "relatedTables": ["adverb_table_003"],
+      "status": "已创建"
+    },
+    "副词(4)": {
+      "category": "副词",
+      "subCategory": "副词(4)",
+      "description": "副词修饰副词",
+      "relatedNotes": ["adverb_note_004"],
+      "relatedTables": ["adverb_table_004"],
+      "status": "已创建"
+    }
+  }
+} 

@@ -1,0 +1,178 @@
+<view class="container">
+  <!-- 测试入口卡片 -->
+  <view class="test-entry-card" bindtap="navigateToGrammarTest">
+    <image src="/images/icon-test.png" class="test-icon"></image>
+    <text class="test-title">语法能力测评</text>
+    <text class="test-desc">测测你的语法水平，获取精准练习推荐</text>
+    <view class="test-button">开始测试</view>
+  </view>
+
+  <!-- 主滚动区域 -->
+  <scroll-view scroll-y class="main-scroll-area">
+
+    <!-- 新增：已选标签区 -->
+    <view class="selected-tags-section" wx:if="{{selectedTagsList.length > 0}}">
+      <view class="tags-header" bindtap="toggleTagsCollapse">
+        <text>已选 {{selectedTagsList.length}} 个考点</text>
+        <image class="collapse-icon" src="/images/arrow.svg" style="transform: rotate({{isTagsCollapsed ? '0deg' : '90deg'}});"></image>
+      </view>
+      <!-- 新增：动效提示 -->
+      <view class="tip-animation" wx:if="{{showTipAnimation}}">
+        <text class="tip-text">💡 点这里可以调整组合哦</text>
+      </view>
+      <view class="tags-container-wrapper {{isTagsCollapsed ? 'collapsed' : ''}}">
+        <view class="tags-container">
+          <block wx:for="{{selectedTagsList}}" wx:key="index" wx:for-item="tagName">
+            <view class="tag-item">
+              <text class="tag-text">{{tagName}} ({{selectedPoints[tagName]}}题)</text>
+              <text class="remove-tag-btn" bindtap="removeTag" data-point="{{tagName}}">×</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view class="grammar-tree">
+      <block wx:for="{{categories}}" wx:key="index" wx:for-item="category" wx:for-index="catIndex">
+        <!-- 分类父节点 -->
+        <view class="category-item" bindtap="toggleCategory" data-index="{{catIndex}}">
+          <view class="category-title-wrapper">
+            <text>{{category}}</text>
+            <!-- 新增：分类题数统计 -->
+            <text class="category-count-badge" wx:if="{{categoryCounts[catIndex] > 0}}">
+              {{categoryCounts[catIndex]}}
+            </text>
+          </view>
+          <image class="collapse-icon {{expandedCategories[catIndex] ? 'rotated' : ''}}" src="/images/arrow.svg"></image>
+        </view>
+        <!-- 子节点容器 -->
+        <view class="point-list-wrapper {{expandedCategories[catIndex] ? 'expanded' : ''}}">
+          <block wx:for="{{rightPanel[catIndex]}}" wx:key="subIndex" wx:for-item="point">
+            <!-- 新增：隐藏被配置为隐藏的语法点 -->
+            <view wx:if="{{!isHiddenPoint(point.name || point)}}" class="point-item {{specialCategories.indexOf(point.name || point) !== -1 ? 'special-category' : ''}}">
+              <view class="point-info">
+                <text class="point-name">{{point.name || point}}</text>
+                <text wx:if="{{point.isHighFrequency}}" class="high-frequency-tag">[高频]</text>
+                <!-- 特殊类别标识 -->
+                <text wx:if="{{specialCategories.indexOf(point.name || point) !== -1}}" class="special-category-tag">📝</text>
+              </view>
+              <view class="count-control">
+                <!-- 所有类别都使用统一的+/-按钮界面 -->
+                <view class="normal-control">
+                  <view class="control-btn" bindtap="decreaseCount" data-point="{{point.name || point}}">-</view>
+                  <text class="count-text">{{selectedPoints[point.name || point] || 0}}题</text>
+                  <view class="control-btn" bindtap="increaseCount" data-point="{{point.name || point}}">+</view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- 新增：综合大类底部操作栏 -->
+  <view class="combo-bar {{showComboBar ? 'show' : ''}}" wx:if="{{showComboBar}}">
+    
+    <!-- Preview section, only shown when a combo is set -->
+    <view class="selected-combo-preview" wx:if="{{isCustomComboSet && customComboConfig && getCustomComboTotalCount() > 0}}">
+      <view class="preview-header">
+        <text class="preview-title">📋 您的专属组合配置</text>
+        <text class="preview-subtitle">共 {{getCustomComboTotalCount()}} 题</text>
+      </view>
+      <view class="preview-content">
+        <block wx:for="{{formattedComboConfig}}" wx:key="category" wx:for-item="categoryItem">
+          <view class="preview-category">
+            <text class="preview-category-name">{{categoryItem.category}}</text>
+            <view class="preview-sub-points">
+              <block wx:for="{{categoryItem.subPoints}}" wx:key="name" wx:for-item="subPoint">
+                <text class="preview-sub-point">{{subPoint.name}} ({{subPoint.count}}题)</text>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    
+    <!-- Placeholder, only shown when a combo is NOT set -->
+    <view class="no-combo-placeholder" wx:if="{{!isCustomComboSet}}">
+      <text class="placeholder-icon">🤷</text>
+      <text class="placeholder-text">您还没有设置专属组合</text>
+      <text class="placeholder-subtext">可使用系统默认组合，或点击下方按钮设置</text>
+    </view>
+
+    <!-- Main action buttons -->
+    <view class="combo-bar-content">
+      <!-- 系统推荐组合区域 -->
+      <view class="combo-section">
+        <text class="section-title">系统推荐组合</text>
+        <view class="section-buttons">
+          <button class="combo-btn quick-btn primary" bindtap="generateSystemCombo">
+            <text class="btn-icon">⚡</text>
+            <text class="btn-text">快速练习</text>
+          </button>
+          <button class="combo-btn settings-btn" bindtap="previewSystemCombo">
+            <text class="btn-icon">👁️</text>
+            <text class="btn-text">过目已选题(可调整）</text>
+          </button>
+        </view>
+      </view>
+
+      <!-- 专属组合区域 -->
+      <view class="combo-section">
+        <text class="section-title">专属组合</text>
+        <view class="section-buttons">
+          <button wx:if="{{isCustomComboSet}}" class="combo-btn quick-btn primary" bindtap="generateCustomCombo">
+            <text class="btn-icon">⚡</text>
+            <text class="btn-text">快速练习</text>
+          </button>
+          <button wx:else class="combo-btn quick-btn disabled">
+            <text class="btn-icon">⚡</text>
+            <text class="btn-text">快速练习</text>
+          </button>
+          
+          <button class="combo-btn settings-btn" bindtap="navigateToCustomComboSetting">
+            <text class="btn-icon">⚙️</text>
+            <text class="btn-text">设置新的专属组合</text>
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <!-- Tooltip for more operations -->
+    <view class="tooltip" wx:if="{{showTooltip}}">
+      <text>点击查看专属组合修改、重置等操作</text>
+    </view>
+
+    <!-- Menu popup -->
+    <view class="menu-popup" wx:if="{{showComboMenu}}">
+      <view class="menu-item" bindtap="navigateToCustomComboSetting">
+        <text class="menu-item-icon">✏️</text>
+        <text class="menu-item-text">修改我的专属组合</text>
+      </view>
+      <view class="menu-item danger" bindtap="clearCustomCombo">
+        <text class="menu-item-icon">🗑️</text>
+        <text class="menu-item-text">重置我的专属组合</text>
+      </view>
+    </view>
+
+    <!-- Close button -->
+    <view class="combo-bar-close" bindtap="hideComboBar">
+      <text>×</text>
+    </view>
+  </view>
+
+  <!-- 底部固定操作栏 -->
+  <view class="bottom-bar">
+    <!-- 总题数：独立标签 -->
+    <view class="total-box">
+      总题数：<text class="count">{{totalQuestions}}</text>
+    </view>
+    <!-- 操作按钮区 -->
+    <view class="actions">
+      <button class="bar-btn clear-btn" bindtap="clearSelected" disabled="{{totalQuestions === 0}}">清空</button>
+      <button class="bar-btn generate-btn" loading="{{generating}}" bindtap="generateQuestions" disabled="{{totalQuestions === 0}}">确认生成</button>
+    </view>
+  </view>
+</view>
+<!-- TabBar 由小程序自动渲染，无需手动写入WXML -->

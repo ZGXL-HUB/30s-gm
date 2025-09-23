@@ -1,0 +1,443 @@
+/* 语法综合页面样式 */
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 页面标题 */
+.header {
+  text-align: center;
+  padding: 40rpx 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin-bottom: 30rpx;
+  border-radius: 20rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+/* 通用章节样式 */
+.section-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30rpx;
+  padding-left: 20rpx;
+  position: relative;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3rpx;
+}
+
+/* 难度选择区域 */
+.difficulty-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.difficulty-btn {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border: 2px solid #e8e8e8;
+  border-radius: 16rpx;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.difficulty-btn.active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.difficulty-btn:active {
+  transform: translateY(2rpx);
+}
+
+.difficulty-icon {
+  font-size: 60rpx;
+  margin-right: 30rpx;
+}
+
+.difficulty-text {
+  flex: 1;
+}
+
+.difficulty-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.difficulty-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 练习模式区域 */
+.mode-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.mode-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.mode-card {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border: 2px solid #e8e8e8;
+  border-radius: 16rpx;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.mode-card.active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.mode-card:active {
+  transform: translateY(2rpx);
+}
+
+.mode-icon {
+  font-size: 48rpx;
+  margin-right: 30rpx;
+}
+
+.mode-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.mode-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 学习进度区域 */
+.progress-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.progress-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.progress-card {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  border: 1px solid #e8e8e8;
+}
+
+.progress-icon {
+  font-size: 48rpx;
+  margin-right: 30rpx;
+}
+
+.progress-info {
+  flex: 1;
+}
+
+.progress-name {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.progress-value {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-bar {
+  width: 200rpx;
+  height: 12rpx;
+  background: #e8e8e8;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-left: 20rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.5s ease;
+}
+
+.accuracy-indicator {
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  margin-left: 20rpx;
+}
+
+.accuracy-indicator.excellent {
+  background: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.accuracy-indicator.good {
+  background: #fff7e6;
+  color: #faad14;
+  border: 1px solid #ffd591;
+}
+
+.accuracy-indicator.needs-improvement {
+  background: #fff2f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+/* 推荐练习区域 */
+.recommendation-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.recommendation-card {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s ease;
+}
+
+.recommendation-card:active {
+  transform: translateY(2rpx);
+  background: #e9ecef;
+}
+
+.recommendation-icon {
+  font-size: 48rpx;
+  margin-right: 30rpx;
+}
+
+.recommendation-content {
+  flex: 1;
+}
+
+.recommendation-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.recommendation-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.recommendation-arrow {
+  font-size: 32rpx;
+  color: #667eea;
+  font-weight: bold;
+}
+
+/* 开始练习按钮 */
+.start-button-container {
+  padding: 40rpx;
+  text-align: center;
+}
+
+.start-button {
+  background: linear-gradient(135deg, #4096ff 0%, #1677ff 100%);
+  color: white;
+  border: none;
+  border-radius: 50rpx;
+  padding: 32rpx 80rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(64, 150, 255, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #4096ff;
+}
+
+.start-button:active {
+  background: linear-gradient(135deg, #1677ff 0%, #0958d9 100%);
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 16rpx rgba(64, 150, 255, 0.4);
+}
+
+.start-button:disabled {
+  background: linear-gradient(135deg, #d9d9d9 0%, #bfbfbf 100%);
+  color: #999;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+.button-icon {
+  font-size: 36rpx;
+  margin-right: 16rpx;
+}
+
+.button-text {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+/* 最近练习区域 */
+.recent-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  border: 1px solid #e8e8e8;
+}
+
+.recent-info {
+  flex: 1;
+}
+
+.recent-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.recent-stats {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+
+.recent-date {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.recent-score {
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  min-width: 80rpx;
+  text-align: center;
+}
+
+.recent-score.excellent {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.recent-score.good {
+  background: #fff7e6;
+  color: #faad14;
+}
+
+.recent-score.needs-improvement {
+  background: #fff2f0;
+  color: #ff4d4f;
+}
+
+/* 响应式设计 */
+@media (max-width: 350px) {
+  .difficulty-btn,
+  .mode-card,
+  .progress-card,
+  .recommendation-card {
+    padding: 20rpx;
+  }
+  
+  .difficulty-icon,
+  .mode-icon,
+  .progress-icon,
+  .recommendation-icon {
+    font-size: 40rpx;
+    margin-right: 20rpx;
+  }
+  
+  .difficulty-name,
+  .mode-name,
+  .recommendation-name {
+    font-size: 28rpx;
+  }
+  
+  .start-button {
+    padding: 24rpx 60rpx;
+    font-size: 28rpx;
+  }
+} 

@@ -1,0 +1,9 @@
+{
+  "name": "practiceProgress",
+  "version": "1.0.0",
+  "description": "专项练习进度管理云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+} 

@@ -1,0 +1,201 @@
+<!--能力图谱页面-->
+<view class="container">
+  <!-- 书写能力测试卡片 -->
+  <view class="writing-test-card" bindtap="navigateToWritingTest">
+    <view class="test-card-header">
+      <view class="test-icon">✍️</view>
+      <view class="test-title">书写能力测评</view>
+      <view class="test-status" wx:if="{{writingScore > 0}}">{{getScoreLevel(writingScore).level}}</view>
+    </view>
+    <view class="test-card-content">
+      <view class="test-desc">全面评估书写能力，发现提升空间</view>
+      <view class="test-button">开始测试</view>
+    </view>
+  </view>
+
+  <!-- 能力图谱展示卡片 -->
+  <view class="ability-map-card">
+    <view class="map-header">
+      <view class="map-icon">📊</view>
+      <view class="map-title">能力图谱</view>
+      <view class="map-subtitle">您的语法和书写能力分析报告</view>
+    </view>
+
+    <!-- 核心评分卡片 -->
+    <view class="score-cards">
+    <!-- 总体评分 -->
+    <view class="score-card main-score">
+      <view class="score-label">总分</view>
+      <view class="score-display">
+        <view class="score-number">{{overallScore}}</view>
+        <view class="score-max">/100</view>
+      </view>
+      <view class="score-level" style="color: {{getScoreLevel(overallScore).color}}">
+        {{getScoreLevel(overallScore).icon}} {{getScoreLevel(overallScore).level}}
+      </view>
+    </view>
+
+    <!-- 语法得分 -->
+    <view class="score-card">
+      <view class="score-label">语法得分</view>
+      <view class="score-display">
+        <view class="score-number">{{grammarScore}}</view>
+        <view class="score-max">/100</view>
+      </view>
+      <view class="score-progress">
+        <view class="progress-text">{{testedGrammarPoints}}/{{totalGrammarPoints}} 完成</view>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{(testedGrammarPoints/totalGrammarPoints)*100}}%"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 书写得分 -->
+    <view class="score-card">
+      <view class="score-label">书写得分</view>
+      <view class="score-display">
+        <view class="score-number">{{writingScore}}</view>
+        <view class="score-max">/100</view>
+      </view>
+      <view class="score-progress">
+        <view class="progress-text">{{testedWritingTables}}/{{totalWritingTables}} 完成</view>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{(testedWritingTables/totalWritingTables)*100}}%"></view>
+        </view>
+      </view>
+    </view>
+    </view>
+
+    <!-- 详情和继续完成入口 -->
+  <view class="action-cards">
+    <view class="action-card" bindtap="showDetailModal">
+      <view class="action-icon">📊</view>
+      <view class="action-content">
+        <view class="action-title">查看详情</view>
+        <view class="action-desc">详细分析报告</view>
+      </view>
+      <view class="action-arrow">></view>
+    </view>
+
+    <view class="action-card" bindtap="showContinueModal" wx:if="{{hasIncompleteTests}}">
+      <view class="action-icon">🎯</view>
+      <view class="action-content">
+        <view class="action-title">继续完成</view>
+        <view class="action-desc">完成未完成的测试</view>
+      </view>
+      <view class="action-arrow">></view>
+    </view>
+    </view>
+
+    <!-- 主要操作按钮 -->
+  <view class="main-actions">
+    <button class="main-btn primary" bindtap="startGrammarTest">
+      开始语法测试
+    </button>
+    <button class="main-btn primary" bindtap="startWritingTest">
+      开始书写测试
+    </button>
+    </view>
+
+    <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <button class="bottom-btn secondary" bindtap="retestAll">
+      重测所有
+    </button>
+    <button class="bottom-btn secondary" bindtap="goBack">
+      返回主页
+    </button>
+    </view>
+  </view>
+
+  <!-- 详情模态框 -->
+  <view class="modal-overlay" wx:if="{{showDetailModal}}" bindtap="hideDetailModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">详细分析报告</view>
+        <view class="modal-close" bindtap="hideDetailModal">×</view>
+      </view>
+      
+      <scroll-view class="modal-body" scroll-y>
+        <!-- 语法能力分析 -->
+        <view class="detail-section">
+          <view class="section-title">
+            <view class="title-icon">📚</view>
+            <view class="title-text">语法能力分析</view>
+          </view>
+          
+          <view class="category-grid">
+            <view wx:for="{{grammarCategories}}" wx:key="index" wx:for-item="category"
+                  class="category-item {{categoryScores[category] >= 0 ? 'tested' : 'untested'}}">
+              <view class="category-name">{{category}}</view>
+              <view class="category-score" wx:if="{{categoryScores[category] >= 0}}">
+                {{categoryScores[category]}}分
+              </view>
+              <view class="category-status" wx:else>未测试</view>
+              <view class="category-level" wx:if="{{categoryScores[category] >= 0}}">
+                {{getScoreLevel(categoryScores[category]).level}}
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 书写能力分析 -->
+        <view class="detail-section">
+          <view class="section-title">
+            <view class="title-icon">✍️</view>
+            <view class="title-text">书写能力分析</view>
+          </view>
+          
+          <view class="table-grid">
+            <view wx:for="{{writingTables}}" wx:key="index" wx:for-item="table"
+                  class="table-item {{tableScores[table] >= 0 ? 'tested' : 'untested'}}">
+              <view class="table-name">{{table}}</view>
+              <view class="table-score" wx:if="{{tableScores[table] >= 0}}">
+                {{tableScores[table]}}分
+              </view>
+              <view class="table-status" wx:else>未测试</view>
+              <view class="table-level" wx:if="{{tableScores[table] >= 0}}">
+                {{getScoreLevel(tableScores[table]).level}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 继续完成模态框 -->
+  <view class="modal-overlay" wx:if="{{showContinueModal}}" bindtap="hideContinueModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">继续完成测试</view>
+        <view class="modal-close" bindtap="hideContinueModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <view class="continue-options">
+          <view class="continue-item" wx:if="{{incompleteGrammarCount > 0}}" bindtap="continueGrammarTest">
+            <view class="continue-icon">📚</view>
+            <view class="continue-content">
+              <view class="continue-title">继续语法测试</view>
+              <view class="continue-desc">还有 {{incompleteGrammarCount}} 个语法点未测试</view>
+            </view>
+            <view class="continue-arrow">></view>
+          </view>
+          
+          <view class="continue-item" wx:if="{{incompleteWritingCount > 0}}" bindtap="continueWritingTest">
+            <view class="continue-icon">✍️</view>
+            <view class="continue-content">
+              <view class="continue-title">继续书写测试</view>
+              <view class="continue-desc">还有 {{incompleteWritingCount}} 个表格未测试</view>
+            </view>
+            <view class="continue-arrow">></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

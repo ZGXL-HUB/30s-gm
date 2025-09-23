@@ -1,0 +1,1256 @@
+{
+  "timestamp": "2025-08-06T23:56:52.920Z",
+  "summary": {
+    "totalQuestions": 136,
+    "totalCategories": 6,
+    "totalDuplicates": 0,
+    "totalMissingFields": 136,
+    "totalInvalidData": 0,
+    "dataQualityScore": 60
+  },
+  "details": {
+    "duplicates": [],
+    "missingFields": [
+      {
+        "index": 0,
+        "question": "Question 0",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 1,
+        "question": "Question 1",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 2,
+        "question": "Question 2",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 3,
+        "question": "Question 3",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 4,
+        "question": "Question 4",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 5,
+        "question": "Question 5",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 6,
+        "question": "Question 6",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 7,
+        "question": "Question 7",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 8,
+        "question": "Question 8",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 9,
+        "question": "Question 9",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 10,
+        "question": "Question 10",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 11,
+        "question": "Question 11",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 12,
+        "question": "Question 12",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 13,
+        "question": "Question 13",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 14,
+        "question": "Question 14",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 15,
+        "question": "Question 15",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 16,
+        "question": "Question 16",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 17,
+        "question": "Question 17",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 18,
+        "question": "Question 18",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 19,
+        "question": "Question 19",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 20,
+        "question": "Question 20",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 21,
+        "question": "Question 21",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 22,
+        "question": "Question 22",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 23,
+        "question": "Question 23",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 24,
+        "question": "Question 24",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 25,
+        "question": "Question 25",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 26,
+        "question": "Question 26",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 27,
+        "question": "Question 27",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 28,
+        "question": "Question 28",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 29,
+        "question": "Question 29",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 30,
+        "question": "Question 30",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 31,
+        "question": "Question 31",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 32,
+        "question": "Question 32",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 33,
+        "question": "Question 33",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 34,
+        "question": "Question 34",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 35,
+        "question": "Question 35",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 36,
+        "question": "Question 36",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 37,
+        "question": "Question 37",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 38,
+        "question": "Question 38",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 39,
+        "question": "Question 39",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 40,
+        "question": "Question 40",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 41,
+        "question": "Question 41",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 42,
+        "question": "Question 42",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 43,
+        "question": "Question 43",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 44,
+        "question": "Question 44",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 45,
+        "question": "Question 45",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 46,
+        "question": "Question 46",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 47,
+        "question": "Question 47",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 48,
+        "question": "Question 48",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 49,
+        "question": "Question 49",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 50,
+        "question": "Question 50",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 51,
+        "question": "Question 51",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 52,
+        "question": "Question 52",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 53,
+        "question": "Question 53",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 54,
+        "question": "Question 54",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 55,
+        "question": "Question 55",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 56,
+        "question": "Question 56",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 57,
+        "question": "Question 57",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 58,
+        "question": "Question 58",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 59,
+        "question": "Question 59",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 60,
+        "question": "Question 60",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 61,
+        "question": "Question 61",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 62,
+        "question": "Question 62",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 63,
+        "question": "Question 63",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 64,
+        "question": "Question 64",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 65,
+        "question": "Question 65",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 66,
+        "question": "Question 66",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 67,
+        "question": "Question 67",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 68,
+        "question": "Question 68",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 69,
+        "question": "Question 69",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 70,
+        "question": "Question 70",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 71,
+        "question": "Question 71",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 72,
+        "question": "Question 72",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 73,
+        "question": "Question 73",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 74,
+        "question": "Question 74",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 75,
+        "question": "Question 75",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 76,
+        "question": "Question 76",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 77,
+        "question": "Question 77",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 78,
+        "question": "Question 78",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 79,
+        "question": "Question 79",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 80,
+        "question": "Question 80",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 81,
+        "question": "Question 81",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 82,
+        "question": "Question 82",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 83,
+        "question": "Question 83",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 84,
+        "question": "Question 84",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 85,
+        "question": "Question 85",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 86,
+        "question": "Question 86",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 87,
+        "question": "Question 87",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 88,
+        "question": "Question 88",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 89,
+        "question": "Question 89",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 90,
+        "question": "Question 90",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 91,
+        "question": "Question 91",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 92,
+        "question": "Question 92",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 93,
+        "question": "Question 93",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 94,
+        "question": "Question 94",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 95,
+        "question": "Question 95",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 96,
+        "question": "Question 96",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 97,
+        "question": "Question 97",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 98,
+        "question": "Question 98",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 99,
+        "question": "Question 99",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 100,
+        "question": "Question 100",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 101,
+        "question": "Question 101",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 102,
+        "question": "Question 102",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 103,
+        "question": "Question 103",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 104,
+        "question": "Question 104",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 105,
+        "question": "Question 105",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 106,
+        "question": "Question 106",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 107,
+        "question": "Question 107",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 108,
+        "question": "Question 108",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 109,
+        "question": "Question 109",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 110,
+        "question": "Question 110",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 111,
+        "question": "Question 111",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 112,
+        "question": "Question 112",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 113,
+        "question": "Question 113",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 114,
+        "question": "Question 114",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 115,
+        "question": "Question 115",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 116,
+        "question": "Question 116",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 117,
+        "question": "Question 117",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 118,
+        "question": "Question 118",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 119,
+        "question": "Question 119",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 120,
+        "question": "Question 120",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 121,
+        "question": "Question 121",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 122,
+        "question": "Question 122",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 123,
+        "question": "Question 123",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 124,
+        "question": "Question 124",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 125,
+        "question": "Question 125",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 0,
+        "question": "Question 0",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 1,
+        "question": "Question 1",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 2,
+        "question": "Question 2",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 3,
+        "question": "Question 3",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 4,
+        "question": "Question 4",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 5,
+        "question": "Question 5",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 6,
+        "question": "Question 6",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 7,
+        "question": "Question 7",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 8,
+        "question": "Question 8",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      },
+      {
+        "index": 9,
+        "question": "Question 9",
+        "missingFields": [
+          "text",
+          "answer",
+          "analysis"
+        ]
+      }
+    ],
+    "invalidData": [],
+    "statistics": {
+      "categories": [
+        "comparison_prefix_suffix_001",
+        "comparison_comparative_001",
+        "comparison_superlative_001",
+        "pronoun_001",
+        "pronoun_002",
+        "questions"
+      ],
+      "filesAnalyzed": [
+        "miniprogram/data/intermediate_questions.js",
+        "data-quality-report.json",
+        "data-quality-report-v2.json"
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "形容词变副词规则",
+  "navigationBarBackgroundColor": "#f8f9fa",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#f5f5f5",
+  "usingComponents": {
+    "page-header-guide": "/components/page-header-guide/index"
+  }
+} 

@@ -1,0 +1,161 @@
+<!--意见反馈页面-->
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="意见反馈"
+    description="您的宝贵意见是我们改进产品的重要动力"
+    tip="💡 提示：请详细描述遇到的问题，我们会尽快处理并回复"
+    icon="💬"
+    storage-key="feedback-guide"
+  />
+  
+  <view class="feedback-content">
+    <!-- 反馈类型选择 -->
+    <view class="feedback-section">
+      <view class="section-title">反馈类型</view>
+      <view class="type-options">
+        <view 
+          class="type-option {{selectedType === 'function' ? 'selected' : ''}}"
+          bindtap="selectType"
+          data-type="function"
+        >
+          <view class="type-icon">🔧</view>
+          <view class="type-content">
+            <view class="type-title">功能问题</view>
+            <view class="type-desc">测试功能异常、操作流程问题</view>
+          </view>
+        </view>
+        
+        <view 
+          class="type-option {{selectedType === 'content' ? 'selected' : ''}}"
+          bindtap="selectType"
+          data-type="content"
+        >
+          <view class="type-icon">📚</view>
+          <view class="type-content">
+            <view class="type-title">内容质量</view>
+            <view class="type-desc">题目答案错误、解析不准确</view>
+          </view>
+        </view>
+        
+        <view 
+          class="type-option {{selectedType === 'experience' ? 'selected' : ''}}"
+          bindtap="selectType"
+          data-type="experience"
+        >
+          <view class="type-icon">✨</view>
+          <view class="type-content">
+            <view class="type-title">用户体验</view>
+            <view class="type-desc">界面设计、使用体验建议</view>
+          </view>
+        </view>
+        
+        <view 
+          class="type-option {{selectedType === 'technical' ? 'selected' : ''}}"
+          bindtap="selectType"
+          data-type="technical"
+        >
+          <view class="type-icon">⚙️</view>
+          <view class="type-content">
+            <view class="type-title">技术问题</view>
+            <view class="type-desc">加载速度、数据同步问题</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 问题描述 -->
+    <view class="feedback-section">
+      <view class="section-title">问题描述 <text class="required">*</text></view>
+      <textarea 
+        class="feedback-textarea"
+        placeholder="请详细描述您遇到的问题或建议..."
+        value="{{feedbackContent}}"
+        bindinput="onContentInput"
+        maxlength="500"
+        show-confirm-bar="{{false}}"
+      ></textarea>
+      <view class="char-count">{{feedbackContent.length}}/500</view>
+    </view>
+
+    <!-- 联系方式 -->
+    <view class="feedback-section">
+      <view class="section-title">联系方式 <text class="optional">（选填）</text></view>
+      <input 
+        class="contact-input"
+        placeholder="微信号或手机号，便于我们回复您"
+        value="{{contactInfo}}"
+        bindinput="onContactInput"
+        maxlength="50"
+      />
+    </view>
+
+    <!-- 图片上传 -->
+    <view class="feedback-section">
+      <view class="section-title">相关截图 <text class="optional">（选填）</text></view>
+      <view class="image-upload">
+        <view 
+          class="upload-item"
+          wx:for="{{uploadedImages}}"
+          wx:key="index"
+        >
+          <image class="uploaded-image" src="{{item}}" mode="aspectFill" />
+          <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</view>
+        </view>
+        <view 
+          class="upload-btn {{uploadedImages.length >= 3 ? 'disabled' : ''}}"
+          bindtap="chooseImage"
+          wx:if="{{uploadedImages.length < 3}}"
+        >
+          <view class="upload-icon">📷</view>
+          <view class="upload-text">添加图片</view>
+        </view>
+      </view>
+      <view class="upload-tip">最多上传3张图片，支持jpg、png格式</view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-section">
+      <button 
+        class="submit-btn {{canSubmit ? 'active' : 'disabled'}}"
+        bindtap="submitFeedback"
+        disabled="{{!canSubmit}}"
+      >
+        {{submitting ? '提交中...' : '提交反馈'}}
+      </button>
+    </view>
+
+    <!-- 查看历史记录 -->
+    <view class="history-section">
+      <button class="history-btn" bindtap="viewHistory">
+        📋 查看我的反馈记录
+      </button>
+    </view>
+  </view>
+
+  <!-- 提交成功模态框 -->
+  <view class="modal-overlay" wx:if="{{showSuccessModal}}" bindtap="hideSuccessModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">反馈提交成功</view>
+        <view class="modal-close" bindtap="hideSuccessModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <view class="success-icon">✅</view>
+        <view class="success-message">
+          <view class="success-title">感谢您的反馈！</view>
+          <view class="success-desc">
+            我们已收到您的反馈，反馈编号：{{feedbackId}}<br/>
+            我们会在3个工作日内处理并回复您
+          </view>
+        </view>
+        
+        <view class="modal-actions">
+          <button class="modal-btn secondary" bindtap="hideSuccessModal">继续反馈</button>
+          <button class="modal-btn primary" bindtap="goBack">返回首页</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

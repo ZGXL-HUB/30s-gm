@@ -1,0 +1,1519 @@
+{
+  "metadata": {
+    "totalQuestions": 58,
+    "grammarPoints": 60,
+    "generatedAt": "2025-09-01T01:18:43.934Z",
+    "description": "语法选择题题库 - 每个语法小点随机抽取一题，添加干扰项生成选择题格式"
+  },
+  "questions": [
+    {
+      "id": "91t72sz0m",
+      "grammarPoint": "介词综合",
+      "question": "Take a break and walk around the garden ____ a while to relax your mind.",
+      "options": [
+        {
+          "label": "A",
+          "text": "for",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "of",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "to",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "for",
+      "correctOption": "A",
+      "analysis": "\"for a while\"为固定短语,意为\"一会儿\",表示动作持续的时间,故填for。",
+      "category": "介词(1)"
+    },
+    {
+      "id": "s08uvz0ga",
+      "grammarPoint": "固定搭配",
+      "question": "I'm tired ___ doing the same thing every day",
+      "options": [
+        {
+          "label": "A",
+          "text": "of",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "for",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "with",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "of",
+      "correctOption": "A",
+      "analysis": "\"be tired of\"为固定短语,意为\"厌倦……\",整句翻译为\"我厌倦了每天做同样的事情\"。",
+      "category": "介词(2)"
+    },
+    {
+      "id": "887wpfpyq",
+      "grammarPoint": "介词 + 名词/动名词",
+      "question": "She is skilled in ___ (use) the computer software",
+      "options": [
+        {
+          "label": "A",
+          "text": "uss",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "using",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "used",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "using",
+      "correctOption": "B",
+      "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。use的动名词形式为using,所以此处应填using。句意为\"她熟练掌握使用计算机软件\"。",
+      "category": "介词(3)"
+    },
+    {
+      "id": "xt9t10gpm",
+      "grammarPoint": "代词综合",
+      "question": "___ of the two answers is correct. You need to think again.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Neith",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "Neithest",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "Neither",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "Neither",
+      "correctOption": "C",
+      "analysis": "neither表示\"两者都不\",用于否定两个选项,\"两个答案都不对\",neither of + 复数名词 + 单数动词,故填Neither。",
+      "category": "代词(1)"
+    },
+    {
+      "id": "i9d5w3608",
+      "grammarPoint": "人称代词",
+      "question": "Give ____ (they) some apples. They are hungry.",
+      "options": [
+        {
+          "label": "A",
+          "text": "theming",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "them",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "themed",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "them",
+      "correctOption": "B",
+      "analysis": "动词give后需要宾格代词作间接宾语。they的宾格为them,构成\"give sb. sth.\"结构,因此此处应填them,句意为\"给他们一些苹果,他们饿了\"。",
+      "category": "代词(2)"
+    },
+    {
+      "id": "n32ej4lrr",
+      "grammarPoint": "物主代词",
+      "question": "____ (it) tail is very long. It's a cute animal.",
+      "options": [
+        {
+          "label": "A",
+          "text": "a",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "Its",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "the",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "Its",
+      "correctOption": "B",
+      "analysis": "句中tail为名词,前面需用形容词性物主代词修饰。it的形容词性物主代词为its,句首需大写为Its,意为\"它的\",因此此处应填Its,表示\"它的尾巴\",句意为\"它的尾巴很长\"。",
+      "category": "代词(3)"
+    },
+    {
+      "id": "untb1fva3",
+      "grammarPoint": "反身代词",
+      "question": "The cat can wash ___ (it).",
+      "options": [
+        {
+          "label": "A",
+          "text": "this",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "itself",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "its",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "itself",
+      "correctOption": "B",
+      "analysis": "主语是\"The cat\"(第三人称单数),\"wash oneself\"意为\"给自己洗澡\",此处用反身代词itself与主语it对应,故填itself。",
+      "category": "代词(4)"
+    },
+    {
+      "id": "kgp3m6813",
+      "grammarPoint": "关系代词",
+      "question": "The book ____ I borrowed from the library is overdue.",
+      "options": [
+        {
+          "label": "A",
+          "text": "which / that",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "which",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "that",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "which / that",
+      "correctOption": "A",
+      "analysis": "which/that。考查定语从句,先行词\"book\"是物,在定语从句\"I borrowed the book from the library\"中作\"borrowed\"的宾语,因此用\"which\"或\"that\"引导,意为\"我从图书馆借的那本书已经过期了\"。",
+      "category": "代词(5)"
+    },
+    {
+      "id": "b96y3o1nz",
+      "grammarPoint": "it相关",
+      "question": "__ appears that they have known the truth.",
+      "options": [
+        {
+          "label": "A",
+          "text": "It",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "the",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "a",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "It",
+      "correctOption": "A",
+      "analysis": "该句使用\"It appears + that从句\"结构。\"It\"作形式主语,真正主语是that引导的主语从句\"that they have known the truth\"；\"appears\"是系动词,表示\"看起来,似乎\"。形式主语\"It\"使句子表达更自然。此句表达说话人的推测,认为\"看起来他们已经知道了真相\"。\"It appears that...\"常用于表达基于观察得出的推测或判断。",
+      "category": "代词(6)"
+    },
+    {
+      "id": "ren9q9g1s",
+      "grammarPoint": "并列连词综合",
+      "question": "Get up early, ____ you'll catch the first bus.",
+      "options": [
+        {
+          "label": "A",
+          "text": "and",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "or",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "but",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "and",
+      "correctOption": "A",
+      "analysis": "该句为并列句,前后分句存在顺承关系。前半句\"Get up early\"(早起)是祈使句,提出建议或要求；后半句\"you'll catch the first bus\"(你就能赶上第一班车)是结果或目的。\"and\"是并列连词,在此处表示顺承和因果关系,意为\"那么,就\"。这种结构常见于\"祈使句 + and + 陈述句\"句型,表示\"如果...就会...\"的含义,体现条件与结果的逻辑关系。",
+      "category": "连词(1)"
+    },
+    {
+      "id": "l3b27o0yq",
+      "grammarPoint": "从属连词综合",
+      "question": "__ you are free, come to my home for a visit.",
+      "options": [
+        {
+          "label": "A",
+          "text": "If",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "the",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "a",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "If",
+      "correctOption": "A",
+      "analysis": "该句使用\"If\"引导条件状语从句,表示\"如果\"。从句\"you are free\"(你有空)是条件,主句\"come to my home for a visit\"(来我家做客)是在条件满足时的邀请,整句是一个条件式的邀请。",
+      "category": "连词(2)"
+    },
+    {
+      "id": "1ups4mq52",
+      "grammarPoint": "连词与名/动/形/副综合",
+      "question": "She opened the window, ____ (breathe) in the fresh air, and sat down.",
+      "options": [
+        {
+          "label": "A",
+          "text": "breathing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "breaths",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "breathed",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "breathed",
+      "correctOption": "C",
+      "analysis": "该句描述过去发生的一系列动作,三个动词\"opened\"、\"breathed\"和\"sat\"为并列谓语,时态需保持一致。均用过去式,描述连续进行的三个动作。",
+      "category": "连词(6)"
+    },
+    {
+      "id": "8idz4v01o",
+      "grammarPoint": "连词与名词",
+      "question": "The hikers carried backpacks filled with ____ (water bottle) and snacks.",
+      "options": [
+        {
+          "label": "A",
+          "text": "water bottle",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "water bottleing",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "water bottles",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "water bottles",
+      "correctOption": "C",
+      "analysis": "该句中\"water bottle\"为可数名词,表示\"水瓶\"。根据语境\"徒步旅行者背着装满水瓶和零食的背包\",徒步旅行通常需要携带多个水瓶,需要用复数形式\"water bottles\"。同时与\"snacks\"(零食,复数形式)并列。",
+      "category": "连词(3)"
+    },
+    {
+      "id": "r6xhv98j9",
+      "grammarPoint": "连词与动词",
+      "question": "He tried to fix the bike, ____ (fail) several times before succeeding.",
+      "options": [
+        {
+          "label": "A",
+          "text": "failing",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "failed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "fails",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "failing",
+      "correctOption": "A",
+      "analysis": "该句使用现在分词\"failing\"作伴随状语,表示在尝试修理自行车的过程中伴随着多次失败。\"failing\"与主句动作\"tried\"同时发生,体现尝试过程中的状态。",
+      "category": "连词(4)"
+    },
+    {
+      "id": "wjk9006n8",
+      "grammarPoint": "连词与形容词",
+      "question": "The mountain peak stands as the ____ (high) and most formidable landmark.",
+      "options": [
+        {
+          "label": "A",
+          "text": "higher",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "high",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "highest",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "highest",
+      "correctOption": "C",
+      "analysis": "句中使用最高级结构,\"the\"和\"most\"是最高级的标志词。括号内\"high\"为形容词(意为\"高的\"),其最高级形式为\"highest\"。\"highest and most formidable\"并列作定语,强调山峰的突出地位。",
+      "category": "连词(5)"
+    },
+    {
+      "id": "cti7bdcd8",
+      "grammarPoint": "冠词综合",
+      "question": "I need ____ piece of paper to write down the phone number.",
+      "options": [
+        {
+          "label": "A",
+          "text": "a",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "the",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "an",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "a",
+      "correctOption": "A",
+      "analysis": "该句中\"piece\"是以辅音音素/p/开头的单数可数名词,表示泛指\"一张纸\",需用不定冠词\"a\"。例如\"a cup of tea\"(一杯茶)、\"an inch of snow\"(一英寸的雪)。此处表示数量概念。",
+      "category": "冠词(1)"
+    },
+    {
+      "id": "gvpfk8bj8",
+      "grammarPoint": "泛指与特指",
+      "question": "I want to eat ____ banana.",
+      "options": [
+        {
+          "label": "A",
+          "text": "a",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "an",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "the",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "a",
+      "correctOption": "A",
+      "analysis": "该句中\"banana\"为单数可数名词,此处表示泛指\"一根香蕉\"(非特指某根特定的香蕉),因此用不定冠词\"a\"。知识点延伸：表达食用愿望时常用泛指,强调的是食物的类别和数量,而非特定性。想吃香蕉时,通常指\"任意一根香蕉\",重点在于满足食用需求。例如\"I want to drink a cup of tea\"(我想喝一杯茶)。此处表达饮食需求的泛指概念,体现日常生活中的不定冠词用法。",
+      "category": "冠词(2)"
+    },
+    {
+      "id": "b3ljceym6",
+      "grammarPoint": "a和an",
+      "question": "She wants to be ___ actress.",
+      "options": [
+        {
+          "label": "A",
+          "text": "an",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "the",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "a",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "an",
+      "correctOption": "A",
+      "analysis": "句中\"actress\"是以元音音素/æ/开头的单数可数名词,其前需用不定冠词\"an\"。知识点：表示职业的名词前通常用不定冠词,如a teacher、a doctor、an actor、an engineer等。选择\"a\"还是\"an\"取决于职业名词的发音。例如\"an artist\"(艺术家,以元音音素开头)、\"a writer\"(作家,以辅音音素开头)。此处\"actress\"发音以元音音素开头,表示\"她想成为一名女演员\",故用\"an\"。",
+      "category": "冠词(3)"
+    },
+    {
+      "id": "hix7wtgoy",
+      "grammarPoint": "the的特殊用法",
+      "question": "He is one of ____ most popular singers in China.",
+      "options": [
+        {
+          "label": "A",
+          "text": "an",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "the",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "a",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "the",
+      "correctOption": "B",
+      "analysis": "该句考查\"one of + the + 最高级 + 复数名词\"的固定结构,表示\"最……之一\"。\"most popular\"为最高级形式,前面必须用定冠词\"the\"。知识点：最高级前必须用定冠词\"the\",\"one of the + 最高级\"是常用句型,表示在某个范围内属于最突出的一部分。例如\"one of the best students\"(最好的学生之一)、\"one of the tallest buildings\"(最高的建筑之一)。此处强调他在中国歌手中的顶尖地位,体现最高级的特指功能。",
+      "category": "冠词(4)"
+    },
+    {
+      "id": "zxij7w8tq",
+      "grammarPoint": "名词综合",
+      "question": "We had a wonderful ____ (time) at the party last night.",
+      "options": [
+        {
+          "label": "A",
+          "text": "timeing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "time",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "timeed",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "time",
+      "correctOption": "B",
+      "analysis": "该句中需填入名词\"time\"的正确形式\"time\"。知识点：在此语境中,\"time\"表示\"时光、时间\",是不可数名词,不需要复数形式。\"have a wonderful time\"是固定搭配,表示\"玩得愉快\"。类似的表达还有\"have a good time\"、\"have a great time\"等。例如\"enjoyable time\"(愉快时光)、\"memorable time\"(难忘时光)。此处\"a wonderful time\"表示\"美好时光\",体现了time作为抽象概念的不可数特性,强调聚会的愉快体验。",
+      "category": "名词(1)"
+    },
+    {
+      "id": "fe22woze7",
+      "grammarPoint": "复合词和外来词",
+      "question": "The ____ (index) of this book are very detailed.",
+      "options": [
+        {
+          "label": "A",
+          "text": "indices",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "indice",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "indiceing",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "indices",
+      "correctOption": "A",
+      "analysis": "该句中需填入名词\"index\"的复数形式\"indices\"。知识点：\"index\"来自拉丁语,其复数形式可以是\"indices\"(保留拉丁语复数形式)或\"indexes\"(英语化复数形式),但\"indices\"更正式和学术化。这类拉丁语外来词需要特别记忆。例如\"book indices\"(书籍索引)、\"mathematical indices\"(数学指数)。此处\"the indices\"表示\"这些索引\",描述书籍的详细程度,体现了拉丁语外来词的正式复数用法,强调学术著作的专业性。",
+      "category": "名词(2)"
+    },
+    {
+      "id": "lnxkav0kn",
+      "grammarPoint": "单复数同形",
+      "question": "We can see many ____ (sheep) on the hill.",
+      "options": [
+        {
+          "label": "A",
+          "text": "sheeping",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "sheep",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "sheeped",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "sheep",
+      "correctOption": "B",
+      "analysis": "该句中需填入名词\"sheep\"的复数形式\"sheep\"。知识点：\"sheep\"属于单复数同形名词,单数和复数形式完全相同。这类词需要通过上下文判断单复数含义,类似的还有deer、fish等。例如\"a sheep\"(一只羊)、\"a flock of sheep\"(一群羊)。此处\"many sheep\"表示\"许多羊\",描述山坡上的牧场景象,体现了单复数同形名词的农牧业表达,强调放牧生活的田园风光。",
+      "category": "名词(2)"
+    },
+    {
+      "id": "vnnhzal5y",
+      "grammarPoint": "不规则复数",
+      "question": "The ____ (goose) are swimming in the pond.",
+      "options": [
+        {
+          "label": "A",
+          "text": "geeseing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "geeseed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "geese",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "geese",
+      "correctOption": "C",
+      "analysis": "该句中需填入名词\"goose\"的复数形式\"geese\"。知识点：\"goose\"是不规则复数变化名词,通过改变内部元音oo→ee形成复数\"geese\"。这与foot→feet、tooth→teeth的变化规律相同,都是通过内部元音变化实现复数转换。例如\"wild geese\"(野鹅)、\"Canadian geese\"(加拿大鹅)。此处\"the geese\"表示\"这些鹅\",描述池塘中的水禽活动,体现了不规则复数名词的动物分类用法,强调自然生态场景。",
+      "category": "名词(2)"
+    },
+    {
+      "id": "1i4i2iueu",
+      "grammarPoint": "以o结尾",
+      "question": "The museum displays many ancient ____ (echo).",
+      "options": [
+        {
+          "label": "A",
+          "text": "echoeing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "echoes",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "echoe",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "echoes",
+      "correctOption": "B",
+      "analysis": "该句中需填入名词\"echo\"的复数形式\"echoes\"。知识点：\"echo\"(回声)虽然是无生命的声音现象,但属于以\"o\"结尾名词中需要加\"-es\"的特例。这类特例词还包括embargo(禁运)、torpedo(鱼雷)等。\"echo\"指声音的反射现象,在语言学和物理学中都很常见。例如\"mountain echoes\"(山谷回声)、\"distant echoes\"(远处回音)。此处\"ancient echoes\"可能指博物馆中展示的古代声学现象或相关文物,体现了某些无生命名词的特殊复数变化。",
+      "category": "名词(3)"
+    },
+    {
+      "id": "fmksdl5hs",
+      "grammarPoint": "以y结尾",
+      "question": "We have different ____ (hobby).",
+      "options": [
+        {
+          "label": "A",
+          "text": "hobbies",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "hobbieing",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "hobbie",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "hobbies",
+      "correctOption": "A",
+      "analysis": "该句中需填入名词\"hobby\"的复数形式\"hobbies\"。知识点：\"hobby\"以辅音字母\"b\"+y结尾,遵循\"辅音字母+y\"变复数规则：去y变i,加-es。这类兴趣爱好词汇都遵循此规律,类似的还有activity→activities等。例如\"outdoor hobbies\"(户外爱好)、\"creative hobbies\"(创意爱好)。此处\"different hobbies\"表示\"不同的爱好\",用于表达个人兴趣的多样性,体现了以辅音+y结尾名词的复数用法,强调个人发展的多元化。",
+      "category": "名词(4)"
+    },
+    {
+      "id": "stlcisfrc",
+      "grammarPoint": "s/sh/ch/x结尾",
+      "question": "There are many ____ (match) in the box. Be careful with them.",
+      "options": [
+        {
+          "label": "A",
+          "text": "matches",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "matcheing",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "matche",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "matches",
+      "correctOption": "A",
+      "analysis": "该句中需填入名词\"match\"的复数形式\"matches\"。知识点：\"match\"以字母组合\"ch\"结尾,遵循\"以s、sh、ch、x结尾\"的名词变复数规则：在词尾加-es。日用品类词汇中,match是基础词汇。需要注意\"match\"有多重含义：火柴、比赛、匹配等,但复数变化规律相同。例如\"safety matches\"(安全火柴)、\"football matches\"(足球比赛)。此处\"many matches\"表示\"很多火柴\",并提醒小心使用,体现了以ch结尾日用品名词的复数用法,强调安全注意事项。",
+      "category": "名词(5)"
+    },
+    {
+      "id": "61zdoqldl",
+      "grammarPoint": "以f/fe结尾",
+      "question": "There are some ____ (knife) on the table.",
+      "options": [
+        {
+          "label": "A",
+          "text": "kniveing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "knives",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "knive",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "knives",
+      "correctOption": "B",
+      "analysis": "该句中需填入名词\"knife\"的复数形式\"knives\"。知识点：\"knife\"以\"fe\"结尾,复数变化时将\"fe\"变为\"v\",再加\"-es\"形成\"knives\"。这是以f/fe结尾名词的典型变化规律,类似的还有life→lives、wife→wives、leaf→leaves等。例如\"kitchen knives\"(厨房刀具)、\"sharp knives\"(锋利的刀)。此处\"some knives\"表示\"一些刀\",描述餐桌上的餐具摆放,体现了以fe结尾名词的复数变化,强调餐具的实用功能。",
+      "category": "名词(2)"
+    },
+    {
+      "id": "084ey3m72",
+      "grammarPoint": "被动写be吗",
+      "question": "The letter ____ (send) to him yesterday has not been replied yet.",
+      "options": [
+        {
+          "label": "A",
+          "text": "senting",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "sented",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "sent",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "sent",
+      "correctOption": "C",
+      "analysis": "该句中需填入过去分词\"sent\"。此处考查过去分词作定语的用法,核心知识点是**过去分词作定语表示已完成的被动动作**。具体分析如下：\n1. **句子结构分析**：主句为\"The letter has not been replied yet\",\"____ to him yesterday\"为后置定语修饰\"the letter\"。\n2. **被动关系判断**：\"信件(letter)\"与\"发送(send)\"之间是被动关系(信件被发送)。\n3. **时间判断**：\"yesterday\"表示过去时间,说明发送动作已经完成。\n4. **过去分词作定语**：\"sent to him yesterday\"表示\"昨天寄给他的\",相当于\"which was sent to him yesterday\"的简化。\n5. **不规则动词变化**：\"send\"的过去分词为\"sent\"(send-sent-sent)。\n6. **语境逻辑**：信件昨天已经寄出,但还没有收到回复,体现了动作的完成性和结果的持续性。\n7. **易混淆点提醒**：注意\"send\"的不规则变化,过去式和过去分词都是\"sent\"；作定语时不需要be动词。",
+      "category": "动词(2)"
+    },
+    {
+      "id": "tovdqqs6t",
+      "grammarPoint": "并列句与动词",
+      "question": "They ____ (visit) many countries and have learned a lot about different cultures.",
+      "options": [
+        {
+          "label": "A",
+          "text": "have visiting",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "have visits",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "have visited",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "have visited",
+      "correctOption": "C",
+      "analysis": "知识点：现在完成时并列。and连接两个并列谓语，由have learned可知为现在完成时，visit需用have visited，主语they为复数，助动词用have。",
+      "category": "动词(3)"
+    },
+    {
+      "id": "gjbpy975b",
+      "grammarPoint": "主从句与动词",
+      "question": "The film which we ____ (see) last night was wonderful.",
+      "options": [
+        {
+          "label": "A",
+          "text": "a",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "the",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "saw",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "saw",
+      "correctOption": "C",
+      "analysis": "**口诀记忆**：定从看主句,主过从过；有明确过去时间,用过去时。\n\n**具体analysis**：\n1. 本句主句\"was wonderful\"是**一般过去时**,且定语从句中有明确的过去时间状语\"last night\",应用**一般过去时**,故填\"saw\"。\n2. **时间状语决定时态**：\n   - \"last night\"明确表示过去时间\n   - 不规则动词：see → saw\n3. **主从时态呼应**：主句和从句都描述过去的事情,时态保持一致。\n\n**快速判断**：看到\"last night\"(过去时间)+ 主句\"was\"(过去时),从句用\"saw\"。",
+      "category": "动词(4)"
+    },
+    {
+      "id": "50dakr449",
+      "grammarPoint": "插入语与动词",
+      "question": "The students, including Tom, ____ (be) excited about the coming trip.",
+      "options": [
+        {
+          "label": "A",
+          "text": "are",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "a",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "the",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "are",
+      "correctOption": "A",
+      "analysis": "该句中需填入一般现在时复数形式\"are\"。此处考查**including类插入语对主谓一致的影响**,核心原则是插入语不改变主语的单复数性质。具体analysis如下：\n1. **插入语识别**：\"including Tom\"(包括汤姆)是including引导的插入语,用于列举主语中包含的具体成员,但不影响主语的数量概念。\n2. **主语分析**：\n   - 真正主语：The students(复数名词)\n   - including插入语：仅起补充说明作用\n   - 忽略插入语后：\"The students ____ excited about the coming trip.\"\n3. **主谓一致判断**：\n   - 主语\"The students\"是复数形式\n   - 描述学生们的感受状态,用一般现在时\n   - 复数主语 + be动词：用are\n4. **including插入语规律**：including + 名词/代词 作插入语时,不参与主谓一致的判断,类似结构还有：except、besides、along with、as well as等。",
+      "category": "动词(5)"
+    },
+    {
+      "id": "8ea2x7eh6",
+      "grammarPoint": "时态(一般过去时)",
+      "question": "He ____ (read) an interesting book last night.",
+      "options": [
+        {
+          "label": "A",
+          "text": "read",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "reading",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "readed",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "read",
+      "correctOption": "A",
+      "analysis": "该句中需填入动词\"read\"的过去式\"read\"。此处考查**同形异音的不规则动词变化**,具体analysis如下：\n1. **时态判断**：\n   - \"last night\"(昨晚)表示过去的具体时间,明确指向一般过去时。\n2. **特殊的不规则动词变化**：\n   - \"read\"是不规则动词：read/riːd/→read/red/→read/red/\n   - 拼写相同但发音不同：原形读/riːd/,过去式和过去分词读/red/\n   - 这是英语中较为特殊的变化类型\n3. **同形异音的识别**：\n   - 需要通过语境和时间状语判断具体的时态和读音\n   - 写作时拼写相同,但发音和意义不同\n   - 类似词汇较少,需要特别注意\n4. **阅读活动的描述**：\n   - \"read a book\"是常见的学习活动表达\n   - \"interesting\"增加了对书籍的评价\n   - 适合用一般过去时描述完整的阅读经历\n5. **记忆要点**：\"read过去还是read,发音变成/red/音；拼写相同音不同,语境时态要分清。\"",
+      "category": "时态(一般过去时)"
+    },
+    {
+      "id": "lodusuvz8",
+      "grammarPoint": "时态(一般将来时)",
+      "question": "I ______ (learn) to play the guitar during the summer vacation—I've already bought one.",
+      "options": [
+        {
+          "label": "A",
+          "text": "am going to learning",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "am going to learn",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "am going to learned",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "am going to learn",
+      "correctOption": "B",
+      "analysis": "该句需填入一般将来时\"am going to learn\"。此处考查**be going to表个人打算**，具体分析如下：\n1. 时态判断：\"summer vacation\"(暑假)是将来时间，\"已买吉他\"提示有明确计划，用be going to。\n2. 主谓一致：主语为I，故用am going to + 动词原形。\n3. 语境逻辑：强调\"自己打算学\"，突出主观意愿。",
+      "category": "时态(一般将来时)"
+    },
+    {
+      "id": "4fklytjk6",
+      "grammarPoint": "时态(过去将来时)",
+      "question": "The manager announced that the company ______ (launch) a new product line the following month.",
+      "options": [
+        {
+          "label": "A",
+          "text": "would launching",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "would launch",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "would launched",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "would launch",
+      "correctOption": "B",
+      "analysis": "该句需填入过去将来时\"would launch\"。此处考查**过去将来时表示过去宣布的未来计划**，具体分析如下：\n1. 时态判断：主句\"announced\"为过去时，\"the following month\"(下个月)是过去视角的将来，用would。\n2. 用法特点：描述企业计划，用would体现正式性，无被动或进行含义。\n3. 动词：launch为及物动词，直接接宾语，无需特殊变化。",
+      "category": "时态(过去将来时)"
+    },
+    {
+      "id": "a0brmvofx",
+      "grammarPoint": "时态(现在进行时)",
+      "question": "The students ____ (listen) to the teacher carefully in class.",
+      "options": [
+        {
+          "label": "A",
+          "text": "are listens",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "are listened",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "are listening",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "are listening",
+      "correctOption": "C",
+      "analysis": "该句中需填入现在进行时\"are listening\"。此处考查**现在进行时表示课堂正在进行的学习活动**,具体analysis如下：\n1. **时态判断**：\n   - \"in class\"(在课堂上)暗示这是正在进行的课堂活动。\n   - \"carefully\"(认真地)修饰听课的方式,强调动作正在进行中。\n2. **结构构成**：\n   - 主语\"The students\"是复数,搭配be动词\"are\"；动词\"listen\"的-ing形式为\"listening\"。\n   - 完整结构：are listening\n3. **listen to固定搭配(重现)**：\n   - \"listen to the teacher\"表示\"听老师讲课\"\n   - listen是不及物动词,需要介词to\n   - 在课堂语境中的典型搭配\n4. **副词carefully的作用**：\n   - carefully修饰动词listen,表示\"认真地听\"\n   - 体现了良好的学习态度\n   - 副词通常位于动词后或句末\n5. **语法要点**：\"in class表课堂,学生听课很认真；are listening表状态,课堂学习正进行。\"",
+      "category": "时态(现在进行时)"
+    },
+    {
+      "id": "1tzf4jqqz",
+      "grammarPoint": "时态(过去进行时)",
+      "question": "They ______ (travel) through the mountains at this time last week.",
+      "options": [
+        {
+          "label": "A",
+          "text": "were traveling",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "were traveled",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "were travels",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "were traveling",
+      "correctOption": "A",
+      "analysis": "该句需填入过去进行时\"were traveling\"。此处考查this time + 过去时间作状语时的时态，具体分析如下：\n1. 时态判断：时间状语\"at this time last week\"(上周这个时候)强调过去某一特定时间点正在进行的动作，需用过去进行时。\n2. 过去进行时构成：主语\"they\"为复数 + were + traveling(travel的现在分词)。\n3. 时间表达特点：this time + 过去时间是过去进行时的典型标志，突出动作在过去对应时刻的持续性。",
+      "category": "时态(过去进行时)"
+    },
+    {
+      "id": "9ggamkvj9",
+      "grammarPoint": "时态(现在完成时)",
+      "question": "She ____ (find) a new job. She is very happy.",
+      "options": [
+        {
+          "label": "A",
+          "text": "has found",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "has founded",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "has founding",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "has found",
+      "correctOption": "A",
+      "analysis": "该句中需填入现在完成时\"has found\"。此处考查**现在完成时表示近期完成动作对现在产生积极影响的用法**,具体analysis如下：\n1. **时态判断**：\n   - 没有具体时间状语,但后句\"She is very happy\"(她很开心)说明找到新工作对她现在的情绪产生积极影响。\n   - 体现现在完成时\"过去动作对现在产生影响\"的典型用法。\n2. **结构构成**：\n   - 主语\"She\"是第三人称单数,搭配助动词\"has\"；动词\"find\"的过去分词为\"found\"(不规则变化)。\n   - 完整结构：She has found\n3. **find的动词变化**：\n   - find是不规则动词：find→found→found\n   - 过去式和过去分词相同,都是found\n   - 区别于founded(建立)：found→founded→founded\n4. **积极结果的表达**：\n   - 过去动作：find a new job(找到新工作)\n   - 现在影响：is very happy(现在很开心)\n   - 找工作成功对当前情绪的积极影响\n5. **语法要点**：\"找到工作在近期,开心情绪在现在；has found表成果,积极影响用完成。\"",
+      "category": "时态(现在完成时)"
+    },
+    {
+      "id": "wcbxxkhfn",
+      "grammarPoint": "时态(过去完成时)",
+      "question": "She ______ (learn) English for ten years before she went abroad.",
+      "options": [
+        {
+          "label": "A",
+          "text": "had learned",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "had learns",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "had learning",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "had learned",
+      "correctOption": "A",
+      "analysis": "该句中需填入过去完成时\"had learned\"。此处考查**过去完成时与for时间段及before从句的搭配**，具体analysis如下：\n1. **时态判断**：\n   - \"before she went abroad\"(在她出国前)中，从句\"went abroad\"是一般过去时，\"学英语\"这一动作在\"出国\"前已持续了十年，需用过去完成时。\n   - 时间段\"for ten years\"强调动作的持续性，结合\"过去的过去\"的时间关系，确定用过去完成时。\n2. **结构构成**：\n   - 主语\"she\" + had + 过去分词learned(learn的过去分词，也可写作learnt)，即had learned。\n3. **for + 时间段的意义**：\n   - 与过去完成时连用，说明动作在过去某一动作发生前已持续了一段时间，强调\"截止到过去某时的持续\"。\n   - 若用一般过去时(\"She learned English for ten years\")，仅说明过去的持续，不体现与\"出国\"的先后。\n4. **动作的先后逻辑**：\n   - 开始学英语→持续十年→出国(过去)\n   - 过去完成时明确\"学英语\"在\"出国\"之前已完成十年的持续。\n5. **语法要点**：\"出国之前学英语，持续十年用完成；before从句是过去，主句先于had加过分。\"",
+      "category": "时态(过去完成时)"
+    },
+    {
+      "id": "xcbilvna2",
+      "grammarPoint": "语态(被动+八大时态)",
+      "question": "A new road ____ (build) in our town when I left last month.",
+      "options": [
+        {
+          "label": "A",
+          "text": "was being builting",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "was being built",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "was being builted",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "was being built",
+      "correctOption": "B",
+      "analysis": "该句中需填入过去进行时的被动语态\"was being built\"。此处考查**不规则动词的过去进行时被动及时间背景**,具体analysis如下：\n1. **语态判断**：\n   - 主语\"A new road\"(一条新路)与动词\"build\"(建造)之间是被动关系(路被建造)。\n   - 道路无法自主建造,需被施工人员修建。\n2. **时态判断**：\n   - \"when I left last month\"(上个月我离开时)说明过去某一时间点正在进行的动作,用过去进行时。\n3. **结构构成**：\n   - 主语\"A new road\"是单数,搭配was；\"build\"的过去分词为\"built\"。\n   - 完整结构：was being built\n4. **语法要点**：\"离开之时路正建,过去进行被动显；build变built要牢记,特定语境别混乱。\"",
+      "category": "语态(被动+八大时态)"
+    },
+    {
+      "id": "6ubd2ynhp",
+      "grammarPoint": "现在分词综合",
+      "question": "The woman ____ (carry) a baby in her arms is my aunt.",
+      "options": [
+        {
+          "label": "A",
+          "text": "carryed",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "carrys",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "carrying",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "carrying",
+      "correctOption": "C",
+      "analysis": "该句中需填入现在分词\"carrying\"作后置定语。此处核心知识点同第3题,即**分词作定语时的时态和语态判断**。分词\"carrying\"修饰主语\"the woman\",表示\"抱着婴儿的女人\",主动且正在进行的动作,用现在分词。",
+      "category": "非谓语(2)"
+    },
+    {
+      "id": "dc590hzxi",
+      "grammarPoint": "过去分词综合",
+      "question": "He was ____ (dress) in a black suit at the party.",
+      "options": [
+        {
+          "label": "A",
+          "text": "dresss",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "dressing",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "dressed",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "dressed",
+      "correctOption": "C",
+      "analysis": "be dressed in是固定短语,意为\"穿着……\",此处用过去分词dressed作表语,表示人的状态。过去分词作表语时,通常用于说明主语的穿着状态,强调\"穿着黑色西装\"的样子,dressed在此处已形容词化,不强调被动动作,只表状态。",
+      "category": "非谓语(3)"
+    },
+    {
+      "id": "r0psb5g3u",
+      "grammarPoint": "不定式综合",
+      "question": "We decided ____ (take) a trip to the mountains.",
+      "options": [
+        {
+          "label": "A",
+          "text": "to takeing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "to take",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "to takeed",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "to take",
+      "correctOption": "B",
+      "analysis": "decide to do sth. 为固定用法,意为\"决定做某事\",动词不定式作宾语,故填 to take。",
+      "category": "非谓语(4)"
+    },
+    {
+      "id": "toxuy7nlk",
+      "grammarPoint": "形容词综合",
+      "question": "The little girl is ____ (love) with big eyes.",
+      "options": [
+        {
+          "label": "A",
+          "text": "lovelying",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "lovely",
+          "isCorrect": true
+        },
+        {
+          "label": "C",
+          "text": "lovelyed",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "lovely",
+      "correctOption": "B",
+      "analysis": "love为动词,此处需转化为形容词。lovely是形容词,意为\"可爱的\",用于修饰\"the little girl\",表示\"长着大眼睛的可爱小女孩\"。",
+      "category": "形容词(1)"
+    },
+    {
+      "id": "g5d7ldnv7",
+      "grammarPoint": "比较级",
+      "question": "The weather in spring is ____ (warm) than that in winter.",
+      "options": [
+        {
+          "label": "A",
+          "text": "warmest",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "warm",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "warmer",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "warmer",
+      "correctOption": "C",
+      "analysis": "知识点是比较级。句中有than,需用比较级,warm是单音节形容词,比较级直接加er,所以填warmer。",
+      "category": "形容词(2)"
+    },
+    {
+      "id": "zeiybht94",
+      "grammarPoint": "最高级",
+      "question": "This is the ____ (useful) tool for this job.",
+      "options": [
+        {
+          "label": "A",
+          "text": "most useful",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "most usefuling",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "most usefuled",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "most useful",
+      "correctOption": "A",
+      "analysis": "知识点：形容词最高级。\"for this job\"表示用途范围,用于这份工作的工具可能有多种,需用最高级。useful为双音节形容词,最高级形式为most + 原级。该句式通过\"the + most + 形容词\"结构,突出某物在特定用途中的最高有效性,体现最高级在功能描述中的应用。",
+      "category": "形容词(3)"
+    },
+    {
+      "id": "9fm59ix2h",
+      "grammarPoint": "副词修饰动词",
+      "question": "The scientist, Dr. Chen, analyzed the data ____ (rigorous), using advanced statistical tools.",
+      "options": [
+        {
+          "label": "A",
+          "text": "rigorously",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "rigorouslyed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "rigorouslying",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "rigorously",
+      "correctOption": "A",
+      "analysis": "修饰动词\"analyzed\"要用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"rigorous\"变为\"rigorously\"。",
+      "category": "副词(2)"
+    },
+    {
+      "id": "41n9x5nr9",
+      "grammarPoint": "副词修饰句子",
+      "question": "____ (happy), the children received many gifts on Christmas Day.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Happily",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "Happilyed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "Happilying",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "Happily",
+      "correctOption": "A",
+      "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"happy\"变为\"Happily\"。",
+      "category": "副词(3)"
+    },
+    {
+      "id": "3wj6qymm2",
+      "grammarPoint": "副词修饰形容词/副词",
+      "question": "The ______ (unbearable) cold wind made us wrap up tightly.​",
+      "options": [
+        {
+          "label": "A",
+          "text": "unbearably",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "unbearablyed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "unbearablying",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "unbearably",
+      "correctOption": "A",
+      "analysis": "修饰形容词需用副词。常见的形容词变副词的原则可以概括为改 y 为 ily, 改 le 为 ly,ic 变 ically, 除此以外一般都加 ly(包括辅音 + e 和 l 结尾的也是加 ly, 比如 extreme 变 extremely；actual 变 actually。但是元音 + e 需要去 e 再加 ly, 比如 true 变 truly, 这里是易混淆点), 部分形容词本身就是副词不变化。因此\"unbearable\"变为\"unbearably\"。",
+      "category": "副词(4)"
+    },
+    {
+      "id": "wclory2rg",
+      "grammarPoint": "定语从句综合",
+      "options": [
+        {
+          "label": "A",
+          "text": "the",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": null,
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "isCorrect": true
+        }
+      ],
+      "correctOption": "C",
+      "analysis": "先行词是\"The teacher\"，关系代词whose在从句中作定语修饰\"advice\"，表示\"老师的建议\"，考查关系代词whose引导定语从句，在从句中作定语的考点，通过校园场景进行考查。",
+      "category": "定语从句(1)"
+    },
+    {
+      "id": "is896oajr",
+      "grammarPoint": "that能填吗",
+      "question": "My cousin, ____ I played with when I was a child, lives in another city.",
+      "options": [
+        {
+          "label": "A",
+          "text": "whom / who",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "whom",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "who",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "whom / who",
+      "correctOption": "A",
+      "analysis": "横线前有逗号,句子为非限制性定语从句,不能用that。",
+      "category": "定语从句(2)"
+    },
+    {
+      "id": "ttqis1h93",
+      "grammarPoint": "who和which选哪个",
+      "question": "The bird, ____ is flying in the sky is a pigeon.",
+      "options": [
+        {
+          "label": "A",
+          "text": "which",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "whiched",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "whiching",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "which",
+      "correctOption": "A",
+      "analysis": "横线前先行词\"bird\"是\"鸟\"的意思,先行词是物用which。",
+      "category": "定语从句(3)"
+    },
+    {
+      "id": "v15j1h3mp",
+      "grammarPoint": "whose",
+      "question": "The girl, ____ dress is very beautiful is dancing on the stage.",
+      "options": [
+        {
+          "label": "A",
+          "text": "whose",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "whoseed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "whoseing",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "whose",
+      "correctOption": "A",
+      "analysis": "whose。考查定语从句关系代词。在定语从句中,关系代词whose表示所属关系,即横线前的先行词\"the girl\"和横线后的名词\"dress\"之间有所属关系,翻译成\"女孩的裙子\",这样的情况用whose,主句是\"这个女孩在舞台上跳舞\",从句是\"女孩的裙子很漂亮\"。",
+      "category": "定语从句(4)"
+    },
+    {
+      "id": "5gb4yciiv",
+      "grammarPoint": "which和when/where混淆",
+      "question": "The park, ____ has a big lake in it is very famous.",
+      "options": [
+        {
+          "label": "A",
+          "text": "which",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "whiching",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "whiched",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "which",
+      "correctOption": "A",
+      "analysis": "只有先行词在从句中做的是主语或是宾语才会使用\"which\",而\"when\"和\"where\"在从句中做时间状语和地点状语。在\"the park has a big lake in it\"中,先行词\"the park\"做主语,因此用\"which\"。",
+      "category": "定语从句(5)"
+    },
+    {
+      "id": "wg593i22o",
+      "grammarPoint": "状语从句综合",
+      "question": "____ he was tired, he still kept working.",
+      "options": [
+        {
+          "label": "A",
+          "text": "Althoughing",
+          "isCorrect": false
+        },
+        {
+          "label": "B",
+          "text": "Althoughed",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "Although",
+          "isCorrect": true
+        }
+      ],
+      "correctAnswer": "Although",
+      "correctOption": "C",
+      "analysis": "知识点：让步状语从句。although引导让步状语从句，“尽管累还是继续工作”，与though同义，从句可放在主句前或后。",
+      "category": "状语和从句(1)"
+    },
+    {
+      "id": "xoh8z6ce9",
+      "grammarPoint": "when",
+      "question": "I was watching TV ____ my mother came back.",
+      "options": [
+        {
+          "label": "A",
+          "text": "when",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "whened",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "whening",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "when",
+      "correctOption": "A",
+      "analysis": "when引导时间状语从句,\"when my mother came back\"\"当我母亲回来时\"作为\"I was watching TV\"\"我在看电视\"的时间状语,即横线后的从句是横线前的主句的时间状语从句,这时用\"when\"。",
+      "category": "状语和从句(2)"
+    },
+    {
+      "id": "zyhsxirzf",
+      "grammarPoint": "where",
+      "question": "The room ____ we had the meeting is on the second floor.",
+      "options": [
+        {
+          "label": "A",
+          "text": "where",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "whereing",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "whereed",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "where",
+      "correctOption": "A",
+      "analysis": "只有先行词在从句中做主语或宾语才会使用which/that,而where引导地点状语。在\"we had the meeting in the room\"中,先行词\"the room\"并非直接作had的宾语,而是在从句中作地点状语,因此用where。",
+      "category": "状语和从句(3)"
+    },
+    {
+      "id": "65oply26a",
+      "grammarPoint": "how",
+      "question": "I want to know ____ she learned to play the piano so well.",
+      "options": [
+        {
+          "label": "A",
+          "text": "how",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "when",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "what",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "how",
+      "correctOption": "A",
+      "analysis": "how引导宾语从句,在从句中作方式状语,表示\"如何、怎样\"。从句\"she learned to play the piano so well\"结构完整(主语she+谓语learned+宾语to play the piano+状语so well),但缺少\"学习钢琴的方式\"这一状语成分,因此用how引导,意为\"我想知道她是如何把钢琴弹得这么好的\"。",
+      "category": "状语和从句(4)"
+    },
+    {
+      "id": "gx4yldmqz",
+      "grammarPoint": "why",
+      "question": "He wondered ____ she was so happy today.",
+      "options": [
+        {
+          "label": "A",
+          "text": "why",
+          "isCorrect": true
+        },
+        {
+          "label": "B",
+          "text": "when",
+          "isCorrect": false
+        },
+        {
+          "label": "C",
+          "text": "what",
+          "isCorrect": false
+        }
+      ],
+      "correctAnswer": "why",
+      "correctOption": "A",
+      "analysis": "why引导宾语从句,在从句中作原因状语,表示\"为什么\"。从句\"she was so happy today\"结构完整(主语she+谓语was+表语so happy+时间状语today),但缺少\"高兴的原因\"这一状语成分,因此用why引导,意为\"他想知道她今天为什么这么高兴\"。",
+      "category": "状语和从句(5)"
+    }
+  ],
+  "missingPoints": [
+    "谓语",
+    "副词综合"
+  ]
+}

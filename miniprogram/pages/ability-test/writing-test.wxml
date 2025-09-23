@@ -1,0 +1,124 @@
+<!--书写测试页面-->
+<view class="container">
+  <!-- 顶部进度条 -->
+  <view class="progress-header">
+    <view class="progress-title">书写规范测试</view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{(totalTables / 14) * 100}}%"></view>
+    </view>
+    <view class="progress-text">{{totalTables}}/14 个表格已测试</view>
+  </view>
+
+  <!-- 表格进度按钮 -->
+  <view class="progress-button-section">
+    <button class="progress-button" bindtap="showProgressModal">
+      <view class="progress-button-content">
+        <view class="progress-button-title">各表格测试进度</view>
+        <view class="progress-button-subtitle">{{totalTables}}/14 个表格已测试</view>
+        <view class="progress-button-arrow">></view>
+      </view>
+    </button>
+  </view>
+
+  <!-- 当前练习 -->
+  <view class="exercise-section" wx:if="{{!loading && currentExercise}}">
+    <view class="exercise-header">
+      <view class="current-table">当前测试：{{currentTable}}</view>
+      <view class="exercise-number">第 {{totalTables + 1}} 题</view>
+    </view>
+
+    <view class="exercise-content">
+      <view class="exercise-question">{{currentExercise.question}}</view>
+      
+      <!-- 填空题输入 -->
+      <view class="fill-blank">
+        <input class="answer-input" 
+               placeholder="请输入答案" 
+               value="{{userAnswer}}"
+               bindinput="onInputChange"
+               bindconfirm="submitAnswer" />
+      </view>
+    </view>
+
+    <!-- 答案反馈 -->
+    <view class="answer-feedback" wx:if="{{showAnswer}}">
+      <view class="feedback-header {{isCorrect ? 'correct' : 'incorrect'}}">
+        <view class="feedback-icon">{{isCorrect ? '✓' : '✗'}}</view>
+        <view class="feedback-text">{{isCorrect ? '回答正确！' : '回答错误'}}</view>
+      </view>
+      
+      <view class="correct-answer" wx:if="{{!isCorrect}}">
+        <text>正确答案：{{currentExercise.correctAnswer}}</text>
+      </view>
+      
+      <view class="exercise-analysis" wx:if="{{currentExercise.analysis}}">
+        <text>{{currentExercise.analysis}}</text>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button wx:if="{{!showAnswer}}" 
+              class="action-btn primary" 
+              bindtap="submitAnswer">
+        提交答案
+      </button>
+      
+      <button wx:if="{{showAnswer}}" 
+              class="action-btn primary" 
+              bindtap="nextExercise">
+        下一题
+      </button>
+      
+      <button class="action-btn secondary" 
+              bindtap="retestTable">
+        重测当前表格
+      </button>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-section" wx:if="{{loading}}">
+    <view class="loading-text">正在加载练习...</view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <button class="bottom-btn secondary" bindtap="saveAndExit">
+      保存并退出
+    </button>
+    <button class="bottom-btn primary" bindtap="showAbilityMap">
+      查看能力图谱
+    </button>
+  </view>
+
+  <!-- 进度查看模态框 -->
+  <view class="modal-overlay" wx:if="{{showProgressModal}}" bindtap="hideProgressModal">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <view class="modal-title">各表格测试进度</view>
+        <view class="modal-close" bindtap="hideProgressModal">×</view>
+      </view>
+      
+      <view class="modal-body">
+        <view class="progress-summary">
+          <view class="summary-text">总体进度：{{totalTables}}/14 个表格已测试</view>
+          <view class="summary-percentage">{{Math.round((totalTables / 14) * 100)}}%</view>
+        </view>
+        
+        <view class="table-grid-modal">
+          <view wx:for="{{tables}}" wx:key="index" wx:for-item="table" 
+                class="table-item-modal {{tableProgress[table].tested ? 'tested' : ''}}">
+            <view class="table-name-modal">{{table}}</view>
+            <view class="table-status-modal">
+              {{tableProgress[table].tested ? '已完成' : '未测试'}}
+            </view>
+            <view class="table-bar-modal">
+              <view class="table-fill-modal" style="width: {{tableProgress[table].percentage}}%"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,245 @@
+/* 能力图谱页面样式 */
+
+.container {
+  padding: 20rpx;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* 页面头部 */
+.page-header {
+  text-align: center;
+  margin-bottom: 40rpx;
+  padding: 40rpx 20rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  color: white;
+}
+
+.header-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.header-subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+/* 薄弱点区域 */
+.weak-points-section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 0 10rpx;
+}
+
+.title-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.title-text {
+  font-size: 32rpx;
+  font-weight: bold;
+  flex: 1;
+}
+
+.refresh-btn {
+  font-size: 24rpx;
+  color: #667eea;
+  padding: 10rpx 20rpx;
+  border: 1rpx solid #667eea;
+  border-radius: 20rpx;
+  background: white;
+}
+
+/* 薄弱点卡片列表 */
+.weak-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.weak-point-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.weak-point-card:active {
+  transform: scale(0.98);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.point-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.accuracy-badge {
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.accuracy-low {
+  background-color: #ff6b6b;
+}
+
+.accuracy-medium {
+  background-color: #feca57;
+}
+
+.accuracy-high {
+  background-color: #48dbfb;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.accuracy-bar {
+  height: 8rpx;
+  background-color: #e9ecef;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.accuracy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+  transition: width 0.3s ease;
+}
+
+.practice-btn {
+  align-self: flex-end;
+  padding: 16rpx 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 25rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4rpx 15rpx rgba(102, 126, 234, 0.3);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  background: white;
+  border-radius: 16rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 整体分析卡片 */
+.overall-analysis {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
+  margin-bottom: 30rpx;
+}
+
+.analysis-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.analysis-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+}
+
+.analysis-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  flex: 1;
+  color: #333;
+}
+
+.analysis-arrow {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.analysis-desc {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 加载状态 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-content {
+  background: white;
+  padding: 40rpx;
+  border-radius: 16rpx;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20rpx;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}

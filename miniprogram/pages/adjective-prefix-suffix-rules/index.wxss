@@ -1,0 +1,139 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20rpx;
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  backdrop-filter: blur(10rpx);
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.description {
+  font-size: 28rpx;
+  color: #7f8c8d;
+  text-align: center;
+  margin-bottom: 40rpx;
+  display: block;
+}
+
+.section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 30rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 3rpx solid #3498db;
+}
+
+.prefix-item {
+  background: #f8f9fa;
+  border-radius: 15rpx;
+  padding: 25rpx;
+  margin-bottom: 25rpx;
+  border-left: 6rpx solid #3498db;
+}
+
+.prefix-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.prefix-number {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-right: 15rpx;
+}
+
+.prefix-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.prefix-meaning {
+  display: flex;
+  margin-bottom: 15rpx;
+}
+
+.meaning-label {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #8e44ad;
+  margin-right: 10rpx;
+}
+
+.meaning-text {
+  font-size: 28rpx;
+  color: #34495e;
+  flex: 1;
+}
+
+.examples {
+  margin-top: 15rpx;
+}
+
+.examples-label {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #27ae60;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.example-list {
+  padding-left: 20rpx;
+}
+
+.example-item {
+  font-size: 26rpx;
+  color: #2c3e50;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.sub-prefix {
+  margin-bottom: 15rpx;
+}
+
+.sub-prefix-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #16a085;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.summary {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  border-radius: 15rpx;
+  padding: 30rpx;
+  margin-top: 30rpx;
+}
+
+.summary-text {
+  font-size: 30rpx;
+  color: white;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+} 

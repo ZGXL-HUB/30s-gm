@@ -1,0 +1,69 @@
+{
+  "timestamp": "2025-08-31T02:00:43.978Z",
+  "originalCount": 65,
+  "duplicateCount": 53,
+  "cleanedCount": 11,
+  "removedCount": 54,
+  "duplicateRate": "90.77",
+  "duplicateStats": {
+    "谓语(1)": 50,
+    "非谓语综合": 9
+  },
+  "remainingQuestions": [
+    {
+      "text": "It ____(be)incredible that such a small town could...",
+      "answer": "was",
+      "category": "动词"
+    },
+    {
+      "text": "A girl on a skateboard ____(catch)my eye as I walk...",
+      "answer": "caught",
+      "category": "动词"
+    },
+    {
+      "text": "She refused ____(leave)the pet shelter until she f...",
+      "answer": "to leave",
+      "category": "动词"
+    },
+    {
+      "text": "Despite the heavy rain, the athlete kept ____(run)...",
+      "answer": "running",
+      "category": "动词"
+    },
+    {
+      "text": "It will take months of effort ____(repair)the old ...",
+      "answer": "to repair",
+      "category": "动词"
+    },
+    {
+      "text": "Although libraries of various scales and functions...",
+      "answer": "to attract",
+      "category": "动词"
+    },
+    {
+      "text": "They ____ (be) members of a 12 - member research t...",
+      "answer": "were",
+      "category": "动词"
+    },
+    {
+      "text": "What could ____ (do) to save this endangered speci...",
+      "answer": "be done",
+      "category": "动词"
+    },
+    {
+      "text": "Some of the themes that the poet was exploring ___...",
+      "answer": "were",
+      "category": "动词"
+    },
+    {
+      "text": "A five - meter - tall statue, ____ (inspire) by an...",
+      "answer": "inspired;was erected",
+      "category": "动词"
+    },
+    {
+      "text": "At present, health ____ (come) first for everyone....",
+      "answer": "comes",
+      "category": "动词"
+    }
+  ]
+}

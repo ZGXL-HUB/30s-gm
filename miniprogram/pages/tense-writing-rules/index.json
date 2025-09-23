@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "时态书写规则",
+  "usingComponents": {
+    "page-header-guide": "/components/page-header-guide/index"
+  }
+} 

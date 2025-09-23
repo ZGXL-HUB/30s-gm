@@ -1,0 +1,297 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="形容词前后缀规则学习"
+    description="学习形容词常见前缀和后缀的含义及用法，掌握构词规律"
+    tip="💡 提示：注意前缀的变体形式，如in-/im-/il-/ir-的变化规律"
+    icon="🔗"
+    storage-key="adjective-prefix-suffix-guide"
+  />
+  
+  <view class="content">
+    <view class="title">形容词常见前后缀知识整理</view>
+    <text class="description">包含含义说明及单词示例</text>
+    
+    <!-- 常见形容词前缀 -->
+    <view class="section">
+      <view class="section-title">一、常见形容词前缀</view>
+      
+      <!-- un- 前缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">1.</text>
+          <text class="prefix-name">un-（表示"不、无、相反"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">否定或相反意义。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• unhappy（不快乐的）</text>
+            <text class="example-item">• unfair（不公平的）</text>
+            <text class="example-item">• uncommon（不常见的）</text>
+            <text class="example-item">• unlikely（不太可能的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- in-/im-/il-/ir- 前缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">2.</text>
+          <text class="prefix-name">in-/im-/il-/ir-（表示"不、无"，根据词根首字母变化）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">否定。</text>
+        </view>
+        <view class="examples">
+          <view class="sub-prefix">
+            <text class="sub-prefix-name">• in-（用于以n以外的字母开头的词根）：</text>
+            <view class="example-list">
+              <text class="example-item">  - incredible（难以置信的）</text>
+              <text class="example-item">  - inactive（不活跃的）</text>
+              <text class="example-item">  - incorrect（不正确的）</text>
+              <text class="example-item">  - independent（独立的）</text>
+            </view>
+          </view>
+          <view class="sub-prefix">
+            <text class="sub-prefix-name">• im-（用于以m/p开头的词根）：</text>
+            <view class="example-list">
+              <text class="example-item">  - impossible（不可能的）</text>
+              <text class="example-item">  - impatient（不耐烦的）</text>
+              <text class="example-item">  - imbalanced（不平衡的）</text>
+              <text class="example-item">  - immoral（不道德的）</text>
+            </view>
+          </view>
+          <view class="sub-prefix">
+            <text class="sub-prefix-name">• il-（用于以l开头的词根）：</text>
+            <view class="example-list">
+              <text class="example-item">  - illegal（非法的）</text>
+              <text class="example-item">  - illogical（不合逻辑的）</text>
+              <text class="example-item">  - illiterate（不识字的）</text>
+              <text class="example-item">  - illusive（虚幻的）</text>
+            </view>
+          </view>
+          <view class="sub-prefix">
+            <text class="sub-prefix-name">• ir-（用于以r开头的词根）：</text>
+            <view class="example-list">
+              <text class="example-item">  - irregular（不规则的）</text>
+              <text class="example-item">  - irresponsible（不负责任的）</text>
+              <text class="example-item">  - irrelevant（无关的）</text>
+              <text class="example-item">  - irreplaceable（不可替代的）</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- re- 前缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">3.</text>
+          <text class="prefix-name">re-（表示"再、又、回"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">重复或返回。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• reusable（可重复使用的）</text>
+            <text class="example-item">• reliable（可靠的）</text>
+            <text class="example-item">• regretful（后悔的）</text>
+            <text class="example-item">• remorseful（悔恨的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- pre- 前缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">4.</text>
+          <text class="prefix-name">pre-（表示"前、预先"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">时间或顺序在前。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• prehistoric（史前的）</text>
+            <text class="example-item">• premature（过早的）</text>
+            <text class="example-item">• precious（珍贵的，原义"提前重视的"）</text>
+            <text class="example-item">• preferential（优先的）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 常见形容词后缀 -->
+    <view class="section">
+      <view class="section-title">二、常见形容词后缀</view>
+      
+      <!-- -able/-ible 后缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">1.</text>
+          <text class="prefix-name">-able/-ible（表示"可…的、能…的"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">具备某种能力或可能性。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• capable（有能力的）</text>
+            <text class="example-item">• flexible（灵活的）</text>
+            <text class="example-item">• visible（可见的）</text>
+            <text class="example-item">• tangible（可触摸的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- -ful 后缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">2.</text>
+          <text class="prefix-name">-ful（表示"充满…的、有…性质的"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">具有某种特征或情感。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• careful（小心的）</text>
+            <text class="example-item">• joyful（快乐的）</text>
+            <text class="example-item">• powerful（强大的）</text>
+            <text class="example-item">• grateful（感激的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- -ous/-ious 后缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">3.</text>
+          <text class="prefix-name">-ous/-ious（表示"具有…的、多…的"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">充满或具备某种特质。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• dangerous（危险的）</text>
+            <text class="example-item">• generous（慷慨的）</text>
+            <text class="example-item">• ambitious（有野心的）</text>
+            <text class="example-item">• anxious（焦虑的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- -ic/-ical 后缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">4.</text>
+          <text class="prefix-name">-ic/-ical（表示"…的、与…相关的"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">属于或关于某事物。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• scientific（科学的）</text>
+            <text class="example-item">• artistic（艺术的）</text>
+            <text class="example-item">• historical（历史的）</text>
+            <text class="example-item">• political（政治的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- -y 后缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">5.</text>
+          <text class="prefix-name">-y（表示"有…的、多…的"，常加在名词后）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">具有某种特征或状态。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• sunny（阳光充足的）</text>
+            <text class="example-item">• windy（多风的）</text>
+            <text class="example-item">• healthy（健康的）</text>
+            <text class="example-item">• noisy（吵闹的）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 特殊前后缀补充 -->
+    <view class="section">
+      <view class="section-title">三、特殊前后缀补充</view>
+      
+      <!-- -ish 后缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">1.</text>
+          <text class="prefix-name">-ish（表示"稍…的、似…的"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">略带某种性质或近似。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• childish（孩子气的）</text>
+            <text class="example-item">• greenish（稍绿的）</text>
+            <text class="example-item">• selfish（自私的）</text>
+            <text class="example-item">• bookish（书呆子气的）</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- over- 前缀 -->
+      <view class="prefix-item">
+        <view class="prefix-header">
+          <text class="prefix-number">2.</text>
+          <text class="prefix-name">over-（表示"过度、超过"）</text>
+        </view>
+        <view class="prefix-meaning">
+          <text class="meaning-label">含义：</text>
+          <text class="meaning-text">超出正常范围。</text>
+        </view>
+        <view class="examples">
+          <text class="examples-label">示例：</text>
+          <view class="example-list">
+            <text class="example-item">• overconfident（过度自信的）</text>
+            <text class="example-item">• overweight（超重的）</text>
+            <text class="example-item">• overcautious（过于谨慎的）</text>
+            <text class="example-item">• overdue（逾期的）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 总结 -->
+    <view class="summary">
+      <view class="summary-text">
+        通过前后缀可快速推测形容词含义，例如"un+happy"即"不快乐"，"care+ful"即"充满小心的"。掌握这些规律能有效扩大词汇量哦！
+      </view>
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,129 @@
+<view class="container">
+  <view class="content">
+    <view class="title">以下是各时态的标志性时间词及用法说明，帮助更精准判断时态应用场景：</view>
+    
+    <view class="section">
+      <view class="section-title">一、一般现在时（Present Simple）</view>
+      <view class="signal-words">标志词：always, usually, often, sometimes, never, every day/week/month, on Sundays, in the morning/afternoon, etc.</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• She <text class="highlight">works</text> every day.（every day）</view>
+      <view class="example-item">• They <text class="highlight">play</text> football on Sundays.（on Sundays）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">二、一般过去时（Past Simple）</view>
+      <view class="signal-words">标志词：yesterday, last week/month/year, ago（如3 days ago）, in + 过去年份（in 2020）, the other day, just now, etc.</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• He <text class="highlight">did</text> his homework yesterday.（yesterday）</view>
+      <view class="example-item">• They <text class="highlight">studied</text> in London last year.（last year）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">三、一般将来时（Future Simple）</view>
+      <view class="signal-words">标志词：tomorrow, next week/month/year, in + 时间段（in 2 days/in the future）, soon, later, tonight, etc.</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• We <text class="highlight">will study</text> abroad next year.（next year）</view>
+      <view class="example-item">• She <text class="highlight">will play</text> the piano tonight.（tonight）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">四、现在进行时（Present Continuous）</view>
+      <view class="signal-words">标志词：now, at the moment, right now, listen, look, etc.（暗示正在进行的动作）。</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• They <text class="highlight">are playing</text> basketball now.（now）</view>
+      <view class="example-item">• Look! She <text class="highlight">is working</text> on the project.（look）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">五、过去进行时（Past Continuous）</view>
+      <view class="signal-words">标志词：at + 过去时间点（at 8:00 last night）, when/while引导的过去时间状语从句, this time yesterday, etc.</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• He <text class="highlight">was doing</text> homework at 9 pm yesterday.（at 9 pm yesterday）</view>
+      <view class="example-item">• She <text class="highlight">was studying</text> when I called.（when引导的从句）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">六、现在完成时（Present Perfect）</view>
+      <view class="signal-words">标志词：</view>
+      <view class="sub-signal">• 表示"已完成"：already, yet, just, ever, never</view>
+      <view class="sub-signal">• 表示"持续"：for + 时间段（for 3 years）, since + 时间点（since 2020）, so far, up to now, in the past/last + 时间段（in the past 5 years）</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• I <text class="highlight">have already done</text> the work.（already）</view>
+      <view class="example-item">• They <text class="highlight">have studied</text> here for 2 years.（for 2 years）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">七、过去完成时（Past Perfect）</view>
+      <view class="signal-words">标志词：by + 过去时间点（by yesterday/by the end of last year）, before + 过去时间, when/after引导的过去完成时从句（强调"过去的过去"）。</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• She <text class="highlight">had played</text> the piano before she went to bed.（before引导的过去时间）</view>
+      <view class="example-item">• By last month, they <text class="highlight">had worked</text> here for 10 years.（by last month）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">八、将来进行时（Future Continuous）</view>
+      <view class="signal-words">标志词：at + 将来时间点（at 5 pm tomorrow）, this time tomorrow, by then, etc.（强调将来某刻正在进行的动作）。</view>
+      <view class="example-title">示例：</view>
+      <view class="example-item">• We <text class="highlight">will be studying</text> at 8 pm tomorrow.（at 8 pm tomorrow）</view>
+      <view class="example-item">• She <text class="highlight">will be working</text> in the office this time next week.（this time next week）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">补充对比表：时态标志词分类</view>
+      <view class="table-container">
+        <view class="table-row header">
+          <view class="table-cell">时态</view>
+          <view class="table-cell">时间标志词（举例）</view>
+          <view class="table-cell">核心功能</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">一般现在时</view>
+          <view class="table-cell">every day, usually, on Sundays</view>
+          <view class="table-cell">经常性动作/客观事实</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">一般过去时</view>
+          <view class="table-cell">yesterday, last week, ago</view>
+          <view class="table-cell">过去具体时间点的动作</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">一般将来时</view>
+          <view class="table-cell">tomorrow, next month, in the future</view>
+          <view class="table-cell">将来时间的动作</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">现在进行时</view>
+          <view class="table-cell">now, at the moment, look</view>
+          <view class="table-cell">现在正在进行的动作</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">过去进行时</view>
+          <view class="table-cell">at 8 pm yesterday, when I called</view>
+          <view class="table-cell">过去某刻正在进行的动作</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">现在完成时</view>
+          <view class="table-cell">for 3 years, since 2020, already</view>
+          <view class="table-cell">过去动作对现在的影响/持续</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">过去完成时</view>
+          <view class="table-cell">by last year, before he left</view>
+          <view class="table-cell">"过去的过去"的动作</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">将来进行时</view>
+          <view class="table-cell">at 5 pm tomorrow, this time next week</view>
+          <view class="table-cell">将来某刻正在进行的动作</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">学习小贴士：</view>
+      <view class="tip-item">• 部分标志词可能适用于多个时态（如"today"可用于现在时或完成时），需结合语境判断。</view>
+      <view class="tip-item">• 不规则动词的过去式和过去分词（如do→did→done）需重点记忆，可通过分类表格强化练习。</view>
+      <view class="tip-item">• 可通过"标志词+动词形式"双维度判断时态，例如看到"for+时间段"优先考虑现在完成时，动词用"have/has+过去分词"。</view>
+    </view>
+  </view>
+</view> 

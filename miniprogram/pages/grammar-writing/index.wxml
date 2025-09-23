@@ -1,0 +1,304 @@
+<view class="container">
+  <!-- 测试入口卡片 -->
+  <view class="test-entry-card" bindtap="navigateToWritingTest">
+    <image src="/images/icon-writing-test.png" class="test-icon"></image>
+    <text class="test-title">书写能力测评</text>
+    <text class="test-desc">全面评估书写能力，发现提升空间</text>
+    <view class="test-button">开始测试</view>
+  </view>
+
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="语法书写练习"
+    description="选择不同类型的语法练习表格，点击开始答题，提升语法应用能力"
+    tip="💡 提示：可以同时选择多个表格进行组合练习"
+    icon="✍️"
+    storage-key="grammar-writing-guide"
+  />
+  
+  <!-- 主要内容区域 -->
+  <scroll-view scroll-y class="main-content">
+    <!-- 分类列表 -->
+    <view class="category-list">
+      <block wx:for="{{categories}}" wx:key="index" wx:for-item="category" wx:for-index="catIndex">
+        <!-- 分类父节点 -->
+        <view class="category-item" bindtap="toggleCategory" data-index="{{catIndex}}">
+          <view class="category-title-wrapper">
+            <text class="category-name">{{category}}</text>
+            <text class="category-count" wx:if="{{catIndex === 0 && pronounTables.length > 0}}">
+              {{pronounTables.length}}个表格
+            </text>
+            <text class="category-count" wx:if="{{catIndex === 1 && nounTables.length > 0}}">
+              {{nounTables.length}}个表格
+            </text>
+            <text class="category-count" wx:if="{{catIndex === 2 && verbTables.length > 0}}">
+              {{verbTables.length}}个表格
+            </text>
+            <text class="category-count" wx:if="{{catIndex === 3 && tenseTables.length > 0}}">
+              {{tenseTables.length}}个表格
+            </text>
+            <text class="category-count" wx:if="{{catIndex === 4 && voiceTables.length > 0}}">
+              {{voiceTables.length}}个表格
+            </text>
+            <text class="category-count" wx:if="{{catIndex === 5 && comparisonTables.length > 0}}">
+              {{comparisonTables.length}}个表格
+            </text>
+            <text class="category-count" wx:if="{{catIndex === 6 && adverbTables.length > 0}}">
+              {{adverbTables.length}}个表格
+            </text>
+          </view>
+        </view>
+        
+        <!-- 子节点容器 -->
+        <view class="sub-categories-wrapper {{expandedCategories[catIndex] ? 'expanded' : ''}}">
+          <!-- 代词部分 -->
+          <block wx:if="{{catIndex === 0}}">
+            <view class="sub-category-item" wx:for="{{pronounSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex" 
+                  bindtap="selectTable" 
+                  data-table-id="{{pronounTables[subIndex].table_id}}"
+                  wx:if="{{pronounTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[pronounTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[pronounTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            
+            <!-- 提示和答案按钮 -->
+            <view class="action-buttons" wx:if="{{catIndex === 0}}">
+              <button class="action-btn hint-btn" bindtap="showHintOptions" data-category-index="0">
+                <text class="btn-icon">💡</text>
+                <text class="btn-text">小小的提示</text>
+              </button>
+              <button class="action-btn answer-btn" bindtap="showFullAnswer" data-table-id="pronoun_001" data-category-index="0">
+                <text class="btn-icon">📚</text>
+                <text class="btn-text">我再记会儿</text>
+              </button>
+            </view>
+          </block>
+          
+          <!-- 名词变复数部分 -->
+          <block wx:if="{{catIndex === 1}}">
+            <view class="sub-category-item" wx:for="{{nounSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex"
+                  bindtap="selectTable" 
+                  data-table-id="{{nounTables[subIndex].table_id}}"
+                  wx:if="{{nounTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[nounTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[nounTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 新增：名词变复数下方两个提示按钮 -->
+            <view class="noun-hint-bar">
+              <button class="noun-hint-btn" bindtap="showNounSuffixHint"><text class="noun-hint-icon">💡</text>关于名词后缀</button>
+              <button class="noun-hint-btn" bindtap="showNounPluralHint"><text class="noun-hint-icon">📚</text>关于名词复数</button>
+            </view>
+          </block>
+          
+          <!-- 动词分词书写部分 -->
+          <block wx:if="{{catIndex === 2}}">
+            <view class="sub-category-item" wx:for="{{verbSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex"
+                  bindtap="selectTable" 
+                  data-table-id="{{verbTables[subIndex].table_id}}"
+                  wx:if="{{verbTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[verbTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[verbTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 分词提示按钮 -->
+            <view class="verb-hint-bar">
+              <button class="verb-hint-btn" bindtap="showPresentParticipleRules"><text class="verb-hint-icon">💡</text>现在分词书写</button>
+              <button class="verb-hint-btn" bindtap="showPastParticipleRules"><text class="verb-hint-icon">📚</text>过去分词书写</button>
+            </view>
+          </block>
+          
+          <!-- 时态书写部分 -->
+          <block wx:if="{{catIndex === 3}}">
+            <!-- 表格练习选项 -->
+            <view class="sub-category-item" wx:for="{{tenseSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex"
+                  bindtap="selectTable" 
+                  data-table-id="{{tenseTables[subIndex].table_id}}"
+                  wx:if="{{tenseTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[tenseTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[tenseTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            
+            <!-- 时态提示按钮 -->
+            <view class="tense-hint-bar">
+              <button class="tense-hint-btn" bindtap="showTenseWritingRules"><text class="tense-hint-icon">💡</text>时态书写规则</button>
+              <button class="tense-hint-btn" bindtap="showTenseSignalRules"><text class="tense-hint-icon">📚</text>时态标志词识别</button>
+            </view>
+          </block>
+          
+          <!-- 语态书写部分 -->
+          <block wx:if="{{catIndex === 4}}">
+            <!-- 表格练习选项 -->
+            <view class="sub-category-item" wx:for="{{voiceSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex"
+                  bindtap="selectTable" 
+                  data-table-id="{{voiceTables[subIndex].table_id}}"
+                  wx:if="{{voiceTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[voiceTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[voiceTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            
+            <!-- 语态提示按钮 -->
+            <view class="voice-hint-bar">
+              <button class="voice-hint-btn" bindtap="showVoiceRules"><text class="voice-hint-icon">💡</text>语态规则提示</button>
+            </view>
+          </block>
+          
+          <!-- 比较级最高级部分 -->
+          <block wx:if="{{catIndex === 5}}">
+            <view class="sub-category-item" wx:for="{{comparisonSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex"
+                  bindtap="selectTable" 
+                  data-table-id="{{comparisonTables[subIndex].table_id}}"
+                  wx:if="{{comparisonTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[comparisonTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[comparisonTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 比较级最高级提示按钮 -->
+            <view class="comparison-hint-bar">
+              <button class="comparison-hint-btn" bindtap="showAdjectivePrefixSuffixRules"><text class="comparison-hint-icon">💡</text>形容词前后缀</button>
+              <button class="comparison-hint-btn" bindtap="showComparisonWritingRules"><text class="comparison-hint-icon">📚</text>比较级最高级书写</button>
+            </view>
+          </block>
+          
+          <!-- 形容词变副词部分 -->
+          <block wx:if="{{catIndex === 6}}">
+            <view class="sub-category-item" wx:for="{{adverbSubCategories}}" wx:key="subIndex" wx:for-item="subCategory" wx:for-index="subIndex"
+                  bindtap="selectTable" 
+                  data-table-id="{{adverbTables[subIndex].table_id}}"
+                  wx:if="{{adverbTables[subIndex]}}">
+              <view class="sub-category-info">
+                <text class="sub-category-name">{{subCategory}}</text>
+              </view>
+              <view class="selection-control">
+                <view class="select-btn {{selectedTables[adverbTables[subIndex].table_id] ? 'selected' : ''}}">
+                  <text class="select-icon">{{selectedTables[adverbTables[subIndex].table_id] ? '✓' : '+'}}</text>
+                </view>
+              </view>
+            </view>
+            <!-- 副词提示按钮 -->
+            <view class="adverb-hint-bar">
+              <button class="adverb-hint-btn" bindtap="showAdverbWritingRules"><text class="adverb-hint-icon">💡</text>形容词变副词书写</button>
+            </view>
+          </block>
+          
+          <!-- 其他分类（暂时显示开发中） -->
+          <block wx:if="{{catIndex > 6}}">
+            <view class="sub-category-item">
+              <view class="sub-category-info">
+                <text class="sub-category-name">开发中...</text>
+                <text class="table-description">该分类的表格正在开发中</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="total-box">
+      已选择：<text class="count">{{selectedCount}}</text>个表格
+    </view>
+    <view class="actions">
+      <button class="bar-btn clear-btn" bindtap="clearSelection" disabled="{{selectedCount === 0}}">
+        清空
+      </button>
+      <button class="bar-btn start-btn" bindtap="startPractice" disabled="{{selectedCount === 0}}">
+        开始练习
+      </button>
+    </view>
+  </view>
+
+  <!-- 提示选项弹窗 -->
+  <view class="modal-overlay" wx:if="{{showHintModal}}" bindtap="closeHintModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">选择提示类型</text>
+        <text class="modal-close" bindtap="closeHintModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="hint-options">
+          <view class="hint-option" 
+                wx:for="{{hintOptions}}" 
+                wx:key="index" 
+                wx:for-item="option"
+                bindtap="selectHintType" 
+                data-type="{{option}}">
+            <text class="hint-text">{{option}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示内容弹窗 -->
+  <view class="modal-overlay" wx:if="{{showHintContentModal}}" bindtap="closeHintContentModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">提示</text>
+        <text class="modal-close" bindtap="closeHintContentModal">×</text>
+      </view>
+      <view class="modal-body">
+        <text style="font-size:28rpx;line-height:1.7;white-space:pre-line;">{{hintContent}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 答案弹窗 -->
+  <view class="modal-overlay" wx:if="{{showAnswerModal}}" bindtap="closeAnswerModal">
+    <view class="modal-content answer-modal" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{currentAnswer.title}}</text>
+        <text class="modal-close" bindtap="closeAnswerModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="answer-table">
+          <view class="table-header">
+            <view class="table-cell header-cell" wx:for="{{currentAnswer.headers}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <view class="table-row" wx:for="{{currentAnswer.data}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex">
+            <view class="table-cell" wx:for="{{row}}" wx:key="colIndex" wx:for-item="cell" wx:for-index="colIndex">
+              {{cell}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

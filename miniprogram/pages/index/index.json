@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "page-header-guide": "/components/page-header-guide/index",
+    "floating-feedback": "/components/floating-feedback/index"
+  },
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "课间语法小助手"
+}

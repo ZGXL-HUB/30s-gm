@@ -1,0 +1,300 @@
+<view class="container">
+  <!-- 顶部统计卡片 -->
+  <view class="stats-card">
+    <view class="stats-header">
+      <view class="stats-title">错题统计</view>
+      <view class="stats-actions">
+        <view class="action-btn" bindtap="showLearningAnalysis">
+          <text class="btn-icon">📊</text>
+          <text class="btn-text">分析</text>
+        </view>
+        <view class="action-btn" bindtap="showLearningProgress">
+          <text class="btn-icon">📈</text>
+          <text class="btn-text">进度</text>
+        </view>
+        <view class="action-btn danger" bindtap="clearAllMistakes" wx:if="{{mistakes.length > 0}}">
+          <text class="btn-icon">🗑️</text>
+          <text class="btn-text">清空</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="stats-content">
+      <view class="stat-item">
+        <view class="stat-number">{{learningProgress.totalMistakes}}</view>
+        <view class="stat-label">总错题</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number">{{learningProgress.masteredMistakes}}</view>
+        <view class="stat-label">已掌握</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number">{{learningProgress.masteryRate}}%</view>
+        <view class="stat-label">掌握率</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习分析面板 -->
+  <view class="analysis-panel" wx:if="{{showAnalysis}}">
+    <view class="panel-header">
+      <text class="panel-title">📊 学习分析</text>
+      <view class="panel-close" bindtap="showLearningAnalysis">×</view>
+    </view>
+    
+    <view class="analysis-content">
+      <!-- 最常出错类别 -->
+      <view class="analysis-item">
+        <view class="analysis-label">最常出错：</view>
+        <view class="analysis-value">{{analysisData.mostErrorCategory || '暂无数据'}}</view>
+        <view class="analysis-detail">共{{analysisData.mostErrorCount}}次</view>
+      </view>
+      
+      <!-- 平均错误次数 -->
+      <view class="analysis-item">
+        <view class="analysis-label">平均错误：</view>
+        <view class="analysis-value">{{analysisData.averageErrorCount}}次/题</view>
+      </view>
+      
+      <!-- 改进趋势 -->
+      <view class="analysis-item">
+        <view class="analysis-label">学习趋势：</view>
+        <view class="analysis-value trend-{{analysisData.improvementTrend}}">
+          {{analysisData.improvementTrend === 'improving' ? '📈 进步中' : 
+            analysisData.improvementTrend === 'declining' ? '📉 需加强' : '➡️ 稳定'}}
+        </view>
+      </view>
+      
+      <!-- 推荐重点 -->
+      <view class="recommendations">
+        <view class="recommendations-title">💡 推荐重点</view>
+        <view class="recommendation-list">
+          <view wx:for="{{analysisData.recommendedFocus}}" wx:key="category" class="recommendation-item">
+            <view class="recommendation-priority">{{item.priority}}</view>
+            <view class="recommendation-text">{{item.recommendation}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学习进度面板 -->
+  <view class="progress-panel" wx:if="{{showProgress}}">
+    <view class="panel-header">
+      <text class="panel-title">📈 学习进度</text>
+      <view class="panel-close" bindtap="showLearningProgress">×</view>
+    </view>
+    
+    <view class="progress-content">
+      <!-- 薄弱点和强项 -->
+      <view class="progress-section">
+        <view class="section-title">🎯 薄弱点</view>
+        <view class="point-list">
+          <view wx:for="{{learningProgress.weakPoints}}" wx:key="*this" class="point-item weak">
+            {{item}}
+          </view>
+        </view>
+      </view>
+      
+      <view class="progress-section">
+        <view class="section-title">✅ 强项</view>
+        <view class="point-list">
+          <view wx:for="{{learningProgress.strongPoints}}" wx:key="*this" class="point-item strong">
+            {{item}}
+          </view>
+        </view>
+      </view>
+      
+      <!-- 最近7天进度 -->
+      <view class="progress-section">
+        <view class="section-title">📅 最近7天</view>
+        <view class="progress-chart">
+          <view wx:for="{{learningProgress.recentProgress}}" wx:key="date" class="chart-bar">
+            <view class="bar-fill" style="height: {{item.count * 10}}px;"></view>
+            <view class="bar-label">{{item.count}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- 练习功能整合区域 -->
+  <view class="practice-section" wx:if="{{filteredMistakes.length > 0}}">
+    <view class="practice-header">
+      <text class="practice-title">📚 练习中心</text>
+      <view class="practice-help" bindtap="showPracticeHelp">
+        <text class="help-icon">❓</text>
+      </view>
+    </view>
+    
+    <view class="practice-cards">
+      <!-- 智能推荐练习卡片 -->
+      <view class="practice-card recommendation-card" wx:if="{{analysisData.recommendedFocus.length > 0}}">
+        <view class="card-header">
+          <view class="card-icon">🎯</view>
+          <view class="card-info">
+            <text class="card-title">智能推荐练习</text>
+            <text class="card-desc">基于错题分析，推荐薄弱语法点</text>
+          </view>
+        </view>
+        <view class="card-content">
+          <text class="recommendation-text">{{analysisData.recommendedFocus[0].recommendation || '暂无推荐'}}</text>
+        </view>
+        <view class="card-actions">
+          <button class="action-btn primary" bindtap="startRecommendedPractice">
+            <text class="btn-text">开始练习</text>
+            <text class="btn-arrow">→</text>
+          </button>
+        </view>
+      </view>
+
+      <!-- 错题消灭练习卡片 -->
+      <view class="practice-card elimination-card">
+        <view class="card-header">
+          <view class="card-icon">⚔️</view>
+          <view class="card-info">
+            <text class="card-title">错题消灭练习</text>
+            <text class="card-desc">重复练习错题，做对{{autoRemoveConfig.correctCount}}次自动移除</text>
+          </view>
+          <view class="card-config" bindtap="showAutoRemoveSettings">
+            <text class="config-text">设置</text>
+          </view>
+        </view>
+        <view class="card-content">
+          <view class="progress-info">
+            <text class="progress-text">当前进度：{{mistakes.length}}道错题待消灭</text>
+          </view>
+        </view>
+        <view class="card-actions">
+          <button class="action-btn primary" bindtap="startEliminationPractice">
+            <text class="btn-text">开始消灭</text>
+            <text class="btn-arrow">→</text>
+          </button>
+          <button class="action-btn secondary" bindtap="showEliminationProgress">
+            <text class="btn-text">查看进度</text>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已移除错题入口 -->
+  <view class="removed-mistakes-section" wx:if="{{removedMistakes.length > 0}}">
+    <view class="removed-mistakes-header" bindtap="toggleRemovedMistakes">
+      <view class="removed-mistakes-title">
+        <text class="removed-icon">🗑️</text>
+        <text>已移除错题 ({{removedMistakes.length}})</text>
+      </view>
+      <view class="removed-mistakes-arrow">{{showRemovedMistakes ? '▼' : '▶'}}</view>
+    </view>
+    
+    <!-- 已移除错题列表 -->
+    <view class="removed-mistakes-list" wx:if="{{showRemovedMistakes}}">
+      <block wx:for="{{removedMistakes}}" wx:key="id">
+        <view class="removed-mistake-item">
+          <view class="removed-mistake-info">
+            <view class="removed-mistake-text">{{item.question}}</view>
+            <view class="removed-mistake-reason">因做对{{item.removedReason.correctCount}}次被移除</view>
+            <view class="removed-mistake-date">{{item.removedDate}}</view>
+          </view>
+          <view class="restore-btn" bindtap="restoreMistake" data-id="{{item.id}}">恢复</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <view class="filter-section">
+    <view class="filter-header">
+      <text class="filter-title">分类筛选</text>
+      <view class="filter-count">共{{filteredMistakes.length}}道</view>
+    </view>
+    
+    <view class="category-tabs">
+      <view class="tab-item {{currentCategory === 'all' ? 'active' : ''}}" 
+            bindtap="filterByCategory" data-category="all">
+        全部
+      </view>
+      <view wx:for="{{categories}}" wx:key="*this" 
+            class="tab-item {{currentCategory === item ? 'active' : ''}}"
+            bindtap="filterByCategory" data-category="{{item}}">
+        {{item}} ({{categoryCounts[item] || 0}})
+      </view>
+    </view>
+  </view>
+
+  <!-- 错题列表 -->
+  <view class="mistake-list">
+    <block wx:for="{{filteredMistakes}}" wx:key="id">
+      <view class="mistake-item">
+        <view class="mistake-header">
+          <view class="mistake-category">{{item.mappedCategory || item.category || '综合'}}</view>
+          <view class="mistake-actions">
+            <view class="action-btn small" bindtap="practiceMistake" data-index="{{index}}">
+              <text class="btn-icon">✏️</text>
+            </view>
+            <view class="action-btn small danger" bindtap="onDelete" data-id="{{item.id}}">
+              <text class="btn-icon">🗑️</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="mistake-content">
+          <view class="mistake-text">{{item.question}}</view>
+          <view class="mistake-answers">
+            <view class="answer-item wrong">
+              <text class="answer-label">你的答案：</text>
+              <text class="answer-text">{{item.userAnswer}}</text>
+            </view>
+            <view class="answer-item correct">
+              <text class="answer-label">正确答案：</text>
+              <text class="answer-text">{{item.correctAnswer}}</text>
+            </view>
+          </view>
+          
+          <view class="mistake-analysis" wx:if="{{item.analysis}}">
+            <text class="analysis-label">解析：</text>
+            <text class="analysis-text">{{item.analysis}}</text>
+          </view>
+          
+          <view class="mistake-meta">
+            <view class="meta-item">
+              <text class="meta-label">错误次数：</text>
+              <text class="meta-value">{{item.errorCount || 1}}</text>
+            </view>
+            <view class="meta-item">
+              <text class="meta-label">正确次数：</text>
+              <text class="meta-value">{{item.correctCount || 0}}</text>
+            </view>
+            <view class="meta-item">
+              <text class="meta-label">日期：</text>
+              <text class="meta-value">{{item.date}}</text>
+            </view>
+          </view>
+          
+          <!-- 消灭进度条 -->
+          <view class="elimination-progress">
+            <view class="progress-header">
+              <text class="progress-label">消灭进度</text>
+              <text class="progress-text">
+                {{item.correctCount || 0}}/{{autoRemoveConfig.correctCount}} 
+                (还需{{autoRemoveConfig.correctCount - (item.correctCount || 0)}}次)
+              </text>
+            </view>
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: {{((item.correctCount || 0) / autoRemoveConfig.correctCount * 100)}}%"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredMistakes.length === 0}}">
+      <text class="empty-text">暂无错题记录</text>
+      <text class="empty-desc">继续练习，错题会自动收集到这里</text>
+    </view>
+  </view>
+</view> 

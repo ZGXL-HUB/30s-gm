@@ -1,0 +1,242 @@
+{
+  "tables": {
+    "pronoun_table_001": {
+      "id": "pronoun_table_001",
+      "frontendName": "代词书写(整表)",
+      "content": "人称物主反身代词整表，五列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(1)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["主格", "宾格", "形容词性物主代词", "名词性物主代词", "反身代词"],
+        "rows": [
+          ["I", "", "", "", ""],
+          ["you", "", "", "", ""],
+          ["he", "", "", "", ""],
+          ["she", "", "", "", ""],
+          ["it", "", "", "", ""],
+          ["we", "", "", "", ""],
+          ["you", "", "", "", ""],
+          ["they", "", "", "", ""]
+        ],
+        "answers": [
+          ["I", "me", "my", "mine", "myself"],
+          ["you", "you", "your", "yours", "yourself"],
+          ["he", "him", "his", "his", "himself"],
+          ["she", "her", "her", "hers", "herself"],
+          ["it", "it", "its", "its", "itself"],
+          ["we", "us", "our", "ours", "ourselves"],
+          ["you", "you", "your", "yours", "yourselves"],
+          ["they", "them", "their", "theirs", "themselves"]
+        ]
+      }
+    },
+    "pronoun_table_002": {
+      "id": "pronoun_table_002",
+      "frontendName": "代词书写(人称代词)",
+      "content": "人称代词练习表格，三列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(2)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["人称", "人称代词(主格)", "人称代词(宾格)"],
+        "rows": [
+          ["你", "you", "you"],
+          ["我", "I", "me"],
+          ["他", "he", "him"],
+          ["她", "she", "her"],
+          ["它", "it", "it"],
+          ["你们", "you", "you"],
+          ["我们", "we", "us"],
+          ["他们", "they", "them"]
+        ]
+      }
+    },
+    "pronoun_table_003": {
+      "id": "pronoun_table_003",
+      "frontendName": "代词书写(物主代词)",
+      "content": "物主代词练习表格，三列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(3)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["人称", "物主代词(形容词性)", "物主代词(名词性)"],
+        "rows": [
+          ["你", "your", "yours"],
+          ["我", "my", "mine"],
+          ["他", "his", "his"],
+          ["她", "her", "hers"],
+          ["它", "its", "its"],
+          ["你们", "your", "yours"],
+          ["我们", "our", "ours"],
+          ["他们", "their", "theirs"]
+        ]
+      }
+    },
+    "pronoun_table_004": {
+      "id": "pronoun_table_004",
+      "frontendName": "代词书写(反身代词)",
+      "content": "反身代词练习表格，两列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(4)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["人称", "反身代词"],
+        "rows": [
+          ["你", "yourself"],
+          ["我", "myself"],
+          ["他", "himself"],
+          ["她", "herself"],
+          ["它", "itself"],
+          ["你们", "yourselves"],
+          ["我们", "ourselves"],
+          ["他们", "themselves"]
+        ]
+      }
+    },
+    "pronoun_table_005": {
+      "id": "pronoun_table_005",
+      "frontendName": "代词书写(关系代词)",
+      "content": "关系代词练习表格，四列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(5)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["例句", "先行词", "关系代词", "能填写 that 吗"],
+        "rows": [
+          ["The girl ______ is singing is my sister.(限制性)", "the girl", "who", "能"],
+          ["Mr. Li, ______ you met yesterday, is our math teacher.(非限制性)", "Mr. Li", "whom", "不能"],
+          ["The cat ______ is black belongs to me.(限制性)", "the cat", "which", "能"],
+          ["The city, ______ I visited last year, is very beautiful.(非限制性)", "the city", "which", "不能"],
+          ["This is the watch ______ my father gave me.(限制性)", "the watch", "that/which(或省略)", "能"],
+          ["Her house, ______ was built in 1990, looks very old.(非限制性)", "her house", "which", "不能"],
+          ["The boy ______ mother is a doctor studies hard.(限制性)", "the boy", "whose", "能"],
+          ["Mary, ______ brother is my classmate, will come tomorrow.(非限制性)", "Mary", "whose", "不能"],
+          ["All the people ______ work here are friendly.(限制性，先行词为不定代词 all)", "all the people", "that", "能(必须用 that)"],
+          ["Lucy, ______ is good at English, helped me with my homework.(非限制性)", "Lucy", "who", "不能"]
+        ]
+      }
+    },
+    "pronoun_table_006": {
+      "id": "pronoun_table_006",
+      "frontendName": "代词书写(it相关)",
+      "content": "it相关用法练习表格，两列结构，包含自动判断功能",
+      "category": "代词",
+      "subCategory": "代词(6)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["例句", "答案"],
+        "rows": [
+          ["______ is necessary for us to learn teamwork.", "It"],
+          ["It is ______(impoertance) for children to read more books.", "important"],
+          ["It is kind ______ you to help me.", "of"],
+          ["It was hard ______( finish) the task on time.", "to finish"],
+          ["______ was in the park that we saw the accident.", "It"],
+          ["It was Tom ______ won the first prize in the competition.", "that"],
+          ["______ is obvious that she will agree with us.", "It"],
+          ["It takes two hours ______ (get) to the airport by bus.", "to get"]
+        ]
+      }
+    }
+  },
+  "notes": {
+    "pronoun_note_001": {
+      "id": "pronoun_note_001",
+      "frontendName": "代词笔记(综合)",
+      "content": "一、人称代词与物主代词的意思区分\n人称代词：指代人或事物，在句中作主语、宾语等，强调 \"谁\"。\n物主代词：表示所属关系，强调 \"谁的\"。\n\n二、人称代词之间的区分\n人称代词分主格(作主语)和宾格(作宾语)，需根据在句中成分选择。\n\n三、物主代词之间的区分\n物主代词分形容词性(后接名词)和名词性(相当于 \"形容词性物主代词 + 名词\"，后不接名词)。\n\n四、反身代词的常见考法\n基本用法：主语和宾语为同一人时，宾语用反身代词(强调 \"自己\")。\n常见搭配：\nby oneself(独自)：He finished the work by himself.\nenjoy oneself(玩得开心)：They enjoyed themselves at the party.\nhelp oneself(随便吃 / 用)：Help yourself to some fruit.\n\n五、写法记忆规则\n宾格特点：\n唯一带 \"s\" 的宾格：us(我们)。\n唯一带 \"r\" 的宾格：her(她)。\n形容词性物主代词：\n仅 his(他的)和 its(它的)以 \"s\" 结尾。\nits(它的)没有一撇(≠ it's，it's=it is/has)。\n名词性物主代词：\n大多在形容词性物主代词后加 \"s\"，如 my→mine，your→yours，our→ours。\n特殊：his(形容词性)= his(名词性)，its(形容词性)= its(名词性)。\n反身代词：\n翻译出 \"他 / 她 / 它\" 的：用宾格 + self/selves，如 him→himself，them→themselves。\n未翻译出 \"他 / 她 / 它\" 的：用形容词性物主代词 + self/selves，如 my→myself，your→yourself。\n\n六、it 的常考用法\n固定句型(对某人来说做某事怎么样)：It + be + adj. + for/of sb. + to do sth.\n形式主语：代替不定式、从句等作主语(避免句子头重脚轻)。\n强调句：It is/was + 被强调部分 + that/who + 其他。\n\n七、关系代词的用法讲解\n关系代词用于引导定语从句，指代先行词(被修饰的名词 / 代词)，并在从句中充当主语、宾语、定语等成分。常见关系代词有：that, which, who, whom, whose。\n\n考察示例\n人称代词\n题目：______ (她) gave ______ (他) a book.\n答案：She; him\n解析：第一空作主语，用主格 She；第二空作宾语，用宾格 him。\n\n物主代词\n题目：This is ______ (我的) bag. ______ (你的) is on the chair.\n答案：my; Yours\n解析：第一空后接名词 bag，用形容词性物主代词 my；第二空后无名词，用名词性物主代词 Yours(相当于 your bag)。\n\n反身代词\n题目：The children dressed ______ (他们自己) quickly.\n答案：themselves\n解析：主语 the children 与宾语指同一群人，用反身代词 themselves(宾格 them+selves)。\n\nit 的用法\n题目：______ is necessary ______ us to learn teamwork.\n答案：It; for\n解析：此处 it 作形式主语，代替真正主语 \"to learn teamwork\"，符合句型 \"It is + adj. + for sb. + to do sth.\"。\n\n关系代词\n题目：The man ______ is talking to our teacher is my uncle.\n答案：who/that\n解析：先行词是 \"the man\"(人)，从句中缺少主语，用 who 或 that。",
+      "category": "代词",
+      "subCategory": "代词(1)",
+      "status": "已创建"
+    },
+    "pronoun_note_002": {
+      "id": "pronoun_note_002",
+      "frontendName": "代词笔记(人称代词)",
+      "content": "一、人称代词与物主代词的意思区分\n人称代词：指代人或事物，在句中作主语、宾语等，强调 \"谁\"。\n物主代词：表示所属关系，强调 \"谁的\"。\n\n二、人称代词之间的区分\n人称代词分主格(作主语)和宾格(作宾语)，需根据在句中成分选择。\n\n三、写法记忆规则\n宾格特点：\n唯一带 \"s\" 的宾格：us(我们)。\n唯一带 \"r\" 的宾格：her(她)。\n\n考察示例\n题目：______ (她) gave ______ (他) a book.\n答案：She; him\n解析：第一空作主语，用主格 She；第二空作宾语，用宾格 him。",
+      "category": "代词",
+      "subCategory": "代词(2)",
+      "status": "已创建"
+    },
+    "pronoun_note_003": {
+      "id": "pronoun_note_003",
+      "frontendName": "代词笔记(物主代词)",
+      "content": "一、人称代词与物主代词的意思区分\n人称代词：指代人或事物，在句中作主语、宾语等，强调 \"谁\"。\n物主代词：表示所属关系，强调 \"谁的\"。\n\n二、物主代词之间的区分\n物主代词分形容词性(后接名词)和名词性(相当于 \"形容词性物主代词 + 名词\"，后不接名词)。\n\n三、写法记忆规则\n形容词性物主代词：\n仅 his(他的)和 its(它的)以 \"s\" 结尾。\nits(它的)没有一撇(≠ it's，it's=it is/has)。\n名词性物主代词：\n大多在形容词性物主代词后加 \"s\"，如 my→mine，your→yours，our→ours。\n特殊：his(形容词性)= his(名词性)，its(形容词性)= its(名词性)。\n\n考察示例\n题目：This is ______ (我的) bag. ______ (你的) is on the chair.\n答案：my; Yours\n解析：第一空后接名词 bag，用形容词性物主代词 my；第二空后无名词，用名词性物主代词 Yours(相当于 your bag)。",
+      "category": "代词",
+      "subCategory": "代词(3)",
+      "status": "已创建"
+    },
+    "pronoun_note_004": {
+      "id": "pronoun_note_004",
+      "frontendName": "代词笔记(反身代词)",
+      "content": "一、反身代词的常见考法\n基本用法：主语和宾语为同一人时，宾语用反身代词(强调 \"自己\")。\n\n二、常见搭配：\nby oneself(独自)：He finished the work by himself.\nenjoy oneself(玩得开心)：They enjoyed themselves at the party.\nhelp oneself(随便吃 / 用)：Help yourself to some fruit.\n\n三、写法记忆规则\n反身代词：\n翻译出 \"他 / 她 / 它\" 的：用宾格 + self/selves，如 him→himself，them→themselves。\n未翻译出 \"他 / 她 / 它\" 的：用形容词性物主代词 + self/selves，如 my→myself，your→yourself。\n\n考察示例\n题目：The children dressed ______ (他们自己) quickly.\n答案：themselves\n解析：主语 the children 与宾语指同一群人，用反身代词 themselves(宾格 them+selves)。",
+      "category": "代词",
+      "subCategory": "代词(4)",
+      "status": "已创建"
+    },
+    "pronoun_note_005": {
+      "id": "pronoun_note_005",
+      "frontendName": "代词笔记(关系代词)",
+      "content": "一、关系代词的用法\n关系代词用于引导定语从句，指代先行词(被修饰的名词 / 代词)，并在从句中充当主语、宾语、定语等成分。常见关系代词有：that, which, who, whom, whose。\n\n二、分类及用法\nwho：指代人，在从句中作主语\nwhom：指代人，在从句中作宾语(可省略)\nwhich：指代物，在从句中作主语或宾语(作宾语时可省略)\nthat：既可指代人也可指代物，在从句中作主语或宾语(作宾语时可省略)\nwhose：指代人或物的 \"…… 的\"，在从句中作定语\n\n三、特殊规则\nthat 不用于非限制性定语从句\n非限制性定语从句用逗号与主句隔开，仅补充说明先行词，此时不能用 that，需用 which(指物)或 who/whom(指人)。\n\n考察示例\n题目：The man ______ is talking to our teacher is my uncle.\n答案：who/that\n解析：先行词是 \"the man\"(人)，从句中缺少主语，用 who 或 that。\n\n题目：I lost the pen ______ my mother gave me as a gift.\n答案：which/that(或省略)\n解析：先行词是 \"the pen\"(物)，从句中缺少宾语，用 which、that 或省略关系代词。\n\n题目：This is the room ______ window faces the sea.\n答案：whose\n解析：从句中 \"window\" 与先行词 \"the room\" 是所属关系(房间的窗户)，用 whose 作定语。\n\n题目：All ______ we need is enough time.\n答案：that\n解析：先行词是不定代词 \"all\"，只能用 that 引导定语从句。\n\n题目：Do you know the girl with ______ Tom is talking?\n答案：whom\n解析：先行词是 \"the girl\"(人)，关系代词前有介词 \"with\"，需用宾格 whom(介词后不能用 who)。",
+      "category": "代词",
+      "subCategory": "代词(5)",
+      "status": "已创建"
+    },
+    "pronoun_note_006": {
+      "id": "pronoun_note_006",
+      "frontendName": "代词笔记(it相关)",
+      "content": "一、写法记忆规则\nits(它的)没有一撇(≠ it's，it's=it is/has)。\n\n二、it 的常考用法\n固定句型(对某人来说做某事怎么样)：It + be + adj. + for/of sb. + to do sth.\n形式主语：代替不定式、从句等作主语(避免句子头重脚轻)。\n强调句：It is/was + 被强调部分 + that/who + 其他。\n\n考察示例\n题目：______ is necessary ______ us to learn teamwork.\n答案：It; for\n解析：此处 it 作形式主语，代替真正主语 \"to learn teamwork\"，符合句型 \"It is + adj. + for sb. + to do sth.\"。",
+      "category": "代词",
+      "subCategory": "代词(6)",
+      "status": "已创建"
+    }
+  },
+  "exerciseCategories": {
+    "代词(1)": {
+      "category": "代词",
+      "subCategory": "代词(1)",
+      "description": "代词综合",
+      "relatedNotes": ["pronoun_note_001"],
+      "relatedTables": ["pronoun_table_001"],
+      "status": "已创建"
+    },
+    "代词(2)": {
+      "category": "代词",
+      "subCategory": "代词(2)",
+      "description": "人称代词",
+      "relatedNotes": ["pronoun_note_002"],
+      "relatedTables": ["pronoun_table_002"],
+      "status": "已创建"
+    },
+    "代词(3)": {
+      "category": "代词",
+      "subCategory": "代词(3)",
+      "description": "物主代词",
+      "relatedNotes": ["pronoun_note_003"],
+      "relatedTables": ["pronoun_table_003"],
+      "status": "已创建"
+    },
+    "代词(4)": {
+      "category": "代词",
+      "subCategory": "代词(4)",
+      "description": "反身代词",
+      "relatedNotes": ["pronoun_note_004"],
+      "relatedTables": ["pronoun_table_004"],
+      "status": "已创建"
+    },
+    "代词(5)": {
+      "category": "代词",
+      "subCategory": "代词(5)",
+      "description": "关系代词",
+      "relatedNotes": ["pronoun_note_005"],
+      "relatedTables": ["pronoun_table_005"],
+      "status": "已创建"
+    },
+    "代词(6)": {
+      "category": "代词",
+      "subCategory": "代词(6)",
+      "description": "it相关",
+      "relatedNotes": ["pronoun_note_006"],
+      "relatedTables": ["pronoun_table_006"],
+      "status": "已创建"
+    }
+  }
+} 

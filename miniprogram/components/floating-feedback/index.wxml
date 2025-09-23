@@ -1,0 +1,34 @@
+<!--浮动反馈按钮组件-->
+<view class="floating-feedback" wx:if="{{show}}">
+  <view class="feedback-trigger" bindtap="toggleFeedback">
+    <view class="feedback-icon">💬</view>
+  </view>
+  
+  <!-- 快速反馈选项 -->
+  <view class="feedback-options {{expanded ? 'expanded' : ''}}" wx:if="{{expanded}}">
+    <view class="option-item" bindtap="quickFeedback" data-type="function">
+      <view class="option-icon">🔧</view>
+      <view class="option-text">功能问题</view>
+    </view>
+    
+    <view class="option-item" bindtap="quickFeedback" data-type="content">
+      <view class="option-icon">📚</view>
+      <view class="option-text">内容错误</view>
+    </view>
+    
+    <view class="option-item" bindtap="quickFeedback" data-type="experience">
+      <view class="option-icon">✨</view>
+      <view class="option-text">体验建议</view>
+    </view>
+    
+    <view class="option-item" bindtap="quickFeedback" data-type="technical">
+      <view class="option-icon">⚙️</view>
+      <view class="option-text">技术问题</view>
+    </view>
+    
+    <view class="option-item" bindtap="viewAllFeedback">
+      <view class="option-icon">📋</view>
+      <view class="option-text">全部反馈</view>
+    </view>
+  </view>
+</view>

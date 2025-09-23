@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-08-06T23:52:40.088Z",
+    "action": "error",
+    "details": {
+      "error": "ENOENT: no such file or directory, open 'C:\\Users\\19772\\WeChatProjects\\miniprogram - 副本 (6) - 副本\\backup\\original_content\\backup_2025-08-06T23-52-40-081Z\\backup_record.json'"
+    },
+    "status": "completed"
+  }
+]

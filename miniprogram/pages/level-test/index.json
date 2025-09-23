@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "语法水平测试",
+  "navigationBarBackgroundColor": "#667eea",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#F6F6F6",
+  "enablePullDownRefresh": false,
+  "disableScroll": true
+}

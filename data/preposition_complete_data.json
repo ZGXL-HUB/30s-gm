@@ -1,0 +1,265 @@
+{
+  "tables": {
+    "preposition_table_001": {
+      "id": "preposition_table_001",
+      "frontendName": "介词书写(常见介词)",
+      "content": "常见介词的中译英表格，包含自动判断功能",
+      "category": "介词",
+      "subCategory": "介词(1)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["意思", "介词"],
+        "rows": [
+          ["用于小地点(具体位置点)", "at"],
+          ["用于大地点(空间内部)", "in"],
+          ["用于表面接触", "on"],
+          ["在…… 下方", "under"],
+          ["在…… 上方(不接触)", "above"],
+          ["在…… 下方(不接触)", "below"],
+          ["在…… 旁边", "beside"],
+          ["在两者之间", "between"],
+          ["在三者及以上之间", "among"],
+          ["在…… 后面", "behind"],
+          ["在…… 前面(外部)", "in front of"],
+          ["在…… 内部", "inside"],
+          ["在…… 外部", "outside"],
+          ["具体时间点", "at"],
+          ["较长时间(年 / 月 / 季节 / 世纪)", "in"],
+          ["具体某天及某天的片段", "on"],
+          ["在…… 之后", "after"],
+          ["在…… 之前", "before"],
+          ["到…… 为止", "by"],
+          ["在…… 期间", "during"],
+          ["持续一段时间", "for"],
+          ["自从…… 以来", "since"],
+          ["关于", "about"],
+          ["反对；靠着", "against"],
+          ["伴随；用；和…… 一起", "with"],
+          ["没有", "without"],
+          ["为了；因为", "for"],
+          ["来自；从", "from"],
+          ["向；对", "to"],
+          ["…… 的；关于", "of"],
+          ["通过；被", "by"],
+          ["因为(后接名词)", "because of"],
+          ["代替", "instead of"]
+        ]
+      }
+    },
+    "preposition_table_002": {
+      "id": "preposition_table_002",
+      "frontendName": "介词书写(常见搭配)",
+      "content": "常见介词词组练习，两列格式，自动判断",
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["动词词组", "含义"],
+        "rows": [
+          ["break down", "出故障(机器)；崩溃(情绪)；分解(化学 / 物理)"],
+          ["break into", "闯入；突然开始(笑、哭等)"],
+          ["break out", "(战争、火灾等)爆发"],
+          ["break up", "解散；分手"],
+          ["put away", "收好；储存"],
+          ["put down", "放下；写下；镇压"],
+          ["put off", "推迟"],
+          ["put on", "穿上；上演"],
+          ["put up", "举起；张贴；搭建；提供住宿"],
+          ["take after", "(外貌、性格)与…… 相像"],
+          ["take apart", "拆开(机器等)"],
+          ["take away", "拿走；带走"],
+          ["take down", "记下；拆除"],
+          ["take in", "吸收；理解；收留"],
+          ["take off", "起飞；脱下；突然成功"],
+          ["take on", "承担；呈现；雇佣"],
+          ["take over", "接管；接替"],
+          ["take up", "开始从事；占据(时间 / 空间)"],
+          ["look after", "照顾"],
+          ["look at", "看"],
+          ["look for", "寻找"],
+          ["look forward to", "期待"],
+          ["look into", "调查"],
+          ["look up", "查阅；抬头看"],
+          ["get along with", "与…… 相处"],
+          ["get away", "离开"],
+          ["get back", "回来；取回"],
+          ["get down to", "开始认真做"],
+          ["get off", "下车"],
+          ["get through", "通过；接通电话"],
+          ["give away", "赠送；泄露"],
+          ["give back", "归还"],
+          ["give in", "屈服"],
+          ["give up", "放弃"],
+          ["give out", "分发；耗尽"]
+        ]
+      }
+    },
+    "preposition_table_003": {
+      "id": "preposition_table_003",
+      "frontendName": "介词书写(介词+名词/动名词)",
+      "content": "介词后的动词ing书写，两列格式，自动判断",
+      "category": "介词",
+      "subCategory": "介词(3)",
+      "status": "已创建",
+      "tableData": {
+        "headers": ["介词后加动词", "注意ing书写规则"],
+        "rows": [
+          ["good at ___ (work)", "working"],
+          ["good at ___ (read)", "reading"],
+          ["good at ___ (play)", "playing"],
+          ["good at ___ (listen)", "listening"],
+          ["interested in ___ (write)", "writing"],
+          ["interested in ___ (make)", "making"],
+          ["interested in ___ (take)", "taking"],
+          ["interested in ___ (live)", "living"],
+          ["keep on ___ (run)", "running"],
+          ["keep on ___ (stop)", "stopping"],
+          ["keep on ___ (swim)", "swimming"],
+          ["keep on ___ (put)", "putting"],
+          ["think about ___ (lie)", "lying"],
+          ["think about ___ (die)", "dying"],
+          ["think about ___ (tie)", "tying"],
+          ["be busy ___ (have)", "having"],
+          ["be busy ___ (do)", "doing"],
+          ["be busy ___ (see)", "seeing"]
+        ]
+      }
+    }
+  },
+  "notes": {
+    "preposition_note_001": {
+      "id": "preposition_note_001",
+      "frontendName": "介词笔记(常见介词)",
+      "content": "常见介词展示",
+      "category": "介词",
+      "subCategory": "介词(1)",
+      "status": "已创建",
+      "noteContent": "一、常见介词分类及用法\n1. 方位介词\nat：用于小地点(具体位置点)，如 at the door(在门口)、at the corner(在角落)\nin：用于大地点(空间内部)，如 in the room(在房间里)、in China(在中国)\non：用于表面接触，如 on the table(在桌上)、on the street(在街上)\nunder：在…… 下方，如 under the bed(在床底下)\nabove：在…… 上方(不接触)，如 above the clouds(在云层上方)\nbelow：在…… 下方(不接触)，如 below the window(在窗户下方)\nbeside：在…… 旁边，如 beside the river(在河边)\nbetween：在两者之间，如 between you and me(在你我之间)\namong：在三者及以上之间，如 among the students(在学生们中)\nbehind：在…… 后面，如 behind the tree(在树后)\nin front of：在…… 前面(外部)，如 in front of the house(在房子前)\ninside：在…… 内部，如 inside the box(在盒子里)\noutside：在…… 外部，如 outside the school(在学校外)\n2. 时间介词\nat：具体时间点，如 at noon(在正午)、at midnight(在午夜)\nin：较长时间(年 / 月 / 季节 / 世纪)，如 in spring(在春天)、in the 21st century(在 21 世纪)\non：具体某天及某天的片段，如 on Christmas Day(在圣诞节)、on a rainy afternoon(在一个下雨的下午)\nafter：在…… 之后，如 after class(课后)、after 2020(2020 年后)\nbefore：在…… 之前，如 before dinner(晚饭前)、before 8 o'clock(8 点前)\nby：到…… 为止，如 by Friday(到周五为止)\nduring：在…… 期间，如 during the holiday(假期期间)\nfor：持续一段时间，如 for three years(持续三年)\nsince：自从…… 以来，如 since 2018(自从 2018 年以来)\n3. 表对象、伴随、原因、目的的介词\nabout：关于，如 talk about the film(谈论那部电影)\nagainst：反对；靠着，如 fight against injustice(反对不公)、lean against the wall(靠着墙)\nwith：伴随；用；和…… 一起，如 walk with a dog(带着狗散步)、cut with a knife(用刀切)\nwithout：没有，如 go out without a coat(没穿外套出去)\nfor：为了；因为，如 study for the exam(为考试学习)、cry for joy(因高兴而哭)\nfrom：来自；从，如 be from America(来自美国)、learn from mistakes(从错误中学习)\nto：向；对，如 write to a friend(给朋友写信)、be kind to others(对他人友善)\nof：…… 的；关于，如 a map of China(中国地图)、think of a plan(想出一个计划)\nby：通过；被，如 by bus(乘公交)、be loved by everyone(被所有人喜爱)\nbecause of：因为(后接名词)，如 late because of the rain(因雨迟到)\ninstead of：代替，如 go by bike instead of by car(骑自行车代替开车)"
+    },
+    "preposition_note_002": {
+      "id": "preposition_note_002",
+      "frontendName": "介词笔记(常见搭配)",
+      "content": "高中常考的介词固定搭配",
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "status": "已创建",
+      "noteContent": "|动词词组\t|含义|\nbreak down\t出故障(机器)；崩溃(情绪)；分解(化学 / 物理)\nbreak into\t闯入；突然开始(笑、哭等)\nbreak out\t(战争、火灾等)爆发\nbreak up\t解散；分手\nput away\t收好；储存\nput down\t放下；写下；镇压\nput off\t推迟\nput on\t穿上；上演\nput up\t举起；张贴；搭建；提供住宿\ntake after\t(外貌、性格)与…… 相像\ntake apart\t拆开(机器等)\ntake away\t拿走；带走\ntake down\t记下；拆除\ntake in\t吸收；理解；收留\ntake off\t起飞；脱下；突然成功\ntake on\t承担；呈现；雇佣\ntake over\t接管；接替\ntake up\t开始从事；占据(时间 / 空间)\nlook after\t照顾\nlook at\t看\nlook for\t寻找\nlook forward to\t期待\nlook into\t调查\nlook up\t查阅；抬头看\nget along with\t与…… 相处\nget away\t离开\nget back\t回来；取回\nget down to\t开始认真做\nget off\t下车\nget through\t通过；接通电话\ngive away\t赠送；泄露\ngive back\t归还\ngive in\t屈服\ngive up\t放弃\ngive out\t分发；耗尽"
+    },
+    "preposition_note_003": {
+      "id": "preposition_note_003",
+      "frontendName": "介词笔记(介词+名词/动名词)",
+      "content": "常见名词后缀、介词后的动词ing书写",
+      "category": "介词",
+      "subCategory": "介词(3)",
+      "status": "已创建",
+      "noteContent": "第一部分：常见介词及考察示例\n|介词\t|含义(后接名词 / 代词时)\t|考察示例\nat\t接具体时间点、小地点\tHe arrived ______ the airport at 3 p.m.(答案：at)\nin\t接年 / 月 / 季节、大地点、时间段\tWe will visit Xi'an ______ July.(答案：in)\non\t接具体日期、星期、具体某天的早 / 中 / 晚\tThey have a meeting ______ Monday morning.(答案：on)\nwith\t接工具、伴随的人或物\tShe writes letters ______ a pencil.(答案：with)\nfor\t接对象、目的、时间段\tI waited ______ you for an hour.(答案：for)\n第二部分：常见名词后缀及考察示例\n|名词后缀|\t例词\t|介词 + 该名词考察示例|\n-tion\teducation\tShe is interested ______ education.(答案：in)\n-ment\tdevelopment\tWe talked ______ the development of the city.(答案：about)\n-ity\tability\tHe has a talent ______ ability in music.(答案：for)\n-ness\thappiness\tThey dreamed ______ happiness.(答案：of)\n-sion\tdiscussion\tWe had a discussion ______ the plan.(答案：on)\n第三部分：现在分词书写规则回顾\n|规则\t|动词原形\t|现在分词形式|\n一般情况直接加 - ing\twork\tworking\n以不发音的 e 结尾，去 e 加 - ing\ttake\ttaking\n以重读闭音节结尾，双写尾字母加 - ing\trun\trunning\n以 ie 结尾，改 ie 为 y 加 - ing\tlie\tlying\n以 y 结尾(非 ie)，直接加 - ing\tplay\tplaying\n注意：\n闭音节词需满足 \"辅 + 元 + 辅\" 结构且重读，flow(ow 为字母组合，非单辅音)、listen(重音在第一音节，末音节不重读)等不双写尾字母。\n现在分词考察示例\nHe left without ______ (say) goodbye.(答案：saying)\nThey succeeded in ______ (finish) the task.(答案：finishing)\nShe is good at ______ (lie) on the grass.(答案：lying)\nWe learned English by ______ (read) novels.(答案：reading)"
+    }
+  },
+  "exerciseCategories": {
+    "介词(1)": {
+      "category": "介词",
+      "subCategory": "介词(1)",
+      "description": "介词综合",
+      "relatedNotes": ["preposition_note_001"],
+      "relatedTables": ["preposition_table_001"],
+      "status": "已创建"
+    },
+    "介词(2)": {
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "description": "固定搭配",
+      "relatedNotes": ["preposition_note_002"],
+      "relatedTables": ["preposition_table_002"],
+      "status": "已创建"
+    },
+    "介词(3)": {
+      "category": "介词",
+      "subCategory": "介词(3)",
+      "description": "介词+名词/动名词",
+      "relatedNotes": ["preposition_note_003"],
+      "relatedTables": ["preposition_table_003"],
+      "status": "已创建"
+    }
+  },
+  "practiceTables": {
+    "preposition_practice_002": {
+      "id": "preposition_practice_002",
+      "frontendName": "介词(2)练习表格",
+      "content": "动词词组填空练习",
+      "category": "介词",
+      "subCategory": "介词(2)",
+      "status": "练习表格",
+      "tableData": {
+        "headers": ["动词词组", "含义"],
+        "rows": [
+          ["break ______", "出故障(机器)；崩溃(情绪)；分解(化学 / 物理)"],
+          ["break ______", "闯入；突然开始(笑、哭等)"],
+          ["break ______", "(战争、火灾等)爆发"],
+          ["break ______", "解散；分手"],
+          ["put ______", "收好；储存"],
+          ["put ______", "放下；写下；镇压"],
+          ["put ______", "推迟"],
+          ["put ______", "穿上；上演"],
+          ["put ______", "举起；张贴；搭建；提供住宿"],
+          ["take ______", "(外貌、性格)与…… 相像"],
+          ["take ______", "拆开(机器等)"],
+          ["take ______", "拿走；带走"],
+          ["take ______", "记下；拆除"],
+          ["take ______", "吸收；理解；收留"],
+          ["take ______", "起飞；脱下；突然成功"],
+          ["take ______", "承担；呈现；雇佣"],
+          ["take ______", "接管；接替"],
+          ["take ______", "开始从事；占据(时间 / 空间)"],
+          ["look ______", "照顾"],
+          ["look ______", "看"],
+          ["look ______", "寻找"],
+          ["look forward ______", "期待"],
+          ["look ______", "调查"],
+          ["look ______", "查阅；抬头看"],
+          ["get along ______", "与…… 相处"],
+          ["get ______", "离开"],
+          ["get ______", "回来；取回"],
+          ["get down ______", "开始认真做"],
+          ["get ______", "下车"],
+          ["get ______", "通过；接通电话"],
+          ["give ______", "赠送；泄露"],
+          ["give ______", "归还"],
+          ["give ______", "屈服"],
+          ["give ______", "放弃"],
+          ["give ______", "分发；耗尽"]
+        ]
+      }
+    },
+    "preposition_practice_003": {
+      "id": "preposition_practice_003",
+      "frontendName": "介词(3)练习表格",
+      "content": "介词后加动词ing练习",
+      "category": "介词",
+      "subCategory": "介词(3)",
+      "status": "练习表格",
+      "tableData": {
+        "headers": ["介词后加动词", "注意ing书写规则"],
+        "rows": [
+          ["good at ___ (work)", "________"],
+          ["good at ___ (read)", "________"],
+          ["good at ___ (play)", "________"],
+          ["good at ___ (listen)", "________"],
+          ["interested in ___ (write)", "________"],
+          ["interested in ___ (make)", "________"],
+          ["interested in ___ (take)", "________"],
+          ["interested in ___ (live)", "________"],
+          ["keep on ___ (run)", "________"],
+          ["keep on ___ (stop)", "________"],
+          ["keep on ___ (swim)", "________"],
+          ["keep on ___ (put)", "________"],
+          ["think about ___ (lie)", "________"],
+          ["think about ___ (die)", "________"],
+          ["think about ___ (tie)", "________"],
+          ["be busy ___ (have)", "________"],
+          ["be busy ___ (do)", "________"],
+          ["be busy ___ (see)", "________"]
+        ]
+      }
+    }
+  }
+} 

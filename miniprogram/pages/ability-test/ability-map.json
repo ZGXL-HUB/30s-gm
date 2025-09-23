@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "floating-feedback": "/components/floating-feedback/index"
+  },
+  "navigationBarTitleText": "能力图谱",
+  "navigationBarBackgroundColor": "#667eea",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#f5f5f5"
+}

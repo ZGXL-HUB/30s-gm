@@ -1,0 +1,147 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="名词变复数规则学习"
+    description="系统学习英语名词变复数的规则变化和不规则变化，掌握变化规律"
+    tip="💡 提示：重点记忆不规则变化，规则变化按规律推导即可"
+    icon="📝"
+    storage-key="noun-rules-guide"
+  />
+  
+  <view class="header">
+    <text class="title">名词变复数规则变化全梳理</text>
+    <text class="subtitle">英语里，名词变复数有清晰的规则，可分规则变化和不规则变化，以下详细整理：</text>
+  </view>
+
+  <!-- 规则变化 -->
+  <view class="section">
+    <view class="section-title">一、规则变化</view>
+    
+    <!-- 一般情况 -->
+    <view class="sub-section">
+      <view class="sub-title">（一）一般情况</view>
+      <text class="content">名词词尾直接加 -s 。</text>
+      <text class="example">例：pen→pens（钢笔）、room→rooms（房间）、teacher→teachers（教师）。</text>
+    </view>
+
+    <!-- 以-s、-x、-sh、-ch结尾 -->
+    <view class="sub-section">
+      <view class="sub-title">（二）以 -s、-x、-sh、-ch 结尾</view>
+      <text class="content">词尾加 -es 。</text>
+      <text class="example">例：class→classes（班级）、box→boxes（盒子）、brush→brushes（刷子）、watch→watches（手表）。</text>
+      <text class="special">特殊：stomach（胃）复数为 stomachs （因 ch 发 /k/ 音，非 /tʃ/ ）。</text>
+    </view>
+
+    <!-- 以y结尾 -->
+    <view class="sub-section">
+      <view class="sub-title">（三）以 "y" 结尾</view>
+      <view class="rule-item">
+        <text class="rule-type">• 辅音字母 + y：</text>
+        <text class="content">变 y 为 i ，再加 -es 。</text>
+        <text class="example">例：family→families（家庭）、city→cities（城市）。</text>
+        <text class="note">注：以 "辅音字母 + y" 结尾的专有名词，特殊情况需变复数时直接加 -s ，如 "Henrys" 。</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-type">• 元音字母 + y：</text>
+        <text class="content">词尾直接加 -s 。</text>
+        <text class="example">例：boy→boys（男孩）、key→keys（钥匙）。</text>
+      </view>
+    </view>
+
+    <!-- 以f/fe结尾 -->
+    <view class="sub-section">
+      <view class="sub-title">（四）以 "f/fe" 结尾</view>
+      <view class="rule-item">
+        <text class="rule-type">• 多数情况：</text>
+        <text class="content">变 f/fe 为 v ，再加 -es （多为生活常用词）。</text>
+        <text class="example">例：leaf→leaves（树叶）、wife→wives（妻子）、wolf→wolves（狼）、knife→knives（小刀）。</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-type">• 少数情况：</text>
+        <text class="content">直接加 -s （如 safe、roof、belief 等，这类词日常使用频率相对低）。</text>
+        <text class="example">例：roof→roofs（屋顶）、belief→beliefs（信念）。</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-type">• 两种形式均可：</text>
+        <text class="example">handkerchief→handkerchiefs / handkerchieves（手帕）、scarf→scarfs / scarves（围巾）。</text>
+      </view>
+    </view>
+
+    <!-- 以o结尾 -->
+    <view class="sub-section">
+      <view class="sub-title">（五）以 "o" 结尾</view>
+      <view class="rule-item">
+        <text class="rule-type">• 有生命的（常用记忆： Negro、hero、tomato、potato 等，可记 "两人两物" ）：</text>
+        <text class="content">加 -es 。</text>
+        <text class="example">例：tomato→tomatoes（西红柿）、potato→potatoes（土豆）、hero→heroes（英雄）。</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-type">• 无生命的 / 外来词 / 缩略词：</text>
+        <text class="content">直接加 -s 。</text>
+        <text class="example">例：photo→photos（照片）、piano→pianos（钢琴）、zoo→zoos（动物园）、kilo→kilos（千克）。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 不规则变化 -->
+  <view class="section">
+    <view class="section-title">二、不规则变化（需特殊记忆）</view>
+    
+    <!-- 单复数同形 -->
+    <view class="sub-section">
+      <view class="sub-title">（一）单复数同形</view>
+      <text class="content">名词单复数形式一致。</text>
+      <text class="example">例：sheep（绵羊）、fish（鱼，表条数时；表种类可用 fishes ）、deer（鹿）、Chinese（中国人）、Japanese（日本人）、means（方法）、series（系列）、works（工厂）。</text>
+      <text class="note">注：fish 表 "鱼的种类" 时，复数常用 fishes ；head 表 "牲口头数" 时，复数为 head ，如 "ten head of cattle（10 头牛）" 。</text>
+    </view>
+
+    <!-- 内部元音变化 -->
+    <view class="sub-section">
+      <view class="sub-title">（二）内部元音变化</view>
+      <text class="content">改变单词内部元音构成复数。</text>
+      <text class="example">例：man→men（男人）、woman→women（女人）、policeman→policemen（警察）、tooth→teeth（牙齿）、foot→feet（脚）、goose→geese（鹅）。</text>
+      <text class="note">注：以 man/woman 结尾的合成词，复数变化同 man/woman ，如 policeman→policemen ；但 German（德国人）、human（人）等非合成词，复数直接加 -s ，即 Germans、humans 。</text>
+    </view>
+
+    <!-- 特殊变形 -->
+    <view class="sub-section">
+      <view class="sub-title">（三）特殊变形</view>
+      <text class="content">无固定规律，需单独记。</text>
+      <text class="example">例：child→children（孩子）、mouse→mice（老鼠）、ox→oxen（公牛）。</text>
+    </view>
+
+    <!-- 合成名词变复数 -->
+    <view class="sub-section">
+      <view class="sub-title">（四）合成名词变复数</view>
+      <view class="rule-item">
+        <text class="rule-type">• 有主体名词：</text>
+        <text class="content">将主体名词变复数。</text>
+        <text class="example">例：looker-on→lookers-on（旁观者）。</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-type">• 无主体名词：</text>
+        <text class="content">在最后一个词后加复数形式。</text>
+        <text class="example">例：go-between→go-betweens（中间人）。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 特殊情况补充 -->
+  <view class="section">
+    <view class="section-title">三、特殊情况补充</view>
+    <view class="rule-item">
+      <text class="rule-type">• 符号 / 单词作名词：</text>
+      <text class="content">特殊语境需变复数时，词尾加 -s 或 -'s 。</text>
+      <text class="example">例：All the –'s should be changed to +'s.（所有负号改正号）</text>
+    </view>
+    <view class="rule-item">
+      <text class="rule-type">• 年代变复数：</text>
+      <text class="content">可直接加 -s 或 -'s 。</text>
+      <text class="example">例：the 1990s / the 1990's（20 世纪 90 年代）</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">掌握这些规则，遇到名词变复数就能快速判断～多结合例句练习，用起来会更顺手，要是碰到复杂情况，随时回头翻规则，慢慢就熟练啦！</text>
+  </view>
+</view> 

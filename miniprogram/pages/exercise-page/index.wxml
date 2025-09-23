@@ -1,0 +1,1745 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="语法练习答题"
+    description="根据题目要求填写答案，系统会实时批改并显示解析"
+    tip="💡 提示：答题过程中可以查看相关笔记和表格辅助学习"
+    icon="✏️"
+    storage-key="exercise-page-guide"
+  />
+  
+  <!-- 语法练习界面 -->
+  <view wx:if="{{exerciseType === 'grammar'}}" class="question-list">
+    <!-- 空状态显示 -->
+    <view wx:if="{{!questions || questions.length === 0}}" class="empty-state">
+      <text class="empty-text">没有习题</text>
+      <text class="empty-subtext">正在加载题目，请稍候...</text>
+    </view>
+    <!-- 题目列表 -->
+    <view wx:else>
+      <view wx:for="{{questions}}" wx:key="index" class="question-item" wx:class="{{results[index] ? (results[index].correct ? 'correct' : 'wrong') : ''}}">
+        <view class="question-content-row">
+          <text class="question-number">{{index + 1}}. {{item.text}}</text>
+          <input 
+            class="answer-input"
+            type="text"
+            value="{{answers[index]}}"
+            bindinput="onInput"
+            bindblur="onInputBlur"
+            data-index="{{index}}"
+            placeholder="请输入答案"
+            disabled="{{submitting}}"
+          />
+        </view>
+        <view class="result" wx:if="{{results[index]}}">
+          <text class="{{results[index].correct ? 'correct-text' : 'wrong-text'}}">
+            {{results[index].correct ? '✓ 正确' : '✗ 错误'}}
+          </text>
+          <text class="answer-text" wx:if="{{!results[index].correct}}">
+            正确答案：{{results[index].answer}}
+          </text>
+          <view class="analysis-container" wx:if="{{results[index].analysis}}">
+            <view class="analysis-header">
+              <text class="analysis-icon">💡</text>
+              <text class="analysis-title">解析</text>
+            </view>
+            <view class="analysis-text {{results[index].analysis.length > 150 ? 'has-overflow' : ''}}">
+              <text class="analysis-content">
+                {{results[index].analysis}}
+              </text>
+            </view>
+          </view>
+        </view>
+        <!-- 新增：实时批改状态显示 -->
+        <view class="real-time-status" wx:if="{{results[index] && answers[index]}}">
+          <text class="status-text {{results[index].correct ? 'status-correct' : 'status-wrong'}}">
+            {{results[index].correct ? '✓' : '✗'}}
+          </text>
+        </view>
+        
+        <!-- 新增：笔记和表格显示 -->
+        <view class="notes-tables-section" wx:if="{{item.relatedNotes || item.relatedTables}}">
+          <!-- 笔记显示 -->
+          <view class="notes-section" wx:if="{{item.relatedNotes}}">
+            <view class="section-title">📝 相关笔记</view>
+            <view wx:for="{{item.relatedNotes}}" wx:for-item="noteId" wx:key="noteId" class="note-item">
+              <view class="note-content" wx:if="{{notesData[noteId] && notesData[noteId].frontendName && notesData[noteId].content && notesData[noteId].content.trim() !== ''}}">
+                <view class="note-title">{{notesData[noteId].frontendName}}</view>
+                <view class="note-text">{{notesData[noteId].content}}</view>
+              </view>
+              <view class="note-content note-placeholder" wx:elif="{{notesData[noteId] && notesData[noteId].frontendName}}">
+                <view class="note-title">{{notesData[noteId].frontendName}}</view>
+                <view class="note-text note-loading">笔记内容加载中...</view>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 表格显示 -->
+          <view class="tables-section" wx:if="{{item.relatedTables}}">
+            <view class="section-title">📊 相关表格</view>
+            <view wx:for="{{item.relatedTables}}" wx:for-item="tableId" wx:key="tableId" class="table-item">
+              <view class="table-content" wx:if="{{tablesData[tableId] && tablesData[tableId].frontendName && tablesData[tableId].content && tablesData[tableId].content.trim() !== ''}}">
+                <view class="table-title">{{tablesData[tableId].frontendName}}</view>
+                <view class="table-html">
+                  <rich-text nodes="{{tablesData[tableId].content}}"></rich-text>
+                </view>
+              </view>
+              <view class="table-content table-placeholder" wx:elif="{{tablesData[tableId] && tablesData[tableId].frontendName}}">
+                <view class="table-title">{{tablesData[tableId].frontendName}}</view>
+                <view class="table-html table-loading">表格内容加载中...</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 表格练习界面 -->
+  <view wx:if="{{exerciseType === 'writing'}}" class="table-exercise">
+    <!-- noun_001专属渲染，左宽右窄 -->
+    <view wx:if="{{tableData['noun_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出左侧单词的名词后缀</view>
+        <button class="noun-hint-btn" bindtap="showNounHint"><text class="noun-hint-icon">💡</text>提示</button>
+      </view>
+      <view class="table-grid">
+        <view wx:for="{{tableData['noun_001']}}" wx:for-item="cell" wx:for-index="idx" wx:key="cell_id">
+          <block wx:if="{{cell.col === 1}}">
+            <view class="table-row">
+              <text class="table-cell left-cell">{{cell.question}}</text>
+              <input class="table-input right-cell{{showCorrect['noun_001'][tableData['noun_001'][idx+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['noun_001'][tableData['noun_001'][idx+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['noun_001'][tableData['noun_001'][idx+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="noun_001"
+                data-cell-id="{{tableData['noun_001'][idx+1].cell_id}}"
+                placeholder="填写后缀"
+              />
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- noun_002专属渲染，表格结构点击选择 -->
+    <view wx:if="{{tableData['noun_002']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">点击以名词后缀结尾的单词(每行只有一个正确答案)</view>
+        <button class="noun-hint-btn" bindtap="showNounHint"><text class="noun-hint-icon">💡</text>提示</button>
+      </view>
+      <view class="table-grid noun002-grid">
+        <block wx:for="{{16}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row noun002-row{{rowStatus[rowIdx] === 'correct' ? ' row-correct' : ''}}{{rowStatus[rowIdx] === 'wrong' ? ' row-wrong' : ''}}">
+            <block wx:for="{{[0,1,2,3]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view wx:if="{{tableData['noun_002'][rowIdx*4+colIdx]}}"
+                class="choice-option noun002-cell{{tableAnswers['noun_002'][tableData['noun_002'][rowIdx*4+colIdx].cell_id] === String.fromCharCode(65+colIdx) ? ' selected' : ''}}{{showCorrect['noun_002'][tableData['noun_002'][rowIdx*4+colIdx].cell_id] === true && tableAnswers['noun_002'][tableData['noun_002'][rowIdx*4+colIdx].cell_id] === String.fromCharCode(65+colIdx) ? ' correct' : ''}}{{showCorrect['noun_002'][tableData['noun_002'][rowIdx*4+colIdx].cell_id] === false && tableAnswers['noun_002'][tableData['noun_002'][rowIdx*4+colIdx].cell_id] === String.fromCharCode(65+colIdx) ? ' wrong' : ''}}"
+                bindtap="onChoiceSelect"
+                data-table-id="noun_002"
+                data-cell-id="{{tableData['noun_002'][rowIdx*4+colIdx].cell_id}}"
+                data-option="{{String.fromCharCode(65+colIdx)}}"
+                data-word="{{tableData['noun_002'][rowIdx*4+colIdx].question}}">
+                <text class="option-text noun002-text">{{tableData['noun_002'][rowIdx*4+colIdx].question}}</text>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- noun_003专属渲染，12行4列点击选择 -->
+    <view wx:if="{{tableData['noun_003']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">点击所有带名词后缀的单词</view>
+        <button class="noun-hint-btn" bindtap="showNounHint"><text class="noun-hint-icon">💡</text>提示</button>
+      </view>
+      <view class="table-grid noun003-grid">
+        <block wx:for="{{12}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row noun003-row">
+            <block wx:for="{{[0,1,2,3]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view wx:if="{{tableData['noun_003'][rowIdx*4+colIdx]}}"
+                class="noun003-cell{{showCorrect['noun_003'][tableData['noun_003'][rowIdx*4+colIdx].cell_id] === true ? ' correct' : ''}}{{showCorrect['noun_003'][tableData['noun_003'][rowIdx*4+colIdx].cell_id] === false ? ' wrong' : ''}}"
+                bindtap="onNoun003CellTap"
+                data-table-id="noun_003"
+                data-cell-id="{{tableData['noun_003'][rowIdx*4+colIdx].cell_id}}"
+                data-word="{{tableData['noun_003'][rowIdx*4+colIdx].question}}">
+                <text class="noun003-text">{{tableData['noun_003'][rowIdx*4+colIdx].question}}</text>
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- noun_004专属渲染：规则变复数 -->
+    <view wx:if="{{tableData['noun_004']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">根据规则填写单词的复数形式</view>
+        <!-- 不再显示全局提示按钮 -->
+      </view>
+      <view class="table-grid noun004-grid">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row noun004-row">
+            <!-- 规则列，点击切换全文 -->
+            <view class="noun004-rule" bindtap="onNoun004RuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{noun004ShowFullRule[rowIdx] ? '#faad14' : '#ccc'}}">
+                {{noun004ShowFullRule[rowIdx] ? '💡' : '💡'}}
+              </text>
+              <text>
+                {{noun004ShowFullRule[rowIdx] ? tableData['noun_004'][rowIdx*5].rule.fullContent : tableData['noun_004'][rowIdx*5].rule.content}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="noun004-cell">
+                <input
+                  class="noun004-input{{noun004InputStatus[rowIdx*5+colIdx+1] === 'correct' ? ' correct' : ''}}{{noun004InputStatus[rowIdx*5+colIdx+1] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['noun_004'][tableData['noun_004'][rowIdx*5+colIdx+1].cell_id]}}"
+                  bindinput="onNoun004Input"
+                  data-table-id="noun_004"
+                  data-cell-id="{{tableData['noun_004'][rowIdx*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['noun_004'][rowIdx*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['noun_004'][tableData['noun_004'][rowIdx*5+colIdx+1].cell_id] ? '#bbb' : (noun004InputStatus[rowIdx*5+colIdx+1] === 'correct' ? 'green' : (noun004InputStatus[rowIdx*5+colIdx+1] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+
+
+    <!-- 代词表格专属渲染 -->
+    <view wx:if="{{tableData['pronoun_001']}}" class="table-container">
+      <view class="table-title">pronoun_001 - 代词练习表格(顺序)</view>
+      
+      <!-- 表头 -->
+      <view class="pronoun-table-header">
+        <view class="pronoun-header-cell">人称</view>
+        <view class="pronoun-header-cell">主格</view>
+        <view class="pronoun-header-cell">宾格</view>
+        <view class="pronoun-header-cell">形容词性物主代词</view>
+        <view class="pronoun-header-cell">名词性物主代词</view>
+        <view class="pronoun-header-cell">反身代词</view>
+      </view>
+      
+      <!-- 表格内容 -->
+      <view wx:for="{{[0,1,2,3,4,5,6,7]}}" wx:key="index" class="pronoun-table-row" wx:for-item="rowIdx">
+        <view wx:for="{{[0,1,2,3,4,5]}}" wx:key="index" class="pronoun-table-cell" wx:for-item="colIdx">
+          <view wx:if="{{colIdx === 0}}" class="pronoun-label">
+            {{tableData['pronoun_001'][rowIdx*6+colIdx].answer}}
+          </view>
+          <input wx:else 
+                 class="pronoun-input{{pronounInputStatus['pronoun_001_' + rowIdx + '_' + colIdx] === 'correct' ? ' correct' : ''}}{{pronounInputStatus['pronoun_001_' + rowIdx + '_' + colIdx] === 'wrong' ? ' wrong' : ''}}"
+                 type="text"
+                 placeholder=""
+                 value="{{pronounUserInputs['pronoun_001_' + rowIdx + '_' + colIdx] || ''}}"
+                 bindinput="onPronounInput"
+                 data-table="pronoun_001"
+                 data-row="{{rowIdx}}"
+                 data-col="{{colIdx}}" />
+        </view>
+      </view>
+      
+      <view class="action-buttons">
+        <button class="action-btn hint-btn" bindtap="showHintOptions">
+          <text class="btn-icon">💡</text>
+          <text class="btn-text">小小的提示</text>
+        </button>
+        <button class="action-btn answer-btn" bindtap="showFullAnswer" data-table-id="pronoun_001">
+          <text class="btn-icon">📚</text>
+          <text class="btn-text">我再记会儿</text>
+        </button>
+      </view>
+    </view>
+
+    <view wx:if="{{tableData['pronoun_002']}}" class="table-container">
+      <view class="table-title">pronoun_002 - 代词练习表格(乱序)</view>
+      
+      <!-- 表头 -->
+      <view class="pronoun-table-header">
+        <view class="pronoun-header-cell">人称</view>
+        <view class="pronoun-header-cell">主格</view>
+        <view class="pronoun-header-cell">宾格</view>
+        <view class="pronoun-header-cell">形容词性物主代词</view>
+        <view class="pronoun-header-cell">名词性物主代词</view>
+        <view class="pronoun-header-cell">反身代词</view>
+      </view>
+      
+      <!-- 表格内容 -->
+      <view wx:for="{{[0,1,2,3,4,5,6,7]}}" wx:key="index" class="pronoun-table-row" wx:for-item="rowIdx">
+        <view wx:for="{{[0,1,2,3,4,5]}}" wx:key="index" class="pronoun-table-cell" wx:for-item="colIdx">
+          <view wx:if="{{colIdx === 0}}" class="pronoun-label">
+            {{tableData['pronoun_002'][rowIdx*6+colIdx].answer}}
+          </view>
+          <input wx:else 
+                 class="pronoun-input{{pronounInputStatus['pronoun_002_' + rowIdx + '_' + colIdx] === 'correct' ? ' correct' : ''}}{{pronounInputStatus['pronoun_002_' + rowIdx + '_' + colIdx] === 'wrong' ? ' wrong' : ''}}"
+                 type="text"
+                 placeholder=""
+                 value="{{pronounUserInputs['pronoun_002_' + rowIdx + '_' + colIdx] || ''}}"
+                 bindinput="onPronounInput"
+                 data-table="pronoun_002"
+                 data-row="{{rowIdx}}"
+                 data-col="{{colIdx}}" />
+        </view>
+      </view>
+      
+      <view class="action-buttons">
+        <button class="action-btn hint-btn" bindtap="showHintOptions">
+          <text class="btn-icon">💡</text>
+          <text class="btn-text">小小的提示</text>
+        </button>
+        <button class="action-btn answer-btn" bindtap="showFullAnswer" data-table-id="pronoun_002">
+          <text class="btn-icon">📚</text>
+          <text class="btn-text">我再记会儿</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 现在分词表格专属渲染 -->
+    <view wx:if="{{tableData['present_participle_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内单词的现在分词形式</view>
+      </view>
+      <view class="table-grid present-participle-grid">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row present-participle-row">
+            <!-- 规则列，点击切换全文 -->
+            <view class="present-participle-rule" bindtap="onPresentParticipleRuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{presentParticipleShowFullRule[rowIdx] ? '#52c41a' : '#ccc'}}">
+                💡
+              </text>
+              <text>
+                {{presentParticipleShowFullRule[rowIdx] ? tableData['present_participle_001'][rowIdx*5].fullRule : tableData['present_participle_001'][rowIdx*5].rule}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="present-participle-cell">
+                <input
+                  class="present-participle-input{{presentParticipleInputStatus[rowIdx*5+colIdx+1] === 'correct' ? ' correct' : ''}}{{presentParticipleInputStatus[rowIdx*5+colIdx+1] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['present_participle_001'][tableData['present_participle_001'][rowIdx*5+colIdx+1].cell_id]}}"
+                  bindinput="onPresentParticipleInput"
+                  data-table-id="present_participle_001"
+                  data-cell-id="{{tableData['present_participle_001'][rowIdx*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['present_participle_001'][rowIdx*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['present_participle_001'][tableData['present_participle_001'][rowIdx*5+colIdx+1].cell_id] ? '#bbb' : (presentParticipleInputStatus[rowIdx*5+colIdx+1] === 'correct' ? 'green' : (presentParticipleInputStatus[rowIdx*5+colIdx+1] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 过去分词表格专属渲染 -->
+    <view wx:if="{{tableData['past_participle_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内单词的过去分词形式</view>
+      </view>
+      <view class="table-grid past-participle-grid">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row past-participle-row">
+            <!-- 规则列，点击切换全文 -->
+            <view class="past-participle-rule" bindtap="onPastParticipleRuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{pastParticipleShowFullRule[rowIdx] ? '#fa8c16' : '#ccc'}}">
+                💡
+              </text>
+              <text>
+                {{pastParticipleShowFullRule[rowIdx] ? tableData['past_participle_001'][rowIdx*5].fullRule : tableData['past_participle_001'][rowIdx*5].rule}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="past-participle-cell">
+                <input
+                  class="past-participle-input{{pastParticipleInputStatus[rowIdx*5+colIdx+1] === 'correct' ? ' correct' : ''}}{{pastParticipleInputStatus[rowIdx*5+colIdx+1] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['past_participle_001'][tableData['past_participle_001'][rowIdx*5+colIdx+1].cell_id]}}"
+                  bindinput="onPastParticipleInput"
+                  data-table-id="past_participle_001"
+                  data-cell-id="{{tableData['past_participle_001'][rowIdx*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['past_participle_001'][rowIdx*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['past_participle_001'][tableData['past_participle_001'][rowIdx*5+colIdx+1].cell_id] ? '#bbb' : (pastParticipleInputStatus[rowIdx*5+colIdx+1] === 'correct' ? 'green' : (pastParticipleInputStatus[rowIdx*5+colIdx+1] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 时态书写表格专属渲染 -->
+    <view wx:if="{{tableData['tense_writing_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出不同时态下的动词形式</view>
+        <button class="signal-card-btn" bindtap="navigateToTenseSignalCards">
+          <text class="signal-card-icon">📚</text>
+          <text class="signal-card-text">标志词回顾卡</text>
+        </button>
+      </view>
+      <view class="table-grid tense-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row tense-header-row">
+          <view class="tense-header-cell">时态</view>
+          <view class="tense-header-cell">do</view>
+          <view class="tense-header-cell">work</view>
+          <view class="tense-header-cell">play</view>
+          <view class="tense-header-cell">study</view>
+        </view>
+        <!-- 8行时态数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row tense-writing-row">
+            <!-- 时态名称列，点击切换全文 -->
+            <view class="tense-writing-rule" bindtap="onTenseWritingRuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{tenseWritingShowFullRule[rowIdx] ? '#1890ff' : '#ccc'}}">
+                💡
+              </text>
+              <text>
+                {{tenseWritingShowFullRule[rowIdx] ? tableData['tense_writing_001'][(rowIdx+1)*5].rule : tableData['tense_writing_001'][(rowIdx+1)*5].content}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="tense-writing-cell">
+                <input
+                  class="tense-writing-input{{tenseWritingInputStatus[(rowIdx+1)*5+colIdx+1] === 'correct' ? ' correct' : ''}}{{tenseWritingInputStatus[(rowIdx+1)*5+colIdx+1] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['tense_writing_001'][tableData['tense_writing_001'][(rowIdx+1)*5+colIdx+1].cell_id]}}"
+                  bindinput="onTenseWritingInput"
+                  data-table-id="tense_writing_001"
+                  data-cell-id="{{tableData['tense_writing_001'][(rowIdx+1)*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx+1}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['tense_writing_001'][(rowIdx+1)*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['tense_writing_001'][tableData['tense_writing_001'][(rowIdx+1)*5+colIdx+1].cell_id] ? '#bbb' : (tenseWritingInputStatus[(rowIdx+1)*5+colIdx+1] === 'correct' ? 'green' : (tenseWritingInputStatus[(rowIdx+1)*5+colIdx+1] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+
+
+    <!-- 形容词前后缀识别表格专属渲染 -->
+    <view wx:if="{{tableData['comparison_prefix_suffix_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请识别形容词的前后缀</view>
+      </view>
+      <view class="table-grid prefix-suffix-grid">
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row prefix-suffix-row">
+            <!-- 示例单词列 -->
+            <view class="prefix-suffix-examples">
+              <text>{{tableData['comparison_prefix_suffix_001'][rowIdx*2].question}}</text>
+            </view>
+            <!-- 输入框列 -->
+            <view class="prefix-suffix-cell">
+              <input
+                class="prefix-suffix-input{{prefixSuffixInputStatus[rowIdx] === 'correct' ? ' correct' : ''}}{{prefixSuffixInputStatus[rowIdx] === 'wrong' ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['comparison_prefix_suffix_001'][tableData['comparison_prefix_suffix_001'][rowIdx*2+1].cell_id]}}"
+                bindinput="onPrefixSuffixInput"
+                data-table-id="comparison_prefix_suffix_001"
+                data-cell-id="{{tableData['comparison_prefix_suffix_001'][rowIdx*2+1].cell_id}}"
+                data-row="{{rowIdx}}"
+                placeholder="{{tableData['comparison_prefix_suffix_001'][rowIdx*2+1].question}}"
+                style="color:{{!tableAnswers['comparison_prefix_suffix_001'][tableData['comparison_prefix_suffix_001'][rowIdx*2+1].cell_id] ? '#bbb' : (prefixSuffixInputStatus[rowIdx] === 'correct' ? 'green' : (prefixSuffixInputStatus[rowIdx] === 'wrong' ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 比较级书写表格专属渲染 -->
+    <view wx:if="{{tableData['comparison_comparative_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内单词的比较级形式</view>
+      </view>
+      <view class="table-grid comparative-grid">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row comparative-row">
+            <!-- 规则列，点击切换全文 -->
+            <view class="comparative-rule" bindtap="onComparativeRuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{comparativeShowFullRule[rowIdx] ? '#eb2f96' : '#ccc'}}">
+                💡
+              </text>
+              <text>
+                {{comparativeShowFullRule[rowIdx] ? tableData['comparison_comparative_001'][rowIdx*5].rule.fullContent : tableData['comparison_comparative_001'][rowIdx*5].rule.content}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="comparative-cell">
+                <input
+                  class="comparative-input{{comparativeInputStatus[tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id] === 'correct' ? ' correct' : ''}}{{comparativeInputStatus[tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['comparison_comparative_001'][tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id]}}"
+                  bindinput="onComparativeInput"
+                  data-table-id="comparison_comparative_001"
+                  data-cell-id="{{tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['comparison_comparative_001'][tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id] ? '#bbb' : (comparativeInputStatus[tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id] === 'correct' ? 'green' : (comparativeInputStatus[tableData['comparison_comparative_001'][rowIdx*5+colIdx+1].cell_id] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 最高级书写表格专属渲染 -->
+    <view wx:if="{{tableData['comparison_superlative_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内单词的最高级形式</view>
+      </view>
+      <view class="table-grid superlative-grid">
+        <block wx:for="{{[0,1,2,3,4]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row superlative-row">
+            <!-- 规则列，点击切换全文 -->
+            <view class="superlative-rule" bindtap="onSuperlativeRuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{superlativeShowFullRule[rowIdx] ? '#eb2f96' : '#ccc'}}">
+                💡
+              </text>
+              <text>
+                {{superlativeShowFullRule[rowIdx] ? tableData['comparison_superlative_001'][rowIdx*5].rule.fullContent : tableData['comparison_superlative_001'][rowIdx*5].rule.content}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="superlative-cell">
+                <input
+                  class="superlative-input{{superlativeInputStatus[tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id] === 'correct' ? ' correct' : ''}}{{superlativeInputStatus[tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['comparison_superlative_001'][tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id]}}"
+                  bindinput="onSuperlativeInput"
+                  data-table-id="comparison_superlative_001"
+                  data-cell-id="{{tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['comparison_superlative_001'][tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id] ? '#bbb' : (superlativeInputStatus[tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id] === 'correct' ? 'green' : (superlativeInputStatus[tableData['comparison_superlative_001'][rowIdx*5+colIdx+1].cell_id] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 副词书写表格专属渲染 -->
+    <view wx:if="{{tableData['adverb_writing_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内形容词的副词形式</view>
+      </view>
+      <view class="table-grid adverb-grid">
+        <block wx:for="{{[0,1,2,3,4,5]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row adverb-row">
+            <!-- 规则列，点击切换全文 -->
+            <view class="adverb-rule" bindtap="onAdverbRuleTap" data-row="{{rowIdx}}">
+              <text class="lightbulb" style="color:{{adverbShowFullRule[rowIdx] ? '#10b981' : '#ccc'}}">
+                💡
+              </text>
+              <text>
+                {{adverbShowFullRule[rowIdx] ? tableData['adverb_writing_001'][rowIdx*5].rule.fullContent : tableData['adverb_writing_001'][rowIdx*5].rule.content}}
+              </text>
+            </view>
+            <!-- 4个输入框 -->
+            <block wx:for="{{[1,2,3,4]}}" wx:for-index="colIdx" wx:key="colIdx">
+              <view class="adverb-cell">
+                <input
+                  class="adverb-input{{adverbInputStatus[tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id] === 'correct' ? ' correct' : ''}}{{adverbInputStatus[tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id] === 'wrong' ? ' wrong' : ''}}"
+                  type="text"
+                  value="{{tableAnswers['adverb_writing_001'][tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id]}}"
+                  bindinput="onAdverbInput"
+                  data-table-id="adverb_writing_001"
+                  data-cell-id="{{tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id}}"
+                  data-row="{{rowIdx}}"
+                  data-col="{{colIdx+1}}"
+                  placeholder="{{tableData['adverb_writing_001'][rowIdx*5+colIdx+1].hintWord}}"
+                  style="color:{{!tableAnswers['adverb_writing_001'][tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id] ? '#bbb' : (adverbInputStatus[tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id] === 'correct' ? 'green' : (adverbInputStatus[tableData['adverb_writing_001'][rowIdx*5+colIdx+1].cell_id] === 'wrong' ? 'red' : '#333'))}}"
+                />
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(一般现在时) -->
+    <view wx:if="{{tableData['voice_writing_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(一般现在时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_001'] && questionsData['voice_writing_001'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_001'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_001'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_001'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_001'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_001'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 一般现在时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_001"
+                data-cell-id="{{tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_001'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 一般现在时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_001"
+                data-cell-id="{{tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_001'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_001'][tableData['voice_writing_001'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(一般过去时) -->
+    <view wx:if="{{tableData['voice_writing_002']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(一般过去时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_002'] && questionsData['voice_writing_002'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_002'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_002'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_002'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_002'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_002'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 一般过去时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_002"
+                data-cell-id="{{tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_002'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 一般过去时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_002"
+                data-cell-id="{{tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_002'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_002'][tableData['voice_writing_002'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(一般将来时) -->
+    <view wx:if="{{tableData['voice_writing_003']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(一般将来时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_003'] && questionsData['voice_writing_003'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_003'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_003'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_003'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_003'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_003'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 一般将来时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_003"
+                data-cell-id="{{tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_003'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 一般将来时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_003"
+                data-cell-id="{{tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_003'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_003'][tableData['voice_writing_003'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(条件时态) -->
+    <view wx:if="{{tableData['voice_writing_004']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(条件时态)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_004'] && questionsData['voice_writing_004'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_004'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_004'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_004'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_004'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_004'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 条件时态写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_004"
+                data-cell-id="{{tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_004'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 条件时态被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_004"
+                data-cell-id="{{tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_004'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_004'][tableData['voice_writing_004'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(现在进行时) -->
+    <view wx:if="{{tableData['voice_writing_005']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(现在进行时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_005'] && questionsData['voice_writing_005'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_005'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_005'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_005'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_005'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_005'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 现在进行时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_005"
+                data-cell-id="{{tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_005'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 现在进行时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_005"
+                data-cell-id="{{tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_005'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_005'][tableData['voice_writing_005'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(过去进行时) -->
+    <view wx:if="{{tableData['voice_writing_006']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(过去进行时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_006'] && questionsData['voice_writing_006'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_006'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_006'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_006'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_006'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_006'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 过去进行时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_006"
+                data-cell-id="{{tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_006'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 过去进行时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_006"
+                data-cell-id="{{tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_006'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_006'][tableData['voice_writing_006'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(现在完成时) -->
+    <view wx:if="{{tableData['voice_writing_007']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(现在完成时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_007'] && questionsData['voice_writing_007'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_007'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_007'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_007'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_007'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_007'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 现在完成时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_007"
+                data-cell-id="{{tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_007'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 现在完成时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_007"
+                data-cell-id="{{tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_007'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_007'][tableData['voice_writing_007'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 语态填表练习专属渲染(过去完成时) -->
+    <view wx:if="{{tableData['voice_writing_008']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请填写语态表格(过去完成时)</view>
+      </view>
+      <!-- 规则说明 -->
+      <view class="rules-section" wx:if="{{questionsData && questionsData['voice_writing_008'] && questionsData['voice_writing_008'].rules}}">
+        <view class="rules-content">
+          <text class="rules-icon">📝</text>
+          <text class="rules-text">{{questionsData['voice_writing_008'].rules}}</text>
+        </view>
+      </view>
+      <view class="table-grid voice-writing-grid">
+        <!-- 表头行 -->
+        <view class="table-row voice-header-row">
+          <view class="voice-header-cell">{{tableData['voice_writing_008'][0].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_008'][1].question}}</view>
+          <view class="voice-header-cell">{{tableData['voice_writing_008'][2].question}}</view>
+        </view>
+        <!-- 10行数据 -->
+        <block wx:for="{{[0,1,2,3,4,5,6,7,8,9]}}" wx:for-index="rowIdx" wx:key="rowIdx">
+          <view class="table-row voice-writing-row">
+            <!-- 单词(原形)列 -->
+            <view class="voice-writing-cell">
+              <text class="voice-word">{{tableData['voice_writing_008'][(rowIdx+1)*3].question}}</text>
+            </view>
+            <!-- 过去完成时写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_008"
+                data-cell-id="{{tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id}}"
+                placeholder="{{tableData['voice_writing_008'][(rowIdx+1)*3+1].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id] ? '#bbb' : (showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id] === true ? 'green' : (showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+1].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+            <!-- 过去完成时被动写法输入框 -->
+            <view class="voice-writing-cell">
+              <input
+                class="voice-writing-input{{showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id] === true ? ' correct' : ''}}{{showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="voice_writing_008"
+                data-cell-id="{{tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id}}"
+                placeholder="{{tableData['voice_writing_008'][(rowIdx+1)*3+2].hintWord}}"
+                style="color:{{!tableAnswers['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id] ? '#bbb' : (showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id] === true ? 'green' : (showCorrect['voice_writing_008'][tableData['voice_writing_008'][(rowIdx+1)*3+2].cell_id] === false ? 'red' : '#333'))}}"
+              />
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 形容词比较级表格专属渲染 -->
+    <view wx:if="{{tableData['comparative_table_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内单词的比较级形式</view>
+      </view>
+      <view class="table-grid adjective-table-grid">
+        <block wx:for="{{currentTableData.exerciseRows}}" wx:for-item="row" wx:for-index="rowIndex" wx:key="rowIndex" wx:if="{{rowIndex > 0}}">
+          <view class="adjective-table-row">
+            <!-- 4个单词+输入框 -->
+            <block wx:for="{{[0,1,2,3]}}" wx:for-index="colIndex" wx:key="colIndex">
+              <view class="adjective-word-cell">
+                <text class="adjective-word-hint">{{row[colIndex].word}}</text>
+                <input 
+                  class="adjective-table-input {{tableInputStatus[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                  type="text"
+                  value="{{tableUserInputs[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                  bindinput="onTableInput"
+                  data-row="{{rowIndex}}"
+                  data-col="{{colIndex}}"
+                  placeholder="请输入答案"
+                />
+              </view>
+            </block>
+            <!-- 规则列 -->
+            <view class="adjective-rule-cell">
+              <view class="clickable-rule" bindtap="onRuleTap" data-row="{{rowIndex}}" data-col="4">
+                <text class="lightbulb" style="color:{{ruleShowFullContent[rowIndex + '_4'] ? '#eb2f96' : '#ccc'}}">💡</text>
+                <text class="rule-text">{{ruleShowFullContent[rowIndex + '_4'] ? row[4].fullContent : row[4].text}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 形容词最高级表格专属渲染 -->
+    <view wx:if="{{tableData['superlative_table_001']}}" class="table-container">
+      <view class="table-title-row">
+        <view class="table-title">请写出格子内单词的最高级形式</view>
+      </view>
+      <view class="table-grid adjective-table-grid">
+        <block wx:for="{{currentTableData.exerciseRows}}" wx:for-item="row" wx:for-index="rowIndex" wx:key="rowIndex" wx:if="{{rowIndex > 0}}">
+          <view class="adjective-table-row">
+            <!-- 4个单词+输入框 -->
+            <block wx:for="{{[0,1,2,3]}}" wx:for-index="colIndex" wx:key="colIndex">
+              <view class="adjective-word-cell">
+                <text class="adjective-word-hint">{{row[colIndex].word}}</text>
+                <input 
+                  class="adjective-table-input {{tableInputStatus[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                  type="text"
+                  value="{{tableUserInputs[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                  bindinput="onTableInput"
+                  data-row="{{rowIndex}}"
+                  data-col="{{colIndex}}"
+                  placeholder="请输入答案"
+                />
+              </view>
+            </block>
+            <!-- 规则列 -->
+            <view class="adjective-rule-cell">
+              <view class="clickable-rule" bindtap="onRuleTap" data-row="{{rowIndex}}" data-col="4">
+                <text class="lightbulb" style="color:{{ruleShowFullContent[rowIndex + '_4'] ? '#eb2f96' : '#ccc'}}">💡</text>
+                <text class="rule-text">{{ruleShowFullContent[rowIndex + '_4'] ? row[4].fullContent : row[4].text}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 表格进度可视化组件 -->
+    <include src="./table-progress.wxml" />
+
+    <!-- 导出按钮 -->
+    <view class="export-button-container" wx:if="{{questions.length > 0}}">
+      <button class="export-button" bindtap="showExportModal">
+        <text class="export-icon">📄</text>
+        <text class="export-text">导出习题</text>
+      </button>
+    </view>
+
+    <!-- 新的代词表格专属渲染 -->
+    <view wx:for="{{Object.keys(tableData)}}" wx:for-item="tableId" wx:key="tableId" wx:if="{{tableId.startsWith('pronoun_table_')}}" class="table-container">
+      <view class="table-title">{{tableData[tableId].frontendName || tableId}}</view>
+      
+      <!-- 表头 -->
+      <view class="pronoun-table-header">
+        <view wx:for="{{tableData[tableId].tableData.headers}}" wx:key="index" wx:for-item="header" class="pronoun-header-cell">
+          {{header}}
+        </view>
+      </view>
+      
+      <!-- 表格内容 -->
+      <view wx:for="{{tableData[tableId].tableData.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="pronoun-table-row">
+        <view wx:for="{{row}}" wx:key="colIndex" wx:for-item="cell" wx:for-index="colIndex" class="pronoun-table-cell">
+          <view wx:if="{{colIndex === 0}}" class="pronoun-label">
+            {{cell}}
+          </view>
+          <input wx:else 
+                 class="pronoun-input{{pronounInputStatus[tableId + '_' + rowIndex + '_' + colIndex] === 'correct' ? ' correct' : ''}}{{pronounInputStatus[tableId + '_' + rowIndex + '_' + colIndex] === 'wrong' ? ' wrong' : ''}}"
+                 type="text"
+                 placeholder=""
+                 value="{{pronounUserInputs[tableId + '_' + rowIndex + '_' + colIndex] || ''}}"
+                 bindinput="onPronounInput"
+                 data-table="{{tableId}}"
+                 data-row="{{rowIndex}}"
+                 data-col="{{colIndex}}" />
+        </view>
+      </view>
+      
+      <view class="action-buttons">
+        <button class="action-btn hint-btn" bindtap="showHintOptions">
+          <text class="btn-icon">💡</text>
+          <text class="btn-text">小小的提示</text>
+        </button>
+        <button class="action-btn answer-btn" bindtap="showFullAnswer" data-table-id="{{tableId}}">
+          <text class="btn-icon">📚</text>
+          <text class="btn-text">我再记会儿</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 介词表格专属渲染 -->
+    <view wx:for="{{Object.keys(tablesData)}}" wx:for-item="tableId" wx:key="tableId" wx:if="{{tableId === 'preposition_table_002'}}" class="table-container">
+      <view class="table-title">{{tablesData[tableId].frontendName || tableId}}</view>
+      
+      <!-- 表头 -->
+      <view class="preposition-table-header">
+        <view wx:for="{{tablesData[tableId].tableData.headers}}" wx:key="index" wx:for-item="header" class="preposition-header-cell">
+          {{header}}
+        </view>
+      </view>
+      
+      <!-- 表格内容 -->
+      <view wx:for="{{tablesData[tableId].tableData.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="preposition-table-row">
+        <view wx:for="{{row}}" wx:key="colIndex" wx:for-item="cell" wx:for-index="colIndex" class="preposition-table-cell">
+          <!-- 左侧：提示文字在上，输入框在下 -->
+          <view wx:if="{{colIndex === 0}}" class="preposition-hint-container">
+            <text class="preposition-hint-text">{{cell}}</text>
+            <input 
+              class="preposition-input{{prepositionInputStatus[tableId + '_' + rowIndex + '_' + colIndex] === 'correct' ? ' correct' : ''}}{{prepositionInputStatus[tableId + '_' + rowIndex + '_' + colIndex] === 'wrong' ? ' wrong' : ''}}"
+              type="text"
+              placeholder="请输入答案"
+              value="{{prepositionUserInputs[tableId + '_' + rowIndex + '_' + colIndex] || ''}}"
+              bindinput="onPrepositionInput"
+              data-table="{{tableId}}"
+              data-row="{{rowIndex}}"
+              data-col="{{colIndex}}" />
+          </view>
+          <!-- 右侧：直接显示中文含义 -->
+          <view wx:else class="preposition-meaning">
+            <text class="preposition-meaning-text">{{cell}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="action-buttons">
+        <button class="action-btn hint-btn" bindtap="showHintOptions">
+          <text class="btn-icon">💡</text>
+          <text class="btn-text">小小的提示</text>
+        </button>
+        <button class="action-btn answer-btn" bindtap="showFullAnswer" data-table-id="{{tableId}}">
+          <text class="btn-icon">📚</text>
+          <text class="btn-text">我再记会儿</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 其它表格通用渲染 -->
+    <view wx:for="{{Object.keys(tableData)}}" wx:for-item="tableId" wx:key="tableId" wx:if="{{tableId !== 'noun_001' && tableId !== 'noun_002' && tableId !== 'noun_003' && tableId !== 'noun_004' && tableId !== 'pronoun_001' && tableId !== 'pronoun_002' && tableId !== 'present_participle_001' && tableId !== 'past_participle_001' && tableId !== 'tense_writing_001' && tableId !== 'comparison_prefix_suffix_001' && tableId !== 'comparison_comparative_001' && tableId !== 'comparison_superlative_001' && tableId !== 'adverb_writing_001' && tableId !== 'voice_writing_001' && tableId !== 'voice_writing_002' && tableId !== 'voice_writing_003' && tableId !== 'voice_writing_004' && tableId !== 'voice_writing_005' && tableId !== 'voice_writing_006' && tableId !== 'voice_writing_007' && tableId !== 'voice_writing_008' && tableId !== 'comparative_table_001' && tableId !== 'superlative_table_001' && !tableId.startsWith('pronoun_table_')}}" class="table-container">
+      <view class="table-title">{{tableId}}</view>
+      <view class="table-grid">
+        <view wx:for="{{tableData[tableId]}}" wx:key="cell_id" wx:for-item="cell">
+          <block wx:if="{{cell.is_header}}">
+            <view class="table-row header-row">
+              <text class="table-cell header-cell">{{cell.question}}</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="table-row">
+              <text class="table-cell">{{cell.question}}</text>
+              <input class="table-input{{showCorrect[tableId][cell.cell_id] === true ? ' correct' : ''}}{{showCorrect[tableId][cell.cell_id] === false ? ' wrong' : ''}}"
+                type="text"
+                value="{{tableAnswers[tableId][cell.cell_id]}}"
+                bindinput="onTableInput"
+                data-table-id="{{tableId}}"
+                data-cell-id="{{cell.cell_id}}"
+                placeholder=""/>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="action-buttons">
+        <button class="action-btn hint-btn" bindtap="showHintOptions">
+          <text class="btn-icon">💡</text>
+          <text class="btn-text">小小的提示</text>
+        </button>
+        <button class="action-btn answer-btn" bindtap="showFullAnswer" data-table-id="{{tableId}}">
+          <text class="btn-icon">📚</text>
+          <text class="btn-text">我再记会儿</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">
+    <!-- 批改完成后的双按钮 -->
+    <view class="double-btn-container" wx:if="{{correctionCompleted}}">
+      <button class="correction-btn variant-btn {{!hasWrongQuestions ? 'disabled' : ''}}" bindtap="startVariantTraining" disabled="{{!hasWrongQuestions}}">
+        <text class="btn-icon">🔄</text>
+        <text class="btn-text">错题变式训练</text>
+      </button>
+      <button class="correction-btn standard-btn" bindtap="startStandardTraining">
+        <text class="btn-icon">✏️</text>
+        <text class="btn-text">书写规范训练</text>
+      </button>
+    </view>
+    
+    <!-- 原有的单按钮逻辑 -->
+    <view wx:else>
+      <button class="submit-btn" bindtap="{{exerciseType === 'writing' ? 'submitTableAnswers' : 'submitAnswers'}}" loading="{{submitting}}" disabled="{{submitting}}">
+        <text class="submit-icon" wx:if="{{!submitting}}">📝</text>
+        <text class="submit-text">{{submitting ? '统计中...' : '提交并统计'}}</text>
+      </button>
+    </view>
+  </view>
+  
+  <!-- 特殊类别引导按钮 -->
+  <view class="special-guide-bar" wx:if="{{showSpecialGuide && !submitting}}">
+    <view class="guide-content">
+      <text class="guide-icon">📝</text>
+      <text class="guide-text">想要更多练习？去"书写规范"查看完整表格</text>
+    </view>
+    <button class="guide-btn" bindtap="navigateToWritingRules">
+      前往书写规范
+    </button>
+  </view>
+  
+  <!-- 选择提示类型弹窗 -->
+  <view class="modal-overlay" wx:if="{{showHintModal}}" bindtap="closeHintModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">选择提示类型</text>
+        <text class="modal-close" bindtap="closeHintModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="hint-options">
+          <view class="hint-option" 
+                wx:for="{{hintOptions}}" 
+                wx:key="index" 
+                wx:for-item="option"
+                bindtap="selectHintType" 
+                data-type="{{option}}">
+            <text class="hint-text">{{option}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示内容弹窗 -->
+  <view class="modal-overlay" wx:if="{{showHintContentModal}}" bindtap="closeHintContentModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">提示</text>
+        <text class="modal-close" bindtap="closeHintContentModal">×</text>
+      </view>
+      <view class="modal-body">
+        <text style="font-size:28rpx;line-height:1.7;white-space:pre-line;">{{hintContent}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 答案弹窗 -->
+  <view class="modal-overlay" wx:if="{{showAnswerModal}}" bindtap="closeAnswerModal">
+    <view class="modal-content answer-modal" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{currentAnswer.title}}</text>
+        <text class="modal-close" bindtap="closeAnswerModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="answer-table">
+          <view class="table-header">
+            <view class="table-cell header-cell" wx:for="{{currentAnswer.headers}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <view class="table-row" wx:for="{{currentAnswer.data}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex">
+            <view class="table-cell" wx:for="{{row}}" wx:key="colIndex" wx:for-item="cell" wx:for-index="colIndex">
+              {{cell}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 新增：知识点双向联动模块 - 知识卡片弹窗 -->
+  
+  <!-- 后缀知识卡片 -->
+  <view class="modal-overlay" wx:if="{{showSuffixCard}}" bindtap="closeSuffixCard">
+    <view class="modal-content knowledge-card" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">📖 {{currentNoteData.frontendName || '语法知识卡'}}</text>
+        <text class="modal-close" bindtap="closeSuffixCard">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="knowledge-content">
+          <!-- 使用原生WXML组件显示结构化内容 -->
+          <view wx:if="{{currentStructuredContent && currentStructuredContent.length > 0}}" class="structured-note-content">
+            <view wx:for="{{currentStructuredContent}}" wx:key="index" wx:for-item="section" class="note-section">
+              <view class="section-title">{{section.title}}</view>
+              
+              <!-- 子章节 -->
+              <view wx:if="{{section.subsections.length > 0}}">
+                <view wx:for="{{section.subsections}}" wx:key="subIndex" wx:for-item="subsection" wx:for-index="subIndex" class="subsection">
+                  <view class="subsection-title">{{subsection.title}}</view>
+                                     <view wx:for="{{subsection.items}}" wx:key="itemIndex" wx:for-item="item" wx:for-index="itemIndex" class="note-item">
+                     <!-- 规则与例子组合 -->
+                     <view wx:if="{{item.type === 'rule-with-examples'}}" class="rule-examples-group">
+                       <view class="rule-text">{{item.rule.content}}</view>
+                       <view wx:for="{{item.examples}}" wx:key="exampleIndex" wx:for-item="example" wx:for-index="exampleIndex" class="example-item">
+                         {{example.content}}
+                       </view>
+                     </view>
+                     <!-- 题目与答案组合 -->
+                     <view wx:elif="{{item.type === 'question-with-answer'}}" class="question-answer-group">
+                       <view class="question-text">{{item.question.content}}</view>
+                       <view class="answer-text">{{item.answer.content}}</view>
+                     </view>
+                     <!-- 列表项 -->
+                     <view wx:elif="{{item.type === 'list'}}" class="list-item">• {{item.content}}</view>
+                     <!-- 表格 -->
+                     <view wx:elif="{{item.type === 'table'}}" class="table-container">
+                       <view class="table-row header">
+                         <view wx:for="{{item.data.headers}}" wx:key="headerIndex" wx:for-item="header" wx:for-index="headerIndex" class="table-cell header-cell">
+                           <text class="table-text header-text">{{header}}</text>
+                         </view>
+                       </view>
+                       <view wx:for="{{item.data.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="table-row">
+                         <view wx:for="{{row}}" wx:key="cellIndex" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+                           <text class="table-text">{{cell}}</text>
+                         </view>
+                       </view>
+                     </view>
+                     <!-- 连续题目 -->
+                     <view wx:elif="{{item.type === 'continuous-question'}}" class="continuous-question-item">{{item.content}}</view>
+                     <!-- 题目 -->
+                     <view wx:elif="{{item.type === 'question'}}" class="question-item">{{item.content}}</view>
+                     <!-- 答案 -->
+                     <view wx:elif="{{item.type === 'answer'}}" class="answer-item">{{item.content}}</view>
+                     <!-- 示例 -->
+                     <view wx:elif="{{item.type === 'example'}}" class="example-item">{{item.content}}</view>
+                     <!-- 考察示例标题 -->
+                     <view wx:elif="{{item.content && item.content.includes('考察示例')}}" class="exam-example-title">{{item.content}}</view>
+                     <!-- 普通文本 -->
+                     <view wx:else class="text-item">{{item.content}}</view>
+                   </view>
+                </view>
+              </view>
+              
+              <!-- 直接项目 -->
+              <view wx:else>
+                                 <view wx:for="{{section.items}}" wx:key="itemIndex" wx:for-item="item" wx:for-index="itemIndex" class="note-item">
+                   <!-- 规则与例子组合 -->
+                   <view wx:if="{{item.type === 'rule-with-examples'}}" class="rule-examples-group">
+                     <view class="rule-text">{{item.rule.content}}</view>
+                     <view wx:for="{{item.examples}}" wx:key="exampleIndex" wx:for-item="example" wx:for-index="exampleIndex" class="example-item">
+                       {{example.content}}
+                     </view>
+                   </view>
+                   <!-- 题目与答案组合 -->
+                   <view wx:elif="{{item.type === 'question-with-answer'}}" class="question-answer-group">
+                     <view class="question-text">{{item.question.content}}</view>
+                     <view class="answer-text">{{item.answer.content}}</view>
+                   </view>
+                   <!-- 连续循环结构组 -->
+                   <view wx:elif="{{item.type === 'consecutive-cycle-groups'}}" class="consecutive-cycle-groups">
+                     <view wx:for="{{item.groups}}" wx:key="groupIndex" wx:for-item="group" wx:for-index="groupIndex" class="cycle-group">
+                       <view wx:for="{{group.items}}" wx:key="cycleIndex" wx:for-item="cycleItem" wx:for-index="cycleIndex" class="cycle-item">
+                         <view wx:if="{{cycleIndex === 0}}" class="cycle-hint">{{cycleItem.content}}</view>
+                         <view wx:elif="{{cycleIndex === 1}}" class="cycle-question">{{cycleItem.content}}</view>
+                         <view wx:elif="{{cycleIndex === 2}}" class="cycle-answer">{{cycleItem.content}}</view>
+                         <view wx:else class="cycle-extra">{{cycleItem.content}}</view>
+                       </view>
+                     </view>
+                   </view>
+                   <!-- 循环结构组 -->
+                   <view wx:elif="{{item.type === 'cycle-group'}}" class="cycle-group">
+                     <view wx:for="{{item.items}}" wx:key="cycleIndex" wx:for-item="cycleItem" wx:for-index="cycleIndex" class="cycle-item">
+                       <view wx:if="{{cycleIndex === 0}}" class="cycle-hint">{{cycleItem.content}}</view>
+                       <view wx:elif="{{cycleIndex === 1}}" class="cycle-question">{{cycleItem.content}}</view>
+                       <view wx:elif="{{cycleIndex === 2}}" class="cycle-answer">{{cycleItem.content}}</view>
+                       <view wx:else class="cycle-extra">{{cycleItem.content}}</view>
+                     </view>
+                   </view>
+                   <!-- 列表项 -->
+                   <view wx:elif="{{item.type === 'list'}}" class="list-item">• {{item.content}}</view>
+                   <!-- 表格 -->
+                   <view wx:elif="{{item.type === 'table'}}" class="table-container">
+                     <view class="table-row header">
+                       <view wx:for="{{item.data.headers}}" wx:key="headerIndex" wx:for-item="header" wx:for-index="headerIndex" class="table-cell header-cell">
+                         <text class="table-text header-text">{{header}}</text>
+                       </view>
+                     </view>
+                     <view wx:for="{{item.data.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="table-row">
+                       <view wx:for="{{row}}" wx:key="cellIndex" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+                         <text class="table-text">{{cell}}</text>
+                       </view>
+                     </view>
+                   </view>
+                   <!-- 练习表格 -->
+                   <view wx:elif="{{item.type === 'practice-table'}}" class="practice-table-container">
+                     <view class="practice-table-title">{{item.title}}</view>
+                     <view class="table-row header">
+                       <view wx:for="{{item.data.headers}}" wx:key="headerIndex" wx:for-item="header" wx:for-index="headerIndex" class="table-cell header-cell">
+                         <text class="table-text header-text">{{header}}</text>
+                       </view>
+                     </view>
+                     <view wx:for="{{item.data.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="table-row">
+                       <view wx:for="{{row}}" wx:key="cellIndex" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+                         <text class="table-text">{{cell}}</text>
+                       </view>
+                     </view>
+                   </view>
+                   <!-- 示例 -->
+                   <view wx:elif="{{item.type === 'example'}}" class="example-item">{{item.content}}</view>
+                   <!-- 改错题 -->
+                   <view wx:elif="{{item.type === 'correction'}}" class="correction-item">{{item.content}}</view>
+                   <!-- 考察示例标题 -->
+                   <view wx:elif="{{item.content && item.content.includes('考察示例')}}" class="exam-example-title">{{item.content}}</view>
+                   <!-- 普通文本 -->
+                   <view wx:else class="text-item">{{item.content}}</view>
+                 </view>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 备用：使用rich-text组件显示内容 -->
+          <rich-text wx:elif="{{currentNoteData}}" class="knowledge-rich-text" nodes="{{currentNoteData.htmlContent || currentNoteData.noteContent || currentNoteData.content}}"></rich-text>
+          
+          <!-- 默认内容 -->
+          <text class="knowledge-text" wx:else>
+            名词变复数规则：
+            
+            • 一般情况加s(例：cat→cats)
+            • 以s/x/sh/ch结尾加es(例：box→boxes)
+            • 以辅音字母+y结尾，变y为i再加es(例：baby→babies)
+            • 以f/fe结尾，变f/fe为v再加es(例：leaf→leaves)
+            • 不规则变化需单独记忆(例：child→children)
+          </text>
+        </view>
+        <view class="knowledge-actions">
+          <button class="knowledge-btn close-btn" bindtap="closeSuffixCard">关闭</button>
+          <button class="knowledge-btn practice-btn" bindtap="goSuffixTable">进入专项练习表格</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 书写规则知识卡片 -->
+  <view class="modal-overlay" wx:if="{{showRuleCard}}" bindtap="closeRuleCard">
+    <view class="modal-content knowledge-card" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">❓ {{currentNoteData.frontendName || '书写规则知识卡'}}</text>
+        <text class="modal-close" bindtap="closeRuleCard">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="knowledge-content">
+          <!-- 使用原生WXML组件显示结构化内容 -->
+          <view wx:if="{{currentStructuredContent && currentStructuredContent.length > 0}}" class="structured-note-content">
+            <view wx:for="{{currentStructuredContent}}" wx:key="index" wx:for-item="section" class="note-section">
+              <view class="section-title">{{section.title}}</view>
+              
+              <!-- 子章节 -->
+              <view wx:if="{{section.subsections.length > 0}}">
+                <view wx:for="{{section.subsections}}" wx:key="subIndex" wx:for-item="subsection" wx:for-index="subIndex" class="subsection">
+                  <view class="subsection-title">{{subsection.title}}</view>
+                  <view wx:for="{{subsection.items}}" wx:key="itemIndex" wx:for-item="item" wx:for-index="itemIndex" class="note-item">
+                    <!-- 规则与例子组合 -->
+                    <view wx:if="{{item.type === 'rule-with-examples'}}" class="rule-examples-group">
+                      <view class="rule-text">{{item.rule.content}}</view>
+                      <view wx:for="{{item.examples}}" wx:key="exampleIndex" wx:for-item="example" wx:for-index="exampleIndex" class="example-item">
+                        {{example.content}}
+                      </view>
+                    </view>
+                    <!-- 题目与答案组合 -->
+                    <view wx:elif="{{item.type === 'question-with-answer'}}" class="question-answer-group">
+                      <view class="question-text">{{item.question.content}}</view>
+                      <view class="answer-text">{{item.answer.content}}</view>
+                    </view>
+                    <!-- 循环结构组 -->
+                    <view wx:elif="{{item.type === 'cycle-group'}}" class="cycle-group">
+                      <view wx:for="{{item.items}}" wx:key="cycleIndex" wx:for-item="cycleItem" wx:for-index="cycleIndex" class="cycle-item">
+                        <view wx:if="{{cycleIndex === 0}}" class="cycle-hint">{{cycleItem.content}}</view>
+                        <view wx:elif="{{cycleIndex === 1}}" class="cycle-question">{{cycleItem.content}}</view>
+                        <view wx:elif="{{cycleIndex === 2}}" class="cycle-answer">{{cycleItem.content}}</view>
+                        <view wx:else class="cycle-extra">{{cycleItem.content}}</view>
+                      </view>
+                    </view>
+                    <!-- 列表项 -->
+                    <view wx:elif="{{item.type === 'list'}}" class="list-item">• {{item.content}}</view>
+                                       <!-- 表格 -->
+                   <view wx:elif="{{item.type === 'table'}}" class="table-container">
+                     <view class="table-row header">
+                       <view wx:for="{{item.data.headers}}" wx:key="headerIndex" wx:for-item="header" wx:for-index="headerIndex" class="table-cell header-cell">
+                         <text class="table-text header-text">{{header}}</text>
+                       </view>
+                     </view>
+                     <view wx:for="{{item.data.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="table-row">
+                       <view wx:for="{{row}}" wx:key="cellIndex" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+                         <text class="table-text">{{cell}}</text>
+                       </view>
+                     </view>
+                   </view>
+                   <!-- 练习表格 -->
+                   <view wx:elif="{{item.type === 'practice-table'}}" class="practice-table-container">
+                     <view class="practice-table-title">{{item.title}}</view>
+                     <view class="table-row header">
+                       <view wx:for="{{item.data.headers}}" wx:key="headerIndex" wx:for-item="header" wx:for-index="headerIndex" class="table-cell header-cell">
+                         <text class="table-text header-text">{{header}}</text>
+                       </view>
+                     </view>
+                     <view wx:for="{{item.data.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="table-row">
+                       <view wx:for="{{row}}" wx:key="cellIndex" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+                         <text class="table-text">{{cell}}</text>
+                       </view>
+                     </view>
+                   </view>
+                   <!-- 示例 -->
+                   <view wx:elif="{{item.type === 'example'}}" class="example-item">{{item.content}}</view>
+                   <!-- 改错题 -->
+                   <view wx:elif="{{item.type === 'correction'}}" class="correction-item">{{item.content}}</view>
+                    <!-- 普通文本 -->
+                    <view wx:else class="text-item">{{item.content}}</view>
+                  </view>
+                </view>
+              </view>
+              
+              <!-- 直接项目 -->
+              <view wx:else>
+                <view wx:for="{{section.items}}" wx:key="itemIndex" wx:for-item="item" wx:for-index="itemIndex" class="note-item">
+                  <!-- 考察示例标题 -->
+                  <view wx:if="{{item.type === 'exam-example-title'}}" class="exam-example-title">{{item.content}}</view>
+                  <!-- 题目 -->
+                  <view wx:elif="{{item.type === 'question'}}" class="question-item">{{item.content}}</view>
+                  <!-- 答案 -->
+                  <view wx:elif="{{item.type === 'answer'}}" class="answer-item">{{item.content}}</view>
+                  <!-- 解析 -->
+                  <view wx:elif="{{item.type === 'analysis'}}" class="analysis-item">{{item.content}}</view>
+                  <!-- 列表项 -->
+                  <view wx:elif="{{item.type === 'list'}}" class="list-item">• {{item.content}}</view>
+                  <!-- 表格 -->
+                  <view wx:elif="{{item.type === 'table'}}" class="table-container">
+                    <view class="table-row header">
+                      <view wx:for="{{item.data.headers}}" wx:key="headerIndex" wx:for-item="header" wx:for-index="headerIndex" class="table-cell header-cell">
+                        <text class="table-text header-text">{{header}}</text>
+                      </view>
+                    </view>
+                    <view wx:for="{{item.data.rows}}" wx:key="rowIndex" wx:for-item="row" wx:for-index="rowIndex" class="table-row">
+                      <view wx:for="{{row}}" wx:key="cellIndex" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+                        <text class="table-text">{{cell}}</text>
+                      </view>
+                    </view>
+                  </view>
+                  <!-- 普通文本 -->
+                  <view wx:else class="text-item">{{item.content}}</view>
+                </view>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 备用：使用rich-text组件显示内容 -->
+          <rich-text wx:elif="{{currentNoteData}}" class="knowledge-rich-text" nodes="{{currentNoteData.htmlContent || currentNoteData.noteContent || currentNoteData.content}}"></rich-text>
+          
+          <!-- 默认内容 -->
+          <text class="knowledge-text" wx:else>
+            动词分词变化规则：
+            
+            • 现在分词一般加ing(例：go→going)
+            • 过去分词规则需结合时态(例：work→worked)
+            • 不规则动词需单独记忆(例：see→seen)
+            • 双写辅音字母规则(例：run→running)
+            • 去e加ing规则(例：write→writing)
+          </text>
+        </view>
+        <view class="knowledge-actions">
+          <button class="knowledge-btn close-btn" bindtap="closeRuleCard">关闭</button>
+          <button class="knowledge-btn practice-btn" bindtap="goRuleTable">进入专项练习表格</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 新增：表格练习卡片 -->
+  <view class="modal-overlay" wx:if="{{showTableCard}}" bindtap="closeTableCard">
+    <view class="modal-content table-card" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">📊 {{currentTableData.frontendName || '专项练习表格'}}</text>
+        <text class="modal-close" bindtap="closeTableCard">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="table-content" wx:if="{{currentTableData}}">
+          <!-- 可滑动的表格容器 -->
+          <scroll-view class="table-scroll-container" scroll-x="true">
+            <view class="interactive-table {{currentTableData.id.startsWith('preposition_table_') ? 'preposition-table' : ''}}">
+              <!-- 表格内容 -->
+              <view class="table-row" wx:for="{{currentTableData.exerciseRows}}" wx:for-item="row" wx:for-index="rowIndex" wx:key="rowIndex">
+                <view class="table-cell {{currentTableData.hasHeader && rowIndex === 0 ? 'header-cell' : ''}}" wx:for="{{row}}" wx:for-item="cell" wx:for-index="colIndex" wx:key="colIndex">
+                  <!-- 表头行 -->
+                  <text wx:if="{{currentTableData.hasHeader && rowIndex === 0}}" class="table-text header-text">{{cell.text}}</text>
+                  <!-- 数据行 -->
+                  <view wx:else>
+                    <!-- 显示答案模式 -->
+                    <text wx:if="{{showTableAnswers && cell.type === 'input'}}" class="table-answer correct-answer">{{cell.answer}}</text>
+                    <!-- 多输入框显示答案模式 -->
+                    <view wx:elif="{{showTableAnswers && cell.type === 'multi-input'}}" class="multi-answer">
+                      <text wx:for="{{cell.answers}}" wx:for-item="answer" wx:key="index" class="table-answer correct-answer">{{answer}}</text>
+                    </view>
+                    <!-- 输入模式 -->
+                    <input 
+                      wx:elif="{{!showTableAnswers && cell.type === 'input'}}"
+                      class="table-input {{tableInputStatus[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                      type="text"
+                      value="{{tableUserInputs[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                      bindinput="onTableInput"
+                      data-row="{{rowIndex}}"
+                      data-col="{{colIndex}}"
+                      placeholder="{{cell.placeholder || '请输入答案'}}"
+                    />
+                    <!-- 多输入框模式 -->
+                    <view wx:elif="{{!showTableAnswers && cell.type === 'multi-input'}}" class="multi-input-container">
+                      <input 
+                        wx:for="{{cell.answers}}" wx:for-item="answer" wx:for-index="answerIndex" wx:key="answerIndex"
+                        class="table-input {{tableInputStatus[currentTableData.id + '_' + rowIndex + '_' + colIndex + '_' + answerIndex]}}"
+                        type="text"
+                        value="{{tableUserInputs[currentTableData.id + '_' + rowIndex + '_' + colIndex + '_' + answerIndex]}}"
+                        bindinput="onTableInput"
+                        data-row="{{rowIndex}}"
+                        data-col="{{colIndex}}"
+                        data-answer-index="{{answerIndex}}"
+                        placeholder="{{cell.placeholder || '请输入答案'}}"
+                      />
+                    </view>
+                    <!-- 分离显示模式：题目在上，答题框在下 -->
+                    <view wx:elif="{{!showTableAnswers && cell.type === 'separated-input'}}" class="separated-input-container">
+                      <!-- 显示题目 -->
+                      <text class="question-text">{{cell.question}}</text>
+                      <!-- 显示答案（查看答案模式） -->
+                      <view wx:if="{{showTableAnswers}}" class="answer-display">
+                        <text wx:for="{{cell.answers}}" wx:for-item="answer" wx:for-index="answerIndex" wx:key="answerIndex" class="table-answer correct-answer">{{answer}}</text>
+                      </view>
+                      <!-- 显示输入框（答题模式） -->
+                      <view wx:else class="input-container">
+                        <input 
+                          wx:for="{{cell.answers}}" wx:for-item="answer" wx:for-index="answerIndex" wx:key="answerIndex"
+                          class="table-input {{tableInputStatus[currentTableData.id + '_' + rowIndex + '_' + colIndex + '_' + answerIndex]}}"
+                          type="text"
+                          value="{{tableUserInputs[currentTableData.id + '_' + rowIndex + '_' + colIndex + '_' + answerIndex]}}"
+                          bindinput="onTableInput"
+                          data-row="{{rowIndex}}"
+                          data-col="{{colIndex}}"
+                          data-answer-index="{{answerIndex}}"
+                          placeholder="请输入答案"
+                        />
+                      </view>
+                    </view>
+                    <!-- 可点击规则 -->
+                    <view wx:elif="{{cell.type === 'clickable-rule'}}" class="clickable-rule" bindtap="onRuleTap" data-row="{{rowIndex}}" data-col="{{colIndex}}" data-rule-text="{{cell.text}}" data-full-content="{{cell.fullContent}}">
+                      <text class="lightbulb" style="color:{{ruleShowFullContent[rowIndex + '_' + colIndex] ? '#eb2f96' : '#ccc'}}">💡</text>
+                      <text class="rule-text">{{ruleShowFullContent[rowIndex + '_' + colIndex] ? cell.fullContent : cell.text}}</text>
+                    </view>
+                    <!-- 单词输入框（用于形容词表格） -->
+                    <view wx:elif="{{cell.type === 'word-input'}}" class="word-input-container">
+                      <text class="word-hint">{{cell.word}}</text>
+                      <input 
+                        class="table-input {{tableInputStatus[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                        type="text"
+                        value="{{tableUserInputs[currentTableData.id + '_' + rowIndex + '_' + colIndex]}}"
+                        bindinput="onTableInput"
+                        data-row="{{rowIndex}}"
+                        data-col="{{colIndex}}"
+                        placeholder="{{cell.placeholder}}"
+                      />
+                    </view>
+                    <!-- 普通文本 -->
+                    <text wx:else class="table-text">{{cell.text}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="table-actions">
+          <button class="table-btn answer-btn" bindtap="{{showTableAnswers ? 'hideTableAnswers' : 'showTableAnswers'}}">
+            {{showTableAnswers ? '隐藏答案' : '查看答案'}}
+          </button>
+          <button class="table-btn practice-btn" bindtap="goTablePractice">开始练习</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出模态框 -->
+  <include src="./export-modal.wxml" />
+</view>
+

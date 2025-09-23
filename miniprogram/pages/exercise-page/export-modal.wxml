@@ -1,0 +1,151 @@
+<!-- 习题导出模态框 -->
+<view class="export-modal-overlay" wx:if="{{showExportModal}}" bindtap="closeExportModal">
+  <view class="export-modal-content" catchtap="">
+    <!-- 模态框头部 -->
+    <view class="export-modal-header">
+      <text class="export-modal-title">📄 导出习题</text>
+      <text class="export-modal-close" bindtap="closeExportModal">×</text>
+    </view>
+
+    <!-- 导出选项 -->
+    <view class="export-options">
+      <!-- 导出格式选择 -->
+      <view class="export-section">
+        <text class="section-title">导出格式</text>
+        <view class="format-options">
+          <view class="format-option {{exportFormat === 'pdf' ? 'selected' : ''}}" 
+                bindtap="selectFormat" data-format="pdf">
+            <view class="format-icon">📄</view>
+            <text class="format-name">PDF</text>
+            <text class="format-desc">适合打印</text>
+          </view>
+          <view class="format-option {{exportFormat === 'word' ? 'selected' : ''}}" 
+                bindtap="selectFormat" data-format="word">
+            <view class="format-icon">📝</view>
+            <text class="format-name">Word</text>
+            <text class="format-desc">便于编辑</text>
+          </view>
+          <view class="format-option {{exportFormat === 'excel' ? 'selected' : ''}}" 
+                bindtap="selectFormat" data-format="excel">
+            <view class="format-icon">📊</view>
+            <text class="format-name">Excel</text>
+            <text class="format-desc">数据表格</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 导出模板选择 -->
+      <view class="export-section">
+        <text class="section-title">导出模板</text>
+        <view class="template-options">
+          <view class="template-option {{exportTemplate === 'standard' ? 'selected' : ''}}" 
+                bindtap="selectTemplate" data-template="standard">
+            <text class="template-name">标准模板</text>
+            <text class="template-desc">题目+答案+解析</text>
+          </view>
+          <view class="template-option {{exportTemplate === 'exercise' ? 'selected' : ''}}" 
+                bindtap="selectTemplate" data-template="exercise">
+            <text class="template-name">练习模板</text>
+            <text class="template-desc">仅题目，答案另页</text>
+          </view>
+          <view class="template-option {{exportTemplate === 'test' ? 'selected' : ''}}" 
+                bindtap="selectTemplate" data-template="test">
+            <text class="template-name">测试模板</text>
+            <text class="template-desc">题目+答题卡</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 题目筛选 -->
+      <view class="export-section">
+        <text class="section-title">题目筛选</text>
+        <view class="filter-options">
+          <view class="filter-item">
+            <text class="filter-label">题目数量</text>
+            <view class="quantity-selector">
+              <button class="quantity-btn" bindtap="decreaseQuantity" disabled="{{exportQuantity <= 1}}">-</button>
+              <text class="quantity-display">{{exportQuantity}}</text>
+              <button class="quantity-btn" bindtap="increaseQuantity" disabled="{{exportQuantity >= maxExportQuantity}}">+</button>
+            </view>
+          </view>
+          
+          <view class="filter-item">
+            <text class="filter-label">难度筛选</text>
+            <view class="difficulty-filter">
+              <view class="difficulty-option {{selectedDifficulties.includes('easy') ? 'selected' : ''}}" 
+                    bindtap="toggleDifficulty" data-difficulty="easy">简单</view>
+              <view class="difficulty-option {{selectedDifficulties.includes('medium') ? 'selected' : ''}}" 
+                    bindtap="toggleDifficulty" data-difficulty="medium">中等</view>
+              <view class="difficulty-option {{selectedDifficulties.includes('hard') ? 'selected' : ''}}" 
+                    bindtap="toggleDifficulty" data-difficulty="hard">困难</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 导出预览 -->
+      <view class="export-section">
+        <text class="section-title">导出预览</text>
+        <view class="export-preview">
+          <view class="preview-item">
+            <text class="preview-label">预计页数：</text>
+            <text class="preview-value">{{estimatedPages}}页</text>
+          </view>
+          <view class="preview-item">
+            <text class="preview-label">文件大小：</text>
+            <text class="preview-value">{{estimatedSize}}</text>
+          </view>
+          <view class="preview-item">
+            <text class="preview-label">包含内容：</text>
+            <text class="preview-value">{{previewContent}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 用户权限提示 -->
+      <view class="export-section" wx:if="{{userExportLimit}}">
+        <view class="limit-info">
+          <text class="limit-icon">⏰</text>
+          <text class="limit-text">
+            今日剩余导出次数：{{userExportLimit.remaining}}/{{userExportLimit.total}}
+          </text>
+        </view>
+        <view class="upgrade-prompt" wx:if="{{userExportLimit.remaining < 3}}">
+          <text class="upgrade-text">导出次数不足？</text>
+          <button class="upgrade-btn" bindtap="showUpgradeModal">升级会员</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="export-actions">
+      <button class="export-btn secondary" bindtap="closeExportModal">取消</button>
+      <button class="export-btn primary" bindtap="startExport" disabled="{{!canExport}}">
+        <text class="btn-icon">📤</text>
+        <text class="btn-text">开始导出</text>
+      </button>
+    </view>
+  </view>
+</view>
+
+<!-- 导出进度模态框 -->
+<view class="export-progress-overlay" wx:if="{{showExportProgress}}">
+  <view class="export-progress-content">
+    <view class="progress-header">
+      <text class="progress-title">正在生成文件...</text>
+    </view>
+    
+    <view class="progress-body">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{exportProgress}}%"></view>
+      </view>
+      <text class="progress-text">{{exportProgress}}%</text>
+      <text class="progress-desc">{{exportStatus}}</text>
+    </view>
+    
+    <view class="progress-actions">
+      <button class="progress-btn" bindtap="cancelExport" wx:if="{{exportProgress < 100}}">取消</button>
+      <button class="progress-btn primary" bindtap="downloadFile" wx:if="{{exportProgress === 100}}">下载文件</button>
+    </view>
+  </view>
+</view>

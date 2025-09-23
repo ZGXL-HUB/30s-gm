@@ -1,0 +1,158 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="被动语态规则学习"
+    description="学习被动语态的核心结构和转换规则，掌握主动句变被动句的方法"
+    tip="💡 提示：先理解结构公式，再学习具体示例"
+    icon="🎯"
+    storage-key="voice-rules-guide"
+  />
+  
+  <view class="content">
+    <view class="title">以下是关于被动语态（含谓语和非谓语）的知识点梳理，结合 save、carry、help、give 四个单词从主动到被动的转换示例：</view>
+    
+    <view class="section">
+      <view class="section-title">一、被动语态的核心结构</view>
+      <view class="core-structure">
+        <view class="structure-item"><text class="highlight">谓语被动语态</text>：<text class="formula">be + 过去分词（done）</text></view>
+        <view class="structure-item"><text class="highlight">非谓语被动形式</text>：过去分词（done）、to be done（不定式被动）、being done（现在分词被动）</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">二、谓语被动语态：主动句→被动句转换示例</view>
+      <view class="section-desc">以四个单词为例，展示主动句变被动句的结构变化：</view>
+      
+      <view class="word-section">
+        <view class="word-title">1. save（拯救）</view>
+        <view class="example-item">• <text class="label">主动句</text>：They save the animals every year.（主语+谓语+宾语）</view>
+        <view class="example-item">• <text class="label">被动句</text>：The animals are saved by them every year.（宾语变主语 + are saved + by+动作发出者）</view>
+        <view class="example-item">• <text class="label">时态扩展</text>（以一般过去时为例）：</view>
+        <view class="sub-example">主动：They saved the dog yesterday.</view>
+        <view class="sub-example">被动：The dog was saved by them yesterday.</view>
+      </view>
+
+      <view class="word-section">
+        <view class="word-title">2. carry（携带）</view>
+        <view class="example-item">• 主动：She carries the box to school.</view>
+        <view class="example-item">• 被动：The box is carried to school by her.</view>
+        <view class="example-item">• 时态扩展（现在进行时）：</view>
+        <view class="sub-example">主动：He is carrying the books now.</view>
+        <view class="sub-example">被动：The books are being carried by him now.（<text class="formula">be being done</text> 结构）</view>
+      </view>
+
+      <view class="word-section">
+        <view class="word-title">3. help（帮助）</view>
+        <view class="example-item">• 主动：We help the old man daily.</view>
+        <view class="example-item">• 被动：The old man is helped by us daily.</view>
+        <view class="example-item">• 时态扩展（现在完成时）：</view>
+        <view class="sub-example">主动：They have helped the children for 3 years.</view>
+        <view class="sub-example">被动：The children have been helped by them for 3 years.（<text class="formula">have been done</text> 结构）</view>
+      </view>
+
+      <view class="word-section">
+        <view class="word-title">4. give（给予）</view>
+        <view class="example-item">• 主动：He gives me a book.（含双宾语：me间接宾语 + a book直接宾语）</view>
+        <view class="example-item">• 被动句1（间接宾语变主语）：I am given a book by him.</view>
+        <view class="example-item">• 被动句2（直接宾语变主语）：A book is given to me by him.（需加介词to）</view>
+        <view class="example-item">• 时态扩展（一般将来时）：</view>
+        <view class="sub-example">主动：They will give her a prize tomorrow.</view>
+        <view class="sub-example">被动：She will be given a prize by them tomorrow.</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">三、非谓语被动形式：主动与被动对比</view>
+      <view class="section-desc">以四个单词的非谓语形式为例，注意被动形式的结构特征：</view>
+      
+      <view class="sub-section">
+        <view class="sub-title">1. 过去分词（done）——表被动或完成</view>
+        <view class="category-title">• 作定语：</view>
+        <view class="comparison-group">
+          <view class="comparison-item">主动：a saving method（正在拯救的方法，现在分词表主动）</view>
+          <view class="comparison-item">被动：a saved animal（被拯救的动物，过去分词表被动）</view>
+          <view class="comparison-item">主动：a carrying bag（便携包，现在分词表用途）</view>
+          <view class="comparison-item">被动：a carried box（被携带的箱子，过去分词表被动）</view>
+        </view>
+        
+        <view class="category-title">• 作状语：</view>
+        <view class="comparison-group">
+          <view class="comparison-item">主动：Saving the animals, they worked day and night.（现在分词表主动）</view>
+          <view class="comparison-item">被动：Saved by them, the animals survived.（过去分词表被动）</view>
+          <view class="comparison-item">主动：Carrying the box, she walked upstairs.（现在分词表主动）</view>
+          <view class="comparison-item">被动：Carried by her, the box was moved easily.（过去分词表被动）</view>
+        </view>
+      </view>
+
+      <view class="sub-section">
+        <view class="sub-title">2. 不定式（to do）——主动式to do vs 被动式to be done</view>
+        <view class="category-title">• 作宾语：</view>
+        <view class="comparison-group">
+          <view class="comparison-item">主动：He wants to save the dog.（want to do主动）</view>
+          <view class="comparison-item">被动：The dog needs to be saved.（need to be done被动，"需要被拯救"）</view>
+          <view class="comparison-item">主动：She plans to carry the luggage.（plan to do主动）</view>
+          <view class="comparison-item">被动：The luggage needs to be carried.（need to be done被动）</view>
+        </view>
+        
+        <view class="category-title">• 作定语：</view>
+        <view class="comparison-group">
+          <view class="comparison-item">主动：He has a task to help others.（to help主动，"帮助他人的任务"）</view>
+          <view class="comparison-item">被动：She has a letter to be given to Tom.（to be given被动，"需要被交给汤姆的信"）</view>
+        </view>
+      </view>
+
+      <view class="sub-section">
+        <view class="sub-title">3. 动名词（doing）——主动式doing vs 被动式being done</view>
+        <view class="category-title">• 作主语/宾语：</view>
+        <view class="comparison-group">
+          <view class="comparison-item">主动：Saving animals is important.（动名词主动式作主语）</view>
+          <view class="comparison-item">被动：Being saved by them made the dog happy.（动名词被动式being done作主语）</view>
+          <view class="comparison-item">主动：He avoids carrying heavy things.（动名词主动式作宾语）</view>
+          <view class="comparison-item">被动：The box hates being carried.（动名词被动式作宾语，"讨厌被携带"）</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">四、被动语态使用注意事项</view>
+      <view class="notice-item">1. <text class="highlight">双宾语动词的被动转换</text>：如give、teach、send等，变被动时可选择间接宾语或直接宾语作主语（如"give sb. sth."→"sb. be given sth."或"sth. be given to sb."）。</view>
+      <view class="notice-item">2. <text class="highlight">非谓语被动式的时态差异</text>：过去分词（done）表"被动+完成"，如"a given book"（已被给的书）；being done表"被动+进行"，如"the book being given"（正在被给的书）；to be done表"被动+将来"，如"the book to be given"（将要被给的书）。</view>
+      <view class="notice-item">3. <text class="highlight">特殊结构</text>：感官动词（如see、hear）主动句中接不带to的不定式（see sb. do），变被动时需还原to（sb. be seen to do）。</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">五、对比表格：四词被动形式总结</view>
+      <view class="table-container">
+        <view class="table-row header">
+          <view class="table-cell">动词</view>
+          <view class="table-cell">谓语被动（以一般现在时为例）</view>
+          <view class="table-cell">非谓语被动形式（举例）</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">save</view>
+          <view class="table-cell">The animals are saved.</view>
+          <view class="table-cell">saved animals（过去分词作定语）<br/>to be saved（不定式被动）</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">carry</view>
+          <view class="table-cell">The box is carried.</view>
+          <view class="table-cell">a carried box（过去分词作定语）<br/>being carried（现在分词被动）</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">help</view>
+          <view class="table-cell">The old man is helped.</view>
+          <view class="table-cell">helped people（过去分词作定语）<br/>to be helped（不定式被动）</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">give</view>
+          <view class="table-cell">A book is given to me. / I am given a book.</view>
+          <view class="table-cell">a given task（过去分词作定语）<br/>being given（动名词被动）</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="conclusion">通过"谓语结构+非谓语形式+具体动词示例"的组合，可系统掌握被动语态在不同语境中的应用逻辑，建议结合例句反复练习转换规则哦！</view>
+    </view>
+  </view>
+</view> 

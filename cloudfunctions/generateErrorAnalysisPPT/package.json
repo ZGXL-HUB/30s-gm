@@ -1,0 +1,9 @@
+{
+  "name": "generateErrorAnalysisPPT",
+  "version": "1.0.0",
+  "description": "生成错题分析PPT云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,110 @@
+/* 浮动反馈按钮组件样式 */
+.floating-feedback {
+  position: fixed;
+  right: 30rpx;
+  bottom: 120rpx;
+  z-index: 999;
+}
+
+.feedback-trigger {
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.feedback-trigger:active {
+  transform: scale(0.95);
+}
+
+.feedback-icon {
+  font-size: 40rpx;
+  color: white;
+}
+
+.feedback-options {
+  position: absolute;
+  bottom: 120rpx;
+  right: 0;
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transform: translateY(20rpx) scale(0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  min-width: 200rpx;
+}
+
+.feedback-options.expanded {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  transition: all 0.2s ease;
+  min-width: 200rpx;
+}
+
+.option-item:last-child {
+  border-bottom: none;
+}
+
+.option-item:active {
+  background: #f8f9fa;
+  transform: scale(0.98);
+}
+
+.option-icon {
+  font-size: 32rpx;
+  margin-right: 20rpx;
+  width: 40rpx;
+  text-align: center;
+}
+
+.option-text {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 350px) {
+  .floating-feedback {
+    right: 20rpx;
+    bottom: 100rpx;
+  }
+  
+  .feedback-trigger {
+    width: 80rpx;
+    height: 80rpx;
+  }
+  
+  .feedback-icon {
+    font-size: 32rpx;
+  }
+  
+  .feedback-options {
+    min-width: 180rpx;
+  }
+  
+  .option-item {
+    padding: 20rpx 24rpx;
+  }
+  
+  .option-text {
+    font-size: 24rpx;
+  }
+}

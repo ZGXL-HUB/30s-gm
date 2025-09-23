@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语法选择题测试页面</title>
+    <style>
+        body { 
+            font-family: 'Microsoft YaHei', Arial, sans-serif; 
+            margin: 20px; 
+            background-color: #f5f5f5; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            color: #2c3e50; 
+            text-align: center; 
+            border-bottom: 3px solid #3498db; 
+            padding-bottom: 10px; 
+        }
+        .question { 
+            margin-bottom: 30px; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            background: #fafafa; 
+        }
+        .question-header { 
+            font-weight: bold; 
+            color: #e74c3c; 
+            margin-bottom: 10px; 
+        }
+        .question-text { 
+            font-size: 16px; 
+            margin-bottom: 15px; 
+            line-height: 1.6; 
+        }
+        .options { 
+            margin-bottom: 15px; 
+        }
+        .option { 
+            margin: 8px 0; 
+            padding: 12px 16px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border: 2px solid #e0e0e0; 
+            background: white; 
+        }
+        .option:hover { 
+            background-color: #e8f4fd; 
+            border-color: #3498db; 
+        }
+        .option.selected { 
+            background-color: #3498db; 
+            color: white; 
+            border-color: #2980b9; 
+        }
+        .option.correct { 
+            background: #d4edda; 
+            border-color: #c3e6cb; 
+            color: #155724; 
+        }
+        .option.incorrect { 
+            background: #f8d7da; 
+            border-color: #f5c6cb; 
+            color: #721c24; 
+        }
+        .option-label { 
+            display: inline-block; 
+            width: 30px; 
+            font-weight: bold; 
+            margin-right: 10px; 
+        }
+        .analysis { 
+            background: #e7f3ff; 
+            padding: 15px; 
+            border-radius: 5px; 
+            border-left: 4px solid #3498db; 
+            margin-top: 15px; 
+            display: none; 
+        }
+        .analysis-title { 
+            font-weight: bold; 
+            color: #2980b9; 
+            margin-bottom: 8px; 
+        }
+        .check-btn { 
+            background: #3498db; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+        .check-btn:hover { 
+            background: #2980b9; 
+        }
+        .stats { 
+            text-align: center; 
+            color: #7f8c8d; 
+            margin-top: 20px; 
+            padding: 15px; 
+            background: #ecf0f1; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 语法选择题测试页面</h1>
+        
+        <div id="question-container">
+            <!-- 题目将在这里动态加载 -->
+        </div>
+        
+        <div class="stats">
+            <p>已答题: <span id="answered-count">0</span> / <span id="total-count">0</span></p>
+            <p>正确率: <span id="accuracy">0%</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 示例题目数据
+        const sampleQuestions = [
+            {
+                id: "test1",
+                grammarPoint: "介词综合",
+                question: "I like to chat ___ my friends about our hobbies.",
+                options: [
+                    { label: "A", text: "for", isCorrect: false },
+                    { label: "B", text: "with", isCorrect: true },
+                    { label: "C", text: "to", isCorrect: false }
+                ],
+                correctAnswer: "with",
+                correctOption: "B",
+                analysis: "\"chat with sb.\"为固定搭配,意为\"和某人聊天\",与\"speak with sb.\"类似,故填with。"
+            },
+            {
+                id: "test2",
+                grammarPoint: "代词综合",
+                question: "Give ____ (we) some advice on how to learn English well.",
+                options: [
+                    { label: "A", text: "us", isCorrect: true },
+                    { label: "B", text: "we", isCorrect: false },
+                    { label: "C", text: "our", isCorrect: false }
+                ],
+                correctAnswer: "us",
+                correctOption: "A",
+                analysis: "动词give后需要宾格代词作间接宾语。we的宾格为us,构成\"give sb. sth.\"结构,因此此处应填us。"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let answeredCount = 0;
+        let correctCount = 0;
+
+        function displayQuestion(questionIndex) {
+            const question = sampleQuestions[questionIndex];
+            const container = document.getElementById('question-container');
+            
+            container.innerHTML = `
+                <div class="question">
+                    <div class="question-header">第${questionIndex + 1}题 - ${question.grammarPoint}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">
+                        ${question.options.map(option => `
+                            <div class="option" data-label="${option.label}" onclick="selectOption(this, '${option.label}')">
+                                <span class="option-label">${option.label}.</span> ${option.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="check-btn" onclick="checkAnswer()">检查答案</button>
+                    <div class="analysis" id="analysis">
+                        <div class="analysis-title">💡 解析</div>
+                        <div>${question.analysis}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(element, label) {
+            // 移除其他选项的选中状态
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // 添加当前选项的选中状态
+            element.classList.add('selected');
+            
+            // 存储选中的答案
+            element.dataset.selected = 'true';
+        }
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('.option.selected');
+            if (!selectedOption) {
+                alert('请先选择一个选项！');
+                return;
+            }
+
+            const selectedLabel = selectedOption.dataset.label;
+            const question = sampleQuestions[currentQuestionIndex];
+            const isCorrect = selectedLabel === question.correctOption;
+
+            // 显示所有选项的正确性
+            document.querySelectorAll('.option').forEach(option => {
+                const optionLabel = option.dataset.label;
+                const isOptionCorrect = optionLabel === question.correctOption;
+                
+                if (isOptionCorrect) {
+                    option.classList.add('correct');
+                } else if (optionLabel === selectedLabel) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            // 显示解析
+            document.getElementById('analysis').style.display = 'block';
+
+            // 更新统计
+            answeredCount++;
+            if (isCorrect) correctCount++;
+            updateStats();
+
+            // 禁用选项点击
+            document.querySelectorAll('.option').forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            // 禁用检查按钮
+            document.querySelector('.check-btn').disabled = true;
+        }
+
+        function updateStats() {
+            document.getElementById('answered-count').textContent = answeredCount;
+            document.getElementById('total-count').textContent = sampleQuestions.length;
+            document.getElementById('accuracy').textContent = 
+                answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) + '%' : '0%';
+        }
+
+        // 初始化页面
+        displayQuestion(0);
+        updateStats();
+    </script>
+</body>
+</html>

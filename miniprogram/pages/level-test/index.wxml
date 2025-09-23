@@ -1,0 +1,282 @@
+<!--pages/level-test/index.wxml-->
+<view class="container">
+  <!-- 欢迎界面 -->
+  <view class="welcome-screen" wx:if="{{testState === 'welcome'}}">
+    <view class="welcome-content">
+      <view class="welcome-title">🎯 语法水平测试</view>
+      <view class="welcome-message">
+        亲爱的用户，现在让我们通过十道题测一测您的语法水平，我会根据您的测试结果给出针对性的使用说明哦！本次测试只会在您第一次登陆的时候展示。
+      </view>
+      <button class="start-btn" bindtap="startGrammarTest">进入测试</button>
+      <button class="exit-btn" bindtap="exitTest">退出测试</button>
+      <button class="preview-btn" bindtap="previewLevelResults">预览各等级结果</button>
+      <button class="test-btn" bindtap="testOptionClick">测试选项点击</button>
+      <button class="debug-btn" bindtap="debugOptionClick">调试选项问题</button>
+    </view>
+  </view>
+
+  <!-- 语法测试界面 -->
+  <view class="test-screen" wx:if="{{testState === 'grammar-test'}}">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+    
+    <view class="question-card">
+      <view class="question-header">
+        <text class="question-number">第{{currentQuestionIndex + 1}}题</text>
+        <text class="question-type">语法选择题</text>
+      </view>
+      
+      <view class="question-content">
+        <text class="question-text">{{currentQuestion.question}}</text>
+      </view>
+      
+      <view class="options-container">
+        <view 
+          class="option-item {{showAnswer && option.isCorrect ? 'correct' : ''}} {{showAnswer && !option.isCorrect ? 'incorrect' : ''}}"
+          wx:for="{{currentQuestion.options}}" 
+          wx:key="label"
+          wx:for-item="option"
+          data-index="{{index}}"
+          bindtap="selectGrammarAnswer"
+        >
+          <text class="option-label">{{option.label}}</text>
+          <text class="option-text">{{option.text}}</text>
+        </view>
+      </view>
+      
+      <view class="answer-feedback" wx:if="{{showAnswer}}">
+        <view class="feedback-icon {{isCorrect ? 'correct' : 'incorrect'}}">
+          {{isCorrect ? '✓' : '✗'}}
+        </view>
+        <view class="feedback-text">
+          {{isCorrect ? '回答正确！' : '正确答案：' + correctAnswerText}}
+        </view>
+        <view class="analysis" wx:if="{{currentQuestion.analysis}}">
+          {{currentQuestion.analysis}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 语法测试完成过渡界面 -->
+  <view class="transition-screen" wx:if="{{testState === 'grammar-complete'}}">
+    <view class="transition-content">
+      <view class="transition-title">🎉 太棒了！</view>
+      <view class="transition-message">
+        接下来让我们看看您对不同词性书写的掌握情况，加油哦！
+      </view>
+      <button class="continue-btn" bindtap="startWritingTest">开始测试</button>
+    </view>
+  </view>
+
+  <!-- 书写测试界面 -->
+  <view class="test-screen" wx:if="{{testState === 'writing-test'}}">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+    
+    <view class="question-card">
+      <view class="question-header">
+        <text class="question-number">第{{currentQuestionIndex + 6}}题</text>
+        <text class="question-type">书写填空题</text>
+      </view>
+      
+      <view class="question-content">
+        <text class="question-text">{{currentQuestion.question}}</text>
+      </view>
+      
+      <view class="answer-input-container">
+        <input 
+          class="answer-input" 
+          placeholder="请输入答案（空答案将记为错误）" 
+          value="{{userInput}}"
+          bindinput="inputWritingAnswer"
+          bindconfirm="submitWritingAnswer"
+        />
+        <button class="submit-btn" bindtap="submitWritingAnswer">提交</button>
+      </view>
+      
+      <view class="answer-tip">
+        <text class="tip-text">💡 提示：未填写答案将自动记为错误，请认真作答</text>
+      </view>
+      
+      <view class="answer-feedback" wx:if="{{showAnswer}}">
+        <view class="feedback-icon {{isCorrect ? 'correct' : 'incorrect'}}">
+          {{isCorrect ? '✓' : '✗'}}
+        </view>
+        <view class="feedback-text">
+          {{isCorrect ? '回答正确！' : '正确答案：' + currentQuestion.answer}}
+        </view>
+        <view class="analysis" wx:if="{{currentQuestion.analysis}}">
+          {{currentQuestion.analysis}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 测试结果界面 -->
+  <view class="result-screen" wx:if="{{testState === 'result'}}">
+    <scroll-view class="result-scroll" scroll-y="true" enhanced="true" show-scrollbar="false">
+      <view class="result-content">
+      <view class="result-title">🎊 恭喜您完成了语法自测！</view>
+      <view class="result-subtitle">快来看看您的战绩和推荐的学习路径吧~</view>
+      
+      <view class="result-stats">
+        <view class="stat-item">
+          <text class="stat-label">语法题正确率</text>
+          <text class="stat-value">{{testResults.grammarCorrect}}/5</text>
+          <text class="stat-level">{{testResults.grammarLevel}}</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-label">书写题正确率</text>
+          <text class="stat-value">{{testResults.writingCorrect}}/5</text>
+          <text class="stat-level">{{testResults.writingLevel}}</text>
+        </view>
+        <view class="stat-item total">
+          <text class="stat-label">总正确率</text>
+          <text class="stat-value">{{testResults.totalCorrect}}/10</text>
+          <text class="stat-level">{{testResults.totalLevel}}</text>
+        </view>
+      </view>
+      
+      <view class="user-level-section">
+        <view class="user-level-title">用户等级：{{testResults.userLevel}}</view>
+        <view class="user-level-message">{{testResults.suggestion}}</view>
+      </view>
+      
+      <view class="recommendation-section">
+        <view class="recommendation-title">推荐学习路径</view>
+        <view class="recommendation-content">
+          <view class="recommendation-text">
+            建议从{{testResults.recommendation}}开始学习
+          </view>
+          <view class="next-steps">
+            <view class="next-steps-title">建议学习步骤：</view>
+            <view class="next-steps-list">
+              <view class="next-step-item" wx:for="{{testResults.nextSteps}}" wx:key="index">
+                <text>• {{item}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 具体推荐练习卡片 -->
+      <view class="specific-recommendations" wx:if="{{testResults.specificRecommendations.length > 0}}">
+        <view class="specific-recommendations-title">🎯 为您推荐的练习</view>
+        <view class="specific-recommendations-list">
+          <view 
+            class="recommendation-card" 
+            wx:for="{{testResults.specificRecommendations}}" 
+            wx:key="index"
+            bindtap="startSpecificRecommendation"
+            data-index="{{index}}"
+          >
+            <view class="recommendation-card-header">
+              <view class="recommendation-icon">{{item.icon}}</view>
+              <view class="recommendation-card-title">{{item.title}}</view>
+            </view>
+            <view class="recommendation-card-description">{{item.description}}</view>
+            <view class="recommendation-card-arrow">→</view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 24题完整版测试入口 -->
+      <view class="comprehensive-test-section">
+        <view class="comprehensive-test-title">📝 想要更详细的书写能力评估？</view>
+        <view class="comprehensive-test-desc">24题全面版书写测试，精准筛查19个表格掌握情况</view>
+        <button class="comprehensive-test-btn" bindtap="goToComprehensiveTest">
+          开始24题全面测试
+        </button>
+      </view>
+
+      <!-- 个性化推荐入口 -->
+      <view class="recommendation-actions">
+        <view class="recommendation-actions-title">🚀 立即开始学习</view>
+        <view class="recommendation-buttons">
+          <button 
+            class="recommendation-btn primary" 
+            bindtap="startRecommendedLearning"
+            data-type="{{testResults.recommendation}}"
+          >
+            {{testResults.recommendation}}
+          </button>
+          <button 
+            class="recommendation-btn secondary" 
+            bindtap="viewLearningPath"
+          >
+            查看学习路径
+          </button>
+        </view>
+      </view>
+
+      <view class="action-buttons">
+        <button class="retake-btn" bindtap="retakeTest">重新测试</button>
+        <button class="view-result-btn" bindtap="viewTestResults">查看测试结果</button>
+        <button class="complete-btn" bindtap="completeTest">完成测试</button>
+      </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 预览各等级结果界面 -->
+  <view class="preview-screen" wx:if="{{testState === 'preview'}}">
+    <view class="preview-content">
+      <view class="preview-header">
+        <view class="preview-title">🔍 各等级结果预览</view>
+        <view class="close-btn" bindtap="closePreview">×</view>
+      </view>
+      
+      <scroll-view class="preview-scroll" scroll-y="true" enhanced="true" show-scrollbar="false">
+        <view class="level-preview-list">
+          <view wx:for="{{previewLevels}}" wx:key="level" wx:for-item="levelData" class="level-preview-item">
+            <view class="level-preview-header">
+              <view class="level-preview-title">{{levelData.title}}</view>
+              <view class="level-preview-subtitle">{{levelData.subtitle}}</view>
+            </view>
+            
+            <view class="level-preview-stats">
+              <view class="stat-item">
+                <text class="stat-label">语法题正确率</text>
+                <text class="stat-value">{{levelData.grammarCorrect}}/5</text>
+                <text class="stat-level">{{levelData.grammarLevel}}</text>
+              </view>
+              <view class="stat-item">
+                <text class="stat-label">书写题正确率</text>
+                <text class="stat-value">{{levelData.writingCorrect}}/5</text>
+                <text class="stat-level">{{levelData.writingLevel}}</text>
+              </view>
+              <view class="stat-item total">
+                <text class="stat-label">总正确率</text>
+                <text class="stat-value">{{levelData.totalCorrect}}/10</text>
+                <text class="stat-level">{{levelData.totalLevel}}</text>
+              </view>
+            </view>
+            
+            <view class="level-preview-user-level">
+              <view class="user-level-title">用户等级：{{levelData.userLevel}}</view>
+              <view class="user-level-message">{{levelData.suggestion}}</view>
+            </view>
+            
+            <view class="level-preview-recommendations">
+              <view class="recommendation-title">推荐模块</view>
+              <view class="recommendation-content">{{levelData.recommendation}}</view>
+              <view class="suggestion-content">{{levelData.suggestion}}</view>
+            </view>
+            
+            <view class="level-preview-actions">
+              <view class="next-steps-title">下一步建议：</view>
+              <view class="next-steps-list">
+                <view wx:for="{{levelData.nextSteps}}" wx:key="index" wx:for-item="step" class="next-step-item">
+                  • {{step}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

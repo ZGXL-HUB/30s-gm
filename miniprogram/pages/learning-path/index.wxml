@@ -1,0 +1,99 @@
+<!--学习路径管理页面-->
+<view class="container">
+  <!-- 用户等级信息 -->
+  <view class="user-level-card">
+    <view class="level-title">当前用户等级</view>
+    <view class="level-name">{{userLevel}}</view>
+    <view class="level-description">{{currentPath.title}} ({{currentPath.duration}})</view>
+  </view>
+
+  <!-- 学习步骤列表 -->
+  <view class="steps-container">
+    <view class="steps-title">学习步骤</view>
+    <view class="steps-list">
+      <view 
+        class="step-item {{completedSteps.includes(item.id) ? 'completed' : ''}}"
+        wx:for="{{currentPath.steps}}" 
+        wx:key="id"
+        data-step-id="{{item.id}}"
+      >
+        <view class="step-header">
+          <view class="step-title">{{item.title}}</view>
+          <view class="step-status">
+            <text wx:if="{{completedSteps.includes(item.id)}}" class="status-completed">✓ 已完成</text>
+            <text wx:else class="status-pending">待完成</text>
+          </view>
+        </view>
+        
+        <view class="step-description">{{item.description}}</view>
+        
+        <view class="step-info">
+          <view class="step-difficulty difficulty-{{item.difficulty}}">
+            {{item.difficulty === 'easy' ? '简单' : item.difficulty === 'medium' ? '中等' : item.difficulty === 'hard' ? '困难' : '专家'}}
+          </view>
+          <view class="step-time">{{item.estimatedTime}}</view>
+        </view>
+        
+        <view class="step-actions">
+          <button 
+            class="action-btn primary" 
+            bindtap="startStep"
+            data-step-id="{{item.id}}"
+          >
+            开始学习
+          </button>
+          <button 
+            class="action-btn secondary" 
+            bindtap="completeStep"
+            data-step-id="{{item.id}}"
+            wx:if="{{!completedSteps.includes(item.id)}}"
+          >
+            标记完成
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 薄弱环节 -->
+  <view class="weak-points-card" wx:if="{{weakPoints.length > 0}}">
+    <view class="card-title">薄弱环节</view>
+    <view class="weak-points-list">
+      <view class="weak-point-item" wx:for="{{weakPoints}}" wx:key="tag">
+        <text>• {{item.name}} (错误率: {{Math.round(item.errorRate * 100)}}%)</text>
+      </view>
+    </view>
+    <button class="view-weak-btn" bindtap="viewWeakPoints">查看详情</button>
+  </view>
+
+  <!-- 学习统计 -->
+  <view class="statistics-card">
+    <view class="card-title">学习统计</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <view class="stat-number">{{completedSteps.length}}/{{currentPath.steps.length}}</view>
+        <view class="stat-label">完成步骤</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number">{{Math.round((completedSteps.length / currentPath.steps.length) * 100)}}%</view>
+        <view class="stat-label">完成率</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-number">{{weakPoints.length}}</view>
+        <view class="stat-label">薄弱环节</view>
+      </view>
+    </view>
+    <button class="view-stats-btn" bindtap="viewStatistics">查看详细统计</button>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="action-btn secondary" bindtap="reassess">重新评估</button>
+    <button class="action-btn primary" bindtap="goHome">返回主页</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-section" wx:if="{{loading}}">
+    <view class="loading-text">正在加载学习路径...</view>
+  </view>
+</view>

@@ -1,0 +1,105 @@
+<!--pages/grammar-test-sets/test.wxml-->
+<view class="container">
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="test-content" wx:elif="{{!showResult}}">
+    <view class="header">
+      <text class="set-name">{{setName}}</text>
+      <text class="progress">{{currentIndex + 1}} / {{totalQuestions}}</text>
+    </view>
+
+    <view class="question-container">
+      <view class="question-tag">
+        <text>{{questions[currentIndex].tag}}</text>
+      </view>
+      
+      <view class="question-text">
+        <text>{{questions[currentIndex].text}}</text>
+      </view>
+      
+      <view class="answer-input">
+        <input 
+          type="text" 
+          placeholder="请输入答案" 
+          value="{{userAnswers[currentIndex]}}"
+          bindinput="onInputChange"
+          class="input-field"
+        />
+      </view>
+    </view>
+
+    <view class="navigation">
+      <button 
+        class="nav-btn prev-btn" 
+        bindtap="onPrevQuestion" 
+        disabled="{{currentIndex === 0}}"
+      >
+        上一题
+      </button>
+      
+      <button 
+        class="nav-btn next-btn" 
+        bindtap="onNextQuestion"
+        disabled="{{!userAnswers[currentIndex]}}"
+      >
+        {{currentIndex === totalQuestions - 1 ? '提交' : '下一题'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="result-content" wx:else>
+    <view class="result-header">
+      <text class="result-title">测试完成</text>
+      <text class="result-subtitle">{{setName}}</text>
+    </view>
+
+    <view class="score-display">
+      <text class="score-text">得分</text>
+      <text class="score-value">{{score}} / {{totalQuestions}}</text>
+      <text class="score-percentage">{{Math.round(score / totalQuestions * 100)}}%</text>
+    </view>
+
+    <!-- 新增：详细解析部分 -->
+    <view class="analysis-section">
+      <text class="analysis-title">题目解析</text>
+      
+      <view class="question-analysis" wx:for="{{questions}}" wx:key="index">
+        <view class="question-header">
+          <text class="question-number">第{{index + 1}}题</text>
+          <view class="question-result {{userAnswers[index] === item.answer ? 'correct' : 'incorrect'}}">
+            {{userAnswers[index] === item.answer ? '✓' : '✗'}}
+          </view>
+        </view>
+        
+        <view class="question-content">
+          <text class="question-text">{{item.text}}</text>
+        </view>
+        
+        <view class="answer-comparison">
+          <view class="answer-item">
+            <text class="answer-label">正确答案：</text>
+            <text class="answer-value correct-answer">{{item.answer}}</text>
+          </view>
+          <view class="answer-item">
+            <text class="answer-label">您的答案：</text>
+            <text class="answer-value {{userAnswers[index] === item.answer ? 'correct-answer' : 'wrong-answer'}}">
+              {{userAnswers[index] || '未作答'}}
+            </text>
+          </view>
+        </view>
+        
+        <view class="analysis-content">
+          <text class="analysis-label">解析：</text>
+          <text class="analysis-text">{{item.analysis}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="result-actions">
+      <button class="action-btn retry-btn" bindtap="onRetry">重新测试</button>
+      <button class="action-btn back-btn" bindtap="onBackToList">返回列表</button>
+    </view>
+  </view>
+</view>

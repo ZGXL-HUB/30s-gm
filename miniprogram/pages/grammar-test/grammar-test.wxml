@@ -1,0 +1,115 @@
+<!--pages/grammar-test/grammar-test.wxml-->
+<view class="container">
+  <!-- 套题选择界面 -->
+  <view wx:if="{{showSetSelection}}" class="set-selection">
+    <view class="header">
+      <text class="title">语法测试套题</text>
+      <text class="subtitle">请选择一套测试题进行练习</text>
+    </view>
+    
+    <view class="test-sets">
+      <view 
+        wx:for="{{testSets}}" 
+        wx:key="id" 
+        class="test-set-item"
+        bindtap="selectTestSet"
+        data-id="{{item.id}}"
+      >
+        <view class="set-info">
+          <text class="set-name">{{item.name}}</text>
+          <text class="set-count">{{item.questions.length}}道题目</text>
+        </view>
+        <view class="set-arrow">></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 测试界面 -->
+  <view wx:else class="test-interface">
+    <!-- 测试进度 -->
+    <view class="progress-bar">
+      <view class="progress-info">
+        <text class="progress-text">第{{currentQuestionIndex + 1}}题 / 共{{totalQuestions}}题</text>
+        <text class="score-text">得分: {{score}}</text>
+      </view>
+      <view class="progress-line">
+        <view class="progress-fill" style="width: {{(currentQuestionIndex + 1) / totalQuestions * 100}}%"></view>
+      </view>
+    </view>
+
+    <!-- 题目内容 -->
+    <view class="question-container">
+      <view class="question-text">
+        {{currentSet.questions[currentQuestionIndex].text}}
+      </view>
+      
+      <!-- 选项 -->
+      <view class="options">
+        <view 
+          wx:for="{{currentSet.questions[currentQuestionIndex].option}}" 
+          wx:key="*this"
+          class="option-item"
+          bindtap="selectAnswer"
+          data-answer="{{item}}"
+        >
+          <text class="option-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 返回按钮 -->
+    <view class="back-btn" bindtap="backToSetSelection">
+      返回套题选择
+    </view>
+  </view>
+
+  <!-- 测试完成界面 -->
+  <view wx:if="{{testCompleted}}" class="completion-interface">
+    <view class="completion-content">
+      <view class="completion-title">测试完成！</view>
+      <view class="score-display">
+        <text class="final-score">最终得分: {{score}} / {{totalQuestions}}</text>
+        <text class="score-percentage">正确率: {{scorePercentage}}%</text>
+      </view>
+      
+      <!-- 题目详细结果 -->
+      <view class="question-results">
+        <view class="results-title">题目详细结果</view>
+        <view 
+          wx:for="{{questionResults}}" 
+          wx:key="index"
+          class="result-item {{item.isCorrect ? 'correct' : 'wrong'}}"
+        >
+          <view class="result-header">
+            <text class="question-number">第{{index + 1}}题</text>
+            <text class="result-status">{{item.isCorrect ? '✓ 正确' : '✗ 错误'}}</text>
+          </view>
+          <view class="question-text">{{item.question}}</view>
+          <view class="answer-comparison">
+            <view class="answer-item">
+              <text class="answer-label">正确答案:</text>
+              <text class="answer-value correct">{{item.correctAnswer}}</text>
+            </view>
+            <view class="answer-item">
+              <text class="answer-label">你的答案:</text>
+              <text class="answer-value {{item.isCorrect ? 'correct' : 'wrong'}}">{{item.userAnswer}}</text>
+            </view>
+          </view>
+          <view class="analysis-section">
+            <text class="analysis-label">解析:</text>
+            <text class="analysis-text">{{item.analysis}}</text>
+          </view>
+          <view class="tag-section">
+            <text class="tag-label">语法点:</text>
+            <text class="tag-text">{{item.tag}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="completion-actions">
+        <view class="restart-btn" bindtap="restartTest">重新测试</view>
+        <view class="back-to-sets-btn" bindtap="backToSetSelection">选择其他套题</view>
+      </view>
+    </view>
+  </view>
+</view>

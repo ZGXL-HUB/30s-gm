@@ -1,0 +1,23 @@
+{
+  "name": "wechat-miniprogram-grammar",
+  "version": "1.0.0",
+  "description": "WeChat Mini Program for English Grammar Learning",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/generate-data-quality-report.js",
+    "build:report": "node scripts/generate-data-quality-report.js --report",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wechat",
+    "miniprogram",
+    "grammar",
+    "english"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "sharp": "^0.34.3"
+  }
+}

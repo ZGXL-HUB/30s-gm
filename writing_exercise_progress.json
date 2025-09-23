@@ -1,0 +1,28 @@
+{
+  "noun_001": {
+    "answers": {
+      "noun_001_1": {
+        "userAnswer": "-ness",
+        "correctAnswer": "-ness",
+        "correct": true,
+        "timestamp": "2025-08-31T13:00:28.336Z",
+        "attempts": 1
+      }
+    },
+    "totalAttempts": 1,
+    "correctAttempts": 1,
+    "lastPracticed": "2025-08-31T13:00:28.336Z",
+    "sessions": [
+      {
+        "tableId": "noun_001",
+        "startTime": "2025-08-31T13:00:28.336Z",
+        "endTime": "2025-08-31T13:00:28.338Z",
+        "totalQuestions": 3,
+        "answeredQuestions": 1,
+        "correctAnswers": 1,
+        "accuracy": 100,
+        "duration": "0分0秒"
+      }
+    ]
+  }
+}

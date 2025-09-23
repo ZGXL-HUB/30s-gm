@@ -1,0 +1,253 @@
+<!--重测我的语法水平页面-->
+<view class="container">
+  <!-- 欢迎界面 -->
+  <view class="welcome-screen" wx:if="{{testState === 'welcome'}}">
+    <view class="welcome-content">
+      <view class="welcome-title">🎯 重测我的语法水平</view>
+      <view class="welcome-message">
+        亲爱的用户，现在让我们通过两道题重新测一测您的语法水平，我会根据您的测试结果给出针对性的使用说明哦！
+      </view>
+      <button class="start-btn" bindtap="startTest">开始测试</button>
+    </view>
+  </view>
+
+  <!-- 测试界面 -->
+  <view class="test-screen" wx:if="{{testState === 'testing'}}">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+    
+    <view class="question-card">
+      <view class="question-header">
+        <text class="question-number">第{{currentQuestionIndex + 1}}题</text>
+        <text class="question-type">语法选择题</text>
+      </view>
+      
+      <view class="question-content">
+        <text class="question-text">{{currentQuestion.text}}</text>
+      </view>
+      
+      <view class="options-container">
+        <view 
+          class="option-item {{showAnswer && option === currentQuestion.correctAnswer ? 'correct' : ''}} {{showAnswer && option !== currentQuestion.correctAnswer && userAnswer === option ? 'incorrect' : ''}}"
+          wx:for="{{currentQuestion.options}}" 
+          wx:key="index"
+          wx:for-item="option"
+          data-option="{{option}}"
+          bindtap="selectOption"
+          catchtap="selectOption"
+        >
+          <text class="option-label">{{index + 1}}</text>
+          <text class="option-text">{{option}}</text>
+        </view>
+      </view>
+      
+      <!-- 调试信息 -->
+      <view class="debug-info" wx:if="{{currentQuestion}}">
+        <text class="debug-text">当前题目: {{currentQuestion.text}}</text>
+        <text class="debug-text">选项数量: {{currentQuestion.options.length}}</text>
+        <text class="debug-text">用户答案: {{userAnswer}}</text>
+        <text class="debug-text">正确答案: {{currentQuestion.correctAnswer}}</text>
+      </view>
+      
+      <!-- 测试按钮 -->
+      <view class="test-buttons" wx:if="{{currentQuestion && currentQuestion.options}}">
+        <button class="test-option-btn" bindtap="forceSelectOption" data-option="{{currentQuestion.options[0]}}">选择A</button>
+        <button class="test-option-btn" bindtap="forceSelectOption" data-option="{{currentQuestion.options[1]}}">选择B</button>
+        <button class="test-option-btn" bindtap="forceSelectOption" data-option="{{currentQuestion.options[2]}}">选择C</button>
+      </view>
+      
+      <view class="answer-feedback" wx:if="{{showAnswer}}">
+        <view class="feedback-icon {{isCorrect ? 'correct' : 'incorrect'}}">
+          {{isCorrect ? '✓' : '✗'}}
+        </view>
+        <view class="feedback-text">
+          {{isCorrect ? '回答正确！' : '正确答案：' + currentQuestion.correctAnswer}}
+        </view>
+        <view class="analysis" wx:if="{{currentQuestion.analysis}}">
+          {{currentQuestion.analysis}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结果界面 -->
+  <view class="result-screen" wx:if="{{testState === 'result'}}">
+    <view class="result-content">
+      <view class="result-title">🎉 测试完成！</view>
+      
+      <!-- 得分和评级 -->
+      <view class="result-summary">
+        <view class="score-section">
+          <view class="score-title">您的得分</view>
+          <view class="score-value">{{testResults.correctCount}}/{{testResults.totalQuestions}}</view>
+          <view class="score-rate">正确率：{{testResults.correctRate}}%</view>
+        </view>
+        
+        <view class="level-section">
+          <view class="level-title">语法水平评级</view>
+          <view class="level-value level-{{testResults.level}}">
+            {{testResults.level === 'level1' ? '较为薄弱' : 
+              testResults.level === 'level2' ? '稍弱' : 
+              testResults.level === 'level3' ? '不错哦' : 
+              testResults.level === 'level4' ? '超棒的' : '简直完美'}}
+          </view>
+        </view>
+      </view>
+      
+      <!-- 推荐和建议 -->
+      <view class="recommendation-section">
+        <view class="recommendation-title">推荐模块</view>
+        <view class="recommendation-content">{{testResults.recommendation}}</view>
+        <view class="suggestion-content">{{testResults.suggestion}}</view>
+      </view>
+      
+      <!-- 重要提示信息 -->
+      <view class="result-tip">
+        如果想要重新测试语法能力可以从'进阶之旅'模块再次测试，常测常新哦~
+      </view>
+      
+      <!-- 下一步推荐 -->
+      <view class="next-steps-section">
+        <view class="next-steps-title">🎯 根据您的测试结果，推荐下一步：</view>
+        <view class="next-steps-list">
+          <view class="next-step-item" bindtap="goToRecommendedPractice">
+            <view class="step-icon">📚</view>
+            <view class="step-content">
+              <view class="step-title">开始语法练习</view>
+              <view class="step-desc">根据您的薄弱环节，进行针对性练习</view>
+            </view>
+            <view class="step-arrow">></view>
+          </view>
+          
+          <view class="next-step-item" bindtap="goToDailyRecommendation">
+            <view class="step-icon">🎯</view>
+            <view class="step-content">
+              <view class="step-title">查看每日推荐</view>
+              <view class="step-desc">获取个性化的每日学习任务</view>
+            </view>
+            <view class="step-arrow">></view>
+          </view>
+          
+          <view class="next-step-item" bindtap="goToWritingTest">
+            <view class="step-icon">✍️</view>
+            <view class="step-content">
+              <view class="step-title">测试书写能力</view>
+              <view class="step-desc">全面评估您的书写规范掌握情况</view>
+            </view>
+            <view class="step-arrow">></view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 底部三个按钮 -->
+      <view class="result-actions">
+        <button class="result-btn analysis-btn" bindtap="viewAnalysis">
+          <text class="btn-icon">📖</text>
+          <text class="btn-text">查看解析</text>
+        </button>
+        <button class="result-btn report-btn" bindtap="viewReport">
+          <text class="btn-icon">📊</text>
+          <text class="btn-text">查看报告</text>
+        </button>
+        <button class="result-btn save-btn" bindtap="saveToDailyTask">
+          <text class="btn-icon">💾</text>
+          <text class="btn-text">保存错题到每日任务</text>
+        </button>
+      </view>
+
+      <!-- 反馈入口 -->
+      <view class="feedback-section">
+        <view class="feedback-title">测试体验如何？</view>
+        <view class="feedback-desc">您的反馈帮助我们不断改进测试质量</view>
+        <button class="feedback-btn" bindtap="goToFeedback" data-type="experience" data-context="grammar_test">
+          💬 反馈测试体验
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 解析界面 -->
+  <view class="analysis-screen" wx:if="{{showAnalysis}}">
+    <view class="analysis-content">
+      <view class="analysis-header">
+        <view class="analysis-title">📖 题目解析</view>
+        <view class="close-btn" bindtap="viewReport">×</view>
+      </view>
+      
+      <view class="analysis-list">
+        <view wx:for="{{userAnswers}}" wx:key="id" wx:for-item="answer" class="analysis-item">
+          <view class="question-header-analysis">
+            <text class="question-number-analysis">第{{index + 1}}题</text>
+            <text class="question-tag">{{answer.tag}}</text>
+          </view>
+          
+          <view class="question-text-analysis">{{answer.question}}</view>
+          
+          <view class="answer-details">
+            <view class="answer-row">
+              <text class="answer-label">正确答案：</text>
+              <text class="answer-correct">{{answer.correctAnswer}}</text>
+            </view>
+            <view class="answer-row">
+              <text class="answer-label">您的答案：</text>
+              <text class="answer-user {{answer.isCorrect ? 'correct' : 'incorrect'}}">{{answer.selectedAnswer}}</text>
+            </view>
+            <view class="answer-row">
+              <text class="answer-label">结果：</text>
+              <text class="answer-result {{answer.isCorrect ? 'correct' : 'incorrect'}}">
+                {{answer.isCorrect ? '✓ 正确' : '✗ 错误'}}
+              </text>
+            </view>
+          </view>
+          
+          <view class="analysis-content-text" wx:if="{{answer.analysis}}">
+            <text class="analysis-label">解析：</text>
+            <text class="analysis-text">{{answer.analysis}}</text>
+          </view>
+          
+          <view class="question-source">来源：{{answer.setInfo}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 报告界面 -->
+  <view class="report-screen" wx:if="{{showReport}}">
+    <view class="report-content">
+      <view class="report-header">
+        <view class="report-title">📊 测试报告</view>
+        <view class="close-btn" bindtap="viewAnalysis">×</view>
+      </view>
+      
+      <view class="report-summary">
+        <view class="report-score">
+          <view class="report-score-title">总体得分</view>
+          <view class="report-score-value">{{testResults.correctCount}}/{{testResults.totalQuestions}}</view>
+          <view class="report-score-rate">正确率：{{testResults.correctRate}}%</view>
+        </view>
+        
+        <view class="report-level">
+          <view class="report-level-title">语法水平评级</view>
+          <view class="report-level-value level-{{testResults.level}}">
+            {{testResults.level === 'level1' ? '较为薄弱' : 
+              testResults.level === 'level2' ? '稍弱' : 
+              testResults.level === 'level3' ? '不错哦' : 
+              testResults.level === 'level4' ? '超棒的' : '简直完美'}}
+          </view>
+        </view>
+      </view>
+      
+      <view class="report-recommendation">
+        <view class="report-recommendation-title">推荐模块</view>
+        <view class="report-recommendation-content">{{testResults.recommendation}}</view>
+        <view class="report-suggestion-content">{{testResults.suggestion}}</view>
+      </view>
+      
+      <view class="report-actions">
+        <button class="report-action-btn" bindtap="retest">重新测试</button>
+        <button class="report-action-btn" bindtap="goHome">返回首页</button>
+      </view>
+    </view>
+  </view>
+</view>

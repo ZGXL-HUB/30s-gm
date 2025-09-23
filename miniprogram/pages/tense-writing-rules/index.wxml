@@ -1,0 +1,160 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="时态书写规则学习"
+    description="系统学习英语八大时态的结构和用法，掌握动词变化规律"
+    tip="💡 提示：注意观察不同时态的结构差异和用法区别"
+    icon="⏰"
+    storage-key="tense-writing-rules-guide"
+  />
+  
+  <view class="content">
+    <view class="title">以下是英语中常见时态的知识点总结，每个时态均包含四个代表性单词的变化写法：</view>
+    
+    <view class="section">
+      <view class="section-title">一、一般现在时（Present Simple）</view>
+      <view class="section-desc">用法：表示经常性动作、客观事实或真理。</view>
+      <view class="section-desc">结构：主语+动词原形/第三人称单数形式。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → do/does（第三人称单数）</view>
+      <view class="word-item">• work → work/works</view>
+      <view class="word-item">• play → play/plays</view>
+      <view class="word-item">• study → study/studies（以辅音+y结尾，变y为i+es）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">二、一般过去时（Past Simple）</view>
+      <view class="section-desc">用法：表示过去发生的动作或状态。</view>
+      <view class="section-desc">结构：主语+动词过去式。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → did（不规则变化）</view>
+      <view class="word-item">• work → worked（规则变化，直接+ed）</view>
+      <view class="word-item">• play → played（规则变化，直接+ed）</view>
+      <view class="word-item">• study → studied（以辅音+y结尾，变y为i+ed）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">三、一般将来时（Future Simple）</view>
+      <view class="section-desc">用法：表示将来发生的动作或状态。</view>
+      <view class="section-desc">结构：主语+will/shall+动词原形。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → will do</view>
+      <view class="word-item">• work → will work</view>
+      <view class="word-item">• play → will play</view>
+      <view class="word-item">• study → will study</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">四、现在进行时（Present Continuous）</view>
+      <view class="section-desc">用法：表示现在正在进行的动作。</view>
+      <view class="section-desc">结构：主语+am/is/are+动词现在分词（-ing形式）。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → doing（直接+ing）</view>
+      <view class="word-item">• work → working（直接+ing）</view>
+      <view class="word-item">• play → playing（直接+ing）</view>
+      <view class="word-item">• study → studying（直接+ing）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">五、过去进行时（Past Continuous）</view>
+      <view class="section-desc">用法：表示过去某一时刻正在进行的动作。</view>
+      <view class="section-desc">结构：主语+was/were+动词现在分词（-ing形式）。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → was/were doing</view>
+      <view class="word-item">• work → was/were working</view>
+      <view class="word-item">• play → was/were playing</view>
+      <view class="word-item">• study → was/were studying</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">六、现在完成时（Present Perfect）</view>
+      <view class="section-desc">用法：表示过去发生的动作对现在的影响，或持续到现在的动作。</view>
+      <view class="section-desc">结构：主语+have/has+动词过去分词。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → have/has done（过去分词：done）</view>
+      <view class="word-item">• work → have/has worked（过去分词：worked）</view>
+      <view class="word-item">• play → have/has played（过去分词：played）</view>
+      <view class="word-item">• study → have/has studied（过去分词：studied）</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">七、过去完成时（Past Perfect）</view>
+      <view class="section-desc">用法：表示在过去某一时间之前已完成的动作。</view>
+      <view class="section-desc">结构：主语+had+动词过去分词。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → had done</view>
+      <view class="word-item">• work → had worked</view>
+      <view class="word-item">• play → had played</view>
+      <view class="word-item">• study → had studied</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">八、将来进行时（Future Continuous）</view>
+      <view class="section-desc">用法：表示将来某一时刻正在进行的动作。</view>
+      <view class="section-desc">结构：主语+will be+动词现在分词（-ing形式）。</view>
+      <view class="section-subtitle">单词变化：</view>
+      <view class="word-item">• do → will be doing</view>
+      <view class="word-item">• work → will be working</view>
+      <view class="word-item">• play → will be playing</view>
+      <view class="word-item">• study → will be studying</view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">总结对比表</view>
+      <view class="table-container">
+        <view class="table-row header">
+          <view class="table-cell">时态</view>
+          <view class="table-cell">结构</view>
+          <view class="table-cell">示例（以do为例）</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">一般现在时</view>
+          <view class="table-cell">动词原形/第三人称单数</view>
+          <view class="table-cell">do/does</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">一般过去时</view>
+          <view class="table-cell">动词过去式</view>
+          <view class="table-cell">did</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">一般将来时</view>
+          <view class="table-cell">will + 动词原形</view>
+          <view class="table-cell">will do</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">现在进行时</view>
+          <view class="table-cell">am/is/are + 现在分词</view>
+          <view class="table-cell">am/is/are doing</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">过去进行时</view>
+          <view class="table-cell">was/were + 现在分词</view>
+          <view class="table-cell">was/were doing</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">现在完成时</view>
+          <view class="table-cell">have/has + 过去分词</view>
+          <view class="table-cell">have/has done</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">过去完成时</view>
+          <view class="table-cell">had + 过去分词</view>
+          <view class="table-cell">had done</view>
+        </view>
+        <view class="table-row">
+          <view class="table-cell">将来进行时</view>
+          <view class="table-cell">will be + 现在分词</view>
+          <view class="table-cell">will be doing</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">注意事项：</view>
+      <view class="note-item">1. 不规则动词的过去式和过去分词需单独记忆（如do→did→done）。</view>
+      <view class="note-item">2. 现在分词变化规则：一般直接+ing；以不发音e结尾去e+ing；重读闭音节双写末尾辅音+ing。</view>
+      <view class="note-item">3. 第三人称单数变化规则：一般+s；以s/x/sh/ch结尾+es；以辅音+y结尾变y为i+es。</view>
+    </view>
+  </view>
+</view> 

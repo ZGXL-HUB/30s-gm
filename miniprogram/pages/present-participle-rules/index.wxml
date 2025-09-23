@@ -1,0 +1,152 @@
+<view class="container">
+  <view class="title">动词变现在分词（-ing形式）规则全梳理</view>
+  
+  <!-- 一般情况：直接加 -ing -->
+  <view class="rule-section">
+    <view class="rule-header">一、一般情况：直接加 -ing</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：动词原形后直接加 -ing，无需变形。
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. work→working（工作）</view>
+        <view class="example-item">2. read→reading（阅读）</view>
+        <view class="example-item">3. play→playing（玩耍）</view>
+        <view class="example-item">4. listen→listening（听）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 以不发音的e结尾：去e加 -ing -->
+  <view class="rule-section">
+    <view class="rule-header">二、以不发音的e结尾：去e加 -ing</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：词尾e不发音时，先去e再加 -ing；若e发音（如see、agree等），直接加 -ing。
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. write→writing（写）</view>
+        <view class="example-item">2. make→making（制作）</view>
+        <view class="example-item">3. take→taking（拿）</view>
+        <view class="example-item">4. live→living（居住）</view>
+      </view>
+      <view class="exceptions">
+        <text class="bold">例外</text>：
+        <view class="exception-item">• see→seeing（e发音，直接加）</view>
+        <view class="exception-item">• agree→agreeing（e发音，直接加）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 重读闭音节结尾：双写辅音字母加 -ing -->
+  <view class="rule-section">
+    <view class="rule-header">三、重读闭音节结尾：双写辅音字母加 -ing</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：
+        <view class="rule-point">1. 单词结尾为"辅音字母+元音字母+辅音字母"（如run, sit）；</view>
+        <view class="rule-point">2. 结尾音节为重读音节。</view>
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. run→running（跑）</view>
+        <view class="example-item">2. stop→stopping（停止）</view>
+        <view class="example-item">3. swim→swimming（游泳）</view>
+        <view class="example-item">4. put→putting（放置）</view>
+      </view>
+      <view class="note">
+        <text class="bold">注意</text>：非重读音节不双写，如visit→visiting（重音在第一音节）。
+      </view>
+    </view>
+  </view>
+
+  <!-- 以ie结尾：变ie为y加 -ing -->
+  <view class="rule-section">
+    <view class="rule-header">四、以ie结尾：变ie为y加 -ing</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：少数以ie结尾且发/aɪ/音的动词，需变ie为y再加 -ing。
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. lie→lying（躺）</view>
+        <view class="example-item">2. die→dying（死亡）</view>
+        <view class="example-item">3. tie→tying（系）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 特殊变化动词 -->
+  <view class="rule-section">
+    <view class="rule-header">五、特殊变化动词</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：无固定规律，需单独记忆。
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. be→being（是）</view>
+        <view class="example-item">2. have→having（有）</view>
+        <view class="example-item">3. do→doing（做）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 易混规则对比表 -->
+  <view class="rule-section">
+    <view class="rule-header">六、易混规则对比表</view>
+    <view class="table-container">
+      <view class="table-header">
+        <view class="table-cell">变化类型</view>
+        <view class="table-cell">规则要点</view>
+        <view class="table-cell">例词1</view>
+        <view class="table-cell">例词2</view>
+        <view class="table-cell">例词3</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">直接加 -ing</view>
+        <view class="table-cell">一般动词原形</view>
+        <view class="table-cell">work→working</view>
+        <view class="table-cell">read→reading</view>
+        <view class="table-cell">play→playing</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">去e加 -ing</view>
+        <view class="table-cell">词尾e不发音</view>
+        <view class="table-cell">write→writing</view>
+        <view class="table-cell">make→making</view>
+        <view class="table-cell">take→taking</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">双写加 -ing</view>
+        <view class="table-cell">重读闭音节+单辅音结尾</view>
+        <view class="table-cell">run→running</view>
+        <view class="table-cell">stop→stopping</view>
+        <view class="table-cell">swim→swimming</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">变ie为y加 -ing</view>
+        <view class="table-cell">以ie结尾且发/aɪ/音</view>
+        <view class="table-cell">lie→lying</view>
+        <view class="table-cell">die→dying</view>
+        <view class="table-cell">tie→tying</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 记忆口诀 -->
+  <view class="rule-section memory-section">
+    <view class="rule-header">记忆口诀</view>
+    <view class="memory-content">
+      <view class="memory-line">"直去双变加，规则要记清：</view>
+      <view class="memory-line">一般直接加ing，e不发音去e行；</view>
+      <view class="memory-line">重读闭音节双写末，ie变y再变形；</view>
+      <view class="memory-line">特殊动词单独记，being/having/doing别忘记。"</view>
+    </view>
+    <view class="tip">
+      通过分类练习（如用stop/swim造句），可快速掌握规则～遇到不确定的动词，先判断词尾结构，再对应规则变形哦！
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,210 @@
+<!-- 教师端作业创建页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">创建作业</text>
+    <text class="subtitle">为您的学生创建语法练习作业</text>
+  </view>
+
+  <!-- 基础信息 -->
+  <view class="section">
+    <view class="section-title">基础信息</view>
+    
+    <view class="form-item">
+      <text class="label">作业标题 *</text>
+      <input 
+        class="input" 
+        placeholder="请输入作业标题" 
+        value="{{assignmentTitle}}"
+        bindinput="setAssignmentTitle"
+      />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">作业描述</text>
+      <textarea 
+        class="textarea" 
+        placeholder="请输入作业描述（可选）" 
+        value="{{assignmentDescription}}"
+        bindinput="setAssignmentDescription"
+      />
+    </view>
+    
+    <view class="form-item">
+      <text class="label">截止时间 *</text>
+      <picker 
+        mode="datetime" 
+        value="{{deadline}}" 
+        bindchange="setDeadline"
+        class="picker"
+      >
+        <view class="picker-text">
+          {{deadline || '请选择截止时间'}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 题目选择 -->
+  <view class="section">
+    <view class="section-title">题目选择</view>
+    
+    <!-- 选择模式切换 -->
+    <view class="mode-tabs">
+      <view class="tab active">语法点选择</view>
+      <view class="tab" bindtap="addLastMistakes">上次错题</view>
+    </view>
+    
+    <!-- 语法点列表 -->
+    <view class="grammar-points">
+      <view 
+        wx:for="{{availableGrammarPoints}}" 
+        wx:key="id" 
+        class="grammar-point-item {{item.selected ? 'selected' : ''}}"
+        bindtap="selectGrammarPoint" 
+        data-id="{{item.id}}"
+      >
+        <view class="grammar-point-name">{{item.name}}</view>
+        
+        <!-- 历史信息 -->
+        <view class="grammar-point-history" wx:if="{{grammarPointHistory[item.id]}}">
+          <view class="history-item">
+            <text class="history-label">上次布置：</text>
+            <text class="history-value">{{grammarPointHistory[item.id].daysAgo}}天前</text>
+          </view>
+          <view class="history-item">
+            <text class="history-label">班级正确率：</text>
+            <text class="history-value {{grammarPointHistory[item.id].accuracyClass}}">
+              {{grammarPointHistory[item.id].classAccuracy}}%
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 已选题目统计 -->
+    <view class="selected-summary">
+      <text>已选择 {{selectedGrammarPoints.length}} 个语法点，共 {{questionCount}} 道题目</text>
+    </view>
+  </view>
+
+  <!-- 变式题设置 -->
+  <view class="section">
+    <view class="section-title">变式题设置</view>
+    
+    <view class="variant-mode">
+      <radio-group bindchange="setVariantMode">
+        <label class="radio-item">
+          <radio value="auto" checked="{{variantMode === 'auto'}}"/>自动生成
+        </label>
+        <label class="radio-item">
+          <radio value="manual" checked="{{variantMode === 'manual'}}"/>手动设置
+        </label>
+        <label class="radio-item">
+          <radio value="none" checked="{{variantMode === 'none'}}"/>不生成
+        </label>
+      </radio-group>
+    </view>
+    
+    <!-- 变式题规则设置 -->
+    <view class="variant-rules" wx:if="{{showVariantSettings}}">
+      <view class="rule-item">
+        <text class="rule-label">75%以上错误率：</text>
+        <input 
+          class="rule-input" 
+          type="number" 
+          value="{{variantRules['75']}}"
+          data-rule="75"
+          bindinput="setVariantRule"
+        />
+        <text class="rule-unit">题变式</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">50%以上错误率：</text>
+        <input 
+          class="rule-input" 
+          type="number" 
+          value="{{variantRules['50']}}"
+          data-rule="50"
+          bindinput="setVariantRule"
+        />
+        <text class="rule-unit">题变式</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">25%以上错误率：</text>
+        <input 
+          class="rule-input" 
+          type="number" 
+          value="{{variantRules['25']}}"
+          data-rule="25"
+          bindinput="setVariantRule"
+        />
+        <text class="rule-unit">题变式</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-label">25%以下错误率：</text>
+        <input 
+          class="rule-input" 
+          type="number" 
+          value="{{variantRules['0']}}"
+          data-rule="0"
+          bindinput="setVariantRule"
+        />
+        <text class="rule-unit">题变式</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="actions">
+    <button class="btn btn-secondary" bindtap="previewAssignment">预览作业</button>
+    <button 
+      class="btn btn-primary {{loading ? 'loading' : ''}}" 
+      bindtap="createAssignment"
+      disabled="{{loading}}"
+    >
+      {{loading ? '创建中...' : '创建作业'}}
+    </button>
+  </view>
+
+  <!-- 预览弹窗 -->
+  <view class="preview-modal" wx:if="{{showPreview}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">作业预览</text>
+        <text class="modal-close" bindtap="closePreview">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="preview-item">
+          <text class="preview-label">作业标题：</text>
+          <text class="preview-value">{{previewData.title}}</text>
+        </view>
+        <view class="preview-item">
+          <text class="preview-label">截止时间：</text>
+          <text class="preview-value">{{previewData.deadline}}</text>
+        </view>
+        <view class="preview-item">
+          <text class="preview-label">语法点：</text>
+          <text class="preview-value">{{previewData.grammarPoints.join('、')}}</text>
+        </view>
+        <view class="preview-item">
+          <text class="preview-label">题目数量：</text>
+          <text class="preview-value">{{previewData.questionCount}}题</text>
+        </view>
+        <view class="preview-item">
+          <text class="preview-label">变式题模式：</text>
+          <text class="preview-value">
+            {{previewData.variantMode === 'auto' ? '自动生成' : 
+              previewData.variantMode === 'manual' ? '手动设置' : '不生成'}}
+          </text>
+        </view>
+      </view>
+      
+      <view class="modal-actions">
+        <button class="btn btn-secondary" bindtap="closePreview">取消</button>
+        <button class="btn btn-primary" bindtap="createAssignment">确认创建</button>
+      </view>
+    </view>
+  </view>
+</view>

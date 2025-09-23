@@ -1,0 +1,9 @@
+{
+  "name": "initializeQuestions",
+  "version": "1.0.0",
+  "description": "Initialize questions database from local file",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+} 

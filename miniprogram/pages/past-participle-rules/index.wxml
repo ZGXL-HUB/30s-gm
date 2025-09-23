@@ -1,0 +1,187 @@
+<view class="container">
+  <view class="title">动词变过去分词（-ed形式）规则全梳理</view>
+  
+  <!-- 一般情况：直接加 -ed -->
+  <view class="rule-section">
+    <view class="rule-header">一、一般情况：直接加 -ed</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：动词原形后直接加 -ed，形式与过去式一致。
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. work→worked（工作）</view>
+        <view class="example-item">2. play→played（玩耍）</view>
+        <view class="example-item">3. visit→visited（参观）</view>
+        <view class="example-item">4. listen→listened（听）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 以不发音的e结尾：直接加 -d -->
+  <view class="rule-section">
+    <view class="rule-header">二、以不发音的e结尾：直接加 -d</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：词尾e不发音时，直接加d（无需去e）；若e发音，同样直接加d。
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. write→written（写）</view>
+        <view class="example-item">2. make→made（制作）</view>
+        <view class="example-item">3. live→lived（居住）</view>
+        <view class="example-item">4. love→loved（爱）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 重读闭音节结尾：双写辅音字母加 -ed -->
+  <view class="rule-section">
+    <view class="rule-header">三、重读闭音节结尾：双写辅音字母加 -ed</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：
+        <view class="rule-point">1. 结尾为"辅音字母+元音字母+辅音字母"结构（如stop, plan）；</view>
+        <view class="rule-point">2. 结尾音节为重读音节。</view>
+      </view>
+      <view class="examples">
+        <text class="bold">例</text>：
+        <view class="example-item">1. stop→stopped（停止）</view>
+        <view class="example-item">2. plan→planned（计划）</view>
+        <view class="example-item">3. prefer→preferred（更喜欢）</view>
+        <view class="example-item">4. refer→referred（参考）</view>
+      </view>
+      <view class="note">
+        <text class="bold">注意</text>：非重读音节不双写，如open→opened（重音在第一音节）。
+      </view>
+    </view>
+  </view>
+
+  <!-- 以辅音字母+y结尾：变y为i加 -ed -->
+  <view class="rule-section">
+    <view class="rule-header">四、以辅音字母+y结尾：变y为i加 -ed</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：词尾为"辅音字母+y"时，变y为i再加ed；若为"元音字母+y"，直接加ed。
+      </view>
+      <view class="examples">
+        <text class="bold">辅音字母+y</text>：
+        <view class="example-item">1. study→studied（学习）</view>
+        <view class="example-item">2. carry→carried（携带）</view>
+        <view class="example-item">3. worry→worried（担心）</view>
+      </view>
+      <view class="examples">
+        <text class="bold">元音字母+y</text>：
+        <view class="example-item">1. play→played（玩）</view>
+        <view class="example-item">2. enjoy→enjoyed（享受）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 不规则动词：特殊变化 -->
+  <view class="rule-section">
+    <view class="rule-header">五、不规则动词：特殊变化</view>
+    <view class="rule-content">
+      <view class="rule-description">
+        <text class="bold">规则</text>：无固定规律，需单独记忆（常见类型如下）。
+      </view>
+      
+      <!-- AAA型 -->
+      <view class="irregular-type">
+        <view class="type-title">（1）AAA型（原形=过去式=过去分词）</view>
+        <view class="example-item">• cut→cut→cut（切）</view>
+        <view class="example-item">• put→put→put（放）</view>
+        <view class="example-item">• let→let→let（让）</view>
+        <view class="example-item">• cost→cost→cost（花费）</view>
+      </view>
+
+      <!-- ABB型 -->
+      <view class="irregular-type">
+        <view class="type-title">（2）ABB型（过去式=过去分词）</view>
+        <view class="example-item">• bring→brought→brought（带来）</view>
+        <view class="example-item">• think→thought→thought（思考）</view>
+        <view class="example-item">• buy→bought→bought（买）</view>
+        <view class="example-item">• catch→caught→caught（抓住）</view>
+      </view>
+
+      <!-- ABA型 -->
+      <view class="irregular-type">
+        <view class="type-title">（3）ABA型（原形=过去分词）</view>
+        <view class="example-item">• come→came→come（来）</view>
+        <view class="example-item">• become→became→become（成为）</view>
+        <view class="example-item">• run→ran→run（跑）</view>
+      </view>
+
+      <!-- ABC型 -->
+      <view class="irregular-type">
+        <view class="type-title">（4）ABC型（三者均不同）</view>
+        <view class="example-item">• do→did→done（做）</view>
+        <view class="example-item">• go→went→gone（去）</view>
+        <view class="example-item">• take→took→taken（拿）</view>
+        <view class="example-item">• write→wrote→written（写）</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 规则与不规则对比表 -->
+  <view class="rule-section">
+    <view class="rule-header">六、规则与不规则对比表</view>
+    <view class="table-container">
+      <view class="table-header">
+        <view class="table-cell">变化类型</view>
+        <view class="table-cell">规则要点</view>
+        <view class="table-cell">例词1</view>
+        <view class="table-cell">例词2</view>
+        <view class="table-cell">例词3</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">直接加 -ed</view>
+        <view class="table-cell">一般动词原形</view>
+        <view class="table-cell">work→worked</view>
+        <view class="table-cell">play→played</view>
+        <view class="table-cell">visit→visited</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">以e结尾加 -d</view>
+        <view class="table-cell">词尾e不发音或发音</view>
+        <view class="table-cell">live→lived</view>
+        <view class="table-cell">love→loved</view>
+        <view class="table-cell">make→made</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">双写加 -ed</view>
+        <view class="table-cell">重读闭音节+单辅音结尾</view>
+        <view class="table-cell">stop→stopped</view>
+        <view class="table-cell">plan→planned</view>
+        <view class="table-cell">prefer→preferred</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">变y为i加 -ed</view>
+        <view class="table-cell">辅音字母+y结尾</view>
+        <view class="table-cell">study→studied</view>
+        <view class="table-cell">carry→carried</view>
+        <view class="table-cell">worry→worried</view>
+      </view>
+      <view class="table-row">
+        <view class="table-cell">不规则变化</view>
+        <view class="table-cell">无固定规律，需单独记忆</view>
+        <view class="table-cell">do→done</view>
+        <view class="table-cell">go→gone</view>
+        <view class="table-cell">write→written</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 记忆技巧 -->
+  <view class="rule-section memory-section">
+    <view class="rule-header">记忆技巧</view>
+    <view class="memory-content">
+      <view class="memory-point">1. 规则变化先看词尾结构（e/y/闭音节），再对应规则；</view>
+      <view class="memory-point">2. 不规则动词可按"AAA/ABB/ABA/ABC"分类记忆，每天积累5-10个；</view>
+      <view class="memory-point">3. 注意区分过去式与过去分词：规则动词两者相同，不规则动词需特殊记（如eat→ate→eaten）。</view>
+    </view>
+    <view class="tip">
+      通过造句练习（如"He has studied English for 5 years"），可加深对过去分词用法的理解哦！
+    </view>
+  </view>
+</view> 

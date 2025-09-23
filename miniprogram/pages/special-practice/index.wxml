@@ -1,0 +1,63 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="header-content">
+      <button class="back-btn" bindtap="goBack">
+        <text class="back-icon">←</text>
+      </button>
+      <text class="page-title">专项练习</text>
+    </view>
+    <text class="page-subtitle">根据错题分析，推荐针对性练习</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 专项练习列表 -->
+  <view class="practice-list" wx:else>
+    <view wx:for="{{practiceTables}}" wx:key="id" class="practice-item">
+      <view class="practice-header">
+        <view class="practice-title">
+          <text class="title-icon">📚</text>
+          <text class="title-text">{{item.name}}</text>
+        </view>
+        <view class="progress-status {{getProgressStatus(item.type)}}">
+          <text class="status-text">{{getProgressText(item.type)}}</text>
+        </view>
+      </view>
+      
+      <view class="practice-content">
+        <view class="table-list">
+          <view wx:for="{{item.tables}}" wx:key="id" wx:for-item="table" class="table-item">
+            <view class="table-info">
+              <text class="table-title">{{table.title}}</text>
+              <text class="table-count">{{table.questions}}题</text>
+            </view>
+            <button 
+              class="start-btn" 
+              bindtap="startPractice" 
+              data-table-ids="{{table.id}}" 
+              data-type="{{item.type}}">
+              开始练习
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && practiceTables.length === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">暂无专项练习内容</text>
+    <text class="empty-desc">继续做题，系统会根据错题自动推荐练习</text>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-tip">
+    <text class="tip-text">💡 提示：专项练习会根据您的错题情况智能推荐</text>
+  </view>
+</view> 

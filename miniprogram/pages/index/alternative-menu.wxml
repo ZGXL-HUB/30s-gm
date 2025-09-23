@@ -1,0 +1,29 @@
+<!-- 二级菜单替代方案 -->
+<view class="function-card menu-card">
+  <view class="card-icon">
+    <view class="icon-text">⚙️</view>
+  </view>
+  <view class="card-content">
+    <view class="card-title">专属组合</view>
+    <view class="card-desc">自定义语法点组合，个性化练习</view>
+    <view class="card-status" wx:if="{{isCustomComboSet}}">已设置</view>
+  </view>
+  
+  <!-- 主操作按钮 -->
+  <view class="card-main-action" bindtap="toggleCustomComboMenu">
+    <text class="action-text">开始练习</text>
+    <text class="action-icon">⋯</text>
+  </view>
+  
+  <!-- 二级菜单 -->
+  <view class="dropdown-menu {{showCustomComboMenu ? 'show' : ''}}" wx:if="{{showCustomComboMenu}}">
+    <view class="menu-item" bindtap="startCustomComboQuick">
+      <text class="menu-icon">⚡</text>
+      <text class="menu-text">快速练习</text>
+    </view>
+    <view class="menu-item" bindtap="goToCustomComboSetting">
+      <text class="menu-icon">⚙️</text>
+      <text class="menu-text">设置组合</text>
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,272 @@
+/* 学习路径管理页面样式 */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20rpx;
+}
+
+/* 用户等级卡片 */
+.user-level-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.level-title {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.level-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.level-description {
+  font-size: 26rpx;
+  color: #667eea;
+  font-weight: 500;
+}
+
+/* 学习步骤容器 */
+.steps-container {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.steps-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.step-item {
+  border: 2rpx solid #e9ecef;
+  border-radius: 15rpx;
+  padding: 25rpx;
+  transition: all 0.3s ease;
+}
+
+.step-item.completed {
+  border-color: #28a745;
+  background: #f8fff8;
+}
+
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.step-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.step-status {
+  font-size: 22rpx;
+}
+
+.status-completed {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #6c757d;
+}
+
+.step-description {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15rpx;
+}
+
+.step-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.step-difficulty {
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  font-weight: bold;
+}
+
+.difficulty-easy {
+  background: #d4edda;
+  color: #155724;
+}
+
+.difficulty-medium {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.difficulty-hard {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.difficulty-expert {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.step-time {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.step-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+.action-btn {
+  flex: 1;
+  border-radius: 25rpx;
+  padding: 15rpx 25rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  border: none;
+}
+
+.action-btn.primary {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 4rpx 15rpx rgba(102, 126, 234, 0.3);
+}
+
+.action-btn.secondary {
+  background: #6c757d;
+  color: white;
+  box-shadow: 0 4rpx 15rpx rgba(108, 117, 125, 0.3);
+}
+
+/* 薄弱环节卡片 */
+.weak-points-card {
+  background: #fff3cd;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #856404;
+  margin-bottom: 20rpx;
+}
+
+.weak-points-list {
+  font-size: 24rpx;
+  color: #856404;
+  margin-bottom: 20rpx;
+}
+
+.weak-point-item {
+  margin-bottom: 8rpx;
+  line-height: 1.4;
+}
+
+.view-weak-btn {
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  border-radius: 25rpx;
+  padding: 15rpx 30rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+/* 学习统计卡片 */
+.statistics-card {
+  background: #d1ecf1;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #0c5460;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #0c5460;
+}
+
+.view-stats-btn {
+  background: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 25rpx;
+  padding: 15rpx 30rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.action-buttons .action-btn {
+  flex: 1;
+  padding: 25rpx;
+  font-size: 28rpx;
+}
+
+/* 加载状态 */
+.loading-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: white;
+}

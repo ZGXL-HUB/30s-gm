@@ -1,0 +1,2354 @@
+{
+  "duplicates": [
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cps_001",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 1,
+        "col": 1,
+        "question": "unhappy, unfair, uncommon",
+        "answer": "un-",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 1,
+        "cell_id": "cps_002",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 1,
+        "col": 2,
+        "question": "请填入前缀",
+        "answer": "un-",
+        "correctAnswer": "un-",
+        "acceptedAnswers": [
+          "un-",
+          "un"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 2,
+        "cell_id": "cps_003",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 2,
+        "col": 1,
+        "question": "incredible, inactive, incorrect",
+        "answer": "in-",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 3,
+        "cell_id": "cps_004",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 2,
+        "col": 2,
+        "question": "请填入前缀",
+        "answer": "in-",
+        "correctAnswer": "in-",
+        "acceptedAnswers": [
+          "in-",
+          "in"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 4,
+        "cell_id": "cps_005",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 3,
+        "col": 1,
+        "question": "impossible, impatient, immoral",
+        "answer": "im-",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 5,
+        "cell_id": "cps_006",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 3,
+        "col": 2,
+        "question": "请填入前缀",
+        "answer": "im-",
+        "correctAnswer": "im-",
+        "acceptedAnswers": [
+          "im-",
+          "im"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 6,
+        "cell_id": "cps_007",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 4,
+        "col": 1,
+        "question": "illegal, illogical, illusive",
+        "answer": "il-",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 7,
+        "cell_id": "cps_008",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 4,
+        "col": 2,
+        "question": "请填入前缀",
+        "answer": "il-",
+        "correctAnswer": "il-",
+        "acceptedAnswers": [
+          "il-",
+          "il"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 8,
+        "cell_id": "cps_009",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 5,
+        "col": 1,
+        "question": "irregular, irresponsible, irrelevant",
+        "answer": "ir-",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 9,
+        "cell_id": "cps_010",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 5,
+        "col": 2,
+        "question": "请填入前缀",
+        "answer": "ir-",
+        "correctAnswer": "ir-",
+        "acceptedAnswers": [
+          "ir-",
+          "ir"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 10,
+        "cell_id": "cps_011",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 6,
+        "col": 1,
+        "question": "capable, flexible, visible",
+        "answer": "-able/-ible",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 11,
+        "cell_id": "cps_012",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 6,
+        "col": 2,
+        "question": "请填入后缀",
+        "answer": "-able/-ible",
+        "correctAnswer": "-able/-ible",
+        "acceptedAnswers": [
+          "-able",
+          "able",
+          "-ible",
+          "ible",
+          "-able/-ible"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 12,
+        "cell_id": "cps_013",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 7,
+        "col": 1,
+        "question": "careful, joyful, powerful",
+        "answer": "-ful",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 13,
+        "cell_id": "cps_014",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 7,
+        "col": 2,
+        "question": "请填入后缀",
+        "answer": "-ful",
+        "correctAnswer": "-ful",
+        "acceptedAnswers": [
+          "-ful",
+          "ful"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 14,
+        "cell_id": "cps_015",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 8,
+        "col": 1,
+        "question": "dangerous, generous, anxious",
+        "answer": "-ous/-ious",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 15,
+        "cell_id": "cps_016",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 8,
+        "col": 2,
+        "question": "请填入后缀",
+        "answer": "-ous/-ious",
+        "correctAnswer": "-ous/-ious",
+        "acceptedAnswers": [
+          "-ous",
+          "ous",
+          "-ious",
+          "ious",
+          "-ous/-ious"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 16,
+        "cell_id": "cps_017",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 9,
+        "col": 1,
+        "question": "scientific, artistic, political",
+        "answer": "-ic/-ical",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 17,
+        "cell_id": "cps_018",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 9,
+        "col": 2,
+        "question": "请填入后缀",
+        "answer": "-ic/-ical",
+        "correctAnswer": "-ic/-ical",
+        "acceptedAnswers": [
+          "-ic",
+          "ic",
+          "-ical",
+          "ical",
+          "-ic/-ical"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_prefix_suffix_001",
+      "original": {
+        "index": 18,
+        "cell_id": "cps_019",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 10,
+        "col": 1,
+        "question": "sunny, windy, healthy",
+        "answer": "-y",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 19,
+        "cell_id": "cps_020",
+        "table_id": "comparison_prefix_suffix_001",
+        "row": 10,
+        "col": 2,
+        "question": "请填入后缀",
+        "answer": "-y",
+        "correctAnswer": "-y",
+        "acceptedAnswers": [
+          "-y",
+          "y"
+        ],
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 1,
+        "cell_id": "cc_002",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "fast",
+        "correctAnswer": "faster",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 2,
+        "cell_id": "cc_003",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "hard",
+        "correctAnswer": "harder",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 3,
+        "cell_id": "cc_004",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "short",
+        "correctAnswer": "shorter",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 4,
+        "cell_id": "cc_005",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "clean",
+        "correctAnswer": "cleaner",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 5,
+        "cell_id": "cc_006",
+        "table_id": "comparison_comparative_001",
+        "row": 2,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则二",
+          "fullContent": "以不发音的e结尾，加 -r"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 6,
+        "cell_id": "cc_007",
+        "table_id": "comparison_comparative_001",
+        "row": 2,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "nice",
+        "correctAnswer": "nicer",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 7,
+        "cell_id": "cc_008",
+        "table_id": "comparison_comparative_001",
+        "row": 2,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "large",
+        "correctAnswer": "larger",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 8,
+        "cell_id": "cc_009",
+        "table_id": "comparison_comparative_001",
+        "row": 2,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "safe",
+        "correctAnswer": "safer",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 9,
+        "cell_id": "cc_010",
+        "table_id": "comparison_comparative_001",
+        "row": 2,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "cute",
+        "correctAnswer": "cuter",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 10,
+        "cell_id": "cc_011",
+        "table_id": "comparison_comparative_001",
+        "row": 3,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则三",
+          "fullContent": "重读闭音节结尾，且词尾只有一个辅音字母，双写辅音字母+er"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 11,
+        "cell_id": "cc_012",
+        "table_id": "comparison_comparative_001",
+        "row": 3,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "big",
+        "correctAnswer": "bigger",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 12,
+        "cell_id": "cc_013",
+        "table_id": "comparison_comparative_001",
+        "row": 3,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "hot",
+        "correctAnswer": "hotter",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 13,
+        "cell_id": "cc_014",
+        "table_id": "comparison_comparative_001",
+        "row": 3,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "thin",
+        "correctAnswer": "thinner",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 14,
+        "cell_id": "cc_015",
+        "table_id": "comparison_comparative_001",
+        "row": 3,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "fat",
+        "correctAnswer": "fatter",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 15,
+        "cell_id": "cc_016",
+        "table_id": "comparison_comparative_001",
+        "row": 4,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则四",
+          "fullContent": "以\"辅音字母+y\"结尾，变y为i+er"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 16,
+        "cell_id": "cc_017",
+        "table_id": "comparison_comparative_001",
+        "row": 4,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "happy",
+        "correctAnswer": "happier",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 17,
+        "cell_id": "cc_018",
+        "table_id": "comparison_comparative_001",
+        "row": 4,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "easy",
+        "correctAnswer": "easier",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 18,
+        "cell_id": "cc_019",
+        "table_id": "comparison_comparative_001",
+        "row": 4,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "heavy",
+        "correctAnswer": "heavier",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 19,
+        "cell_id": "cc_020",
+        "table_id": "comparison_comparative_001",
+        "row": 4,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "busy",
+        "correctAnswer": "busier",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 20,
+        "cell_id": "cc_021",
+        "table_id": "comparison_comparative_001",
+        "row": 5,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则五",
+          "fullContent": "不规则变化（需单独记忆的核心词汇）"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 21,
+        "cell_id": "cc_022",
+        "table_id": "comparison_comparative_001",
+        "row": 5,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "good",
+        "correctAnswer": "better",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 22,
+        "cell_id": "cc_023",
+        "table_id": "comparison_comparative_001",
+        "row": 5,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "bad",
+        "correctAnswer": "worse",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 23,
+        "cell_id": "cc_024",
+        "table_id": "comparison_comparative_001",
+        "row": 5,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "many",
+        "correctAnswer": "more",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cc_001",
+        "table_id": "comparison_comparative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -er（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 24,
+        "cell_id": "cc_025",
+        "table_id": "comparison_comparative_001",
+        "row": 5,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "little",
+        "correctAnswer": "less",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 1,
+        "cell_id": "cs_002",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "fast",
+        "correctAnswer": "fastest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 2,
+        "cell_id": "cs_003",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "hard",
+        "correctAnswer": "hardest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 3,
+        "cell_id": "cs_004",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "short",
+        "correctAnswer": "shortest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 4,
+        "cell_id": "cs_005",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "clean",
+        "correctAnswer": "cleanest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 5,
+        "cell_id": "cs_006",
+        "table_id": "comparison_superlative_001",
+        "row": 2,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则二",
+          "fullContent": "以不发音的e结尾，加 -st"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 6,
+        "cell_id": "cs_007",
+        "table_id": "comparison_superlative_001",
+        "row": 2,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "nice",
+        "correctAnswer": "nicest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 7,
+        "cell_id": "cs_008",
+        "table_id": "comparison_superlative_001",
+        "row": 2,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "large",
+        "correctAnswer": "largest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 8,
+        "cell_id": "cs_009",
+        "table_id": "comparison_superlative_001",
+        "row": 2,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "safe",
+        "correctAnswer": "safest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 9,
+        "cell_id": "cs_010",
+        "table_id": "comparison_superlative_001",
+        "row": 2,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "cute",
+        "correctAnswer": "cutest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 10,
+        "cell_id": "cs_011",
+        "table_id": "comparison_superlative_001",
+        "row": 3,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则三",
+          "fullContent": "重读闭音节结尾，且词尾只有一个辅音字母，双写辅音字母+est"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 11,
+        "cell_id": "cs_012",
+        "table_id": "comparison_superlative_001",
+        "row": 3,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "big",
+        "correctAnswer": "biggest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 12,
+        "cell_id": "cs_013",
+        "table_id": "comparison_superlative_001",
+        "row": 3,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "hot",
+        "correctAnswer": "hottest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 13,
+        "cell_id": "cs_014",
+        "table_id": "comparison_superlative_001",
+        "row": 3,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "thin",
+        "correctAnswer": "thinnest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 14,
+        "cell_id": "cs_015",
+        "table_id": "comparison_superlative_001",
+        "row": 3,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "fat",
+        "correctAnswer": "fattest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 15,
+        "cell_id": "cs_016",
+        "table_id": "comparison_superlative_001",
+        "row": 4,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则四",
+          "fullContent": "以\"辅音字母+y\"结尾，变y为i+est"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 16,
+        "cell_id": "cs_017",
+        "table_id": "comparison_superlative_001",
+        "row": 4,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "happy",
+        "correctAnswer": "happiest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 17,
+        "cell_id": "cs_018",
+        "table_id": "comparison_superlative_001",
+        "row": 4,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "easy",
+        "correctAnswer": "easiest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 18,
+        "cell_id": "cs_019",
+        "table_id": "comparison_superlative_001",
+        "row": 4,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "heavy",
+        "correctAnswer": "heaviest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 19,
+        "cell_id": "cs_020",
+        "table_id": "comparison_superlative_001",
+        "row": 4,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "busy",
+        "correctAnswer": "busiest",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 20,
+        "cell_id": "cs_021",
+        "table_id": "comparison_superlative_001",
+        "row": 5,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则五",
+          "fullContent": "不规则变化（需单独记忆的核心词汇）"
+        }
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 21,
+        "cell_id": "cs_022",
+        "table_id": "comparison_superlative_001",
+        "row": 5,
+        "col": 2,
+        "is_header": false,
+        "hintWord": "good",
+        "correctAnswer": "best",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 22,
+        "cell_id": "cs_023",
+        "table_id": "comparison_superlative_001",
+        "row": 5,
+        "col": 3,
+        "is_header": false,
+        "hintWord": "bad",
+        "correctAnswer": "worst",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 23,
+        "cell_id": "cs_024",
+        "table_id": "comparison_superlative_001",
+        "row": 5,
+        "col": 4,
+        "is_header": false,
+        "hintWord": "many",
+        "correctAnswer": "most",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "original": {
+        "index": 0,
+        "cell_id": "cs_001",
+        "table_id": "comparison_superlative_001",
+        "row": 1,
+        "col": 1,
+        "is_header": false,
+        "rule": {
+          "showType": "short",
+          "content": "规则一",
+          "fullContent": "直接加 -est（适用于单音节词及部分双音节词）"
+        }
+      },
+      "duplicate": {
+        "index": 24,
+        "cell_id": "cs_025",
+        "table_id": "comparison_superlative_001",
+        "row": 5,
+        "col": 5,
+        "is_header": false,
+        "hintWord": "little",
+        "correctAnswer": "least",
+        "userInput": ""
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 1,
+        "cell_id": "cell_002",
+        "table_id": "pronoun_001",
+        "row": 1,
+        "col": 2,
+        "question": "人称'你'的主格代词",
+        "answer": "you",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 2,
+        "cell_id": "cell_003",
+        "table_id": "pronoun_001",
+        "row": 1,
+        "col": 3,
+        "question": "人称'你'的宾格代词",
+        "answer": "you",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 15,
+        "cell_id": "cell_016",
+        "table_id": "pronoun_001",
+        "row": 3,
+        "col": 4,
+        "question": "人称'他'的形容词性物主代词",
+        "answer": "his",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 16,
+        "cell_id": "cell_017",
+        "table_id": "pronoun_001",
+        "row": 3,
+        "col": 5,
+        "question": "人称'他'的名词性物主代词",
+        "answer": "his",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 20,
+        "cell_id": "cell_021",
+        "table_id": "pronoun_001",
+        "row": 4,
+        "col": 3,
+        "question": "人称'她'的宾格代词",
+        "answer": "her",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 21,
+        "cell_id": "cell_022",
+        "table_id": "pronoun_001",
+        "row": 4,
+        "col": 4,
+        "question": "人称'她'的形容词性物主代词",
+        "answer": "her",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 25,
+        "cell_id": "cell_026",
+        "table_id": "pronoun_001",
+        "row": 5,
+        "col": 2,
+        "question": "人称'它'的主格代词",
+        "answer": "it",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 26,
+        "cell_id": "cell_027",
+        "table_id": "pronoun_001",
+        "row": 5,
+        "col": 3,
+        "question": "人称'它'的宾格代词",
+        "answer": "it",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 27,
+        "cell_id": "cell_028",
+        "table_id": "pronoun_001",
+        "row": 5,
+        "col": 4,
+        "question": "人称'它'的形容词性物主代词",
+        "answer": "its",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 28,
+        "cell_id": "cell_029",
+        "table_id": "pronoun_001",
+        "row": 5,
+        "col": 5,
+        "question": "人称'它'的名词性物主代词",
+        "answer": "its",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 1,
+        "cell_id": "cell_002",
+        "table_id": "pronoun_001",
+        "row": 1,
+        "col": 2,
+        "question": "人称'你'的主格代词",
+        "answer": "you",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 31,
+        "cell_id": "cell_032",
+        "table_id": "pronoun_001",
+        "row": 6,
+        "col": 2,
+        "question": "人称'你们'的主格代词",
+        "answer": "you",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 1,
+        "cell_id": "cell_002",
+        "table_id": "pronoun_001",
+        "row": 1,
+        "col": 2,
+        "question": "人称'你'的主格代词",
+        "answer": "you",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 32,
+        "cell_id": "cell_033",
+        "table_id": "pronoun_001",
+        "row": 6,
+        "col": 3,
+        "question": "人称'你们'的宾格代词",
+        "answer": "you",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 3,
+        "cell_id": "cell_004",
+        "table_id": "pronoun_001",
+        "row": 1,
+        "col": 4,
+        "question": "人称'你'的形容词性物主代词",
+        "answer": "your",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 33,
+        "cell_id": "cell_034",
+        "table_id": "pronoun_001",
+        "row": 6,
+        "col": 4,
+        "question": "人称'你们'的形容词性物主代词",
+        "answer": "your",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_001",
+      "original": {
+        "index": 4,
+        "cell_id": "cell_005",
+        "table_id": "pronoun_001",
+        "row": 1,
+        "col": 5,
+        "question": "人称'你'的名词性物主代词",
+        "answer": "yours",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 34,
+        "cell_id": "cell_035",
+        "table_id": "pronoun_001",
+        "row": 6,
+        "col": 5,
+        "question": "人称'你们'的名词性物主代词",
+        "answer": "yours",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 7,
+        "cell_id": "cell_056",
+        "table_id": "pronoun_002",
+        "row": 2,
+        "col": 2,
+        "question": "人称'它'的主格代词",
+        "answer": "it",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 8,
+        "cell_id": "cell_057",
+        "table_id": "pronoun_002",
+        "row": 2,
+        "col": 3,
+        "question": "人称'它'的宾格代词",
+        "answer": "it",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 9,
+        "cell_id": "cell_058",
+        "table_id": "pronoun_002",
+        "row": 2,
+        "col": 4,
+        "question": "人称'它'的形容词性物主代词",
+        "answer": "its",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 10,
+        "cell_id": "cell_059",
+        "table_id": "pronoun_002",
+        "row": 2,
+        "col": 5,
+        "question": "人称'它'的名词性物主代词",
+        "answer": "its",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 13,
+        "cell_id": "cell_062",
+        "table_id": "pronoun_002",
+        "row": 3,
+        "col": 2,
+        "question": "人称'你'的主格代词",
+        "answer": "you",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 14,
+        "cell_id": "cell_063",
+        "table_id": "pronoun_002",
+        "row": 3,
+        "col": 3,
+        "question": "人称'你'的宾格代词",
+        "answer": "you",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 26,
+        "cell_id": "cell_075",
+        "table_id": "pronoun_002",
+        "row": 5,
+        "col": 3,
+        "question": "人称'她'的宾格代词",
+        "answer": "her",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 27,
+        "cell_id": "cell_076",
+        "table_id": "pronoun_002",
+        "row": 5,
+        "col": 4,
+        "question": "人称'她'的形容词性物主代词",
+        "answer": "her",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 39,
+        "cell_id": "cell_088",
+        "table_id": "pronoun_002",
+        "row": 7,
+        "col": 4,
+        "question": "人称'他'的形容词性物主代词",
+        "answer": "his",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 40,
+        "cell_id": "cell_089",
+        "table_id": "pronoun_002",
+        "row": 7,
+        "col": 5,
+        "question": "人称'他'的名词性物主代词",
+        "answer": "his",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 13,
+        "cell_id": "cell_062",
+        "table_id": "pronoun_002",
+        "row": 3,
+        "col": 2,
+        "question": "人称'你'的主格代词",
+        "answer": "you",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 43,
+        "cell_id": "cell_092",
+        "table_id": "pronoun_002",
+        "row": 8,
+        "col": 2,
+        "question": "人称'你们'的主格代词",
+        "answer": "you",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 13,
+        "cell_id": "cell_062",
+        "table_id": "pronoun_002",
+        "row": 3,
+        "col": 2,
+        "question": "人称'你'的主格代词",
+        "answer": "you",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 44,
+        "cell_id": "cell_093",
+        "table_id": "pronoun_002",
+        "row": 8,
+        "col": 3,
+        "question": "人称'你们'的宾格代词",
+        "answer": "you",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 15,
+        "cell_id": "cell_064",
+        "table_id": "pronoun_002",
+        "row": 3,
+        "col": 4,
+        "question": "人称'你'的形容词性物主代词",
+        "answer": "your",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 45,
+        "cell_id": "cell_094",
+        "table_id": "pronoun_002",
+        "row": 8,
+        "col": 4,
+        "question": "人称'你们'的形容词性物主代词",
+        "answer": "your",
+        "is_header": false
+      }
+    },
+    {
+      "file": "writing_pronouns.js",
+      "category": "pronoun_002",
+      "original": {
+        "index": 16,
+        "cell_id": "cell_065",
+        "table_id": "pronoun_002",
+        "row": 3,
+        "col": 5,
+        "question": "人称'你'的名词性物主代词",
+        "answer": "yours",
+        "is_header": false
+      },
+      "duplicate": {
+        "index": 46,
+        "cell_id": "cell_095",
+        "table_id": "pronoun_002",
+        "row": 8,
+        "col": 5,
+        "question": "人称'你们'的名词性物主代词",
+        "answer": "yours",
+        "is_header": false
+      }
+    }
+  ],
+  "emptyAnswers": [
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 0
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 1
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 2
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 3
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 4
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 5
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 6
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 7
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 8
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 9
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 10
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 11
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 12
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 13
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 14
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 15
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 16
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 17
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 18
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 19
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 20
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 21
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 22
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 23
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_comparative_001",
+      "index": 24
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 0
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 1
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 2
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 3
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 4
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 5
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 6
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 7
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 8
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 9
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 10
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 11
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 12
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 13
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 14
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 15
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 16
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 17
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 18
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 19
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 20
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 21
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 22
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 23
+    },
+    {
+      "file": "writing_comparisons.js",
+      "category": "comparison_superlative_001",
+      "index": 24
+    }
+  ],
+  "formatErrors": [],
+  "summary": {
+    "totalDuplicates": 76,
+    "totalEmptyAnswers": 50,
+    "totalFormatErrors": 0,
+    "checkedAt": "2025-06-30T07:20:35.247Z"
+  }
+}

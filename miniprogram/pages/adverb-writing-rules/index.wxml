@@ -1,0 +1,179 @@
+<view class="container">
+  <!-- 页面引导卡片 -->
+  <page-header-guide 
+    title="形容词变副词规则学习"
+    description="学习形容词变副词的后缀变化规律，掌握不同情况下的变化方法"
+    tip="💡 提示：注意观察词尾字母的变化规律，重点记忆特殊变化"
+    icon="🔤"
+    storage-key="adverb-writing-rules-guide"
+  />
+  
+  <view class="header">
+    <text class="main-title">形容词变副词的后缀书写规则</text>
+    <text class="subtitle">掌握形容词变副词的变化规律</text>
+  </view>
+
+  <view class="content">
+    <!-- 一、直接加 -ly -->
+    <view class="rule-section">
+      <view class="rule-header">
+        <text class="rule-number">一、</text>
+        <text class="rule-title">直接加 -ly</text>
+      </view>
+      <view class="rule-description">
+        <text class="rule-text">大多数形容词直接在词尾加 -ly 变为副词。</text>
+      </view>
+      <view class="examples">
+        <text class="examples-title">例子：</text>
+        <view class="example-list">
+          <view class="example-item">
+            <text class="example-text">1. quick（快速的）→ quickly（快速地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">2. clear（清楚的）→ clearly（清楚地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">3. slow（缓慢的）→ slowly（缓慢地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">4. careful（仔细的）→ carefully（仔细地）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 二、以辅音字母 + y 结尾，变 y 为 i 加 -ly -->
+    <view class="rule-section">
+      <view class="rule-header">
+        <text class="rule-number">二、</text>
+        <text class="rule-title">以辅音字母 + y 结尾，变 y 为 i 加 -ly</text>
+      </view>
+      <view class="rule-description">
+        <text class="rule-text">若形容词以"辅音字母 + y"结尾，需先将 y 改为 i，再加 -ly。</text>
+      </view>
+      <view class="examples">
+        <text class="examples-title">例子：</text>
+        <view class="example-list">
+          <view class="example-item">
+            <text class="example-text">1. happy（开心的）→ happily（开心地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">2. easy（容易的）→ easily（容易地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">3. heavy（重的）→ heavily（沉重地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">4. angry（生气的）→ angrily（生气地）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 三、due 和 true 变副词，去 e 加 -ly -->
+    <view class="rule-section">
+      <view class="rule-header">
+        <text class="rule-number">三、</text>
+        <text class="rule-title">due 和 true 变副词，去 e 加 -ly</text>
+      </view>
+      <view class="rule-description">
+        <text class="rule-text">due 和 true 这两个词变副词时，去掉 e 后加 -ly。</text>
+      </view>
+      <view class="examples">
+        <text class="examples-title">例子：</text>
+        <view class="example-list">
+          <view class="example-item">
+            <text class="example-text">1. due（应有的）→ duly（正当地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">2. true（真实的）→ truly（真实地）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 四、以 -le 结尾，去 e 加 -y -->
+    <view class="rule-section">
+      <view class="rule-header">
+        <text class="rule-number">四、</text>
+        <text class="rule-title">以 -le 结尾，去 e 加 -y</text>
+      </view>
+      <view class="rule-description">
+        <text class="rule-text">以 -le 结尾的形容词，去掉 e 后加 -y 构成副词。</text>
+      </view>
+      <view class="examples">
+        <text class="examples-title">例子：</text>
+        <view class="example-list">
+          <view class="example-item">
+            <text class="example-text">1. terrible（糟糕的）→ terribly（糟糕地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">2. gentle（温柔的）→ gently（温柔地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">3. simple（简单的）→ simply（简单地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">4. possible（可能的）→ possibly（可能地）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 五、以 -ic 结尾，加 -ally -->
+    <view class="rule-section">
+      <view class="rule-header">
+        <text class="rule-number">五、</text>
+        <text class="rule-title">以 -ic 结尾，加 -ally</text>
+      </view>
+      <view class="rule-description">
+        <text class="rule-text">以 -ic 结尾的形容词，通常加 -ally 变为副词（但 public 例外，变为 publicly）。</text>
+      </view>
+      <view class="examples">
+        <text class="examples-title">例子：</text>
+        <view class="example-list">
+          <view class="example-item">
+            <text class="example-text">1. basic（基本的）→ basically（基本地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">2. automatic（自动的）→ automatically（自动地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">3. dramatic（戏剧的）→ dramatically（戏剧地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">4. energetic（精力充沛的）→ energetically（精力充沛地）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 六、特殊变化（不规则形式） -->
+    <view class="rule-section">
+      <view class="rule-header">
+        <text class="rule-number">六、</text>
+        <text class="rule-title">特殊变化（不规则形式）</text>
+      </view>
+      <view class="rule-description">
+        <text class="rule-text">少数形容词变副词有特殊形式，需单独记忆。</text>
+      </view>
+      <view class="examples">
+        <text class="examples-title">例子：</text>
+        <view class="example-list">
+          <view class="example-item">
+            <text class="example-text">1. good（好的）→ well（好地）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">2. fast（快的）→ fast（快地，同形）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">3. hard（努力的）→ hard（努力地，同形）</text>
+          </view>
+          <view class="example-item">
+            <text class="example-text">4. late（晚的）→ late（晚地，同形）</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

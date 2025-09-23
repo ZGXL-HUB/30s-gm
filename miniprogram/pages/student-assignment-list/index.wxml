@@ -1,0 +1,99 @@
+<!-- 学生端作业列表页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">我的作业</text>
+    <text class="subtitle">完成老师布置的语法练习</text>
+  </view>
+
+  <!-- 标签页切换 -->
+  <view class="tabs">
+    <view 
+      class="tab {{currentTab === 'pending' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="pending"
+    >
+      待完成 ({{getCurrentAssignments().length}})
+    </view>
+    <view 
+      class="tab {{currentTab === 'completed' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="completed"
+    >
+      已完成 ({{getCurrentAssignments().length}})
+    </view>
+  </view>
+
+  <!-- 作业列表 -->
+  <view class="assignment-list" wx:if="{{!loading}}">
+    <view 
+      wx:for="{{getCurrentAssignments()}}" 
+      wx:key="_id" 
+      class="assignment-item {{item.isExpired ? 'expired' : ''}}"
+    >
+      <view class="assignment-header">
+        <text class="assignment-title">{{item.title}}</text>
+        <text class="assignment-status {{item.status}}">{{item.statusText}}</text>
+      </view>
+      
+      <view class="assignment-info">
+        <view class="info-item">
+          <text class="info-label">截止时间：</text>
+          <text class="info-value">{{formatTime(item.deadline)}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">题目数量：</text>
+          <text class="info-value">{{item.questions.length}}题</text>
+        </view>
+        <view class="info-item" wx:if="{{item.status === 'completed'}}">
+          <text class="info-label">得分：</text>
+          <text class="info-value">{{item.score}}/{{item.totalScore}}</text>
+        </view>
+        <view class="info-item" wx:if="{{item.status === 'completed'}}">
+          <text class="info-label">正确率：</text>
+          <text class="info-value">{{item.accuracy}}%</text>
+        </view>
+        <view class="info-item" wx:if="{{!item.isExpired && item.status !== 'completed'}}">
+          <text class="info-label">剩余时间：</text>
+          <text class="info-value remaining">{{formatRemainingTime(item.deadline)}}</text>
+        </view>
+      </view>
+      
+      <view class="assignment-actions">
+        <button 
+          class="action-btn primary" 
+          bindtap="startAssignment" 
+          data-id="{{item._id}}"
+          wx:if="{{item.canSubmit}}"
+        >
+          开始练习
+        </button>
+        <button 
+          class="action-btn secondary" 
+          bindtap="viewAssignmentResult" 
+          data-id="{{item._id}}"
+          wx:if="{{item.status === 'completed'}}"
+        >
+          查看结果
+        </button>
+        <button 
+          class="action-btn disabled" 
+          wx:if="{{item.isExpired && item.status !== 'completed'}}"
+        >
+          已过期
+        </button>
+      </view>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{getCurrentAssignments().length === 0}}">
+      <text class="empty-icon">📚</text>
+      <text class="empty-text">暂无{{currentTab === 'pending' ? '待完成' : '已完成'}}的作业</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>
