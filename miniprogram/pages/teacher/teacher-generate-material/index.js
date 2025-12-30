@@ -164,28 +164,31 @@ Page({
         const cloudDataLoader = require('../../../utils/cloudDataLoader.js');
         console.log('cloudDataLoader 加载成功:', typeof cloudDataLoader);
         
-        // 获取所有语法点
-        const grammarPoints = [...new Set(questions.map(q => q.grammarPoint || q.category))];
-        console.log('尝试从数据库获取真实题目，语法点:', grammarPoints);
+        // 统计每个语法点需要的题目数量（根据传入的questions数据）
+        const pointCountMap = {};
+        questions.forEach(q => {
+          const point = q.grammarPoint || q.category;
+          pointCountMap[point] = (pointCountMap[point] || 0) + 1;
+        });
+        
+        console.log('尝试从数据库获取真实题目，语法点及数量:', pointCountMap);
         
         // 为每个语法点获取真实题目
-        // 根据变式题数量，每个语法点需要提取 (1 + variantCount) 道题目
-        // 1题作为原题，variantCount 题作为变式题
-        const questionsPerPoint = 1 + (variantCount || 0);
-        console.log(`每个语法点需要提取 ${questionsPerPoint} 道题目（1道原题 + ${variantCount || 0}道变式题）`);
-        
-        for (const point of grammarPoints) {
+        // 专题模式：根据pointCountMap中的数量提取
+        // 其他模式：根据变式题数量，每个语法点提取 (1 + variantCount) 道题目
+        for (const [point, count] of Object.entries(pointCountMap)) {
           try {
-            console.log(`正在获取 ${point} 的题目...`);
+            console.log(`正在获取 ${point} 的题目，需要 ${count} 道...`);
             const dbQuestions = await cloudDataLoader.getQuestionsByGrammarPoint(point);
             console.log(`获取到 ${point} 题目数量:`, dbQuestions ? dbQuestions.length : 0);
             
-          if (dbQuestions && dbQuestions.length > 0) {
-            // 根据变式题数量提取对应数量的题目
-            const selected = this.getRandomQuestions(dbQuestions, questionsPerPoint);
-            realQuestions.push(...selected);
-            console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目（1道原题 + ${selected.length - 1}道变式题）`);
-          }
+            if (dbQuestions && dbQuestions.length > 0) {
+              // 根据需要的数量提取题目
+              const questionsNeeded = count; // 专题模式：使用统计的数量
+              const selected = this.getRandomQuestions(dbQuestions, questionsNeeded);
+              realQuestions.push(...selected);
+              console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目`);
+            }
           } catch (error) {
             console.warn(`⚠️ 获取 ${point} 题目失败:`, error);
           }
@@ -218,9 +221,7 @@ Page({
       type: type
     });
     
-    // 将题目按语法点分组，每个语法点有 (1 + variantCount) 道题目
-    // 第一题作为原题，剩余的作为变式题
-    const questionsPerPoint = 1 + (variantCount || 0);
+    // 将题目按语法点分组
     const groupedQuestions = {};
     
     // 按语法点分组题目
@@ -232,36 +233,56 @@ Page({
       groupedQuestions[point].push(question);
     }
     
+    // 判断是否为专题模式：如果某个语法点有多题且没有变式题，则为专题模式
+    const isTopicMode = Object.values(groupedQuestions).some(qs => qs.length > 1 && variantCount === 0);
+    
     // 生成学案内容
     let exerciseIndex = 1;
     for (const [point, pointQuestions] of Object.entries(groupedQuestions)) {
-      // 第一题作为原题
-      const mainQuestion = pointQuestions[0];
-      const variantQuestions = pointQuestions.slice(1); // 剩余的作为变式题
-      
-      content += `### 练习${exerciseIndex}：${point}\n`;
-      content += `**题目**: ${mainQuestion.text}\n`;
-      
-      if (type === 'teacher') {
-        content += `**答案**: ${mainQuestion.answer || mainQuestion.correctAnswer}\n`;
-        content += `**解析**: ${mainQuestion.analysis || '暂无解析'}\n`;
-      }
-      
-      // 添加变式题（如果有）
-      if (variantQuestions.length > 0) {
-        content += `\n**变式练习题**:\n`;
-        for (let j = 0; j < variantQuestions.length; j++) {
-          const variant = variantQuestions[j];
-          content += `${j + 1}. ${variant.text}`;
+      if (isTopicMode && pointQuestions.length > 1) {
+        // 专题模式：每个语法点的多道题目都作为独立练习展示
+        for (let i = 0; i < pointQuestions.length; i++) {
+          const question = pointQuestions[i];
+          content += `### 练习${exerciseIndex}：${point}\n`;
+          content += `**题目**: ${question.text}\n`;
+          
           if (type === 'teacher') {
-            content += ` (答案: ${variant.answer || variant.correctAnswer})`;
+            content += `**答案**: ${question.answer || question.correctAnswer}\n`;
+            content += `**解析**: ${question.analysis || '暂无解析'}\n`;
           }
-          content += `\n`;
+          
+          content += `\n---\n\n`;
+          exerciseIndex++;
         }
+      } else {
+        // 其他模式：第一题作为原题，剩余的作为变式题
+        const mainQuestion = pointQuestions[0];
+        const variantQuestions = pointQuestions.slice(1);
+        
+        content += `### 练习${exerciseIndex}：${point}\n`;
+        content += `**题目**: ${mainQuestion.text}\n`;
+        
+        if (type === 'teacher') {
+          content += `**答案**: ${mainQuestion.answer || mainQuestion.correctAnswer}\n`;
+          content += `**解析**: ${mainQuestion.analysis || '暂无解析'}\n`;
+        }
+        
+        // 添加变式题（如果有）
+        if (variantQuestions.length > 0) {
+          content += `\n**变式练习题**:\n`;
+          for (let j = 0; j < variantQuestions.length; j++) {
+            const variant = variantQuestions[j];
+            content += `${j + 1}. ${variant.text}`;
+            if (type === 'teacher') {
+              content += ` (答案: ${variant.answer || variant.correctAnswer})`;
+            }
+            content += `\n`;
+          }
+        }
+        
+        content += `\n---\n\n`;
+        exerciseIndex++;
       }
-      
-      content += `\n---\n\n`;
-      exerciseIndex++;
     }
     
     // 不再添加“知识点总结 / 教学建议 / 课后作业”，避免预览和导出出现多余内容

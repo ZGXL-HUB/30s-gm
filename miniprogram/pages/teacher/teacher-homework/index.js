@@ -1,4 +1,39 @@
-// 教师端布置语法作业页面
+/**
+ * 教师端布置语法作业页面
+ * 
+ * ============================================
+ * 【代码保护策略 - 重要提示】
+ * ============================================
+ * 
+ * 本文件包含三种作业模式：
+ * 1. 'gaokao' - 高考配比10题（已测试通过，请勿修改）
+ * 2. 'topic' - 专题20题（待修改）
+ * 3. 'custom' - 自选20题（待修改）
+ * 
+ * 【修改"专题20题"和"自选20题"时的注意事项】：
+ * 
+ * 1. 请勿修改以下标记为【高考配比专用】的函数和逻辑：
+ *    - executeGaokaoSystemCombo() - 高考配比题目生成逻辑
+ *    - generateGaokaoQuestions() - 高考配比题目构建逻辑
+ *    - buildAssignmentData() 中的 homeworkType === 'gaokao' 分支
+ *    - generateHomeworkData() 中的 homeworkType === 'gaokao' 分支
+ * 
+ * 2. 修改其他模式时，请使用严格的条件判断：
+ *    - 使用 if (homeworkType === 'topic') { ... }
+ *    - 使用 if (homeworkType === 'custom') { ... }
+ *    - 避免使用 else if，确保高考配比逻辑独立
+ * 
+ * 3. 共享逻辑提取原则：
+ *    - 如果需要在多个模式间共享逻辑，请提取为独立函数
+ *    - 不要修改高考配比专用的数据结构和逻辑
+ * 
+ * 4. 测试建议：
+ *    - 修改后务必测试高考配比10题功能是否正常
+ *    - 确保高考配比仍然生成正好10题
+ *    - 确保"谓语"和"非谓语"仍然必选
+ * 
+ * ============================================
+ */
 Page({
   data: {
     // 作业类型选择
@@ -323,8 +358,8 @@ Page({
     selectedTags: [],
     // 专题模式：已选择的专题
     selectedTopics: [],
-    // 专题模式：选择的题目总数
-    selectedTotalCount: 10,
+    // 专题模式：选择的题目总数（专题20题模式固定为20题）
+    selectedTotalCount: 20,
     
     // 每个大类的选中题数（用于同步计数显示）
     categoryCounts: [],
@@ -517,17 +552,28 @@ Page({
     const type = e.currentTarget.dataset.type;
     const selectedType = this.data.homeworkTypes.find(item => item.id === type);
     
-    this.setData({ 
+    // 专题20题模式：固定为20题
+    const initialData = {
       homeworkType: type,
       currentHomeworkType: selectedType,
       showTypeSelector: false,
       showSmartRecommendations: type === 'custom' // 自选模式时显示智能推荐
-    });
+    };
+    
+    // 专题模式固定为20题
+    if (type === 'topic') {
+      initialData.selectedTotalCount = 20;
+    }
+    
+    this.setData(initialData);
     console.log('选择作业类型:', type);
     
+    // 【高考配比专用逻辑 - 请勿修改】
     // 如果是高考配比模式，直接执行系统组合选择
+    // 注意：此逻辑已测试通过，修改其他模式时请勿改动
     if (type === 'gaokao') {
       await this.executeGaokaoSystemCombo();
+      return; // 高考配比模式执行后直接返回，不执行后续逻辑
     }
     
     this.generateSmartTitle();
@@ -537,7 +583,12 @@ Page({
 
   // 从推荐结果更新已选语法点
 
-  // 执行高考配比系统组合（直接使用系统推荐组合逻辑）
+  /**
+   * 【高考配比专用函数 - 请勿修改】
+   * 执行高考配比系统组合逻辑
+   * 功能：生成正好10题，其中"谓语"和"非谓语"必选，其余8题从其他分类随机选择
+   * 注意：此函数已测试通过，修改"专题20题"和"自选20题"时请勿改动此函数
+   */
   async executeGaokaoSystemCombo() {
     try {
       wx.showLoading({ title: '正在生成高考配比...' });
@@ -910,47 +961,50 @@ Page({
     }, 50);
   },
 
-  // 选择语法大点（专题模式）
+  // 选择语法大点（专题模式）- 改为单选，选中后直接进入预览
   selectGrammarTopic(e) {
     const topicId = e.currentTarget.dataset.id;
-    console.log('选择专题, topicId:', topicId);
+    console.log('【专题模式】选择专题, topicId:', topicId);
     
-    const topics = this.data.grammarTopics.map(topic => {
-      if (topic.id === topicId) {
-        console.log('切换专题选中状态:', topic.name, '从', topic.selected, '到', !topic.selected);
-        return { ...topic, selected: !topic.selected };
-      }
-      return topic;
-    });
+    // 找到选中的专题
+    const selectedTopic = this.data.grammarTopics.find(t => t.id === topicId);
+    if (!selectedTopic) {
+      console.warn('未找到专题:', topicId);
+      return;
+    }
     
-    // 更新selectedTopics数组
-    const selectedTopics = topics
-      .filter(topic => topic.selected)
-      .map(topic => topic.name);
+    // 单选逻辑：取消其他所有选择，只保留当前选择的专题
+    const topics = this.data.grammarTopics.map(topic => ({
+      ...topic,
+      selected: topic.id === topicId // 只有当前选择的专题为true，其他都为false
+    }));
     
-    console.log('专题选择后 - selectedTopics:', selectedTopics);
+    // 更新selectedTopics数组（只包含一个专题）
+    const selectedTopics = [selectedTopic.name];
     
+    console.log('【专题模式】单选专题:', selectedTopic.name);
+    
+    // 先同步更新本地数据（确保立即可用）
+    this.data.grammarTopics = topics;
+    this.data.selectedTopics = selectedTopics;
+    this.data.selectedTags = selectedTopics;
+    this.data.variantCount = 0;
+    
+    // 然后调用setData更新界面
     this.setData({ 
       grammarTopics: topics,
       selectedTopics: selectedTopics,
-      selectedTags: selectedTopics  // 专题模式下selectedTags就是专题名称数组
-    }, () => {
-      console.log('专题选择后 - data.selectedTopics:', this.data.selectedTopics);
-      this.updateTopicModeCounts();
-      this.updateSelectedCount();
-      this.updateCategoryCounts();
-      this.updateSmartTitle();
+      selectedTags: selectedTopics,  // 专题模式下selectedTags就是专题名称数组
+      variantCount: 0  // 专题模式固定为0道变式题
     });
     
-    // 专题模式下选择大点后给出提示
-    const selectedTopic = topics.find(t => t.id === topicId);
-    if (selectedTopic && selectedTopic.selected) {
-      wx.showToast({
-        title: `已选择${selectedTopic.name}`,
-        icon: 'success',
-        duration: 1500
-      });
-    }
+    console.log('【专题模式】专题选择后 - selectedTopics:', selectedTopics);
+    
+    // 直接跳转到预览界面（goToPreviewDirectly会使用this.data中的数据，已经同步更新）
+    setTimeout(() => {
+      console.log('【专题模式】准备跳转，当前selectedTopics:', this.data.selectedTopics);
+      this.goToPreviewDirectly();
+    }, 150);
   },
 
   // 选择语法小点
@@ -1067,27 +1121,38 @@ Page({
     });
   },
   
-  // 更新专题模式的计数
+  // 更新专题模式的计数（专题20题：20题平均分配到选中专题的所有小点上）
   updateTopicModeCounts() {
     const { selectedTopics, selectedTotalCount } = this.data;
     
     if (selectedTopics.length === 0) {
-      this.setData({ totalQuestions: 0 });
+      this.setData({ totalQuestions: 0, distributedQuestions: [] });
       return;
     }
     
-    // 获取所有选中的小点
-    const allSelectedPoints = [];
-    selectedTopics.forEach(topicName => {
-      const topic = this.data.grammarTopics.find(t => t.name === topicName);
-      if (topic && topic.points) {
-        allSelectedPoints.push(...topic.points);
-      }
-    });
+    // 专题模式只允许选择一个专题
+    const topicName = selectedTopics[0];
+    const topic = this.data.grammarTopics.find(t => t.name === topicName);
     
-    // 智能分配题目
-    const distributedQuestions = this.distributeQuestionsToPoints(allSelectedPoints, selectedTotalCount);
+    if (!topic || !topic.points || topic.points.length === 0) {
+      console.warn('【专题模式】未找到专题或专题下没有小点:', topicName);
+      this.setData({ totalQuestions: 0, distributedQuestions: [] });
+      return;
+    }
+    
+    // 获取该专题下的所有小点
+    const allSelectedPoints = [...topic.points];
+    console.log(`【专题模式】专题 "${topicName}" 下有 ${allSelectedPoints.length} 个小点:`, allSelectedPoints.map(p => p.name));
+    
+    // 20题平均分配到所有小点
+    const totalCount = selectedTotalCount || 20;
+    const distributedQuestions = this.distributeQuestionsToPoints(allSelectedPoints, totalCount);
     const totalQuestions = distributedQuestions.reduce((sum, point) => sum + point.count, 0);
+    
+    console.log(`【专题模式】分配结果: 共${totalQuestions}题，分配到${distributedQuestions.filter(p => p.count > 0).length}个小点`);
+    distributedQuestions.filter(p => p.count > 0).forEach(p => {
+      console.log(`  - ${p.name}: ${p.count}题`);
+    });
     
     this.setData({ 
       totalQuestions,
@@ -1893,7 +1958,94 @@ Page({
     });
   },
 
-  // 无变式题，直接进入预览
+  // 专题模式：直接跳转到预览界面（不需要"我选好了"按钮和变式题弹窗）
+  goToPreviewDirectly() {
+    console.log('【专题模式】开始直接跳转到预览界面');
+    
+    const { selectedTopics, grammarTopics, selectedTotalCount } = this.data;
+    
+    // 检查是否有选中的专题
+    if (!selectedTopics || selectedTopics.length === 0) {
+      console.warn('【专题模式】未选择专题，无法跳转');
+      wx.showToast({
+        title: '请先选择专题',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    // 直接重新计算分配数据，确保数据是最新的
+    const topicName = selectedTopics[0];
+    const topic = grammarTopics.find(t => t.name === topicName);
+    
+    if (!topic || !topic.points || topic.points.length === 0) {
+      console.error('【专题模式】专题下没有小点:', topicName);
+      wx.showToast({
+        title: '专题下没有可用的小点',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    // 直接计算分配，不依赖 this.data.distributedQuestions
+    const allSelectedPoints = [...topic.points];
+    const totalCount = selectedTotalCount || 20;
+    const distributedQuestions = this.distributeQuestionsToPoints(allSelectedPoints, totalCount);
+    
+    console.log('【专题模式】分配数据计算完成:', {
+      topicName,
+      pointsCount: allSelectedPoints.length,
+      totalCount,
+      distributedCount: distributedQuestions.filter(p => p.count > 0).length
+    });
+    
+    // 同步更新数据，用于构建作业数据
+    this.data.distributedQuestions = distributedQuestions;
+    this.setData({ distributedQuestions });
+    
+    // 直接构建作业数据（不等待setData回调）
+    const assignmentData = this.buildAssignmentData();
+    
+    if (!assignmentData || !assignmentData.questions || assignmentData.questions.length === 0) {
+      console.error('【专题模式】构建作业数据失败:', assignmentData);
+      wx.showToast({
+        title: '生成题目失败，请重试',
+        icon: 'none'
+      });
+      return;
+    }
+    
+    console.log('【专题模式】作业数据构建成功:', {
+      title: assignmentData.title,
+      questionsCount: assignmentData.questions.length,
+      grammarPoints: [...new Set(assignmentData.questions.map(q => q.grammarPoint || q.category))]
+    });
+    
+    // 专题模式固定为0道变式题
+    const variantCount = 0;
+    
+    // 跳转到统一学案生成流程
+    const url = `/pages/teacher/teacher-generate-material/index?assignmentData=${encodeURIComponent(JSON.stringify(assignmentData))}&variantCount=${variantCount}`;
+    
+    console.log('【专题模式】准备跳转，URL长度:', url.length);
+    
+    wx.navigateTo({
+      url: url,
+      success: () => {
+        console.log('【专题模式】跳转到预览界面成功');
+      },
+      fail: (error) => {
+        console.error('【专题模式】跳转失败:', error);
+        wx.showToast({
+          title: '跳转失败，请重试',
+          icon: 'error',
+          duration: 2000
+        });
+      }
+    });
+  },
+
+  // 无变式题，直接进入预览（保留给其他模式使用）
   goToPreview() {
     if (this.data.variantCount === 0) {
       wx.showToast({
@@ -1952,12 +2104,17 @@ Page({
     let questions = [];
     let title = smartTitle || '语法练习学案';
     
+    // 【高考配比专用逻辑 - 请勿修改】
     if (homeworkType === 'gaokao') {
-      // 高考配比模式
+      // 高考配比模式：使用已生成的 gaokaoRatio.selectedGrammarPoints
       questions = this.generateGaokaoQuestions();
       title = '高考配比练习';
     } else if (homeworkType === 'topic') {
-      // 专题模式
+      // 专题模式：确保分配数据已更新
+      if (!this.data.distributedQuestions || this.data.distributedQuestions.length === 0) {
+        console.log('【专题模式】分配数据未设置，重新计算...');
+        this.updateTopicModeCounts();
+      }
       questions = this.generateTopicQuestions();
       title = '专题练习';
     } else if (homeworkType === 'custom') {
@@ -1976,7 +2133,11 @@ Page({
     };
   },
 
-  // 生成高考配比题目
+  /**
+   * 【高考配比专用函数 - 请勿修改】
+   * 根据 gaokaoRatio.selectedGrammarPoints 生成题目
+   * 注意：此函数依赖 executeGaokaoSystemCombo() 生成的数据结构
+   */
   generateGaokaoQuestions() {
     const { gaokaoRatio } = this.data;
     const questions = [];
@@ -2132,18 +2293,77 @@ A. 选项A    B. 选项B    C. 选项C    D. 选项D
   },
 
   // 生成专题题目
+  /**
+   * 生成专题模式题目
+   * 根据选中的专题（selectedTopics）和分配的题目数量（distributedQuestions）生成题目数据
+   */
   generateTopicQuestions() {
-    // 根据选择的专题生成题目
-    return [
-      {
-        id: 'q1',
-        text: 'This is a topic question 1',
-        grammarPoint: '定语从句',
-        category: '定语从句综合',
-        answer: 'C',
-        analysis: '这是定语从句的解析'
+    const { selectedTopics, distributedQuestions, selectedTotalCount, grammarTopics } = this.data;
+    
+    console.log('【专题模式】开始生成题目，参数:', {
+      selectedTopics,
+      distributedQuestions: distributedQuestions ? distributedQuestions.length : 0,
+      selectedTotalCount,
+      grammarTopicsCount: grammarTopics ? grammarTopics.length : 0
+    });
+    
+    // 如果没有选中的专题，返回空数组
+    if (!selectedTopics || selectedTopics.length === 0) {
+      console.warn('专题模式：未选择任何专题');
+      return [];
+    }
+    
+    // 如果没有分配数据，重新计算分配
+    let questions = [];
+    let pointsWithCount = [];
+    
+    if (distributedQuestions && distributedQuestions.length > 0) {
+      // 使用已有的分配结果
+      pointsWithCount = distributedQuestions.filter(p => p.count > 0);
+      console.log('【专题模式】使用已有分配结果:', pointsWithCount.map(p => ({ name: p.name, count: p.count })));
+    } else {
+      // 重新计算分配：从选中的专题中获取所有小点
+      const allSelectedPoints = [];
+      selectedTopics.forEach(topicName => {
+        const topic = grammarTopics.find(t => t.name === topicName);
+        console.log(`【专题模式】查找专题 "${topicName}":`, topic ? `找到，包含 ${topic.points ? topic.points.length : 0} 个小点` : '未找到');
+        if (topic && topic.points) {
+          allSelectedPoints.push(...topic.points);
+          console.log(`【专题模式】从专题 "${topicName}" 获取到小点:`, topic.points.map(p => p.name));
+        }
+      });
+      
+      console.log('【专题模式】所有选中的小点:', allSelectedPoints.map(p => p.name));
+      
+      const distributed = this.distributeQuestionsToPoints(allSelectedPoints, selectedTotalCount || 20);
+      pointsWithCount = distributed.filter(p => p.count > 0);
+      console.log('【专题模式】分配后的结果:', pointsWithCount.map(p => ({ name: p.name, count: p.count })));
+    }
+    
+    // 根据分配结果生成题目数据
+    pointsWithCount.forEach((point, index) => {
+      // 为每个语法点生成对应数量的题目占位数据
+      // 实际题目会在学案生成时从数据库获取
+      for (let i = 0; i < point.count; i++) {
+        questions.push({
+          id: `topic_q${index}_${i}`,
+          text: `专题题目占位 ${point.name}`, // 占位文本，实际会在学案生成时替换
+          grammarPoint: point.name, // 语法点名称，用于从数据库查询
+          category: point.name, // 分类名称
+          answer: '', // 答案会在从数据库获取时填充
+          analysis: '' // 解析会在从数据库获取时填充
+        });
       }
-    ];
+    });
+    
+    console.log('【专题模式】最终生成的题目数据:', {
+      selectedTopics,
+      totalQuestions: questions.length,
+      grammarPoints: questions.map(q => q.grammarPoint),
+      pointsWithCount: pointsWithCount.map(p => ({ name: p.name, count: p.count }))
+    });
+    
+    return questions;
   },
 
   // 生成自选题目
@@ -2195,7 +2415,9 @@ A. 选项A    B. 选项B    C. 选项C    D. 选项D
     
     // 获取选中的语法点名称（用于云数据库查询）
     let selectedGrammarPoints = [];
+    // 【高考配比专用逻辑 - 请勿修改】
     if (homeworkType === 'gaokao') {
+      // 高考配比模式：直接使用 gaokaoRatio.selectedGrammarPoints（由 executeGaokaoSystemCombo 生成）
       selectedGrammarPoints = this.data.gaokaoRatio.selectedGrammarPoints || [];
     } else {
       // 从grammarTopics中提取选中的小点名称

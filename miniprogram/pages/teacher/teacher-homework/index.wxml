@@ -41,7 +41,7 @@
           />
         </view>
       </view>
-      <view class="selected-tags" wx:if="{{homeworkType !== 'gaokao'}}">
+      <view class="selected-tags" wx:if="{{homeworkType !== 'gaokao' && homeworkType !== 'topic'}}">
         <!-- 总题数显示和进度条 -->
         <view class="total-questions-section" wx:if="{{selectedTags.length > 0 || selectedTopics.length > 0}}">
           <view class="total-info">
@@ -51,51 +51,6 @@
           </view>
           <view class="progress-bar">
             <view class="progress-fill" style="width: {{(totalQuestions / 20) * 100}}%"></view>
-          </view>
-        </view>
-        
-        <!-- 专题模式：极简快速选择 -->
-        <view class="topic-quick-section" wx:if="{{homeworkType === 'topic'}}">
-          <!-- 总数选择 -->
-          <view class="total-questions-selector">
-            <text class="selector-title">选择题目总数</text>
-            <view class="question-count-buttons">
-              <view 
-                class="count-btn {{selectedTotalCount === 5 ? 'active' : ''}}"
-                bindtap="selectTotalCount"
-                data-count="5"
-              >5题</view>
-              <view 
-                class="count-btn {{selectedTotalCount === 10 ? 'active' : ''}}"
-                bindtap="selectTotalCount"
-                data-count="10"
-              >10题</view>
-              <view 
-                class="count-btn {{selectedTotalCount === 15 ? 'active' : ''}}"
-                bindtap="selectTotalCount"
-                data-count="15"
-              >15题</view>
-              <view 
-                class="count-btn {{selectedTotalCount === 20 ? 'active' : ''}}"
-                bindtap="selectTotalCount"
-                data-count="20"
-              >20题</view>
-            </view>
-          </view>
-          
-          <!-- 已选专题显示 -->
-          <view class="selected-topics-display" wx:if="{{selectedTopics.length > 0}}">
-            <text class="display-title">已选专题 ({{selectedTopics.length}}个)</text>
-            <view class="topic-tags">
-              <view 
-                class="topic-tag"
-                wx:for="{{selectedTopics}}" 
-                wx:key="*this"
-              >
-                <text class="topic-tag-text">{{item}}</text>
-                <text class="topic-tag-remove" data-topic="{{item}}" bindtap="removeSelectedTopic">×</text>
-              </view>
-            </view>
           </view>
         </view>
         
@@ -223,7 +178,8 @@
 
 
   <!-- 操作按钮 -->
-  <view class="action-buttons" wx:if="{{homeworkType}}">
+  <!-- 专题模式：选择专题后直接跳转，不需要"我选好了"按钮 -->
+  <view class="action-buttons" wx:if="{{homeworkType && homeworkType !== 'topic'}}">
         <button 
           class="btn btn-primary btn-full" 
           bindtap="showVariantSelector"
