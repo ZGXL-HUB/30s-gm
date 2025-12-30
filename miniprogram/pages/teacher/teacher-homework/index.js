@@ -542,61 +542,84 @@ Page({
     try {
       wx.showLoading({ title: '正在生成高考配比...' });
       
-      // 使用已有的系统组合规则
-      const systemComboRules = {
-        "介词": 1,
-        "代词": 1,
-        "连词": 1,
-        "冠词": 1,
-        "名词": 1,
-        "动词": 1,
-        "谓语": 1,
-        "非谓语": 1,
-        "形容词": 1,
-        "副词": 1,
-        "定语从句": 1,
-        "状语和从句": 1
-      };
+      // 所有可用的分类（共12个）
+      const allCategories = [
+        "介词",
+        "代词",
+        "连词",
+        "冠词",
+        "名词",
+        "动词",
+        "谓语",
+        "非谓语",
+        "形容词",
+        "副词",
+        "定语从句",
+        "状语和从句"
+      ];
 
       const selectedPoints = {};
       const usedGrammarPoints = new Set();
 
-      // 根据规则选择语法点
-      Object.keys(systemComboRules).forEach(category => {
-        const count = systemComboRules[category];
+      // 第一步：必选"谓语"和"非谓语"，各选1题
+      const requiredCategories = ["谓语", "非谓语"];
+      for (const category of requiredCategories) {
+        const grammarPoints = this.getGrammarPointsByCategory(category);
+        console.log(`必选分类 ${category} 下的语法点:`, grammarPoints);
         
-        // 获取该分类下的所有语法点
+        if (grammarPoints.length > 0) {
+          const randomGrammarPoint = grammarPoints[Math.floor(Math.random() * grammarPoints.length)];
+          selectedPoints[randomGrammarPoint] = 1;
+          usedGrammarPoints.add(randomGrammarPoint);
+          console.log(`✅ 必选 ${randomGrammarPoint}`);
+        } else {
+          console.log(`❌ ${category} 分类下没有语法点`);
+        }
+      }
+
+      // 第二步：从剩余的10个分类中随机选8个分类
+      const remainingCategories = allCategories.filter(cat => !requiredCategories.includes(cat));
+      console.log('剩余分类:', remainingCategories);
+      
+      // 随机打乱剩余分类，取前8个
+      const shuffledRemaining = [...remainingCategories].sort(() => Math.random() - 0.5);
+      const selectedCategories = shuffledRemaining.slice(0, 8);
+      console.log('随机选中的8个分类:', selectedCategories);
+
+      // 从选中的8个分类中各选1个语法点
+      for (const category of selectedCategories) {
         const grammarPoints = this.getGrammarPointsByCategory(category);
         console.log(`分类 ${category} 下的语法点:`, grammarPoints);
         
-        // 随机选择一个语法点
         if (grammarPoints.length > 0) {
           const randomGrammarPoint = grammarPoints[Math.floor(Math.random() * grammarPoints.length)];
-          console.log(`从 ${category} 分类中随机选择:`, randomGrammarPoint);
           
           // 如果该语法点未被使用
           if (!usedGrammarPoints.has(randomGrammarPoint)) {
-            selectedPoints[randomGrammarPoint] = count;
+            selectedPoints[randomGrammarPoint] = 1;
             usedGrammarPoints.add(randomGrammarPoint);
             console.log(`✅ 成功选择 ${randomGrammarPoint}`);
           } else {
-            console.log(`⚠️ ${randomGrammarPoint} 已被使用，跳过`);
+            // 如果已被使用，尝试选择其他语法点
+            const unusedPoints = grammarPoints.filter(p => !usedGrammarPoints.has(p));
+            if (unusedPoints.length > 0) {
+              const alternativePoint = unusedPoints[Math.floor(Math.random() * unusedPoints.length)];
+              selectedPoints[alternativePoint] = 1;
+              usedGrammarPoints.add(alternativePoint);
+              console.log(`✅ 选择替代语法点 ${alternativePoint}`);
+            }
           }
         } else {
           console.log(`❌ ${category} 分类下没有语法点`);
         }
-      });
+      }
 
-      // 如果题目不够10道，从其他语法点补充
-      while (Object.keys(selectedPoints).length < 10) {
-        const availablePoints = this.getAllAvailableGrammarPoints();
-        const unusedPoints = availablePoints.filter(point => !usedGrammarPoints.has(point));
-        
-        if (unusedPoints.length === 0) break;
-        
-        const randomPoint = unusedPoints[Math.floor(Math.random() * unusedPoints.length)];
-        selectedPoints[randomPoint] = 1;
-        usedGrammarPoints.add(randomPoint);
+      // 确保正好是10题（2题必选 + 8题随机选）
+      const finalCount = Object.keys(selectedPoints).length;
+      console.log(`最终选中 ${finalCount} 个语法点（目标：10个）`);
+      
+      if (finalCount !== 10) {
+        console.warn(`⚠️ 语法点数量不符合预期：${finalCount}，应该是10个`);
       }
 
       // 更新界面显示
