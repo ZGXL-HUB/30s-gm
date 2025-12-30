@@ -1,0 +1,27 @@
+<!-- 极简主界面 -->
+<view class="main-container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">📚 语法练习系统</text>
+    <text class="subtitle">让教学更简单，让学习更高效</text>
+  </view>
+
+  <!-- 功能入口卡片 -->
+  <view class="function-cards">
+    <!-- 语法组卷入口 -->
+    <view class="card teacher-card" bindtap="goToTeacherMode">
+      <view class="card-icon">📝</view>
+      <view class="card-title">语法组卷</view>
+      <view class="card-desc">智能组卷 • 高考配比 • 专题练习</view>
+      <view class="card-arrow">→</view>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer">
+    <text class="footer-text">点击开始语法组卷</text>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

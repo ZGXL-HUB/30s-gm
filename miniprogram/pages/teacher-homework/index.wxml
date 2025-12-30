@@ -1,0 +1,460 @@
+<!--教师端布置语法作业页面-->
+<view class="teacher-homework">
+  <!-- 作业类型选择卡片弹窗 -->
+  <view class="homework-type-selector" wx:if="{{!homeworkType}}">
+    <view class="selector-header">
+      <text class="title">选择作业类型</text>
+      <text class="subtitle">请选择您要布置的作业类型</text>
+    </view>
+    <view class="type-cards">
+      <view 
+        class="type-card"
+        wx:for="{{homeworkTypes}}" 
+        wx:key="id"
+        data-type="{{item.id}}"
+        bindtap="selectHomeworkType"
+      >
+        <view class="card-icon" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}CC 100%);">
+          <text class="icon">{{item.icon}}</text>
+        </view>
+        <view class="card-content">
+          <text class="title">{{item.title}}</text>
+          <text class="subtitle">{{item.subtitle}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统一文件树界面 -->
+  <view class="homework-content" wx:if="{{homeworkType}}">
+    <!-- 顶部已选内容标签 -->
+    <view class="selected-content-header">
+      <view class="header-row">
+        <text class="header-title">已选内容</text>
+        <!-- 乱序开关 -->
+        <view class="shuffle-toggle">
+          <text class="shuffle-label">乱序出题</text>
+          <switch 
+            checked="{{shuffleQuestions}}" 
+            bindchange="toggleShuffle"
+            color="#1890ff"
+          />
+        </view>
+      </view>
+      <view class="selected-tags" wx:if="{{homeworkType !== 'gaokao'}}">
+        <!-- 总题数显示和进度条 -->
+        <view class="total-questions-section" wx:if="{{selectedTags.length > 0 || selectedTopics.length > 0}}">
+          <view class="total-info">
+            <text class="total-label">总题数:</text>
+            <text class="total-count">{{totalQuestions}}题</text>
+            <text class="max-count">/ 20题</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{(totalQuestions / 20) * 100}}%"></view>
+          </view>
+        </view>
+        
+        <!-- 专题模式：极简快速选择 -->
+        <view class="topic-quick-section" wx:if="{{homeworkType === 'topic'}}">
+          <!-- 总数选择 -->
+          <view class="total-questions-selector">
+            <text class="selector-title">选择题目总数</text>
+            <view class="question-count-buttons">
+              <view 
+                class="count-btn {{selectedTotalCount === 5 ? 'active' : ''}}"
+                bindtap="selectTotalCount"
+                data-count="5"
+              >5题</view>
+              <view 
+                class="count-btn {{selectedTotalCount === 10 ? 'active' : ''}}"
+                bindtap="selectTotalCount"
+                data-count="10"
+              >10题</view>
+              <view 
+                class="count-btn {{selectedTotalCount === 15 ? 'active' : ''}}"
+                bindtap="selectTotalCount"
+                data-count="15"
+              >15题</view>
+              <view 
+                class="count-btn {{selectedTotalCount === 20 ? 'active' : ''}}"
+                bindtap="selectTotalCount"
+                data-count="20"
+              >20题</view>
+            </view>
+          </view>
+          
+          <!-- 已选专题显示 -->
+          <view class="selected-topics-display" wx:if="{{selectedTopics.length > 0}}">
+            <text class="display-title">已选专题 ({{selectedTopics.length}}个)</text>
+            <view class="topic-tags">
+              <view 
+                class="topic-tag"
+                wx:for="{{selectedTopics}}" 
+                wx:key="*this"
+              >
+                <text class="topic-tag-text">{{item}}</text>
+                <text class="topic-tag-remove" data-topic="{{item}}" bindtap="removeSelectedTopic">×</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 自选模式：详细控制 -->
+        <view class="slider-section" wx:if="{{homeworkType === 'custom' && selectedTags.length > 0}}">
+          <view 
+            class="slider-item"
+            wx:for="{{selectedTags}}" 
+            wx:key="*this"
+          >
+            <text class="slider-label">{{item.name || item}}</text>
+            <view class="slider-container">
+              <text class="slider-count">{{item.count || 1}}题</text>
+              <view class="number-control-wrapper">
+                <!-- 减少按钮 -->
+                <view 
+                  class="control-btn decrease-btn {{item.count <= 1 ? 'disabled' : ''}}"
+                  bindtap="decreaseSliderValue"
+                  data-index="{{index}}"
+                >-</view>
+                
+                <!-- 数字显示和刻度 -->
+                <view class="number-display">
+                  <text class="current-number">{{item.count || 1}}</text>
+                  <view class="scale-dots">
+                    <view 
+                      class="dot {{dot <= (item.count || 1) ? 'active' : ''}}"
+                      wx:for="{{getSliderTicks(index)}}"
+                      wx:key="*this"
+                      bindtap="setSliderValue"
+                      data-index="{{index}}"
+                      data-value="{{item}}"
+                    ></view>
+                  </view>
+                </view>
+                
+                <!-- 增加按钮 -->
+                <view 
+                  class="control-btn increase-btn {{item.count >= getSliderMax(index) ? 'disabled' : ''}}"
+                  bindtap="increaseSliderValue"
+                  data-index="{{index}}"
+                >+</view>
+              </view>
+            </view>
+            <text class="slider-remove" data-index="{{index}}" bindtap="removeSelectedTag">×</text>
+          </view>
+        </view>
+        
+        <!-- 空状态提示 -->
+        <view class="empty-state" wx:if="{{selectedTags.length === 0 && selectedTopics.length === 0}}">
+          <text class="empty-text">
+            {{homeworkType === 'topic' ? '请选择语法专题' : '请选择语法小点'}}
+          </text>
+        </view>
+      </view>
+      
+      <!-- 高考配比模式显示已选语法点 -->
+      <view class="gaokao-selected-points" wx:if="{{homeworkType === 'gaokao'}}">
+        <view class="gaokao-header">
+          <text class="gaokao-title">高考配比已生成</text>
+          <text class="gaokao-subtitle">共{{gaokaoRatio.selectedGrammarPoints.length}}个语法点，每题1道</text>
+          <button class="btn btn-small btn-outline" bindtap="regenerateGaokaoCombo">重新生成</button>
+        </view>
+        <view class="selected-points-grid">
+          <view 
+            class="selected-point-item"
+            wx:for="{{gaokaoRatio.selectedGrammarPoints}}" 
+            wx:key="*this"
+          >
+            <text class="point-name">{{item}}</text>
+            <text class="point-count">1题</text>
+            <text class="point-remove" data-point="{{item}}" bindtap="removeGaokaoPoint">×</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 调试信息 -->
+    <view class="debug-info" wx:if="{{showDebugInfo}}">
+      <text class="debug-text">调试模式：显示数据结构信息</text>
+      <button class="btn btn-small" bindtap="toggleDebugInfo">隐藏调试</button>
+      <button class="btn btn-small" bindtap="forceDataRefresh">强制刷新数据</button>
+      <button class="btn btn-small" bindtap="forceRenderPoints">强制渲染小点</button>
+    </view>
+    
+    <!-- 语法点手风琴列表 -->
+    <view class="grammar-accordion">
+      <view class="accordion-section" wx:for="{{grammarTopics}}" wx:key="id">
+        <view 
+          class="section-header {{item.expanded ? 'expanded' : ''}}"
+          data-topic-id="{{item.id}}"
+          data-id="{{item.id}}"
+        >
+          <view 
+            class="section-title"
+            bindtap="{{homeworkType === 'topic' ? 'selectGrammarTopic' : 'toggleTopic'}}"
+            data-topic-id="{{item.id}}"
+            data-id="{{item.id}}"
+          >
+            <text class="topic-name">{{item.name}}</text>
+            <text class="topic-count" wx:if="{{categoryCounts[index] > 0}}" data-selected="true">已选{{categoryCounts[index]}}题</text>
+            <text class="topic-count" wx:else>{{item.questionCount}}题</text>
+          </view>
+          <view class="section-actions">
+            <!-- 专题模式：显示选择框，隐藏展开按钮 -->
+            <view class="checkbox {{item.selected ? 'checked' : ''}}" wx:if="{{homeworkType === 'topic'}}" data-id="{{item.id}}" bindtap="selectGrammarTopic"></view>
+            
+            <!-- 自选模式：显示展开按钮和全选按钮 -->
+            <view wx:if="{{homeworkType !== 'topic'}}" class="custom-mode-actions">
+              <view class="select-all-btn" bindtap="selectAllPoints" data-topic-id="{{item.id}}" catchtap="preventEventBubble" data-debug="true">全选</view>
+              <view class="expand-icon" bindtap="toggleTopic" data-topic-id="{{item.id}}">{{item.expanded ? '−' : '+'}}</view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 小点列表 -->
+        <view class="section-content" wx:if="{{item.expanded}}">
+          <block wx:for="{{item.points}}" wx:key="id" wx:for-item="point" wx:for-index="pointIndex">
+            <view 
+              class="point-item {{homeworkType === 'topic' ? 'disabled' : ''}} {{point.selected ? 'selected' : ''}}"
+              data-point-id="{{point.id}}"
+              bindtap="selectPoint"
+            >
+              <view class="point-info">
+                <text class="point-name">{{point.name}}</text>
+                <text class="point-count" wx:if="{{homeworkType === 'topic'}}">{{point.questionCount}}题</text>
+                <!-- 调试信息 -->
+                <text class="debug-info" wx:if="{{showDebugInfo}}" style="font-size: 20rpx; color: #999;">
+                  ID:{{point.id}}|Name:{{point.name}}|Count:{{point.questionCount}}
+                </text>
+              </view>
+              <view class="point-checkbox {{point.selected ? 'checked' : ''}}" wx:if="{{homeworkType !== 'topic'}}"></view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons" wx:if="{{homeworkType}}">
+    <button 
+      class="btn btn-primary" 
+      bindtap="previewHomework"
+    >预览作业</button>
+    <button 
+      class="btn btn-success" 
+      bindtap="showPublishConfirm"
+    >发布作业</button>
+    <button 
+      class="btn btn-outline" 
+      bindtap="saveDraft"
+    >暂存</button>
+    <button 
+      class="btn btn-outline" 
+      bindtap="toggleDebugInfo"
+    >调试数据</button>
+  </view>
+
+  <!-- 作业类型选择弹窗 -->
+  <view class="modal" wx:if="{{showTypeSelector}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">选择作业类型</text>
+        <text class="close" bindtap="closeTypeSelector">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="type-grid">
+          <view 
+            class="type-item"
+            wx:for="{{homeworkTypes}}" 
+            wx:key="id"
+            data-type="{{item.id}}"
+            bindtap="selectHomeworkType"
+          >
+            <view class="type-icon" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}CC 100%);">
+              <text class="icon">{{item.icon}}</text>
+            </view>
+            <view class="type-content">
+              <text class="title">{{item.title}}</text>
+              <text class="subtitle">{{item.subtitle}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 发布确认弹窗 -->
+  <view class="modal" wx:if="{{showPublishConfirm}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">确认发布作业</text>
+        <text class="close" bindtap="closePublishConfirm">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="confirm-info">
+          <text class="label">作业标题：</text>
+          <text class="value">{{smartTitle}}</text>
+        </view>
+        <view class="confirm-info" wx:if="{{smartRemark}}">
+          <text class="label">备注内容：</text>
+          <text class="value">{{smartRemark}}</text>
+        </view>
+        <view class="confirm-info">
+          <text class="label">截止时间：</text>
+          <text class="value">2025-10-05 18:00</text>
+        </view>
+        <view class="confirm-info">
+          <text class="label">发布班级：</text>
+          <view class="class-selection">
+            <view class="selected-classes" wx:if="{{selectedClasses.length > 0}}">
+              <text class="class-tag" wx:for="{{selectedClasses}}" wx:key="id" wx:for-item="class">
+                {{class.name}}
+                <text class="remove-class" data-class-id="{{class.id}}" bindtap="removeSelectedClass">×</text>
+              </text>
+            </view>
+            <view class="no-class-selected" wx:else>
+              <text class="placeholder">请选择班级</text>
+            </view>
+            <button class="btn btn-outline btn-small" bindtap="showClassSelection">选择班级</button>
+          </view>
+        </view>
+        <view class="confirm-tip">
+          <text class="tip">请确认以上信息无误后发布作业</text>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-secondary" bindtap="closePublishConfirm">取消</button>
+        <button class="btn btn-primary" bindtap="publishHomework" loading="{{loading}}">确认发布</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 班级选择弹窗 -->
+  <view class="modal" wx:if="{{showClassSelection}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">选择发布班级</text>
+        <text class="close" bindtap="closeClassSelection">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="class-list">
+          <view 
+            class="class-item {{selectedClassIds.indexOf(item.id) > -1 ? 'selected' : ''}}"
+            wx:for="{{availableClasses}}" 
+            wx:key="id"
+            data-class-id="{{item.id}}"
+            bindtap="toggleClassSelection"
+          >
+            <view class="class-info">
+              <text class="class-name">{{item.name}}</text>
+              <text class="class-stats">{{item.studentCount}}人</text>
+            </view>
+            <view class="select-indicator" wx:if="{{selectedClassIds.indexOf(item.id) > -1}}">✓</view>
+          </view>
+        </view>
+        
+        <view class="selection-summary" wx:if="{{selectedClasses.length > 0}}">
+          <text class="summary-text">已选择 {{selectedClasses.length}} 个班级</text>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-secondary" bindtap="closeClassSelection">取消</button>
+        <button class="btn btn-primary" bindtap="confirmClassSelection">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 发布成功弹窗 -->
+  <view class="modal" wx:if="{{showPublishSuccess}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">发布成功</text>
+        <text class="close" bindtap="closePublishSuccess">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="success-content">
+          <text class="success-icon">✓</text>
+          <text class="success-message">作业发布成功！</text>
+          <text class="success-detail">学生端已收到作业通知</text>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="goToMaterials">生成学案</button>
+        <button class="btn btn-secondary" bindtap="closePublishSuccess">完成</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 暂存作业提示弹窗 -->
+  <view class="modal" wx:if="{{showDraftPrompt}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">发现未完成的作业</text>
+        <text class="close" bindtap="startNewHomework">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="draft-info">
+          <text class="draft-icon">📝</text>
+          <text class="draft-message">您有一个未发布的作业暂存</text>
+          <view class="draft-details">
+            <text class="detail-item">作业类型：{{draftData.homeworkType === 'gaokao' ? '高考配比10题' : draftData.homeworkType === 'topic' ? '专题10题' : '自选10题'}}</text>
+            <text class="detail-item">暂存时间：{{draftData.formattedSavedAt || '刚刚'}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-secondary" bindtap="startNewHomework">重新开始</button>
+        <button class="btn btn-primary" bindtap="continueDraft">继续编辑</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预览弹窗 -->
+  <view class="preview-modal" wx:if="{{showPreview}}" bindtap="closePreview">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="title">作业预览</text>
+        <text class="close" bindtap="closePreview">×</text>
+      </view>
+      
+      <view class="preview-content">
+        <view class="preview-item">
+          <text class="label">作业类型:</text>
+          <text class="value">{{previewData.type}}</text>
+        </view>
+        <view class="preview-item">
+          <text class="label">题目总数:</text>
+          <text class="value">{{previewData.totalQuestions}}题</text>
+        </view>
+        <view class="preview-item">
+          <text class="label">出题顺序:</text>
+          <text class="value">{{previewData.config.shuffleQuestions ? '乱序' : '顺序'}}</text>
+        </view>
+        
+        <view class="selected-items">
+          <text class="label">已选内容:</text>
+          <view class="items-list">
+            <text 
+              class="item-tag"
+              wx:for="{{previewData.selectedItems}}" 
+              wx:key="id"
+            >{{item.name || item.category}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,152 @@
+<!-- 教师端主界面 - 按流程图设计 -->
+<view class="teacher-main">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">教师端</text>
+  </view>
+
+  <!-- 主要功能入口 -->
+  <view class="function-grid">
+    <!-- 布置语法作业 -->
+    <view class="function-card homework-card" bindtap="goToHomework">
+      <view class="card-icon">
+        <text class="icon">📝</text>
+      </view>
+      <view class="card-content">
+        <text class="card-title">布置语法作业</text>
+        <text class="card-subtitle">智能推荐 • 高考配比 • 专题练习 • 自选题目</text>
+      </view>
+      <view class="card-arrow">→</view>
+    </view>
+
+    <!-- 我的PPT/学案 -->
+    <view class="function-card materials-card" bindtap="goToMaterials">
+      <view class="card-icon">
+        <text class="icon">📊</text>
+      </view>
+      <view class="card-content">
+        <text class="card-title">我的PPT/学案</text>
+        <text class="card-subtitle">配套材料 • 点名器 • 摸底测试 • 材料库</text>
+      </view>
+      <view class="card-arrow">→</view>
+    </view>
+
+    <!-- 班级管理 -->
+    <view class="function-card class-card" bindtap="goToClass">
+      <view class="card-icon">
+        <text class="icon">👥</text>
+      </view>
+      <view class="card-content">
+        <text class="card-title">班级管理</text>
+        <text class="card-subtitle">班级列表 • 学生管理 • 班级模板 • 数据统计</text>
+      </view>
+      <view class="card-arrow">→</view>
+    </view>
+  </view>
+
+  <!-- 最近活动 -->
+  <view class="recent-section">
+    <view class="section-header">
+      <text class="section-title">最近活动</text>
+      <text class="section-more" bindtap="viewAllActivities">查看全部</text>
+    </view>
+    
+    <view class="activity-list">
+      <view 
+        class="activity-item"
+        wx:for="{{recentActivities}}" 
+        wx:key="id"
+        bindtap="viewActivity"
+        data-id="{{item.id}}"
+      >
+        <view class="activity-icon">
+          <text class="icon">{{item.icon}}</text>
+        </view>
+        <view class="activity-content">
+          <text class="activity-title">{{item.title}}</text>
+          <text class="activity-desc">{{item.description}}</text>
+          <text class="activity-time">{{item.time}}</text>
+        </view>
+        <view class="activity-status status-{{item.status}}">
+          <text class="status-text">{{item.statusText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 作业详情弹窗 -->
+  <view class="modal" wx:if="{{showAssignmentDetail}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="title">作业详情</text>
+        <text class="close" bindtap="closeAssignmentDetail">×</text>
+      </view>
+      
+      <view class="modal-body" wx:if="{{selectedAssignment}}">
+        <view class="assignment-detail">
+          <view class="detail-item">
+            <text class="label">作业标题：</text>
+            <text class="value">{{selectedAssignment.title}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedAssignment.remark}}">
+            <text class="label">备注内容：</text>
+            <text class="value">{{selectedAssignment.remark}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">截止时间：</text>
+            <text class="value">{{selectedAssignment.deadline}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">完成进度：</text>
+            <text class="value">已完成 {{selectedAssignment.completedCount || 12}}/{{selectedAssignment.totalCount || 33}} 人</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">平均正确率：</text>
+            <text class="value">{{selectedAssignment.averageAccuracy || 78}}%</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">创建时间：</text>
+            <text class="value">{{selectedAssignment.createdAt}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="closeAssignmentDetail">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 简化的导出弹窗 -->
+  <view class="export-modal" wx:if="{{showExportModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">生成讲评材料</text>
+        <text class="modal-close" bindtap="closeExportModal">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="format-options">
+          <view class="format-option" bindtap="generateExport" data-format="ppt">
+            <view class="format-icon">📊</view>
+            <view class="format-info">
+              <text class="format-name">PPT格式</text>
+              <text class="format-desc">课堂讲评用</text>
+            </view>
+          </view>
+          
+          <view class="format-option" bindtap="generateExport" data-format="word">
+            <view class="format-icon">📄</view>
+            <view class="format-info">
+              <text class="format-name">Word格式</text>
+              <text class="format-desc">打印分发用</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

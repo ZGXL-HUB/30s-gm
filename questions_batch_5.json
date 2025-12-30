@@ -1,0 +1,502 @@
+[
+  {
+    "text": "He ____ (tell) me he would come to the party, but he didn't show up.",
+    "answer": "told",
+    "analysis": "该句中需填入动词\"tell\"的过去式\"told\"。此处考查**不规则动词变化和承诺与现实的对比**,具体analysis如下：\n1. **时态判断**：\n   - 通过语境判断：他之前告诉我会来,但实际没来,所以\"tell\"发生在过去。\n2. **不规则动词变化(重现)**：\n   - \"tell\"是不规则动词：tell→told→told\n   - 过去式和过去分词相同的不规则变化\n   - 在前面题目中已经出现过\n3. **复合句的时态配合**：\n   - 主句：He told me...(一般过去时)\n   - 宾语从句：he would come...(过去将来时)\n   - 转折句：but he didn't show up(一般过去时)\n4. **承诺与现实的对比**：\n   - \"tell\"表示之前的承诺或说法\n   - \"didn't show up\"表示实际的结果\n   - 形成鲜明的对比,突出说话与行动的不一致\n5. **语法要点**：\"tell变told已学过,承诺行动要对比；宾语从句用would,实际结果用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "She ____ (spend) a lot of money on clothes last month.",
+    "answer": "spent",
+    "analysis": "该句中需填入动词\"spend\"的过去式\"spent\"。此处考查**不规则动词的辅音变化和消费行为表达**,具体analysis如下：\n1. **时态判断**：\n   - \"last month\"(上个月)表示过去的时间段,是一般过去时的典型标志。\n2. **不规则动词变化**：\n   - \"spend\"是不规则动词：spend→spent→spent\n   - d→t的辅音变化：spend→spent, send→sent, build→built\n   - 过去式和过去分词相同\n3. **消费结构spend...on...**：\n   - \"spend money on sth.\"表示\"在某方面花钱\"\n   - \"a lot of money\"说明花费数额较大\n   - \"on clothes\"说明消费的具体方向\n4. **消费行为的描述**：\n   - 消费行为通常发生在具体的时间段内\n   - \"last month\"为消费行为提供了明确的时间框架\n   - 适合用一般过去时描述已完成的消费\n5. **记忆要点**：\"spend变spent记仔细,d变t音有规律；花钱购物用spend on,过去消费用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "We ____ (see) a beautiful rainbow after the rain yesterday.",
+    "answer": "saw",
+    "analysis": "该句中需填入动词\"see\"的过去式\"saw\"。此处考查**不规则动词变化和自然现象观察**,具体analysis如下：\n1. **时态判断**：\n   - \"yesterday\"(昨天)是明确的过去时间标志,需要使用一般过去时。\n2. **不规则动词变化(重现)**：\n   - \"see\"是不规则动词：see→saw→seen\n   - 在前面题目中已经出现过,需要巩固记忆\n   - 元音变化型不规则动词\n3. **自然现象的观察**：\n   - \"see a rainbow\"表示\"看到彩虹\"\n   - \"after the rain\"说明彩虹出现的条件\n   - 自然现象的观察适合用一般过去时描述\n4. **时间逻辑关系**：\n   - \"after the rain\"表示时间的先后顺序\n   - 先下雨,后出现彩虹,最后我们看到\n   - 整个过程发生在\"yesterday\",用一般过去时\n5. **语法要点**：\"see变saw要熟记,自然现象很美丽；雨后彩虹常出现,美好时光用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "They ____ (do) their homework at home last night.",
+    "answer": "did",
+    "analysis": "该句中需填入动词\"do\"的过去式\"did\"。此处考查**常用不规则动词变化和学习活动表达**,具体analysis如下：\n1. **时态判断**：\n   - \"last night\"(昨晚)表示过去的具体时间,是一般过去时的典型标志。\n2. **不规则动词变化**：\n   - \"do\"是不规则动词：do→did→done\n   - 完全不规则变化,是最基础的不规则动词之一\n   - 需要熟练掌握\n3. **学习活动的表达**：\n   - \"do homework\"是固定搭配,表示\"做作业\"\n   - \"at home\"说明做作业的地点\n   - 这是学生日常学习活动的典型描述\n4. **日常活动的时间安排**：\n   - \"last night\"是做作业的常见时间\n   - 晚上在家做作业符合学生的日常安排\n   - 适合用一般过去时描述已完成的学习任务\n5. **记忆要点**：\"do变did最基础,做作业是do homework；昨晚在家学习好,日常安排用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The research team ______ (conduct) a series of experiments to test the new drug next month.",
+    "answer": "will conduct",
+    "analysis": "该句中需填入一般将来时\"will conduct\"。此处考查**一般将来时表示计划中的将来动作**,具体analysis如下：\n1. **时态判断**：\n   - 时间状语\"next month\"(下个月)明确表示动作发生在将来,因此句子需用一般将来时。\n2. **一般将来时构成**：\n   - 基本结构：will + 动词原形\n   - 主语\"The research team\"(第三人称单数) + will + conduct = will conduct\n3. **will的用法特点**：\n   - 表示预先计划或安排好的将来动作,带有一定的确定性\n   - 适用于描述正式的研究、项目等计划性活动\n4. **时间状语对应**：\n   - 一般将来时常与以下时间状语连用：\n     - 表示具体将来时间的短语：next week, tomorrow, in three days等；\n     - 表示将来阶段的表达：in the coming years, in the future等。\n5. **与be going to的区别**：\n   - will更强调计划的正式性和客观性\n   - be going to侧重主观打算或根据迹象判断的将来\n   - 此处研究团队的实验是正式计划,用will更恰当。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "According to the weather forecast, a strong typhoon ______ (hit) the coastal areas in three days.",
+    "answer": "will hit",
+    "analysis": "该句中需填入一般将来时\"will hit\"。此处考查**一般将来时表示基于客观预测的将来事件**,具体analysis如下：\n1. **时态判断**：\n   - 时间状语\"in three days\"(三天后)表示将来的时间,结合\"weather forecast\"(天气预报)这一客观依据,需用一般将来时。\n2. **一般将来时的客观性用法**：\n   - will在此处表示基于权威信息(如预报、数据)的客观预测\n   - 区别于主观意愿,更强调事件的可能性和确定性\n3. **in + 时间段的用法**：\n   - \"in + 时间段\"表示\"在...之后\",是一般将来时的典型标志\n   - 如in a week(一周后)、in two hours(两小时后)\n4. **动词hit的特点**：\n   - hit为不规则动词,但在一般将来时中用原形\n   - 类似动词：cut, put等,将来时均保持原形\n5. **语境合理性**：\n   - 天气预报属于客观预测,用will体现专业性和确定性\n   - 若用be going to则侧重\"迹象表明\",此处不如will贴合语境。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "You ______ (not recognize) Mary when you see her—she has lost 20 pounds and cut her hair short.",
+    "answer": "won't recognize",
+    "analysis": "该句中需填入一般将来时否定形式\"won't recognize\"。此处考查**时间状语从句中一般将来时的用法**,具体analysis如下：\n1. **时态判断**：\n   - 主句描述将来的情况,从句\"when you see her\"用一般现在时表将来(主将从现),因此主句需用一般将来时。\n2. **一般将来时否定构成**：\n   - 基本结构：will not + 动词原形,缩写为won't + 动词原形\n   - 主语\"You\" + won't + recognize = won't recognize\n3. **主将从现原则**：\n   - 时间状语从句(when, before, after等引导)中,用一般现在时表将来\n   - 主句用一般将来时,体现动作的先后关系\n   - 此处\"看见她时\"是将来的时间点,主句\"认不出\"是该时间点的动作。\n4. **语境逻辑**：\n   - 破折号后解释原因(已减重、剪发),说明将来认不出的必然性\n   - 用will体现这种基于现状的推测\n5. **否定形式注意事项**：\n   - will not的缩写为won't(而非willn't)\n   - 否定词not需紧跟will,不可置于动词后。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "We hope the government ______ (introduce) stricter regulations to reduce carbon emissions in urban areas.",
+    "answer": "will introduce",
+    "analysis": "该句中需填入一般将来时\"will introduce\"。此处考查**宾语从句中一般将来时的用法**,具体analysis如下：\n1. **时态判断**：\n   - 主句\"We hope\"为一般现在时,宾语从句描述将来的动作,因此用一般将来时。\n2. **宾语从句的时态呼应**：\n   - 当主句为现在时态(一般现在时、现在进行时等),宾语从句可根据实际情况用将来时\n   - 此处\"政府出台法规\"是将来的动作,不受主句时态限制\n3. **will在希望类表达中的用法**：\n   - 在hope, expect等动词后的宾语从句中,用will表示对将来的期待\n   - 体现动作发生的可能性和说话人的主观愿望\n4. **语境背景**：\n   - \"reduce carbon emissions\"(减少碳排放)是未来的环保目标\n   - 法规的出台具有计划性,用will符合语境\n5. **与be going to的区别**：\n   - 此处不强调\"迹象\",而是表达希望发生的将来事件,用will更自然。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "Look at those dark clouds—there ______ (be) a heavy downpour in less than an hour.",
+    "answer": "is going to be",
+    "analysis": "该句中需填入\"is going to be\"。此处考查**be going to表示根据迹象判断的将来事件**,具体analysis如下：\n1. **时态判断**：\n   - 前句\"Look at those dark clouds\"(看那些乌云)是明显的迹象,提示即将发生的动作；时间状语\"in less than an hour\"(不到一小时后)表示将来,因此用be going to结构。\n2. **be going to结构构成**：\n   - 基本结构：be动词 + going to + 动词原形\n   - 主语\"there\"对应的be动词为is(遵循there be句型的主谓一致) + going to be = is going to be\n3. **be going to的核心用法**：\n   - 表示根据当前迹象判断即将发生的事情\n   - 区别于will,更强调\"迹象表明\"的客观性\n4. **与there be句型的结合**：\n   - there be句型的将来时结构为there is/are going to be\n   - 注意避免重复be动词(不可说there is going to have)\n5. **时间状语特点**：\n   - \"in less than an hour\"表示短期内的将来,与be going to暗示的\"即将发生\"高度匹配。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "You ______ (have) plenty of time to prepare for the exam if you start reviewing the materials this weekend.",
+    "answer": "will have",
+    "analysis": "该句中需填入一般将来时\"will have\"。此处考查**条件状语从句中一般将来时的用法**,具体analysis如下：\n1. **时态判断**：\n   - 条件状语从句\"if you start reviewing...\"用一般现在时表将来(主将从现),主句描述将来的结果,因此用一般将来时。\n2. **主将从现原则**：\n   - if引导的条件句中,用一般现在时表示将来的假设\n   - 主句用一般将来时,体现\"如果...就会...\"的逻辑关系\n3. **一般将来时的肯定构成**：\n   - 基本结构：will + 动词原形\n   - 主语\"You\" + will + have = will have\n4. **语境逻辑**：\n   - 前句\"start reviewing this weekend\"(本周末开始复习)是将来的条件\n   - 后句\"have plenty of time\"(有充足时间)是该条件下的将来结果\n5. **与be going to的区别**：\n   - 此处强调客观结果,而非主观打算,用will更恰当\n   - be going to侧重\"计划\",与语境不符。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "I ______ (be) absent from the meeting tomorrow because I have to fly to New York on business.",
+    "answer": "will be",
+    "analysis": "该句中需填入一般将来时\"will be\"。此处考查**一般将来时中be动词的用法**,具体analysis如下：\n1. **时态判断**：\n   - 时间状语\"tomorrow\"(明天)表示将来,句子描述将来的状态,需用一般将来时。\n2. **be动词的一般将来时构成**：\n   - 基本结构：will + be(be动词原形)\n   - 主语\"I\" + will + be = will be\n3. **一般将来时表状态**：\n   - 不仅可表示将来的动作,也可表示将来的状态\n   - 此处\"be absent\"(缺席)是状态描述,用will be体现将来的状态\n4. **原因状语的时态**：\n   - 后句\"because I have to fly...\"(因为我得飞往...)用一般现在时表将来的必要性\n   - 说明将来缺席的原因,与主句的将来时呼应\n5. **与be going to be的区别**：\n   - 两者均可表示将来状态,但will更强调客观事实\n   - 此处因出差缺席是客观安排,用will be更自然。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "Experts predict that global temperatures ______ (rise) by at least 2°C over the next 50 years if no effective measures are taken.",
+    "answer": "will rise",
+    "analysis": "该句中需填入一般将来时\"will rise\"。此处考查**一般将来时表示基于预测的将来动作**,具体analysis如下：\n1. **时态判断**：\n   - 时间状语\"over the next 50 years\"(在未来50年内)表示将来的时间段,结合\"experts predict\"(专家预测),需用一般将来时。\n2. **一般将来时在预测中的用法**：\n   - will常用于表示基于专业知识或数据的预测\n   - 体现对将来趋势的客观判断\n3. **条件句与主句的时态呼应**：\n   - 条件句\"if no effective measures are taken\"用一般现在时表将来假设(主将从现)\n   - 主句用一般将来时,描述该假设下的将来结果\n4. **数量变化的表达**：\n   - \"rise by at least 2°C\"(至少上升2摄氏度)是将来的数量变化\n   - 一般将来时可清晰表达这种趋势性变化\n5. **语境适配性**：\n   - 气候变化预测属于客观趋势描述,用will比be going to更符合专家预测的正式语境。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "Scientists believe that humans ______ (establish) a permanent base on Mars within the next 50 years.",
+    "answer": "will establish",
+    "analysis": "该句需填入一般将来时\"will establish\"。此处考查**will表示对未来的客观预测**，具体分析如下：\n1. 时态判断：时间状语\"within the next 50 years\"(未来50年内)明确指向将来，且\"scientists believe\"体现客观预测，用will合适。\n2. 结构特点：will + 动词原形，无需考虑被动或进行形式。\n3. 语境逻辑：建立火星基地是基于科学发展的未来可能性，用will体现这种确定性较低的预测。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "Look at the schedule—our flight ______ (depart) at 6:30 tomorrow morning, so we need to get up early.",
+    "answer": "will depart",
+    "analysis": "该句需填入一般将来时\"will depart\"。此处考查**will表示按计划发生的将来动作**，具体分析如下：\n1. 时态判断：\"tomorrow morning\"(明天早上)是将来时间，且\"schedule\"(日程表)提示动作已计划，用will表正式安排。\n2. 与be going to区别：此处强调日程的客观性，而非主观打算，故不用be going to。\n3. 动词特点：depart为不及物动词，无需被动，直接用will + 原形。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "I ______ (lend) you my car this weekend if you promise to drive carefully.",
+    "answer": "will lend",
+    "analysis": "该句需填入一般将来时\"will lend\"。此处考查**will用于条件句中表将来承诺**，具体分析如下：\n1. 时态判断：if引导的条件句用一般现在时(promise)，主句用will表将来结果，符合\"主将从现\"。\n2. 用法特点：will在此处体现主观承诺，无被动或进行含义。\n3. 语境逻辑：\"借车\"是基于对方承诺的将来动作，用will突出意愿。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "There ______ (be) a total lunar eclipse tonight—let's go outside to watch it.",
+    "answer": "will be",
+    "analysis": "该句需填入一般将来时\"will be\"。此处考查**there be句型的一般将来时**，具体分析如下：\n1. 时态判断：\"tonight\"(今晚)是将来时间，描述自然现象的发生，用will表客观事实。\n2. 结构注意：there will be为固定搭配，不可用there is going to have(避免与have混淆)。\n3. 语境特点：月食是确定会发生的将来事件，will体现这种确定性。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "My parents ______ (visit) us next month—they've already booked their train tickets.",
+    "answer": "are going to visit",
+    "analysis": "该句需填入一般将来时\"are going to visit\"。此处考查**be going to表计划好的将来动作**，具体分析如下：\n1. 时态判断：\"next month\"(下个月)是将来时间，且\"booked tickets\"(已订票)提示动作已计划，用be going to合适。\n2. 结构特点：主语my parents为复数，故用are going to + 动词原形。\n3. 与will区别：此处强调\"已计划\"，比will更贴合语境。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "If you keep eating so much junk food, you ______ (gain) weight sooner or later.",
+    "answer": "will gain",
+    "analysis": "该句需填入一般将来时\"will gain\"。此处考查**will用于条件句表将来结果**，具体分析如下：\n1. 时态判断：if条件句用一般现在时(keep)，主句用will表将来必然结果，符合\"主将从现\"。\n2. 用法逻辑：\"增重\"是基于当前习惯的将来推测，will体现这种可能性。\n3. 无被动含义：gain为主动动作，无需被动形式。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The museum ______ (host) a special exhibition on ancient coins next week—do you want to go?",
+    "answer": "will host",
+    "analysis": "该句需填入一般将来时\"will host\"。此处考查**will表将来的正式活动安排**，具体分析如下：\n1. 时态判断：\"next week\"(下周)是将来时间，博物馆展览是官方安排，用will体现正式性。\n2. 动词特点：host为及物动词，此处直接接宾语，无需被动。\n3. 语境适配：询问对方意愿时，用will描述客观安排更自然。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "According to the weather report, it ______ (rain) all day tomorrow, so we'd better cancel the picnic.",
+    "answer": "will rain",
+    "analysis": "该句需填入一般将来时\"will rain\"。此处考查**will表基于权威信息的将来预测**，具体分析如下：\n1. 时态判断：\"tomorrow\"(明天)是将来时间，\"weather report\"(天气预报)是权威来源，用will表客观预测。\n2. 与be going to区别：虽有\"下雨\"的预测，但will更贴合\"报告\"的正式性，而非主观判断。\n3. 动词特点：rain为不及物动词，无需被动。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "My brother ______ (start) his new job at the software company next Monday.",
+    "answer": "is going to start",
+    "analysis": "该句需填入一般将来时\"is going to start\"。此处考查**be going to表个人计划的将来动作**，具体分析如下：\n1. 时态判断：\"next Monday\"(下周一)是将来时间，\"新工作\"是个人已确定的计划，用be going to。\n2. 主谓一致：主语my brother为第三人称单数，故用is going to + 动词原形。\n3. 语境逻辑：强调\"哥哥自己已计划好\"，比will更突出主观安排。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "If you don't hurry, we ______ (miss) the beginning of the concert.",
+    "answer": "will miss",
+    "analysis": "该句需填入一般将来时\"will miss\"。此处考查**will用于条件句表将来负面结果**，具体分析如下：\n1. 时态判断：if条件句用一般现在时(don't hurry)，主句用will表将来可能的后果，符合\"主将从现\"。\n2. 用法特点：will在此处体现\"不及时行动会导致的结果\"，无被动含义。\n3. 动词特点：miss为及物动词，直接接宾语，无需特殊变化。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The president ______ (give) a speech on environmental protection at the conference this Friday.",
+    "answer": "will give",
+    "analysis": "该句需填入一般将来时\"will give\"。此处考查**will表官方的将来安排**，具体分析如下：\n1. 时态判断：\"this Friday\"(本周五)是将来时间，\"总统演讲\"是正式活动安排，用will体现权威性。\n2. 与be going to区别：官方活动更侧重客观性，不用be going to。\n3. 结构简单：will + 动词原形，无被动或进行形式。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "I ______ (learn) to play the guitar during the summer vacation—I've already bought one.",
+    "answer": "am going to learn",
+    "analysis": "该句需填入一般将来时\"am going to learn\"。此处考查**be going to表个人打算**，具体分析如下：\n1. 时态判断：\"summer vacation\"(暑假)是将来时间，\"已买吉他\"提示有明确计划，用be going to。\n2. 主谓一致：主语为I，故用am going to + 动词原形。\n3. 语境逻辑：强调\"自己打算学\"，突出主观意愿。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "Scientists warn that if we don't reduce plastic use, marine life ______ (suffer) even more in the future.",
+    "answer": "will suffer",
+    "analysis": "该句需填入一般将来时\"will suffer\"。此处考查**will用于条件句表将来影响**，具体分析如下：\n1. 时态判断：if条件句用一般现在时(don't reduce)，主句用will表将来的负面影响，符合\"主将从现\"。\n2. 用法特点：will在此处体现对未来的担忧，无被动含义。\n3. 动词特点：suffer为不及物动词，直接用will + 原形。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The new shopping mall ______ (open) to the public next month—there are already many advertisements about it.",
+    "answer": "will open",
+    "analysis": "该句需填入一般将来时\"will open\"。此处考查**will表即将发生的将来动作**，具体分析如下：\n1. 时态判断：\"next month\"(下个月)是将来时间，\"已有广告\"说明即将开业，用will表客观事实。\n2. 与be going to区别：虽有迹象，但\"商场开业\"是正式事件，用will更合适。\n3. 结构：open为不及物动词(表\"开业\")，无需被动。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "I ______ (send) you the report as soon as I finish writing it.",
+    "answer": "will send",
+    "analysis": "该句需填入一般将来时\"will send\"。此处考查**will用于时间状语从句表将来动作**，具体分析如下：\n1. 时态判断：as soon as引导的从句用一般现在时(finish)，主句用will表将来动作，符合\"主将从现\"。\n2. 用法特点：will在此处体现\"完成后就做\"的即时性，无被动含义。\n3. 语境逻辑：\"发送报告\"是基于\"完成写作\"的将来动作，用will突出顺承关系。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "There ______ (be) a charity concert in the park this weekend—all proceeds will go to children in need.",
+    "answer": "will be",
+    "analysis": "该句需填入一般将来时\"will be\"。此处考查**there be句型的将来时**，具体分析如下：\n1. 时态判断：\"this weekend\"(本周末)是将来时间，描述计划中的活动，用will表客观安排。\n2. 结构注意：there will be为固定搭配，不可混淆为there is going to have。\n3. 语境：慈善音乐会是公开活动，用will体现正式性。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "My sister ______ (turn) 18 next week—we're planning a big party for her.",
+    "answer": "will turn",
+    "analysis": "该句需填入一般将来时\"will turn\"。此处考查**will表将来的年龄变化**，具体分析如下：\n1. 时态判断：\"next week\"(下周)是将来时间，\"满18岁\"是自然发生的将来事件，用will。\n2. 用法特点：年龄增长是客观事实，不用be going to(后者侧重主观计划)。\n3. 动词：turn为系动词(表\"达到某年龄\")，无需被动。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "If you study hard, you ______ (pass) the final exam without any difficulty.",
+    "answer": "will pass",
+    "analysis": "该句需填入一般将来时\"will pass\"。此处考查**will用于条件句表积极结果**，具体分析如下：\n1. 时态判断：if条件句用一般现在时(study)，主句用will表将来的好结果，符合\"主将从现\"。\n2. 用法逻辑：\"通过考试\"是\"努力学习\"的可能结果，will体现这种可能性。\n3. 无被动：pass为主动动作，直接用will + 原形。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The teacher announced that we ______ (have) a quiz on Chapter 5 next Friday.",
+    "answer": "will have",
+    "analysis": "该句需填入一般将来时\"will have\"。此处考查**will表老师宣布的将来安排**，具体分析如下：\n1. 时态判断：\"next Friday\"(下周五)是将来时间，\"老师宣布\"的测验是正式安排，用will。\n2. 与过去将来时区别：主句\"announced\"为过去时，但此处\"next Friday\"相对于现在仍是将来，故不用would。\n3. 结构：will + 动词原形，无被动或进行形式。",
+    "category": "谓语(3)",
+    "grammarPoint": "谓语(3)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "She told me she ______ (visit) her aunt in London the following week.",
+    "answer": "would visit",
+    "analysis": "该句需填入过去将来时\"would visit\"。此处考查**间接引语中过去将来时的用法**，具体分析如下：\n1. 时态判断：主句\"She told me\"为一般过去时，宾语从句中\"the following week\"(第二周)是相对于过去的将来时间，需用过去将来时。\n2. 结构特点：would + 动词原形，体现\"从过去看将要发生的动作\"。\n3. 语境逻辑：\"告诉\"是过去动作，\"拜访阿姨\"是当时看来将要发生的事，用would符合时态呼应。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "The tour guide said that the bus ______ (leave) at 8 o'clock the next morning.",
+    "answer": "would leave",
+    "analysis": "该句需填入过去将来时\"would leave\"。此处考查**过去将来时表示过去计划的将来动作**，具体分析如下：\n1. 时态判断：主句\"said\"为过去时，\"the next morning\"(第二天早上)是过去视角下的将来，用would表计划。\n2. 用法特点：描述过去已知的未来安排，不用被动或进行形式。\n3. 与was going to区别：此处强调客观计划，用would更贴合\"导游说明\"的正式语境。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "He promised that he ______ (help) me with my homework after he finished his own.",
+    "answer": "would help",
+    "analysis": "该句需填入过去将来时\"would help\"。此处考查**过去将来时表示过去的承诺**，具体分析如下：\n1. 时态判断：主句\"promised\"为过去时，\"帮助\"是当时承诺的未来动作，用would体现。\n2. 时间逻辑：after引导的从句用一般过去时(finished)，主句用过去将来时，符合\"主过将从过\"。\n3. 无复杂结构：仅需would + 动词原形，不涉及其他语法点。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "I thought that the weather ______ (get) better in the afternoon, but it rained heavily.",
+    "answer": "would get",
+    "analysis": "该句需填入过去将来时\"would get\"。此处考查**过去将来时表示过去的推测**，具体分析如下：\n1. 时态判断：主句\"thought\"为过去时，\"下午天气变好\"是当时对未来的推测，用would。\n2. 语境对比：后句\"rained\"(过去时)说明推测未实现，但不影响前句用过去将来时。\n3. 结构简单：would + 动词原形，无被动含义。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "The students were told that their teacher ______ (return) from her business trip the next day.",
+    "answer": "would return",
+    "analysis": "该句需填入过去将来时\"would return\"。此处考查**被动句中过去将来时的用法**，具体分析如下：\n1. 时态判断：主句\"were told\"为一般过去时的被动(仅主句被动，谓语动词本身不涉及被动)，\"the next day\"是过去的将来，用would。\n2. 核心语法：聚焦谓语动词return的过去将来时，不涉及动词本身的被动形式。\n3. 逻辑：\"被告知\"是过去动作，\"老师返回\"是当时预计的未来事件。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "She said she ______ (buy) a new laptop with her birthday money.",
+    "answer": "was going to buy",
+    "analysis": "该句需填入过去将来时\"was going to buy\"。此处考查**was going to表过去的计划**，具体分析如下：\n1. 时态判断：主句\"said\"为过去时，\"用生日钱买电脑\"是当时已有的计划，用was going to。\n2. 主谓一致：主语she为第三人称单数，故用was going to + 动词原形。\n3. 与would区别：强调\"过去的打算\"，比would更突出计划性。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "They thought the concert ______ (start) at 7 pm, so they left home early.",
+    "answer": "would start",
+    "analysis": "该句需填入过去将来时\"would start\"。此处考查**过去将来时表示过去的预期**，具体分析如下：\n1. 时态判断：主句\"thought\"为过去时，\"音乐会7点开始\"是当时对未来的预期，用would。\n2. 语境逻辑：\"提前离开\"是基于当时对音乐会开始时间的未来判断。\n3. 无复杂结构：仅需would + 动词原形。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "The manager announced that the company ______ (launch) a new product line the following month.",
+    "answer": "would launch",
+    "analysis": "该句需填入过去将来时\"would launch\"。此处考查**过去将来时表示过去宣布的未来计划**，具体分析如下：\n1. 时态判断：主句\"announced\"为过去时，\"the following month\"(下个月)是过去视角的将来，用would。\n2. 用法特点：描述企业计划，用would体现正式性，无被动或进行含义。\n3. 动词：launch为及物动词，直接接宾语，无需特殊变化。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "I wasn't sure if he ______ (accept) the invitation to the party.",
+    "answer": "would accept",
+    "analysis": "该句需填入过去将来时\"would accept\"。此处考查**宾语从句中过去将来时的不确定用法**，具体分析如下：\n1. 时态判断：主句\"wasn't sure\"为过去时，\"是否接受邀请\"是当时对未来的不确定推测，用would。\n2. 语法点：if引导宾语从句(表\"是否\")，主句过去时，从句用过去将来时。\n3. 结构：would + 动词原形，无其他语法点干扰。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "He told us that he ______ (travel) to Japan during his summer holiday.",
+    "answer": "was going to travel",
+    "analysis": "该句需填入过去将来时\"was going to travel\"。此处考查**was going to表过去的旅行计划**，具体分析如下：\n1. 时态判断：主句\"told\"为过去时，\"暑假去日本\"是当时的计划，用was going to。\n2. 强调重点：突出\"过去已确定的安排\"，比would更贴合\"告知计划\"的语境。\n3. 主谓一致：主语he对应was going to。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "The weather forecast said that it ______ (rain) the next day, but it turned out to be sunny.",
+    "answer": "would rain",
+    "analysis": "该句需填入过去将来时\"would rain\"。此处考查**过去将来时表示过去的预报**，具体分析如下：\n1. 时态判断：主句\"said\"为过去时，\"第二天会下雨\"是当时的天气预报，用would。\n2. 结果对比：后句\"sunny\"说明预报不准，但前句仍用过去将来时体现当时的预测。\n3. 用法：would + 动词原形，无被动含义。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "She decided that she ______ (quit) her job and move to the countryside.",
+    "answer": "would quit",
+    "analysis": "该句需填入过去将来时\"would quit\"。此处考查**过去将来时表示过去的决定**，具体分析如下：\n1. 时态判断：主句\"decided\"为过去时，\"辞职搬家\"是当时决定的未来动作，用would。\n2. 并列动作：and连接的\"move\"用原形，与would quit呼应(would可省略第二个动词前的would)。\n3. 无复杂语法：仅体现过去决定的未来动作。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "They were sure that their team ______ (win) the championship that year.",
+    "answer": "would win",
+    "analysis": "该句需填入过去将来时\"would win\"。此处考查**过去将来时表示过去的信心**，具体分析如下：\n1. 时态判断：主句\"were sure\"为过去时，\"赢得冠军\"是当时对未来的信心预测，用would。\n2. 时间状语：\"that year\"(那年)是过去的时间范围，\"赢得冠军\"是其中的未来事件。\n3. 结构：would + 动词原形，无其他语法点。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "He mentioned that he ______ (meet) his old friend at the airport the next morning.",
+    "answer": "would meet",
+    "analysis": "该句需填入过去将来时\"would meet\"。此处考查**过去将来时表示过去提及的未来安排**，具体分析如下：\n1. 时态判断：主句\"mentioned\"为过去时，\"去机场见朋友\"是当时提及的未来安排，用would。\n2. 语境：\"提及\"是过去动作，\"见面\"是当时计划的未来事件。\n3. 用法简单：would + 动词原形，无被动或进行。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "The children were excited because they ______ (go) to the zoo the next day.",
+    "answer": "were going to go",
+    "analysis": "该句需填入过去将来时\"were going to go\"。此处考查**were going to表过去的期待**，具体分析如下：\n1. 时态判断：主句\"were excited\"为过去时，\"第二天去动物园\"是孩子们当时期待的未来活动，用were going to。\n2. 主谓一致：主语children为复数，故用were going to + 动词原形。\n3. 强调：突出\"过去已知且期待的计划\"。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "I didn't know if she ______ (attend) the meeting or not.",
+    "answer": "would attend",
+    "analysis": "该句需填入过去将来时\"would attend\"。此处考查**过去将来时在不确定语境中的用法**，具体分析如下：\n1. 时态判断：主句\"didn't know\"为过去时，\"是否参加会议\"是当时对未来的不确定，用would。\n2. 语法点：if表\"是否\"，引导宾语从句，主句过去时，从句用过去将来时。\n3. 结构：would + 动词原形，无其他语法点。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "The boss said that he ______ (give) us a raise after the project was completed.",
+    "answer": "would give",
+    "analysis": "该句需填入过去将来时\"would give\"。此处考查**过去将来时表示过去的承诺(条件下)**，具体分析如下：\n1. 时态判断：主句\"said\"为过去时，after从句用一般过去时(was completed)，主句用过去将来时表未来动作。\n2. 逻辑：\"涨工资\"是基于\"项目完成\"的过去承诺的未来动作。\n3. 用法：would + 动词原形，无被动。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "She thought she ______ (finish) reading the book by the end of the week, but she was too busy.",
+    "answer": "would finish",
+    "analysis": "该句需填入过去将来时\"would finish\"。此处考查**过去将来时表示过去未实现的预期**，具体分析如下：\n1. 时态判断：主句\"thought\"为过去时，\"周末读完书\"是当时的预期，用would。\n2. 结果：后句\"too busy\"说明未实现，但前句仍用过去将来时体现当时的想法。\n3. 结构：would + 动词原形，不涉及完成时(虽有by短语，但此处仅表过去的未来预期)。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  },
+  {
+    "text": "They announced that the new library ______ (open) to the public the following month.",
+    "answer": "would open",
+    "analysis": "该句需填入过去将来时\"would open\"。此处考查**过去将来时表示过去宣布的开放计划**，具体分析如下：\n1. 时态判断：主句\"announced\"为过去时，\"the following month\"是过去的将来，用would。\n2. 动词：open为不及物动词(表\"开放\")，无需被动，直接用would + 原形。\n3. 语境：\"宣布图书馆开放\"是过去动作，\"开放\"是当时计划的未来事件。",
+    "category": "谓语(4)",
+    "grammarPoint": "谓语(4)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.325Z"
+  }
+]

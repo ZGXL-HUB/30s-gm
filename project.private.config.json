@@ -20,6 +20,6 @@
   },
   "condition": {},
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "projectname": "miniprogram-%E4%BF%AE%E6%94%B9%E4%B8%BB%E7%95%8C%E9%9D%A24%E6%9C%AA%E6%B8%85%E7%90%86%E8%B1%861",
+  "projectname": "miniprogram-%25252525E4%25252525BF%25252525AE%25252525E6%2525252594%25252525B9%25252525E4%25252525B8%25252525BB%25252525E7%2525252595%252525258C%25252525E9%252525259D%25252525A24%25252525E6%252525259C%25252525AA%25252525E6%25252525B8%2525252585%25252525E7%2525252590%2525252586%25252525E8%25252525B1%25252525861",
   "libVersion": "3.8.10"
 }

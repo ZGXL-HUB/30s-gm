@@ -1741,5 +1741,8 @@
 
   <!-- 导出模态框 -->
   <include src="./export-modal.wxml" />
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
 </view>
 

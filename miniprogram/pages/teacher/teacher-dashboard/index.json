@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "floating-feedback": "/components/floating-feedback/index"
+  },
+  "navigationBarTitleText": "教师工作台",
+  "navigationBarBackgroundColor": "#667eea",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#667eea"
+}

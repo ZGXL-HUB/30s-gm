@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "page-header-guide": "/components/page-header-guide/index"
+    "page-header-guide": "/components/page-header-guide/index",
+    "floating-feedback": "/components/floating-feedback/index"
   },
   "navigationBarBackgroundColor": "#f5f5f5",
   "navigationBarTitleText": "我"

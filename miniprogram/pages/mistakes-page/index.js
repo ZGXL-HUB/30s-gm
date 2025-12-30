@@ -80,26 +80,6 @@ Page({
       "综合练习": "#ff7a45",
       "其他": "#d9d9d9"
     },
-    isPremium: false, // 新增：付费状态标记
-    
-    // 新增：学习进度相关数据
-    learningProgress: {
-      totalMistakes: 0,
-      masteredMistakes: 0,
-      masteryRate: 0,
-      recentProgress: [],
-      weakPoints: [],
-      strongPoints: []
-    },
-    
-    // 新增：智能分析相关数据
-    analysisData: {
-      mostErrorCategory: '',
-      mostErrorCount: 0,
-      averageErrorCount: 0,
-      improvementTrend: 'stable', // stable, improving, declining
-      recommendedFocus: []
-    },
     
     // 新增：UI状态
     showAnalysis: false,
@@ -119,8 +99,6 @@ Page({
       this.loadMistakes();
       // 移除图表初始化，因为当前页面没有图表功能
       // this.initChart();
-      // 新增：检查付费状态
-      this.checkPremiumStatus();
       // 移除重复调用，loadMistakes中已经调用了analyzeLearningData
       // this.analyzeLearningData();
       console.log('[错题本] 页面加载完成');
@@ -150,12 +128,6 @@ Page({
     }
   },
 
-  // 新增：检查付费状态
-  checkPremiumStatus() {
-    // 这里可以添加付费状态检查逻辑
-    // 目前先设置为免费用户
-    this.setData({ isPremium: false });
-  },
 
   // 新增：分类归一化函数
   normalizeCategory(category) {
@@ -337,8 +309,9 @@ Page({
           const ctx = canvas.getContext('2d');
           
           // 设置canvas大小 - 使用新的API
-          const systemInfo = wx.getDeviceInfo();
-          const dpr = systemInfo.pixelRatio || 1;
+          const deviceInfo = wx.getDeviceInfo();
+          const windowInfo = wx.getWindowInfo();
+          const dpr = windowInfo.pixelRatio || deviceInfo.pixelRatio || 1;
           canvas.width = this.data.chartWidth * dpr;
           canvas.height = this.data.chartHeight * dpr;
           ctx.scale(dpr, dpr);
@@ -632,15 +605,6 @@ Page({
     });
   },
 
-  // 新增：付费功能入口(预留)
-  showPremiumFeatures() {
-    if (!this.data.isPremium) {
-      wx.showToast({ 
-        title: '功能开发中，敬请期待', 
-        icon: 'none' 
-      });
-    }
-  },
 
 
 

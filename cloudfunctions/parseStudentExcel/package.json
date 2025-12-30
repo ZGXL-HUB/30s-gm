@@ -1,0 +1,10 @@
+{
+  "name": "parseStudentExcel",
+  "version": "1.0.0",
+  "description": "解析学生Excel文件并导入数据库",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "xlsx": "^0.18.5"
+  }
+}

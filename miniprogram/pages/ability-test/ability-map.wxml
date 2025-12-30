@@ -1,17 +1,5 @@
 <!--能力图谱页面-->
 <view class="container">
-  <!-- 书写能力测试卡片 -->
-  <view class="writing-test-card" bindtap="navigateToWritingTest">
-    <view class="test-card-header">
-      <view class="test-icon">✍️</view>
-      <view class="test-title">书写能力测评</view>
-      <view class="test-status" wx:if="{{writingScore > 0}}">{{getScoreLevel(writingScore).level}}</view>
-    </view>
-    <view class="test-card-content">
-      <view class="test-desc">全面评估书写能力，发现提升空间</view>
-      <view class="test-button">开始测试</view>
-    </view>
-  </view>
 
   <!-- 能力图谱展示卡片 -->
   <view class="ability-map-card">
@@ -90,10 +78,10 @@
     <!-- 主要操作按钮 -->
   <view class="main-actions">
     <button class="main-btn primary" bindtap="startGrammarTest">
-      开始语法测试
+      开始语法练习
     </button>
     <button class="main-btn primary" bindtap="startWritingTest">
-      开始书写测试
+      开始书写练习
     </button>
     </view>
 

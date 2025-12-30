@@ -1,0 +1,96 @@
+<!--教师端主界面-->
+<view class="teacher-dashboard">
+  <!-- 头部信息 -->
+  <view class="header">
+    <view class="teacher-info">
+      <image class="avatar" src="{{teacherInfo.avatar}}" mode="aspectFill"></image>
+      <view class="info">
+        <text class="name">{{teacherInfo.name}}</text>
+        <text class="school">{{teacherInfo.school}}</text>
+      </view>
+    </view>
+    <view class="stats">
+      <view class="stat-item">
+        <text class="number">{{quickStats.totalStudents}}</text>
+        <text class="label">学生总数</text>
+      </view>
+      <view class="stat-item">
+        <text class="number">{{quickStats.activeAssignments}}</text>
+        <text class="label">进行中作业</text>
+      </view>
+      <view class="stat-item">
+        <text class="number">{{quickStats.completedToday}}</text>
+        <text class="label">今日完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="section-title">主要功能</view>
+    <view class="menu-grid">
+      <view 
+        class="menu-item" 
+        wx:for="{{menuItems}}" 
+        wx:key="id"
+        data-path="{{item.path}}"
+        bindtap="navigateToFeature"
+      >
+        <view class="menu-icon" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}CC 100%);">
+          <text class="icon">{{item.icon}}</text>
+        </view>
+        <view class="menu-content">
+          <text class="title">{{item.title}}</text>
+          <text class="subtitle">{{item.subtitle}}</text>
+        </view>
+        <view class="arrow">></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近活动 -->
+  <view class="activity-section">
+    <view class="section-title">最近活动</view>
+    <view class="activity-list">
+      <view 
+        class="activity-item" 
+        wx:for="{{recentActivities}}" 
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="viewActivityDetail"
+      >
+        <view class="activity-icon">
+          <text wx:if="{{item.type === 'assignment'}}">📝</text>
+          <text wx:elif="{{item.type === 'material'}}">📊</text>
+          <text wx:elif="{{item.type === 'class'}}">👥</text>
+          <text wx:else>📋</text>
+        </view>
+        <view class="activity-content">
+          <text class="title">{{item.title}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
+        <view class="activity-status status-{{item.status}}">
+          <text wx:if="{{item.status === 'completed'}}">已完成</text>
+          <text wx:elif="{{item.status === 'success'}}">成功</text>
+          <text wx:elif="{{item.status === 'pending'}}">进行中</text>
+          <text wx:else>{{item.status}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快速操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="navigateToFeature" data-path="/pages/teacher/teacher-homework/index">
+      <text class="icon">⚡</text>
+      <text class="text">快速布置作业</text>
+    </view>
+    <view class="action-item" bindtap="navigateToFeature" data-path="/pages/teacher/teacher-materials/index">
+      <text class="icon">📄</text>
+      <text class="text">生成PPT/学案</text>
+    </view>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

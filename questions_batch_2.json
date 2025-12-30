@@ -1,0 +1,502 @@
+[
+  {
+    "text": "He is aware ___ the importance of learning English",
+    "answer": "of",
+    "analysis": "\"be aware of\"为固定短语,意为\"意识到……；知道……\",整句翻译为\"他意识到学习英语的重要性\"。",
+    "category": "固定搭配",
+    "grammarPoint": "固定搭配",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is short ___ money this month",
+    "answer": "of",
+    "analysis": "\"be short of\"为固定短语,意为\"缺乏……；缺少……\",整句翻译为\"他这个月缺钱\"。",
+    "category": "固定搭配",
+    "grammarPoint": "固定搭配",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She is addicted ___ playing computer games",
+    "answer": "to",
+    "analysis": "\"be addicted to\"为固定短语,意为\"沉迷于……；对……上瘾\",其中to是介词,后接名词或动名词,整句翻译为\"她沉迷于玩电脑游戏\"。",
+    "category": "固定搭配",
+    "grammarPoint": "固定搭配",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He got into trouble for ___ (argue) with his teacher",
+    "answer": "arguing",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。argue的动名词形式为arguing,所以此处应填arguing。句意为\"他因和他的老师吵架而惹上麻烦\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She has a talent for ___ (paint)",
+    "answer": "painting",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。paint的动名词形式为painting,所以此处应填painting。句意为\"她有绘画的天赋\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I have a lot of experience in ___ (organize) events",
+    "answer": "organizing",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。organize的动名词形式为organizing,所以此处应填organizing。句意为\"我在组织活动方面有很多经验\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "They are excited about ___ (go) on a trip",
+    "answer": "going",
+    "analysis": "analysis:句子中about为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。go的动名词形式为going,所以此处应填going。句意为\"他们对旅行感到兴奋\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is known for ___ (create) beautiful music",
+    "answer": "creating",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。create的动名词形式为creating,所以此处应填creating。句意为\"他以创作美丽的音乐而闻名\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She has difficulty in ___ (pronounce) some words",
+    "answer": "pronouncing",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。pronounce的动名词形式为pronouncing,所以此处应填pronouncing。句意为\"她在发音一些单词时有困难\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm engaged in ___ (write) a story these days",
+    "answer": "writing",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。write的动名词形式为writing,所以此处应填writing。句意为\"这些天我在写一个故事\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is busy with ___ (repair) his bike",
+    "answer": "repairing",
+    "analysis": "analysis:句子中with为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。repair的动名词形式为repairing,所以此处应填repairing。句意为\"他忙于修理他的自行车\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She takes pride in ___ (help) others",
+    "answer": "helping",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。help的动名词形式为helping,所以此处应填helping。句意为\"她以帮助别人为荣\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm concerned about ___ (lose) my keys",
+    "answer": "losing",
+    "analysis": "analysis:句子中about为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。lose的动名词形式为losing,所以此处应填losing。句意为\"我担心丢失我的钥匙\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He shows interest in ___ (study) history",
+    "answer": "studying",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。study的动名词形式为studying,所以此处应填studying。句意为\"他对学习历史表现出兴趣\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She has a passion for ___ (dance)",
+    "answer": "dancing",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。dance的动名词形式为dancing,所以此处应填dancing。句意为\"她对跳舞有热情\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm tired from ___ (run) a long distance",
+    "answer": "running",
+    "analysis": "analysis:句子中from为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。run的动名词形式为running,所以此处应填running。句意为\"我因长跑而疲倦\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is successful in ___ (pass) the difficult exam",
+    "answer": "passing",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。pass的动名词形式为passing,所以此处应填passing。句意为\"他成功通过了困难的考试\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She is afraid of ___ (speak) in public",
+    "answer": "speaking",
+    "analysis": "analysis:句子中of为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。speak的动名词形式为speaking,所以此处应填speaking。句意为\"她害怕在公共场合说话\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm looking forward to ___ (hear) from you",
+    "answer": "hearing",
+    "analysis": "analysis:句子中to为介词(look forward to中的to),介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。hear的动名词形式为hearing,所以此处应填hearing。句意为\"我期待收到你的来信\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is good at ___ (play) basketball",
+    "answer": "playing",
+    "analysis": "analysis:句子中at为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。play的动名词形式为playing,所以此处应填playing。句意为\"他擅长打篮球\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She dreams of ___ (become) a famous actress",
+    "answer": "becoming",
+    "analysis": "analysis:句子中of为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。become的动名词形式为becoming,所以此处应填becoming。句意为\"她梦想成为一名著名的女演员\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I have a habit of ___ (read) before sleep",
+    "answer": "reading",
+    "analysis": "analysis:句子中of为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。read的动名词形式为reading,所以此处应填reading。句意为\"我有睡前阅读的习惯\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is responsible for ___ (lock) the door every night",
+    "answer": "locking",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。lock的动名词形式为locking,所以此处应填locking。句意为\"他负责每晚锁门\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She is capable of ___ (finish) the work ahead of time",
+    "answer": "finishing",
+    "analysis": "analysis:句子中of为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。finish的动名词形式为finishing,所以此处应填finishing。句意为\"她有能力提前完成工作\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm confident in ___ (achieve) my dreams",
+    "answer": "achieving",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。achieve的动名词形式为achieving,所以此处应填achieving。句意为\"我对实现我的梦想很有信心\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He is addicted to ___ (play) video games",
+    "answer": "playing",
+    "analysis": "analysis:句子中to为介词(be addicted to中的to),介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。play的动名词形式为playing,所以此处应填playing。句意为\"他沉迷于玩电子游戏\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She is keen on ___ (collect) stamps",
+    "answer": "collecting",
+    "analysis": "analysis:句子中on为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。collect的动名词形式为collecting,所以此处应填collecting。句意为\"她热衷于收集邮票\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm used to ___ (get) up early on weekdays",
+    "answer": "getting",
+    "analysis": "analysis:句子中to为介词(be used to中的to),介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。get的动名词形式为getting,所以此处应填getting。句意为\"我习惯在工作日早起\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He has a preference for ___ (watch) action movies",
+    "answer": "watching",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。watch的动名词形式为watching,所以此处应填watching。句意为\"他偏爱看动作电影\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She has an eye for ___ (design) clothes",
+    "answer": "designing",
+    "analysis": "analysis:句子中for为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。design的动名词形式为designing,所以此处应填designing。句意为\"她有设计服装的天赋\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I'm involved in ___ (do) volunteer work",
+    "answer": "doing",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。do的动名词形式为doing,所以此处应填doing。句意为\"我参与做志愿工作\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "He takes pleasure in ___ (listen) to classical music",
+    "answer": "listening",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。listen的动名词形式为listening,所以此处应填listening。句意为\"他以听古典音乐为乐\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She is skilled in ___ (use) the computer software",
+    "answer": "using",
+    "analysis": "analysis:句子中in为介词,介词后接名词、代词和动名词。括号里是动词时需用动名词形式,即动词的-ing形式。use的动名词形式为using,所以此处应填using。句意为\"她熟练掌握使用计算机软件\"。",
+    "category": "介词 + 名词/动名词",
+    "grammarPoint": "介词 + 名词/动名词",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The wind blew down many ____ (leaf) from the tree.",
+    "answer": "leaves",
+    "analysis": "该句中需填入名词\"leaf\"的复数形式\"leaves\"。知识点：\"leaf\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f或fe变为v,再加-es。类似的f结尾词还有knife→knives、life→lives、wife→wives等。例如\"green leaves\"(绿叶)、\"fallen leaves\"(落叶)。此处\"many leaves\"表示\"许多叶子\",描述秋季自然景观的变化,体现了以f结尾名词的特殊复数变化规律,强调季节更替的自然现象。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "My dad has two ____ (knife) in the kitchen.",
+    "answer": "knives",
+    "analysis": "该句中需填入名词\"knife\"的复数形式\"knives\"。知识点：\"knife\"以字母组合\"fe\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f或fe变为v,再加-es。类似的fe结尾词还有life→lives、wife→wives、thief→thieves等。例如\"kitchen knives\"(厨房刀具)、\"sharp knives\"(锋利的刀)。此处\"two knives\"表示\"两把刀\",用于日常厨房工具场景,体现了以fe结尾名词的标准复数变化,强调实用工具的数量概念。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (roof) of these houses are all red.",
+    "answer": "roofs",
+    "analysis": "该句中需填入名词\"roof\"的复数形式\"roofs\"。知识点：\"roof\"以字母\"f\"结尾,但属于特例,复数形式直接加-s。虽然大多数以f结尾的名词变复数时f变v加-es,但roof、proof、chief、gulf等词是例外,直接加-s。例如\"tile roofs\"(瓦屋顶)、\"flat roofs\"(平屋顶)。此处\"the roofs\"表示\"这些屋顶\",描述房屋外观特征,体现了以f结尾名词的特例变化规律,强调建筑风格的统一性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "How many ____ (life) did the doctor save last year?",
+    "answer": "lives",
+    "analysis": "该句中需填入名词\"life\"的复数形式\"lives\"。知识点：\"life\"以字母\"fe\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f或fe变为v,再加-es。类似的fe结尾词还有knife→knives、wife→wives等。例如\"human lives\"(人的生命)、\"animal lives\"(动物生命)。此处\"how many lives\"表示\"多少条生命\",用于描述医生的救人事迹,体现了以fe结尾名词的标准复数变化,强调生命价值的珍贵性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "There are three ____ (chief) attending the meeting.",
+    "answer": "chiefs",
+    "analysis": "该句中需填入名词\"chief\"的复数形式\"chiefs\"。知识点：\"chief\"以字母\"f\"结尾,但属于特例,复数形式直接加-s。虽然大多数以f结尾的名词变复数时f变v加-es,但chief、roof、proof、gulf等词是例外,直接加-s。例如\"tribe chiefs\"(部落首领)、\"police chiefs\"(警察局长)。此处\"three chiefs\"表示\"三位首领\",描述会议参与者的身份,体现了以f结尾名词的特例变化规律,强调领导者的权威性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (thief) stole my wallet yesterday.",
+    "answer": "thieves",
+    "analysis": "该句中需填入名词\"thief\"的复数形式\"thieves\"。知识点：\"thief\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、knife→knives等。例如\"car thieves\"(偷车贼)、\"pickpocket thieves\"(扒手)。此处\"the thieves\"表示\"那些小偷\",描述犯罪行为,体现了以f结尾名词的标准复数变化,强调社会安全问题。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (wolf) are howling in the forest.",
+    "answer": "wolves",
+    "analysis": "该句中需填入名词\"wolf\"的复数形式\"wolves\"。知识点：\"wolf\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、thief→thieves等。例如\"gray wolves\"(灰狼)、\"wild wolves\"(野狼)。此处\"the wolves\"表示\"那些狼\",描述森林中的野生动物景象,体现了以f结尾名词的标准复数变化,强调自然生态的野性特征。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I cut the cake into two ____ (half).",
+    "answer": "halves",
+    "analysis": "该句中需填入名词\"half\"的复数形式\"halves\"。知识点：\"half\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、knife→knives等。例如\"two halves\"(两半)、\"equal halves\"(相等的两半)。此处\"two halves\"表示\"两半\",用于描述分割动作的结果,体现了以f结尾名词的标准复数变化,强调分割的精确性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (proof) of his innocence are very convincing.",
+    "answer": "proofs",
+    "analysis": "该句中需填入名词\"proof\"的复数形式\"proofs\"。知识点：\"proof\"以字母\"f\"结尾,但属于特例,复数形式直接加-s。虽然大多数以f结尾的名词变复数时f变v加-es,但proof、roof、chief、gulf等词是例外,直接加-s。例如\"scientific proofs\"(科学证据)、\"legal proofs\"(法律证据)。此处\"the proofs\"表示\"这些证据\",用于法律或论证场景,体现了以f结尾名词的特例变化规律,强调证据的说服力。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "There are many ____ (gulf) along the coast.",
+    "answer": "gulfs",
+    "analysis": "该句中需填入名词\"gulf\"的复数形式\"gulfs\"。知识点：\"gulf\"以字母\"f\"结尾,但属于特例,复数形式直接加-s。虽然大多数以f结尾的名词变复数时f变v加-es,但gulf、roof、proof、chief等词是例外,直接加-s。例如\"deep gulfs\"(深海湾)、\"tropical gulfs\"(热带海湾)。此处\"many gulfs\"表示\"许多海湾\",描述海岸线地理特征,体现了以f结尾名词的特例变化规律,强调地理环境的多样性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (wife) of the fishermen are waiting at the harbor.",
+    "answer": "wives",
+    "analysis": "该句中需填入名词\"wife\"的复数形式\"wives\"。知识点：\"wife\"以字母组合\"fe\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f或fe变为v,再加-es。类似的fe结尾词还有knife→knives、life→lives等。例如\"fishermen's wives\"(渔夫的妻子们)、\"sailors' wives\"(水手的妻子们)。此处\"the wives\"表示\"那些妻子们\",描述等待的场景,体现了以fe结尾名词的标准复数变化,强调家庭关系的集体概念。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "She has several ____ (scarf) in different colors.",
+    "answer": "scarves",
+    "analysis": "该句中需填入名词\"scarf\"的复数形式\"scarves\"。知识点：\"scarf\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、thief→thieves等。例如\"winter scarves\"(冬季围巾)、\"silk scarves\"(丝绸围巾)。此处\"several scarves\"表示\"几条围巾\",用于描述个人配饰的多样性,体现了以f结尾名词的标准复数变化,强调时尚配饰的丰富性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (shelf) in the library are full of books.",
+    "answer": "shelves",
+    "analysis": "该句中需填入名词\"shelf\"的复数形式\"shelves\"。知识点：\"shelf\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、knife→knives等。例如\"book shelves\"(书架)、\"wooden shelves\"(木制架子)。此处\"the shelves\"表示\"那些书架\",描述图书馆的设施,体现了以f结尾名词的标准复数变化,强调学习环境的丰富性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "There are many ____ (loaf) of bread in the bakery.",
+    "answer": "loaves",
+    "analysis": "该句中需填入名词\"loaf\"的复数形式\"loaves\"。知识点：\"loaf\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、thief→thieves等。例如\"fresh loaves\"(新鲜面包)、\"whole wheat loaves\"(全麦面包)。此处\"many loaves\"表示\"许多条面包\",描述面包店的商品,体现了以f结尾名词的标准复数变化,强调食品的丰富供应。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "The ____ (calf) are grazing in the field.",
+    "answer": "calves",
+    "analysis": "该句中需填入名词\"calf\"的复数形式\"calves\"。知识点：\"calf\"以字母\"f\"结尾,遵循\"以f或fe结尾\"的名词变复数规则：将f变为v,再加-es。类似的f结尾词还有leaf→leaves、wolf→wolves等。例如\"young calves\"(小牛犊)、\"dairy calves\"(奶牛犊)。此处\"the calves\"表示\"那些小牛\",描述农场中的动物景象,体现了以f结尾名词的标准复数变化,强调农业生产的生机。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "I need to buy some new ____ (handkerchief) for the trip.",
+    "answer": "handkerchiefs",
+    "analysis": "该句中需填入名词\"handkerchief\"的复数形式\"handkerchiefs\"。知识点：\"handkerchief\"以字母\"f\"结尾,但属于特例,复数形式直接加-s。虽然大多数以f结尾的名词变复数时f变v加-es,但handkerchief、roof、proof、chief等词是例外,直接加-s。例如\"cotton handkerchiefs\"(棉质手帕)、\"silk handkerchiefs\"(丝绸手帕)。此处\"some new handkerchiefs\"表示\"一些新手帕\",用于旅行准备,体现了以f结尾名词的特例变化规律,强调个人用品的实用性。",
+    "category": "f/fe结尾",
+    "grammarPoint": "f/fe结尾",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.323Z"
+  },
+  {
+    "text": "It ____ (be)incredible that such a small town could have such a big festival.",
+    "answer": "was",
+    "analysis": "was,考查动词过去时态和主谓一致,通过描述过去的情境考查一般过去时以及 it 作主语时的主谓一致。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  }
+]

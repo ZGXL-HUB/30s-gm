@@ -518,7 +518,7 @@ Page({
   // 显示测试完成
   showTestComplete() {
     wx.showActionSheet({
-      itemList: ['查看能力图谱', '进行更全面的书写能力测试（24题）', '开始语法测试'],
+      itemList: ['查看能力图谱', '开始语法练习', '返回首页'],
       success: (res) => {
         switch (res.tapIndex) {
           case 0: // 查看能力图谱
@@ -526,14 +526,14 @@ Page({
               url: '/pages/ability-test/ability-map'
             });
             break;
-          case 1: // 进行更全面的书写能力测试
+          case 1: // 开始语法练习
             wx.redirectTo({
-              url: '/pages/ability-test/comprehensive-writing-test'
+              url: '/pages/grammar-select/index'
             });
             break;
-          case 2: // 开始语法测试
+          case 2: // 返回首页
             wx.redirectTo({
-              url: '/pages/ability-test/grammar-test'
+              url: '/pages/index/index'
             });
             break;
         }

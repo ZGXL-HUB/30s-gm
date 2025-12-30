@@ -1,11 +1,4 @@
 <view class="container">
-  <!-- 测试入口卡片 -->
-  <view class="test-entry-card" bindtap="navigateToWritingTest">
-    <image src="/images/icon-writing-test.png" class="test-icon"></image>
-    <text class="test-title">书写能力测评</text>
-    <text class="test-desc">全面评估书写能力，发现提升空间</text>
-    <view class="test-button">开始测试</view>
-  </view>
 
   <!-- 页面引导卡片 -->
   <page-header-guide 

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "floating-feedback": "/components/floating-feedback/index"
+  },
+  "navigationBarTitleText": "教师端",
+  "navigationBarBackgroundColor": "#667eea",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true
+}

@@ -1,18 +1,6 @@
 <!--index.wxml-->
 <view class="container">
 
-  <!-- 语法能力测试卡片 -->
-  <view class="grammar-test-card" bindtap="navigateToGrammarTest">
-    <view class="test-card-header">
-      <view class="test-icon">📊</view>
-      <view class="test-title">语法能力测评</view>
-      <view class="test-status" wx:if="{{todayStats.grammarLevel}}">{{todayStats.grammarLevelText}}</view>
-    </view>
-    <view class="test-card-content">
-      <view class="test-desc">测测你的语法水平，获取精准练习推荐</view>
-      <view class="test-button">开始测试</view>
-    </view>
-  </view>
 
   <!-- 每日推荐卡片 -->
   <view class="daily-recommendation-card" bindtap="goToDailyCards" style="width: 443rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">

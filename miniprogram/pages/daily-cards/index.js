@@ -51,16 +51,22 @@ Page({
     this.setData({ loading: false });
   },
 
+  // 生成基础练习推荐
+  generateBasicRecommendations(userLevel) {
+    return {
+      level: userLevel || 'beginner',
+      weakPoints: [],
+      suggestions: ['建议从基础语法开始练习，逐步提升'],
+      nextSteps: ['开始语法练习', '查看每日推荐任务']
+    };
+  },
+
   // 生成新一天的卡片
   generateNewDayCards(userLevel) {
-    // 尝试使用个性化推荐系统
+    // 生成基础练习卡片
     try {
-      const UserAbilityProfile = require('../../utils/userAbilityProfile.js');
-      const abilityProfile = new UserAbilityProfile();
-      abilityProfile.updateProfile();
-      
-      // 生成个性化推荐
-      const recommendations = abilityProfile.generatePersonalizedRecommendations();
+      // 基于用户等级生成基础练习推荐
+      const recommendations = this.generateBasicRecommendations(userLevel);
       
       // 将推荐转换为卡片格式
       const todayCards = this.convertRecommendationsToCards(recommendations, userLevel);
@@ -229,8 +235,8 @@ Page({
       },
       {
         type: 'comprehensive_test',
-        title: '综合能力测试',
-        description: '全面检测学习效果',
+        title: '综合练习',
+        description: '全面练习学习内容',
         difficulty: 'medium',
         estimatedTime: '20分钟',
         icon: '🎯',

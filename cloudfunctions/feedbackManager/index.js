@@ -21,6 +21,9 @@ exports.main = async (event, context) => {
   const { action, data } = event;
   const { OPENID } = cloud.getWXContext();
 
+  // 调试信息
+  console.log('云函数接收到的参数:', { action, data, OPENID });
+
   try {
     switch (action) {
       case 'submitFeedback':

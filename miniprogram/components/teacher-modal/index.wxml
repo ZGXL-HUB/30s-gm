@@ -1,0 +1,17 @@
+<!--教师端通用弹窗组件-->
+<view class="teacher-modal" wx:if="{{show}}" bindtap="onMaskTap">
+  <view 
+    class="modal-content"
+    style="width: {{width}}; height: {{height}};"
+    bindtap="onContentTap"
+  >
+    <view class="modal-header" wx:if="{{title || showClose}}">
+      <text class="title" wx:if="{{title}}">{{title}}</text>
+      <text class="close" wx:if="{{showClose}}" bindtap="onClose">×</text>
+    </view>
+    
+    <view class="modal-body">
+      <slot></slot>
+    </view>
+  </view>
+</view>

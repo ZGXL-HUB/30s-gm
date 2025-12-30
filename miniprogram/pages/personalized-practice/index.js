@@ -182,9 +182,9 @@ Page({
       content: '重新评估将更新您的学习推荐，是否继续？',
       success: (res) => {
         if (res.confirm) {
-          // 跳转到能力测试页面
+          // 跳转到语法练习页面
           wx.navigateTo({
-            url: '/pages/level-test/index'
+            url: '/pages/grammar-select/index'
           });
         }
       }

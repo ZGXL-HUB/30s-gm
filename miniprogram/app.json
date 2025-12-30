@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/main/index",
     "pages/index/index",
     "pages/grammar-select/index",
     "pages/grammar-overview/index",
@@ -42,7 +43,30 @@
     "pages/feedback/index",
     "pages/feedback/history",
     "pages/admin/feedback-management",
-    "pages/test-cloud/index"
+    "pages/test-cloud/index",
+    "pages/student-join-class/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/teacher",
+      "name": "teacher",
+      "pages": [
+        "teacher-create-assignment/index",
+        "teacher-assignment-list/index",
+        "teacher-dashboard/index",
+        "teacher-homework/index",
+        "teacher-materials/index",
+        "teacher-class/index",
+        "teacher-generate-material/index"
+      ]
+    },
+    {
+      "root": "pages/student",
+      "name": "student",
+      "pages": [
+        "student-assignment-list/index"
+      ]
+    }
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -58,12 +82,6 @@
         "text": "首页",
         "iconPath": "images/icons/home.png",
         "selectedIconPath": "images/icons/home-active.png"
-      },
-      {
-        "pagePath": "pages/ability-test/ability-map",
-        "text": "能力测试",
-        "iconPath": "images/icons/business.png",
-        "selectedIconPath": "images/icons/business-active.png"
       },
       {
         "pagePath": "pages/grammar-writing/index",

@@ -1,0 +1,10 @@
+{
+  "name": "uploadQuestions",
+  "version": "1.0.0",
+  "description": "上传题库数据到云数据库",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
+

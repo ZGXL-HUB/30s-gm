@@ -1,0 +1,256 @@
+/* 教师端主界面样式 */
+.teacher-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0 0 100rpx 0;
+}
+
+/* 头部信息 */
+.header {
+  padding: 40rpx 30rpx 30rpx;
+  color: white;
+}
+
+.teacher-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  border: 3rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.school {
+  display: block;
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  backdrop-filter: blur(10rpx);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item .number {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stat-item .label {
+  display: block;
+  font-size: 22rpx;
+  opacity: 0.8;
+}
+
+/* 功能菜单 */
+.menu-section {
+  margin: 30rpx 30rpx 0;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+}
+
+.menu-grid {
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background-color: #f8f9fa;
+}
+
+.menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+
+.menu-icon .icon {
+  font-size: 36rpx;
+}
+
+.menu-content {
+  flex: 1;
+}
+
+.menu-content .title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.menu-content .subtitle {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.arrow {
+  font-size: 28rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+/* 最近活动 */
+.activity-section {
+  margin: 30rpx 30rpx 0;
+}
+
+.activity-list {
+  background: white;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item:active {
+  background-color: #f8f9fa;
+}
+
+.activity-icon {
+  width: 60rpx;
+  height: 60rpx;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-content .title {
+  display: block;
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.activity-content .time {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+}
+
+.activity-status {
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+}
+
+.status-completed {
+  background: #e8f5e8;
+  color: #52c41a;
+}
+
+.status-success {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.status-pending {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+/* 快速操作 */
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  margin: 30rpx;
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  border-radius: 15rpx;
+  transition: background-color 0.3s;
+}
+
+.action-item:active {
+  background-color: #f8f9fa;
+}
+
+.action-item .icon {
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+
+.action-item .text {
+  font-size: 22rpx;
+  color: #666;
+  text-align: center;
+}

@@ -1092,12 +1092,6 @@ Page({
     }
   },
 
-  // 新增：跳转到书写测试
-  navigateToWritingTest: function() {
-    wx.navigateTo({
-      url: '/pages/ability-test/writing-test?from=module'
-    });
-  },
 
   // 初始化错误标记
   initErrorMarking: function() {

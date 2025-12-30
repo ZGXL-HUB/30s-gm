@@ -1,0 +1,193 @@
+<!-- 全新的学生管理界面模板 -->
+<view class="student-management-container">
+  
+  <!-- 页面头部 -->
+  <view class="page-header">
+    <text class="page-title">学生管理</text>
+    <view class="header-actions">
+      <button class="btn btn-outline" bindtap="showUsageGuide">使用说明</button>
+      <button class="btn btn-secondary btn-refresh" bindtap="refreshStudentList">
+        <text class="btn-icon">🔄</text>
+        刷新
+      </button>
+      <button class="btn btn-primary" bindtap="showCreateStudentModal">添加学生</button>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <text class="loading-text">正在加载学生数据...</text>
+  </view>
+
+  <!-- 学生列表 -->
+  <view class="students-container" wx:else>
+    
+    <!-- 学生统计信息 -->
+    <view class="students-stats">
+      <text class="stats-text">共 {{students.length}} 名学生</text>
+    </view>
+
+    <!-- 学生列表 -->
+    <view class="students-list">
+      <view 
+        class="student-card"
+        wx:for="{{students}}" 
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="viewStudentDetail"
+      >
+        <!-- 学生基本信息 -->
+        <view class="student-header">
+          <view class="student-info">
+            <text class="student-name">{{item.name}}</text>
+            <text class="student-id">{{item.studentId}}</text>
+          </view>
+          <view class="status-badge status-{{item.status}}">
+            {{item.status === 'active' ? '活跃' : '离线'}}
+          </view>
+        </view>
+
+        <!-- 班级信息 -->
+        <view class="student-class">
+          <text class="class-label">班级：</text>
+          <text class="class-name">{{item.class}}</text>
+        </view>
+
+        <!-- 联系方式 -->
+        <view class="student-contact" wx:if="{{item.phone || item.email}}">
+          <text class="contact-text">{{item.phone}} {{item.email}}</text>
+        </view>
+
+        <!-- 学习统计 -->
+        <view class="student-stats">
+          <view class="stat-item">
+            <text class="stat-number">{{item.completedAssignments}}/{{item.totalAssignments}}</text>
+            <text class="stat-label">完成作业</text>
+          </view>
+          <view class="stat-item">
+            <text class="stat-number">{{item.averageAccuracy}}%</text>
+            <text class="stat-label">平均正确率</text>
+          </view>
+          <view class="stat-item">
+            <text class="stat-number">{{item.weakGrammarPoints.length}}</text>
+            <text class="stat-label">薄弱点</text>
+          </view>
+        </view>
+
+        <!-- 薄弱语法点 -->
+        <view class="weak-points" wx:if="{{item.weakGrammarPoints.length > 0}}">
+          <text class="weak-points-label">薄弱语法点：</text>
+          <view class="points-list">
+            <text 
+              class="point-tag"
+              wx:for="{{item.weakGrammarPoints}}" 
+              wx:key="*this"
+            >{{item}}</text>
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{students.length === 0}}">
+      <text class="empty-icon">👥</text>
+      <text class="empty-text">暂无学生数据</text>
+      <text class="empty-tip">点击"添加学生"按钮添加新学生</text>
+    </view>
+
+  </view>
+
+  <!-- 创建学生弹窗 -->
+  <view class="modal-overlay" wx:if="{{showCreateStudent}}">
+    <view class="modal">
+      <view class="modal-header">
+        <text class="modal-title">添加学生</text>
+        <text class="modal-close" bindtap="closeCreateStudentModal">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="form-item">
+          <text class="form-label">学生姓名</text>
+          <input 
+            class="form-input"
+            type="text" 
+            placeholder="请输入学生姓名"
+            value="{{newStudent.name}}"
+            data-field="name"
+            bindinput="onStudentInput"
+          />
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-secondary" bindtap="closeCreateStudentModal">取消</button>
+        <button class="btn btn-primary" bindtap="createStudent">创建</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学生详情弹窗 -->
+  <view class="modal-overlay" wx:if="{{showStudentDetail}}">
+    <view class="modal">
+      <view class="modal-header">
+        <text class="modal-title">学生详情</text>
+        <text class="modal-close" bindtap="closeStudentDetail">×</text>
+      </view>
+      
+      <view class="modal-body" wx:if="{{selectedStudent}}">
+        <view class="detail-section">
+          <text class="detail-title">基本信息</text>
+          <view class="detail-item">
+            <text class="detail-label">姓名：</text>
+            <text class="detail-value">{{selectedStudent.name}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">学号：</text>
+            <text class="detail-value">{{selectedStudent.studentId}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">班级：</text>
+            <text class="detail-value">{{selectedStudent.class}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">状态：</text>
+            <text class="detail-value">{{selectedStudent.status === 'active' ? '活跃' : '离线'}}</text>
+          </view>
+        </view>
+
+        <view class="detail-section">
+          <text class="detail-title">学习统计</text>
+          <view class="detail-item">
+            <text class="detail-label">完成作业：</text>
+            <text class="detail-value">{{selectedStudent.completedAssignments}}/{{selectedStudent.totalAssignments}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">平均正确率：</text>
+            <text class="detail-value">{{selectedStudent.averageAccuracy}}%</text>
+          </view>
+          <view class="detail-item">
+            <text class="detail-label">薄弱点数量：</text>
+            <text class="detail-value">{{selectedStudent.weakGrammarPoints.length}}个</text>
+          </view>
+        </view>
+
+        <view class="detail-section" wx:if="{{selectedStudent.weakGrammarPoints.length > 0}}">
+          <text class="detail-title">薄弱语法点</text>
+          <view class="weak-points-detail">
+            <text 
+              class="weak-point-detail"
+              wx:for="{{selectedStudent.weakGrammarPoints}}" 
+              wx:key="*this"
+            >{{item}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="closeStudentDetail">关闭</button>
+      </view>
+    </view>
+  </view>
+
+</view>

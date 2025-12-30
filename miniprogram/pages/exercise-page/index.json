@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "page-header-guide": "/components/page-header-guide/index"
+    "page-header-guide": "/components/page-header-guide/index",
+    "floating-feedback": "/components/floating-feedback/index"
   }
 }

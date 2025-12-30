@@ -183,7 +183,9 @@ async function getSystemComboQuestions(limit = 10) {
       "谓语": 1,
       "非谓语": 1,
       "形容词": 1,
-      "副词": 1
+      "副词": 1,
+      "定语从句": 1,
+      "状语和从句": 1
     }
     
     const selectedGrammarPoints = []

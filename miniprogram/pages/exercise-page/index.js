@@ -587,6 +587,20 @@ Page({
         });
       }
       
+      // 优化查询，只获取必要字段并限制数量
+      query = query.field({
+        _id: true,
+        text: true,
+        category: true,
+        type: true,
+        options: true,
+        answer: true,
+        analysis: true,
+        explanation: true,
+        difficulty: true,
+        grammarPoint: true
+      }).limit(count || 10);
+      
       const result = await query.get();
       console.log('✅ 云数据库查询成功，获得', result.data.length, '条数据');
       

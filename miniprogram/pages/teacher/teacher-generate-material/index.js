@@ -1,0 +1,863 @@
+// 统一学案生成流程页面
+Page({
+  data: {
+    // 基础数据
+    selectedQuestions: [], // 选中的原题
+    assignmentData: null, // 作业数据
+    materialInfo: null, // 材料信息
+    
+    // 变式题选择
+    variantCount: 0, // 变式题数量 (0-3)
+    
+    // 预览相关
+    previewContent: '', // 预览内容
+    showPreview: false, // 是否显示预览
+    previewType: 'student', // 预览类型: 'student' | 'teacher'
+    
+    // 生成状态
+    isGenerating: false, // 是否正在生成
+    generatedContent: '', // 生成的内容
+    
+    // 分享相关
+    shareInfo: null, // 分享信息
+  },
+
+  onLoad(options) {
+    // 从参数获取材料信息
+    if (options.materialId) {
+      this.loadMaterialData(options.materialId);
+    }
+    
+    // 从参数获取作业数据
+    if (options.assignmentId) {
+      this.loadAssignmentData(options.assignmentId);
+    }
+    
+    // 从布置作业页面传递的作业数据
+    if (options.assignmentData) {
+      try {
+        const assignmentData = JSON.parse(decodeURIComponent(options.assignmentData));
+        this.setData({
+          assignmentData: assignmentData,
+          selectedQuestions: assignmentData.questions || []
+        });
+        console.log('接收到作业数据:', assignmentData);
+      } catch (error) {
+        console.error('解析作业数据失败:', error);
+        wx.showToast({
+          title: '数据加载失败',
+          icon: 'error'
+        });
+      }
+    }
+    
+    // 接收变式题数量
+    if (options.variantCount) {
+      this.setData({
+        variantCount: parseInt(options.variantCount)
+      });
+    }
+    
+    // 直接进入预览模式
+    this.setData({
+      showPreview: true
+    });
+    
+    // 初始化预览
+    this.generatePreview();
+  },
+
+  // 加载材料数据
+  async loadMaterialData(materialId) {
+    try {
+      const teacherId = wx.getStorageSync('teacherId') || 'teacher_123';
+      const materials = wx.getStorageSync(`materials_${teacherId}`) || [];
+      const material = materials.find(m => m.id === materialId);
+      
+      if (material) {
+        this.setData({
+          materialInfo: material,
+          assignmentData: await this.getAssignmentData(material.assignmentId)
+        });
+        this.loadQuestions();
+      }
+    } catch (error) {
+      console.error('加载材料数据失败:', error);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'error'
+      });
+    }
+  },
+
+  // 加载作业数据
+  async loadAssignmentData(assignmentId) {
+    try {
+      const teacherId = wx.getStorageSync('teacherId') || 'teacher_123';
+      const homeworks = wx.getStorageSync(`homeworks_${teacherId}`) || [];
+      const assignments = wx.getStorageSync(`assignments_${teacherId}`) || [];
+      const allAssignments = [...homeworks, ...assignments];
+      const assignment = allAssignments.find(a => (a._id || a.id) === assignmentId);
+      
+      if (assignment) {
+        this.setData({
+          assignmentData: assignment
+        });
+        this.loadQuestions();
+      }
+    } catch (error) {
+      console.error('加载作业数据失败:', error);
+    }
+  },
+
+  // 加载题目数据
+  loadQuestions() {
+    const { assignmentData } = this.data;
+    if (assignmentData && assignmentData.questions) {
+      this.setData({
+        selectedQuestions: assignmentData.questions
+      });
+    }
+  },
+
+  // 显示变式题选择器（已移除，变式题选择在前一步完成）
+
+  // 生成预览内容
+  async generatePreview() {
+    try {
+      wx.showLoading({
+        title: '生成预览中...',
+        mask: true
+      });
+
+      const { selectedQuestions, variantCount, previewType } = this.data;
+      
+      
+      // 生成预览内容
+      const content = await this.generateMaterialContent(selectedQuestions, variantCount, previewType);
+      
+      this.setData({
+        previewContent: content,
+        showPreview: true
+      });
+
+      wx.hideLoading();
+    } catch (error) {
+      wx.hideLoading();
+      console.error('生成预览失败:', error);
+      wx.showToast({
+        title: '预览生成失败',
+        icon: 'error'
+      });
+    }
+  },
+
+  // 生成学案内容
+  async generateMaterialContent(questions, variantCount, type = 'student') {
+    let content = '';
+    
+    // 只在第一次生成时尝试从数据库获取真实题目，避免重复生成
+    if (!this.data.cachedRealQuestions) {
+      let realQuestions = [];
+      try {
+        console.log('开始尝试加载 cloudDataLoader...');
+        const cloudDataLoader = require('../../../utils/cloudDataLoader.js');
+        console.log('cloudDataLoader 加载成功:', typeof cloudDataLoader);
+        
+        // 获取所有语法点
+        const grammarPoints = [...new Set(questions.map(q => q.grammarPoint || q.category))];
+        console.log('尝试从数据库获取真实题目，语法点:', grammarPoints);
+        
+        // 为每个语法点获取真实题目
+        // 根据变式题数量，每个语法点需要提取 (1 + variantCount) 道题目
+        // 1题作为原题，variantCount 题作为变式题
+        const questionsPerPoint = 1 + (variantCount || 0);
+        console.log(`每个语法点需要提取 ${questionsPerPoint} 道题目（1道原题 + ${variantCount || 0}道变式题）`);
+        
+        for (const point of grammarPoints) {
+          try {
+            console.log(`正在获取 ${point} 的题目...`);
+            const dbQuestions = await cloudDataLoader.getQuestionsByGrammarPoint(point);
+            console.log(`获取到 ${point} 题目数量:`, dbQuestions ? dbQuestions.length : 0);
+            
+          if (dbQuestions && dbQuestions.length > 0) {
+            // 根据变式题数量提取对应数量的题目
+            const selected = this.getRandomQuestions(dbQuestions, questionsPerPoint);
+            realQuestions.push(...selected);
+            console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目（1道原题 + ${selected.length - 1}道变式题）`);
+          }
+          } catch (error) {
+            console.warn(`⚠️ 获取 ${point} 题目失败:`, error);
+          }
+        }
+        
+        // 缓存真实题目，避免重复获取
+        if (realQuestions.length > 0) {
+          console.log(`✅ 使用数据库真实题目，共 ${realQuestions.length} 道`);
+          this.setData({ cachedRealQuestions: realQuestions });
+          questions = realQuestions;
+        } else {
+          console.log('⚠️ 未获取到真实题目，使用原题目');
+          this.setData({ cachedRealQuestions: questions });
+        }
+      } catch (error) {
+        console.error('获取真实题目失败:', error);
+        console.log('使用原题目');
+        this.setData({ cachedRealQuestions: questions });
+      }
+    } else {
+      // 使用缓存的题目，确保所有版本使用相同的题目
+      questions = this.data.cachedRealQuestions;
+      console.log('使用缓存的题目，共', questions.length, '道');
+    }
+    
+    // 添加调试信息（两种类型都打印）
+    console.log('生成学案时的参数:', {
+      questionsLength: questions.length,
+      variantCount: variantCount,
+      type: type
+    });
+    
+    // 将题目按语法点分组，每个语法点有 (1 + variantCount) 道题目
+    // 第一题作为原题，剩余的作为变式题
+    const questionsPerPoint = 1 + (variantCount || 0);
+    const groupedQuestions = {};
+    
+    // 按语法点分组题目
+    for (const question of questions) {
+      const point = question.grammarPoint || question.category || '综合';
+      if (!groupedQuestions[point]) {
+        groupedQuestions[point] = [];
+      }
+      groupedQuestions[point].push(question);
+    }
+    
+    // 生成学案内容
+    let exerciseIndex = 1;
+    for (const [point, pointQuestions] of Object.entries(groupedQuestions)) {
+      // 第一题作为原题
+      const mainQuestion = pointQuestions[0];
+      const variantQuestions = pointQuestions.slice(1); // 剩余的作为变式题
+      
+      content += `### 练习${exerciseIndex}：${point}\n`;
+      content += `**题目**: ${mainQuestion.text}\n`;
+      
+      if (type === 'teacher') {
+        content += `**答案**: ${mainQuestion.answer || mainQuestion.correctAnswer}\n`;
+        content += `**解析**: ${mainQuestion.analysis || '暂无解析'}\n`;
+      }
+      
+      // 添加变式题（如果有）
+      if (variantQuestions.length > 0) {
+        content += `\n**变式练习题**:\n`;
+        for (let j = 0; j < variantQuestions.length; j++) {
+          const variant = variantQuestions[j];
+          content += `${j + 1}. ${variant.text}`;
+          if (type === 'teacher') {
+            content += ` (答案: ${variant.answer || variant.correctAnswer})`;
+          }
+          content += `\n`;
+        }
+      }
+      
+      content += `\n---\n\n`;
+      exerciseIndex++;
+    }
+    
+    // 不再添加“知识点总结 / 教学建议 / 课后作业”，避免预览和导出出现多余内容
+    // 教师版额外信息可在需要时单独生成，不耦合在题目文本中
+
+    return content;
+  },
+
+  // 随机选择题目
+  getRandomQuestions(questions, count) {
+    if (!questions || questions.length === 0) return [];
+    
+    const shuffled = [...questions].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  },
+
+  // 生成变式题内容
+  generateVariantQuestion(originalQuestion, variantIndex) {
+    const grammarPoint = originalQuestion.grammarPoint || originalQuestion.category;
+    const baseText = originalQuestion.text;
+    
+    // 根据实际语法点生成对应的变式题
+    const variants = {
+      '介词 + 名词/动名词': [
+        `介词填空练习 - The book is ___ the table.`,
+        `介词搭配练习 - I'm interested ___ learning English.`,
+        `介词用法辨析 - The meeting will be held ___ Monday morning.`
+      ],
+      'it相关': [
+        `it用法练习 - ___ is important to study hard.`,
+        `it形式主语练习 - ___ seems that he is right.`,
+        `it强调句练习 - ___ was yesterday that I met him.`
+      ],
+      '从属连词综合': [
+        `连词选择练习 - I like both tea ___ coffee.`,
+        `连词用法练习 - ___ it's raining, we'll stay inside.`,
+        `连词综合练习 - He said ___ he would come.`
+      ],
+      'a和an': [
+        `冠词选择练习 - I have ___ apple and ___ orange.`,
+        `a/an用法练习 - This is ___ useful book.`,
+        `冠词填空练习 - She is ___ honest person.`
+      ],
+      '复合词和外来词': [
+        `复合词练习 - This is a ___ story.`,
+        `外来词练习 - The ___ of the situation is clear.`,
+        `词汇综合练习 - This is a ___ problem.`
+      ],
+      '主从句与动词': [
+        `主从句练习 - I suggest that he ___ the work.`,
+        `动词时态练习 - I ___ to school every day.`,
+        `从句综合练习 - He said he ___ the work yesterday.`
+      ],
+      '时态(过去进行时)': [
+        `过去进行时练习 - I ___ TV when you called.`,
+        `时态转换练习 - He said he ___ the work yesterday.`,
+        `时态综合练习 - By the time we arrived, the meeting ___.`
+      ],
+      '不定式综合': [
+        `不定式练习 - I want ___ English well.`,
+        `不定式用法练习 - It's important ___ hard.`,
+        `不定式综合练习 - I hope ___ you soon.`
+      ],
+      '比较级': [
+        `比较级练习 - This book is ___ than that one.`,
+        `最高级练习 - This is the ___ book I've ever read.`,
+        `比较综合练习 - The weather is ___ today.`
+      ],
+      '副词修饰形容词/副词': [
+        `副词位置练习 - He ___ speaks English well.`,
+        `副词用法练习 - She runs ___ in the morning.`,
+        `副词修饰练习 - The car moves ___ on the highway.`
+      ],
+      'whose': [
+        `whose用法练习 - This is the student ___ book was lost.`,
+        `关系代词练习 - The man ___ is talking is my teacher.`,
+        `whose综合练习 - This is the reason ___ I came.`
+      ],
+      'where': [
+        `where用法练习 - This is the place ___ we met.`,
+        `关系副词练习 - This is the time ___ we should leave.`,
+        `where综合练习 - This is the reason ___ I came.`
+      ]
+    };
+    
+    // 根据语法点选择对应的变式题模板，如果没有匹配则使用通用模板
+    const grammarVariants = variants[grammarPoint] || [
+      `语法点练习 - 请根据${grammarPoint}完成练习。`,
+      `变式练习 - 请完成${grammarPoint}相关练习。`,
+      `综合练习 - 请运用${grammarPoint}知识完成题目。`
+    ];
+    
+    const variantIndex_mod = (variantIndex - 1) % grammarVariants.length;
+    
+    return grammarVariants[variantIndex_mod];
+  },
+
+  // 切换预览类型
+  switchPreviewType(e) {
+    const type = e.currentTarget.dataset.type;
+    this.setData({
+      previewType: type
+    });
+    
+    // 使用缓存的题目重新生成预览，避免重新获取题目
+    if (this.data.cachedRealQuestions) {
+      this.generatePreviewWithCachedQuestions();
+    } else {
+      this.generatePreview();
+    }
+  },
+
+  // 使用缓存题目生成预览
+  async generatePreviewWithCachedQuestions() {
+    try {
+      wx.showLoading({
+        title: '生成预览中...',
+        mask: true
+      });
+
+      const { cachedRealQuestions, variantCount, previewType } = this.data;
+      
+      // 生成预览内容
+      const content = await this.generateMaterialContent(cachedRealQuestions, variantCount, previewType);
+      
+      this.setData({
+        previewContent: content,
+        showPreview: true
+      });
+
+      wx.hideLoading();
+    } catch (error) {
+      wx.hideLoading();
+      console.error('生成预览失败:', error);
+      wx.showToast({
+        title: '预览生成失败',
+        icon: 'error'
+      });
+    }
+  },
+
+  // 生成学案（带答案）并转发
+  async generateWithAnswers() {
+    await this.generateAndShare('teacher');
+  },
+
+  // 生成学案（无答案）并转发
+  async generateWithoutAnswers() {
+    await this.generateAndShare('student');
+  },
+
+  // 生成并分享
+  async generateAndShare(type) {
+    try {
+      this.setData({ isGenerating: true });
+      
+      wx.showLoading({
+        title: '生成学案中...',
+        mask: true
+      });
+
+      // 使用缓存的题目，确保分享内容与预览一致
+      const questions = this.data.cachedRealQuestions || this.data.selectedQuestions;
+      const { variantCount } = this.data;
+      const content = await this.generateMaterialContent(questions, variantCount, type);
+      
+      // 保存文件
+      const fileName = `${this.data.assignmentData?.title || '学案'}_${type === 'teacher' ? '教师版' : '学生版'}_${Date.now()}.html`;
+      const filePath = await this.saveAsHtml(content, fileName);
+      
+      wx.hideLoading();
+      this.setData({ isGenerating: false });
+      
+      // 生成分享链接并分享
+      const shareUrl = await this.generateShareUrl(content, type);
+      this.shareToWechat(shareUrl, type);
+      
+    } catch (error) {
+      this.setData({ isGenerating: false });
+      wx.hideLoading();
+      console.error('生成学案失败:', error);
+      wx.showToast({
+        title: '生成失败',
+        icon: 'error'
+      });
+    }
+  },
+
+  // 生成分享链接
+  async generateShareUrl(content, type) {
+    // 这里应该调用后端API生成分享链接
+    // 暂时返回一个模拟链接
+    const baseUrl = 'https://example.com/study-plan';
+    const params = {
+      content: encodeURIComponent(content),
+      type: type,
+      timestamp: Date.now()
+    };
+    
+    return `${baseUrl}?${Object.keys(params).map(key => `${key}=${params[key]}`).join('&')}`;
+  },
+
+  // 分享到微信
+  shareToWechat(shareUrl, type) {
+    // 显示分享成功提示
+    wx.showModal({
+      title: '学案已生成',
+      content: '学案已准备完成！请点击右上角的分享按钮，选择要分享的好友或群聊。',
+      showCancel: false,
+      confirmText: '我知道了',
+      success: () => {
+        // 触发微信分享
+        wx.showShareMenu({
+          withShareTicket: true,
+          success: () => {
+            console.log('分享菜单显示成功');
+          },
+          fail: (error) => {
+            console.error('分享菜单显示失败:', error);
+            // 备用方案：复制链接到剪贴板
+            wx.setClipboardData({
+              data: shareUrl,
+              success: () => {
+                wx.showToast({
+                  title: '链接已复制到剪贴板',
+                  icon: 'success'
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
+  // 保存为HTML格式
+  async saveAsHtml(content, fileName) {
+    try {
+      const fs = wx.getFileSystemManager();
+      const filePath = `${wx.env.USER_DATA_PATH}/${fileName}`;
+      
+      // 生成HTML格式内容
+      const htmlContent = this.convertToHtml(content);
+      
+      fs.writeFileSync(filePath, htmlContent, 'utf8');
+      console.log('HTML文件保存成功:', filePath);
+      
+      return filePath;
+    } catch (error) {
+      console.error('保存HTML文件失败:', error);
+      throw error;
+    }
+  },
+
+  // 转换为HTML格式
+  convertToHtml(markdownContent) {
+    // 更完善的Markdown到HTML转换
+    let html = markdownContent
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/^- (.*$)/gim, '<li>$1</li>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/---/g, '<hr>');
+    
+    // 包装段落
+    html = '<p>' + html + '</p>';
+    
+    return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学案</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8; 
+            margin: 0; 
+            padding: 20px; 
+            background: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #2c3e50; 
+            border-bottom: 3px solid #3498db; 
+            padding-bottom: 15px; 
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 { 
+            color: #34495e; 
+            margin-top: 40px; 
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 { 
+            color: #7f8c8d; 
+            margin-top: 25px; 
+            margin-bottom: 15px;
+        }
+        strong { 
+            color: #e74c3c; 
+            font-weight: 600;
+        }
+        hr { 
+            border: none; 
+            border-top: 2px solid #ecf0f1; 
+            margin: 30px 0; 
+        }
+        p {
+            margin: 15px 0;
+            text-align: justify;
+        }
+        li {
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+        .question { 
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+            border-left: 4px solid #3498db;
+        }
+        .answer { 
+            background: linear-gradient(135deg, #d4edda, #c3e6cb); 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 6px; 
+            border-left: 4px solid #28a745;
+        }
+        .info-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .suggestion-section {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        ${html}
+    </div>
+</body>
+</html>`;
+  },
+
+  // 分享到微信
+  shareToWechat(filePath, fileName) {
+    wx.openDocument({
+      filePath: filePath,
+      fileType: 'html',
+      showMenu: true, // 显示分享菜单
+      success: () => {
+        // 显示分享指引
+        wx.showModal({
+          title: '学案已生成',
+          content: '学案已准备完成！\n\n请点击右上角的分享按钮，选择要分享的好友或群聊。',
+          confirmText: '我知道了',
+          showCancel: false,
+          success: () => {
+            wx.showToast({
+              title: '请使用右上角分享',
+              icon: 'success',
+              duration: 2000
+            });
+          }
+        });
+      },
+      fail: (error) => {
+        console.error('打开文件失败:', error);
+        // 提供备用分享方案
+        wx.showModal({
+          title: '文件已生成',
+          content: `学案已保存为: ${fileName}\n\n由于系统限制，无法直接打开文件。\n\n您可以选择：\n1. 复制内容到剪贴板\n2. 保存到手机相册\n3. 通过其他方式分享`,
+          confirmText: '复制内容',
+          cancelText: '我知道了',
+          success: (res) => {
+            if (res.confirm) {
+              this.copyContentToClipboard();
+            }
+          }
+        });
+      }
+    });
+  },
+
+  // 复制内容到剪贴板（只包含题目部分：练习标题 + 题干）
+  async copyContentToClipboard() {
+    try {
+      wx.showLoading({
+        title: '准备复制...',
+        mask: true
+      });
+
+      // 优先使用缓存的真实题目，如果没有则使用选中的题目
+      const questions = this.data.cachedRealQuestions || this.data.selectedQuestions;
+      const { variantCount, previewType } = this.data;
+      
+      if (!questions || questions.length === 0) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '没有可复制的内容',
+          icon: 'none'
+        });
+        return;
+      }
+
+      console.log('开始生成复制内容，题目数量:', questions.length, '预览类型:', previewType);
+      
+      // 生成学案内容
+      const markdownContent = await this.generateMaterialContent(questions, variantCount, previewType);
+      const isTeacher = previewType === 'teacher';
+
+      console.log('生成的内容长度:', markdownContent.length);
+
+      // 只保留“练习内容”部分：
+      // 学生版：每一题的标题和题干
+      // 教师版：每一题的标题、题干 + 答案 + 解析
+      const questionBlocks = [];
+      const lines = markdownContent.split('\n');
+      let currentBlock = null;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+
+        // 匹配 "### 练习X：语法点"
+        const match = line.match(/^###\s*练习(\d+)[：:](.*)$/);
+        if (match) {
+          // 开启新的题目块
+          if (currentBlock) {
+            questionBlocks.push(currentBlock.join('\n'));
+          }
+          currentBlock = [];
+          const index = match[1];
+          const label = (match[2] || '').trim();
+          currentBlock.push(`练习${index}：${label}`);
+          continue;
+        }
+
+        if (currentBlock) {
+          // 题干行：以 "**题目**" 开头
+          if (/^\*\*题目\*\*\s*:/.test(line)) {
+            const plainLine = line.replace(/^\*\*题目\*\*\s*:/, '题目:').trim();
+            currentBlock.push(plainLine);
+            continue;
+          }
+
+          // 教师版额外包含答案和解析
+          if (isTeacher && /^\*\*答案\*\*\s*:/.test(line)) {
+            const answerLine = line.replace(/^\*\*答案\*\*\s*:/, '答案:').trim();
+            currentBlock.push(answerLine);
+            continue;
+          }
+
+          if (isTeacher && /^\*\*解析\*\*\s*:/.test(line)) {
+            const analysisLine = line.replace(/^\*\*解析\*\*\s*:/, '解析:').trim();
+            currentBlock.push(analysisLine);
+            continue;
+          }
+
+          // 变式练习题标题行
+          if (/^\*\*变式练习题\*\*\s*:/.test(line)) {
+            currentBlock.push('变式练习题:');
+            continue;
+          }
+
+          // 变式题内容行（格式：数字. 题目内容）
+          if (/^\d+\.\s+/.test(line)) {
+            const variantLine = line.replace(/^\d+\.\s+/, '').trim();
+            currentBlock.push(variantLine);
+            continue;
+          }
+        }
+      }
+
+      // 收尾，把最后一题加入
+      if (currentBlock) {
+        questionBlocks.push(currentBlock.join('\n'));
+      }
+
+      console.log('提取到的题目块数量:', questionBlocks.length);
+
+      // 拼成最终要复制的内容
+      let textToCopy = '';
+      if (questionBlocks.length > 0) {
+        textToCopy = questionBlocks.join('\n\n');
+      } else {
+        // 兜底：如果解析不到题目，尝试从预览内容中提取
+        const { stripMarkdown } = require('../../../utils/markdown.js');
+        if (this.data.previewContent) {
+          // 从预览内容中提取题目部分
+          const previewLines = this.data.previewContent.split('\n');
+          const previewBlocks = [];
+          let previewBlock = null;
+          
+          for (const line of previewLines) {
+            const match = line.match(/^###\s*练习(\d+)[：:](.*)$/);
+            if (match) {
+              if (previewBlock) {
+                previewBlocks.push(previewBlock.join('\n'));
+              }
+              previewBlock = [];
+              const index = match[1];
+              const label = (match[2] || '').trim();
+              previewBlock.push(`练习${index}：${label}`);
+            } else if (previewBlock) {
+              if (/^\*\*题目\*\*\s*:/.test(line)) {
+                previewBlock.push(line.replace(/^\*\*题目\*\*\s*:/, '题目:').trim());
+              } else if (isTeacher && /^\*\*答案\*\*\s*:/.test(line)) {
+                previewBlock.push(line.replace(/^\*\*答案\*\*\s*:/, '答案:').trim());
+              } else if (isTeacher && /^\*\*解析\*\*\s*:/.test(line)) {
+                previewBlock.push(line.replace(/^\*\*解析\*\*\s*:/, '解析:').trim());
+              }
+            }
+          }
+          
+          if (previewBlock) {
+            previewBlocks.push(previewBlock.join('\n'));
+          }
+          
+          if (previewBlocks.length > 0) {
+            textToCopy = previewBlocks.join('\n\n');
+          } else {
+            textToCopy = stripMarkdown(this.data.previewContent);
+          }
+        } else {
+          textToCopy = stripMarkdown(markdownContent);
+        }
+      }
+
+      console.log('最终复制内容长度:', textToCopy.length);
+
+      wx.hideLoading();
+
+      // 直接复制为纯文本
+      wx.setClipboardData({
+        data: textToCopy,
+        success: () => {
+          wx.showToast({
+            title: '内容已复制到剪贴板',
+            icon: 'success',
+            duration: 2000
+          });
+        },
+        fail: (error) => {
+          console.error('复制到剪贴板失败:', error);
+          wx.showToast({
+            title: '复制失败，请重试',
+            icon: 'error'
+          });
+        }
+      });
+    } catch (error) {
+      wx.hideLoading();
+      console.error('复制内容失败:', error);
+      wx.showToast({
+        title: '复制失败',
+        icon: 'error'
+      });
+    }
+  },
+
+  // 返回上一页
+  goBack() {
+    wx.navigateBack();
+  },
+
+  // 重新选择变式题（已移除，返回上一步重新选择）
+  reselectVariants() {
+    wx.navigateBack();
+  }
+});

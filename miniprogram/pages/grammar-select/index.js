@@ -57,7 +57,19 @@ Page({
     showTooltip: false,
     
     // 新增：动效提示相关数据
-    showTipAnimation: false
+    showTipAnimation: false,
+    
+    // 新增：智能控制面板相关数据
+    isPreciseMode: true, // 默认精确模式
+    multiplier: 1, // 批量调节乘数
+    maxQuestions: 50, // 最大题目数
+    selectedCount: 0, // 已选语法点数量
+    
+    // 快速模式相关数据
+    targetTotalQuestions: 20, // 目标总题数
+    selectedCategories: [], // 选中的大类
+    availableCategories: [], // 可用的大类列表
+    categoryAllocation: {} // 大类分配情况
   },
 
   toggleSubmenu: function(e) {
@@ -79,14 +91,17 @@ Page({
     const point = e.currentTarget.dataset.point;
     const selectedPoints = this.data.selectedPoints;
     
-    // 恢复原有的统一切换逻辑，不区分特殊类别
-    selectedPoints[point] = !selectedPoints[point];
+    // 修改逻辑：使用数字而不是布尔值
+    if (selectedPoints[point] && selectedPoints[point] > 0) {
+      // 如果已经选中，则取消选择
+      delete selectedPoints[point];
+    } else {
+      // 如果未选中，则设置为1题
+      selectedPoints[point] = 1;
+    }
     
-    const totalQuestions = Object.values(selectedPoints).reduce((sum, count) => {
-      return sum + (typeof count === 'number' ? count : (count ? 5 : 0));
-    }, 0);
-    
-    this.setData({ selectedPoints, totalQuestions }, () => {
+    this.setData({ selectedPoints }, () => {
+      this.updateComputedData();
       this.updateSelectedPointsList();
       this.updateParentHasSelected();
     });
@@ -95,9 +110,9 @@ Page({
   removeSelectedPoint: function(e) {
     const point = e.currentTarget.dataset.point;
     const selectedPoints = this.data.selectedPoints;
-    selectedPoints[point] = false;
-    const totalQuestions = Object.values(selectedPoints).filter(Boolean).length * 5;
-    this.setData({ selectedPoints, totalQuestions }, () => {
+    delete selectedPoints[point];
+    this.setData({ selectedPoints }, () => {
+      this.updateComputedData();
       this.updateSelectedPointsList();
       this.updateParentHasSelected();
     });
@@ -107,7 +122,7 @@ Page({
     const { selectedPoints, rightPanel, categories } = this.data;
     const selectedList = [];
     Object.keys(selectedPoints).forEach(child => {
-      if (selectedPoints[child]) {
+      if (selectedPoints[child] && selectedPoints[child] > 0) {
         let parent = '';
         for (let i = 0; i < rightPanel.length; i++) {
           if (rightPanel[i].includes(child)) {
@@ -115,7 +130,7 @@ Page({
             break;
           }
         }
-        selectedList.push({ parent, child });
+        selectedList.push({ parent, child, count: selectedPoints[child] });
       }
     });
     this.setData({ selectedList });
@@ -124,7 +139,7 @@ Page({
   updateParentHasSelected: function() {
     const { rightPanel, selectedPoints } = this.data;
     const parentHasSelected = rightPanel.map(children =>
-      children.some(child => selectedPoints[child])
+      children.some(child => selectedPoints[child] && selectedPoints[child] > 0)
     );
     this.setData({ parentHasSelected });
   },
@@ -355,7 +370,17 @@ Page({
         totalQuestions: 0,
         selectedTagsList: [],
         categoryCounts: [],
-        expandedCategories: {}
+        expandedCategories: {},
+        
+        // 新增：智能控制面板初始化
+        isPreciseMode: true,
+        multiplier: 1,
+        maxQuestions: 50,
+        selectedCount: 0,
+        targetTotalQuestions: 20,
+        selectedCategories: [],
+        availableCategories: this.data.categories,
+        categoryAllocation: {}
       });
       
       // 检查是否从首页传递了使用自定义组合的参数
@@ -526,48 +551,6 @@ Page({
     this.setData({ pointToCategoryMap: pointMap });
   },
 
-  updateComputedData: function() {
-    try {
-      const { selectedPoints, pointToCategoryMap, categories } = this.data;
-      
-      // 确保基本数据结构存在
-      if (!selectedPoints || !pointToCategoryMap || !categories) {
-        console.warn('基本数据结构不完整, 使用默认值');
-        this.setData({
-          selectedTagsList: [],
-          categoryCounts: new Array(this.data.categories.length).fill(0),
-          totalQuestions: 0
-        });
-        return;
-      }
-      
-      const selectedTagsList = Object.keys(selectedPoints);
-      const categoryCounts = new Array(categories.length).fill(0);
-      let totalQuestions = 0;
-
-      for (const point in selectedPoints) {
-        const count = selectedPoints[point];
-        if (typeof count === 'number' && count > 0) {
-          totalQuestions += count;
-          const catIndex = pointToCategoryMap[point];
-          if (catIndex !== undefined && catIndex >= 0 && catIndex < categoryCounts.length) {
-            categoryCounts[catIndex] = count;
-          }
-        }
-      }
-      
-      this.setData({ selectedTagsList, categoryCounts, totalQuestions });
-      console.log('数据更新完成:', { selectedTagsList, categoryCounts, totalQuestions });
-    } catch (error) {
-      console.error('更新计算数据失败:', error);
-      // 设置安全的默认值
-      this.setData({
-        selectedTagsList: [],
-        categoryCounts: new Array(this.data.categories.length).fill(0),
-        totalQuestions: 0
-      });
-    }
-  },
 
   removeTag: function(e) {
     const point = e.currentTarget.dataset.point;
@@ -575,6 +558,50 @@ Page({
     delete selectedPoints[point];
     this.setData({ selectedPoints });
     this.updateComputedData();
+  },
+
+  // 新增：已选标签区域的题目数量增加
+  increaseTagCount: function(e) {
+    const point = e.currentTarget.dataset.point;
+    const { selectedPoints } = this.data;
+    const currentCount = selectedPoints[point] || 0;
+    if (currentCount < 10) {
+      selectedPoints[point] = currentCount + 1;
+      this.setData({ selectedPoints });
+      this.updateComputedData();
+      
+      // 如果是特殊类别，提供额外说明
+      if (this.isSpecialCategory(point)) {
+        wx.showToast({
+          title: '此类别提供引导题，更多练习请查看"书写规范"',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    } else {
+      wx.showToast({
+        title: '每个语法点最多选择10题',
+        icon: 'none',
+        duration: 1500
+      });
+    }
+  },
+
+  // 新增：已选标签区域的题目数量减少
+  decreaseTagCount: function(e) {
+    const point = e.currentTarget.dataset.point;
+    const { selectedPoints } = this.data;
+    const currentCount = selectedPoints[point] || 0;
+    if (currentCount > 1) {
+      selectedPoints[point] = currentCount - 1;
+      this.setData({ selectedPoints });
+      this.updateComputedData();
+    } else {
+      // 如果减少到0，则移除该标签
+      delete selectedPoints[point];
+      this.setData({ selectedPoints });
+      this.updateComputedData();
+    }
   },
 
   // 新增：格式化专属组合配置用于显示
@@ -1148,10 +1175,182 @@ Page({
     }, 3000);
   },
 
-  // 新增：跳转到语法测试
-  navigateToGrammarTest: function() {
-    wx.navigateTo({
-      url: '/pages/ability-test/grammar-test?from=module'
+  // 新增：智能控制面板相关方法
+  
+  // 模式切换
+  toggleMode: function(e) {
+    const isPreciseMode = e.detail.value;
+    this.setData({ isPreciseMode });
+    
+    if (isPreciseMode) {
+      // 切换到精确模式，保持现有选择
+      this.updatePreciseMode();
+    } else {
+      // 切换到快速模式，初始化快速模式数据
+      this.initializeQuickMode();
+    }
+  },
+
+  // 更新精确模式
+  updatePreciseMode: function() {
+    const { selectedPoints } = this.data;
+    const selectedCount = Object.keys(selectedPoints).filter(point => selectedPoints[point] > 0).length;
+    this.setData({ selectedCount });
+  },
+
+  // 初始化快速模式
+  initializeQuickMode: function() {
+    // 初始化可用大类列表
+    const availableCategories = this.data.categories;
+    this.setData({ 
+      availableCategories,
+      selectedCategories: [],
+      categoryAllocation: {}
     });
-  }
+  },
+
+  // 精确模式：批量调节
+  onMultiplierChange: function(e) {
+    const multiplier = e.detail.value;
+    this.setData({ multiplier });
+    
+    // 重新计算所有已选语法点的题目数量
+    const { selectedPoints } = this.data;
+    const updatedPoints = {};
+    
+    Object.keys(selectedPoints).forEach(point => {
+      if (selectedPoints[point] > 0) {
+        updatedPoints[point] = multiplier;
+      }
+    });
+    
+    this.setData({ selectedPoints: updatedPoints });
+    this.updateComputedData();
+  },
+
+  // 快速模式：总数控制
+  onTotalQuestionsChange: function(e) {
+    const targetTotal = e.detail.value;
+    this.setData({ targetTotalQuestions: targetTotal });
+    
+    // 智能分配到选中的大类
+    this.smartAllocateQuestions();
+  },
+
+  // 快速模式：切换大类选择
+  toggleCategory: function(e) {
+    const category = e.currentTarget.dataset.category;
+    const { selectedCategories } = this.data;
+    
+    let newSelectedCategories;
+    if (selectedCategories.includes(category)) {
+      newSelectedCategories = selectedCategories.filter(cat => cat !== category);
+    } else {
+      newSelectedCategories = [...selectedCategories, category];
+    }
+    
+    this.setData({ selectedCategories: newSelectedCategories });
+    
+    // 重新智能分配题目
+    this.smartAllocateQuestions();
+  },
+
+  // 智能分配算法
+  smartAllocateQuestions: function() {
+    const { selectedCategories, targetTotalQuestions, rightPanel, categories } = this.data;
+    
+    if (selectedCategories.length === 0) {
+      this.setData({ categoryAllocation: {} });
+      return;
+    }
+    
+    // 按大类平均分配，然后根据题目数量微调
+    const basePerCategory = Math.floor(targetTotalQuestions / selectedCategories.length);
+    const remainder = targetTotalQuestions % selectedCategories.length;
+    
+    const allocation = {};
+    const updatedSelectedPoints = {};
+    
+    selectedCategories.forEach((category, index) => {
+      const extra = index < remainder ? 1 : 0;
+      const questionsPerCategory = basePerCategory + extra;
+      allocation[category] = questionsPerCategory;
+      
+      // 找到该大类下的所有语法点
+      const categoryIndex = categories.indexOf(category);
+      if (categoryIndex !== -1) {
+        const categoryPoints = rightPanel[categoryIndex];
+        const questionsPerPoint = Math.max(1, Math.floor(questionsPerCategory / categoryPoints.length));
+        
+        categoryPoints.forEach(point => {
+          if (!this.isHiddenPoint(point)) {
+            updatedSelectedPoints[point] = questionsPerPoint;
+          }
+        });
+      }
+    });
+    
+    this.setData({ 
+      categoryAllocation: allocation,
+      selectedPoints: updatedSelectedPoints
+    });
+    
+    this.updateComputedData();
+  },
+
+  // 更新计算数据（增强版）
+  updateComputedData: function() {
+    try {
+      const { selectedPoints, pointToCategoryMap, categories } = this.data;
+      
+      // 确保基本数据结构存在
+      if (!selectedPoints || !pointToCategoryMap || !categories) {
+        console.warn('基本数据结构不完整, 使用默认值');
+        this.setData({
+          selectedTagsList: [],
+          categoryCounts: new Array(this.data.categories.length).fill(0),
+          totalQuestions: 0,
+          selectedCount: 0
+        });
+        return;
+      }
+      
+      const selectedTagsList = Object.keys(selectedPoints).filter(point => selectedPoints[point] > 0);
+      const categoryCounts = new Array(categories.length).fill(0);
+      let totalQuestions = 0;
+      const selectedCount = selectedTagsList.length;
+
+      for (const point in selectedPoints) {
+        const count = selectedPoints[point];
+        if (typeof count === 'number' && count > 0) {
+          totalQuestions += count;
+          const catIndex = pointToCategoryMap[point];
+          if (catIndex !== undefined && catIndex >= 0 && catIndex < categoryCounts.length) {
+            categoryCounts[catIndex] = count;
+          }
+        }
+      }
+      
+      this.setData({ 
+        selectedTagsList, 
+        categoryCounts, 
+        totalQuestions,
+        selectedCount
+      });
+      
+      this.updateSelectedPointsList();
+      this.updateParentHasSelected();
+      console.log('数据更新完成:', { selectedTagsList, categoryCounts, totalQuestions, selectedCount });
+    } catch (error) {
+      console.error('更新计算数据失败:', error);
+      // 设置安全的默认值
+      this.setData({
+        selectedTagsList: [],
+        categoryCounts: new Array(this.data.categories.length).fill(0),
+        totalQuestions: 0,
+        selectedCount: 0
+      });
+    }
+  },
+
 }); 

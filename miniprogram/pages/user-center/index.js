@@ -231,6 +231,13 @@ Page({
     });
   },
 
+  // 跳转到加入班级页面
+  goToJoinClass() {
+    wx.navigateTo({
+      url: '/pages/student-join-class/index'
+    });
+  },
+
   // 跳转到意见反馈页面
   goToFeedback() {
     wx.navigateTo({

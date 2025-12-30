@@ -1,0 +1,9 @@
+{
+  "name": "generateMaterialFile",
+  "version": "1.0.0",
+  "description": "生成教学材料文件云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

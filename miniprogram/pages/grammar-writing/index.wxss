@@ -10,58 +10,6 @@
   position: relative;
 }
 
-/* 统一测试卡片样式 */
-.test-entry-card {
-  padding: 20rpx;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  border-radius: 16rpx;
-  color: white;
-  margin: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 10;
-}
-
-.test-entry-card:active {
-  transform: scale(0.98);
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.15);
-}
-
-.test-icon {
-  width: 60rpx;
-  height: 60rpx;
-  margin-bottom: 12rpx;
-}
-
-.test-title {
-  font-size: 36rpx;
-  font-weight: bold;
-  margin-bottom: 8rpx;
-}
-
-.test-desc {
-  display: block;
-  font-size: 28rpx;
-  margin-bottom: 20rpx;
-  opacity: 0.9;
-  line-height: 1.4;
-}
-
-.test-button {
-  background: white;
-  color: #2575fc;
-  border-radius: 50rpx;
-  text-align: center;
-  padding: 12rpx 32rpx;
-  font-weight: bold;
-  font-size: 28rpx;
-  box-shadow: 0 2rpx 8rpx rgba(255,255,255,0.3);
-}
 
 .container::before {
   content: '';

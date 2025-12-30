@@ -1,0 +1,308 @@
+<!--教师端我的学案页面-->
+<view class="teacher-materials">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">我的学案</text>
+    <text class="page-subtitle">配套材料管理</text>
+  </view>
+
+  <!-- 配套材料 -->
+  <view class="tab-content">
+    <view class="section-header">
+      <view class="header-left">
+        <text class="title">最近生成的配套材料</text>
+        <text class="subtitle">基于作业结果自动生成</text>
+      </view>
+      <view class="header-right">
+        <button 
+          class="refresh-btn {{isRefreshing ? 'refreshing' : ''}}"
+          bindtap="refreshMaterials"
+          disabled="{{isRefreshing}}"
+        >
+          <text class="refresh-icon">{{isRefreshing ? '⟳' : '↻'}}</text>
+          <text class="refresh-text">{{isRefreshing ? '刷新中...' : '刷新'}}</text>
+        </button>
+      </view>
+    </view>
+    
+    <!-- 加载状态 -->
+    <view class="loading-container" wx:if="{{isRefreshing && recentMaterials.length === 0}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">正在加载配套材料...</text>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!isRefreshing && recentMaterials.length === 0}}">
+      <text class="empty-icon">📄</text>
+      <text class="empty-title">暂无配套材料</text>
+      <text class="empty-desc">发布作业后将自动生成配套材料</text>
+      
+      <!-- 调试信息 -->
+      <view class="debug-info" wx:if="{{fromHomework}}">
+        <text class="debug-title">调试信息：</text>
+        <text class="debug-item">作业ID: {{homeworkId}}</text>
+        <text class="debug-item">作业标题: {{homeworkTitle}}</text>
+        <text class="debug-item">来源: 作业发布页面</text>
+      </view>
+      
+      <button class="btn btn-primary" bindtap="goToHomework">去布置作业</button>
+      <button class="btn btn-outline" bindtap="refreshMaterials" style="margin-top: 20rpx;">手动刷新</button>
+    </view>
+    
+    <view class="materials-list" wx:if="{{recentMaterials.length > 0}}">
+      <view 
+        class="material-item {{item.status === 'generating' ? 'generating' : ''}}"
+        wx:for="{{recentMaterials}}" 
+        wx:key="id"
+      >
+        <view class="material-info">
+          <view class="material-header">
+            <text class="title">{{item.title}}</text>
+            <view class="type-badge type-{{item.type}}">{{item.type.toUpperCase()}}</view>
+          </view>
+          <text class="time">{{formatTime(item.createdAt)}}</text>
+          <view class="stats">
+            <text class="stat">生成时间: {{formatTime(item.createdAt)}}</text>
+          </view>
+        </view>
+        <!-- 生成中状态 -->
+        <view class="generating-status" wx:if="{{item.status === 'generating'}}">
+          <view class="generating-content">
+            <view class="generating-spinner"></view>
+            <text class="generating-text">正在生成材料...</text>
+          </view>
+        </view>
+        
+        <view class="material-actions" wx:else>
+          <!-- 主要操作：统一生成流程 -->
+          <button 
+            class="btn btn-primary-new"
+            data-id="{{item.id}}"
+            bindtap="goToUnifiedGenerate"
+            disabled="{{item.status === 'generating'}}"
+          >{{item.status === 'generating' ? '生成中...' : '生成学案'}}</button>
+          
+          <!-- 次要操作：查看详情 -->
+          <button 
+            class="btn btn-outline"
+            data-id="{{item.id}}"
+            bindtap="viewAssignmentDetail"
+          >详情</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- 作业详情弹窗 -->
+  <view class="modal" wx:if="{{showAssignmentDetail}}" bindtap="closeAssignmentDetail">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="title">作业详情</text>
+        <text class="close" bindtap="closeAssignmentDetail">×</text>
+      </view>
+      
+      <view class="modal-body" wx:if="{{selectedAssignment}}">
+        <view class="assignment-detail">
+          <view class="detail-item">
+            <text class="label">作业标题：</text>
+            <text class="value">{{selectedAssignment.title}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedAssignment.remark}}">
+            <text class="label">备注内容：</text>
+            <text class="value">{{selectedAssignment.remark}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">截止时间：</text>
+            <text class="value">{{selectedAssignment.deadline}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">完成进度：</text>
+            <text class="value">已完成 {{selectedAssignment.completedCount || 12}}/{{selectedAssignment.totalCount || 33}} 人</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">平均正确率：</text>
+            <text class="value">{{selectedAssignment.averageAccuracy || 78}}%</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">创建时间：</text>
+            <text class="value">{{selectedAssignment.createdAt}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="closeAssignmentDetail">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 题目列表弹窗 -->
+  <view class="modal" wx:if="{{showQuestionList}}" bindtap="closeQuestionList">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="title">题目列表</text>
+        <text class="close" bindtap="closeQuestionList">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="question-list">
+          <view 
+            class="question-item {{item.id === rollcallData.currentQuestion ? 'active' : ''}}"
+            wx:for="{{questionList}}" 
+            wx:key="id"
+            data-question-id="{{item.id}}"
+            bindtap="jumpToQuestion"
+          >
+            <text class="question-number">第{{item.id}}题</text>
+            <text class="question-title">{{item.title}}</text>
+            <view class="question-status">
+              <text class="status-text" wx:if="{{item.status === 'completed'}}">已完成</text>
+              <text class="status-text" wx:elif="{{item.status === 'current'}}">当前</text>
+              <text class="status-text" wx:else>未开始</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="closeQuestionList">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 云端备份管理弹窗 -->
+  <view class="modal" wx:if="{{showBackupModal}}" bindtap="closeBackupModal">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="title">云端备份管理</text>
+        <text class="close" bindtap="closeBackupModal">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="backup-status">
+          <view class="status-item">
+            <text class="status-label">连接状态：</text>
+            <text class="status-value status-{{cloudBackupStatus}}">
+              {{cloudBackupStatus === 'connected' ? '已连接' : cloudBackupStatus === 'connecting' ? '连接中' : cloudBackupStatus === 'error' ? '连接失败' : '未连接'}}
+            </text>
+          </view>
+          <view class="status-item" wx:if="{{lastBackupTime}}">
+            <text class="status-label">上次备份：</text>
+            <text class="status-value">{{formatTime(lastBackupTime)}}</text>
+          </view>
+        </view>
+        
+        <view class="backup-actions">
+          <button class="btn btn-primary" bindtap="manualBackup">立即备份</button>
+          <button class="btn btn-outline" bindtap="restoreFromCloud">从云端恢复</button>
+          <button class="btn btn-outline" bindtap="syncToCloud">同步到云端</button>
+        </view>
+        
+        <view class="backup-settings">
+          <view class="setting-item">
+            <text class="setting-label">自动备份</text>
+            <switch 
+              checked="{{autoBackupEnabled}}" 
+              bindchange="toggleAutoBackup"
+              color="#1890ff"
+            />
+          </view>
+        </view>
+        
+        <view class="backup-history" wx:if="{{backupHistory.length > 0}}">
+          <text class="history-title">备份历史</text>
+          <view class="history-list">
+            <view 
+              class="history-item"
+              wx:for="{{backupHistory}}" 
+              wx:key="id"
+            >
+              <text class="history-time">{{formatTime(item.backupTime)}}</text>
+              <text class="history-version">v{{item.version}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="closeBackupModal">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 反馈弹窗 -->
+  <view class="modal" wx:if="{{showFeedbackModal}}" bindtap="closeFeedbackModal">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="title">功能反馈</text>
+        <text class="close" bindtap="closeFeedbackModal">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="feedback-content">
+          <text class="feedback-title">亲爱的用户，您希望摸底测试增加什么功能呢？</text>
+          <text class="feedback-subtitle">我们会优先考虑并投入开发。</text>
+          <textarea 
+            class="feedback-input"
+            placeholder="请输入您的建议..."
+            value="{{feedbackContent}}"
+            bindinput="setFeedbackContent"
+            maxlength="500"
+          ></textarea>
+          <text class="feedback-count">{{feedbackContent.length}}/500</text>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-outline" bindtap="closeFeedbackModal">取消</button>
+        <button class="btn btn-primary" bindtap="submitFeedback">提交</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 作业选择弹窗 -->
+  <view class="modal" wx:if="{{showAssignmentSelector}}" bindtap="closeAssignmentSelector">
+    <view class="modal-content" catchtap="preventClose">
+      <view class="modal-header">
+        <text class="title">选择作业</text>
+        <text class="close" bindtap="closeAssignmentSelector">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <view class="assignment-list" wx:if="{{availableAssignments.length > 0}}">
+          <view 
+            class="assignment-item"
+            wx:for="{{availableAssignments}}" 
+            wx:key="_id"
+            data-id="{{item._id}}"
+            bindtap="selectAssignment"
+          >
+            <view class="assignment-info">
+              <text class="assignment-title">{{item.title}}</text>
+              <text class="assignment-desc">{{item.description}}</text>
+              <view class="assignment-details">
+                <text class="detail">{{item.questionCount}}题</text>
+                <text class="detail">{{item.studentCount}}人参与</text>
+                <text class="detail">正确率{{item.averageAccuracy}}%</text>
+              </view>
+            </view>
+            <view class="assignment-status status-{{item.status}}">
+              {{item.status === 'active' ? '进行中' : item.status === 'completed' ? '已完成' : '已过期'}}
+            </view>
+          </view>
+        </view>
+        
+        <view class="no-assignments" wx:else>
+          <text class="no-assignments-text">暂无作业数据</text>
+          <text class="no-assignments-hint">将显示默认语法填空题</text>
+        </view>
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn btn-primary" bindtap="closeAssignmentSelector">取消</button>
+      </view>
+    </view>
+  </view>
+</view>

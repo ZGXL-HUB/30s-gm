@@ -1,3 +1,196 @@
+/* 智能控制面板样式 */
+.smart-control-panel {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16rpx;
+  margin: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(64, 150, 255, 0.1);
+  border: 2rpx solid #bae7ff;
+}
+
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1677ff;
+}
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.mode-label {
+  font-size: 24rpx;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+/* 精确模式样式 */
+.precise-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.selected-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.summary-text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.progress-bar {
+  height: 8rpx;
+  background-color: rgba(186, 231, 255, 0.3);
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4096ff 0%, #1677ff 100%);
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.batch-control {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(186, 231, 255, 0.5);
+}
+
+.control-label {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  min-width: 120rpx;
+}
+
+.multiplier-control {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+}
+
+.multiplier-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.multiplier-slider {
+  flex: 1;
+}
+
+.multiplier-value {
+  font-size: 24rpx;
+  color: #1677ff;
+  font-weight: 600;
+  min-width: 40rpx;
+  text-align: center;
+}
+
+/* 快速模式样式 */
+.quick-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.total-control {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(186, 231, 255, 0.5);
+}
+
+.total-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+}
+
+.total-slider {
+  flex: 1;
+}
+
+.total-value {
+  font-size: 24rpx;
+  color: #1677ff;
+  font-weight: 600;
+  min-width: 80rpx;
+  text-align: center;
+}
+
+.category-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.selection-label {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.category-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  font-size: 24rpx;
+  transition: all 0.3s ease;
+  border: 1rpx solid transparent;
+}
+
+.category-tag.active {
+  background-color: #667eea;
+  color: #fff;
+  border-color: #5a6fd8;
+  transform: scale(1.05);
+}
+
+.smart-allocation-tip {
+  padding: 12rpx 16rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12rpx;
+  border-left: 4rpx solid #52c41a;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #52c41a;
+  line-height: 1.4;
+}
+
 /* 全局容器 */
 .container {
   display: flex;
@@ -7,56 +200,6 @@
   background-color: #f7f8fa;
 }
 
-/* 统一测试卡片样式 */
-.test-entry-card {
-  padding: 20rpx;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  border-radius: 16rpx;
-  color: white;
-  margin: 20rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.test-entry-card:active {
-  transform: scale(0.98);
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.15);
-}
-
-.test-icon {
-  width: 60rpx;
-  height: 60rpx;
-  margin-bottom: 12rpx;
-}
-
-.test-title {
-  font-size: 36rpx;
-  font-weight: bold;
-  margin-bottom: 8rpx;
-}
-
-.test-desc {
-  display: block;
-  font-size: 28rpx;
-  margin-bottom: 20rpx;
-  opacity: 0.9;
-  line-height: 1.4;
-}
-
-.test-button {
-  background: white;
-  color: #2575fc;
-  border-radius: 50rpx;
-  text-align: center;
-  padding: 12rpx 32rpx;
-  font-weight: bold;
-  font-size: 28rpx;
-  box-shadow: 0 2rpx 8rpx rgba(255,255,255,0.3);
-}
 
 /* 主滚动区 */
 .main-scroll-area {
@@ -732,16 +875,55 @@
   padding: 10rpx 16rpx;
   font-size: 26rpx;
   color: #323233;
+  gap: 12rpx;
 }
 
 .tag-text {
-  margin-right: 12rpx;
+  flex: 1;
+  font-weight: 500;
+}
+
+.tag-count-control {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 6rpx;
+  padding: 4rpx 8rpx;
+  border: 1rpx solid #e4e7ed;
+}
+
+.tag-control-btn {
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  border-radius: 50%;
+  background-color: #f7f8fa;
+  color: #333;
+  margin: 0 4rpx;
+  transition: all 0.2s ease;
+}
+
+.tag-control-btn:active {
+  background-color: #e4e7ed;
+  transform: scale(0.9);
+}
+
+.tag-count-text {
+  font-size: 24rpx;
+  color: #4096ff;
+  font-weight: 500;
+  min-width: 60rpx;
+  text-align: center;
 }
 
 .remove-tag-btn {
   font-size: 32rpx;
   color: #969799;
   font-weight: bold;
+  margin-left: 8rpx;
 }
 
 /* 新增：动效提示样式 */

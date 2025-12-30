@@ -132,12 +132,12 @@ Page({
       advanced: {
         icon: '🚀',
         title: '进阶之旅',
-        description: '本模块可以进行语法和书写能力诊断并提供与您能力匹配的每日任务，快和我一起开启进阶之旅吧！',
+        description: '个性化学习推荐，根据你的练习记录提供针对性的学习内容',
         actions: [
           {
-            text: '进入每日练习',
+            text: '开始练习',
             type: 'secondary',
-            handler: 'enterDailyPractice'
+            handler: 'goToGrammarSelect'
           }
         ]
       }
@@ -294,7 +294,7 @@ Page({
       case 'expert':
         recommendations.suggestions.push('您的语法水平已经很高，建议挑战更难的题目');
         recommendations.nextSteps.push('尝试专属组合练习');
-        recommendations.nextSteps.push('进行综合能力测试');
+        recommendations.nextSteps.push('挑战高难度练习');
         break;
       case 'advanced':
         recommendations.suggestions.push('您的语法水平良好，可以加强薄弱环节');
@@ -312,9 +312,9 @@ Page({
         recommendations.nextSteps.push('多做语法分点练习');
         break;
       default:
-        recommendations.suggestions.push('建议先进行语法能力测试');
-        recommendations.nextSteps.push('开始语法能力测评');
-        recommendations.nextSteps.push('了解自己的语法水平');
+        recommendations.suggestions.push('建议从基础语法开始练习');
+        recommendations.nextSteps.push('开始语法练习');
+        recommendations.nextSteps.push('查看每日推荐任务');
     }
     
     // 根据薄弱环节添加针对性建议
@@ -332,17 +332,11 @@ Page({
     return {
       level: 'beginner',
       weakPoints: [],
-      suggestions: ['建议先进行语法能力测试，了解自己的水平'],
-      nextSteps: ['开始语法能力测评', '查看每日推荐任务']
+      suggestions: ['建议从基础语法开始练习，逐步提升'],
+      nextSteps: ['开始语法练习', '查看每日推荐任务']
     };
   },
 
-  // 跳转到语法测试页面
-  navigateToGrammarTest() {
-    wx.navigateTo({
-      url: '/pages/ability-test/grammar-test'
-    });
-  },
 
   // 跳转到每日任务页面
   goToDailyCards() {
@@ -884,7 +878,7 @@ Page({
   // 生成系统组合数据（用于调整页面）
   generateSystemComboData() {
     try {
-      // 系统组合规则：每个大类选择1道题，总共10道题
+      // 系统组合规则：每个大类选择1道题，总共12道题
       const systemComboRules = {
         "介词": 1,
         "代词": 1,
@@ -895,7 +889,9 @@ Page({
         "谓语": 1,
         "非谓语": 1,
         "形容词": 1,
-        "副词": 1
+        "副词": 1,
+        "定语从句": 1,
+        "状语和从句": 1
       };
 
       const selectedPoints = {};
@@ -961,7 +957,7 @@ Page({
       // 从云数据库加载题库数据
       const questionsData = await cloudDataLoader.loadIntermediateQuestions();
       
-      // 系统组合规则：每个大类选择1道题，总共10道题
+      // 系统组合规则：每个大类选择1道题，总共12道题
       const systemComboRules = {
         "介词": 1,
         "代词": 1,
@@ -972,7 +968,9 @@ Page({
         "谓语": 1,
         "非谓语": 1,
         "形容词": 1,
-        "副词": 1
+        "副词": 1,
+        "定语从句": 1,
+        "状语和从句": 1
       };
 
       const selectedQuestions = [];
@@ -2251,21 +2249,6 @@ Page({
     });
   },
 
-  // 进入每日练习
-  enterDailyPractice() {
-    // 更新用户能力画像
-    const UserAbilityProfile = require('../../utils/userAbilityProfile.js');
-    const abilityProfile = new UserAbilityProfile();
-    abilityProfile.updateProfile();
-    
-    // 生成个性化推荐
-    const recommendations = abilityProfile.generatePersonalizedRecommendations();
-    
-    // 跳转到个性化每日练习页面
-    wx.navigateTo({
-      url: `/pages/personalized-practice/index?recommendations=${encodeURIComponent(JSON.stringify(recommendations))}`
-    });
-  },
 
   // 计算语法水平评级
   calculateGrammarLevel(grammarCount) {

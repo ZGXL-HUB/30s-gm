@@ -80,27 +80,21 @@
     </view>
 
     <view class="settings_container">
-      <!-- <view class="setting_item">
-        <view class="left">
-          <image class="setting_icon" src="../../images/icons/setting.svg" />
-          <view class="setting_text">个人信息设置</view>
-        </view>
-        <image class="arrow_icon" src="../../images/arrow.svg" />
-      </view> -->
-      <!-- <view class="setting_item">
-        <view class="left">
-          <image class="setting_icon" src="../../images/icons/question.svg" />
-          <view class="setting_text">常见问题</view>
-        </view>
-        <image class="arrow_icon" src="../../images/arrow.svg" />
-      </view> -->
       <view class="setting_item">
         <view class="left">
           <image class="setting_icon" src="../../images/icons/customer-service.svg" />
+          <!-- 【已替换】原view改为button - 使用微信原生客服功能，需要button标签配合open-type="contact"实现 -->
           <!-- <view class="setting_text">联系客服</view> -->
           <button open-type="contact" class="contact-button">
             联系客服
           </button>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view>
+      <view class="setting_item" bind:tap="goToJoinClass">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/class.svg" />
+          <view class="setting_text">加入班级</view>
         </view>
         <image class="arrow_icon" src="../../images/arrow.svg" />
       </view>
@@ -127,5 +121,8 @@
       </view>
     </view>
   </view>
-  <!-- cloud-tip-modal组件已删除 -->
+  <!-- 【已删除】cloud-tip-modal组件 - 云开发提示模态框已移除，不再需要提示用户云功能 -->
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
 </view>

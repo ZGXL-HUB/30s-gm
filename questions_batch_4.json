@@ -1,0 +1,502 @@
+[
+  {
+    "text": "As a journalist, I have dedicated the past three years ______ (documenting) all the social changes I witnessed.",
+    "answer": "to documenting",
+    "analysis": "to documenting。\"dedicate time to doing sth.\" 为固定结构,所以用 \"to documenting\",考查固定搭配中动名词的用法。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The astonishing growth of this town, which is purposefully developed to preserve its traditions while embracing modernity, _____ (signify) there are always fresh surprises to uncover here.",
+    "answer": "signifies",
+    "analysis": "signifies。主语 \"growth\" 是单数,根据上下文用一般现在时,谓语用 \"signifies\",考查一般现在时和主谓一致。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The classic storytelling method that has been handed down for generations can still ______ (utilize) today to convey profound messages.",
+    "answer": "be utilized",
+    "analysis": "be utilized。\"method\" 和 \"utilize\" 是被动关系,情态动词 \"can\" 后接 \"be utilized\",考查情态动词的被动语态。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The Botanical Path around the conservatory ____ (lead) visitors on a fascinating exploration.",
+    "answer": "leads",
+    "analysis": "leads。主语 \"Path\" 是单数,一般现在时用 \"leads\",考查一般现在时和主谓一致。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "As a young boy, I ____ (aspire) to be an astronaut when I grew up.",
+    "answer": "aspired",
+    "analysis": "aspired。根据 \"grew\" 可知用一般过去时,\"aspire\" 的过去式是 \"aspired\",考查一般过去时。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "Although libraries of various scales and functions are available everywhere, the public libraries tend ____ (attract) more readers.",
+    "answer": "to attract",
+    "analysis": "to attract。考查固定搭配 \"tend to do sth.\",所以用 \"to attract\",考查固定搭配。",
+    "category": "谓语(1)",
+    "grammarPoint": "谓语(1)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (fortunate), we arrived at the station just in time to catch the train.",
+    "answer": "Fortunately",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"fortunate\"变为\"Fortunately\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (obvious), he didn't understand what the teacher was saying.",
+    "answer": "Obviously",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"obvious\"变为\"Obviously\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (surprising), she passed the difficult exam without much effort.",
+    "answer": "Surprisingly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"surprising\"变为\"Surprisingly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (sad), the old man lost his beloved dog last week.",
+    "answer": "Sadly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"sad\"变为\"Sadly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (honest), I don't think his idea will work in practice.",
+    "answer": "Honestly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"honest\"变为\"Honestly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (general), people like to spend their weekends outdoors in good weather.",
+    "answer": "Generally",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"general\"变为\"Generally\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (hopeful), we will have a chance to visit the famous museum during our trip.",
+    "answer": "Hopefully",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"hopeful\"变为\"Hopefully\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (frank), I'm not interested in the movie they recommended.",
+    "answer": "Frankly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"frank\"变为\"Frankly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (lucky), the storm stopped before the outdoor concert started.",
+    "answer": "Luckily",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"lucky\"变为\"Luckily\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (strange), no one has mentioned this important issue in the meeting.",
+    "answer": "Strangely",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"strange\"变为\"Strangely\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (true), he is one of the most hard - working students in the class.",
+    "answer": "Truly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"true\"变为\"Truly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (typical), he left his keys at home again.",
+    "answer": "Typically",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"typical\"变为\"Typically\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (certain), we need to find a solution to this problem as soon as possible.",
+    "answer": "Certainly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"certain\"变为\"Certainly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (doubtful), he will show up at the party since he is always busy.",
+    "answer": "Doubtfully",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"doubtful\"变为\"Doubtfully\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (sure), we can finish the project on time if we work together.",
+    "answer": "Surely",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"sure\"变为\"Surely\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (normally), the store opens at 9 o'clock in the morning.",
+    "answer": "Normally",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"normal\"变为\"Normally\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (unfortunately), the flight was cancelled due to bad weather.",
+    "answer": "Unfortunately",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"unfortunate\"变为\"Unfortunately\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (interestingly), the story he told has a very unexpected ending.",
+    "answer": "Interestingly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"interesting\"变为\"Interestingly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (suddenly), a loud noise came from the next room.",
+    "answer": "Suddenly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"sudden\"变为\"Suddenly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (convenient), there is a supermarket near my home.",
+    "answer": "Conveniently",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"convenient\"变为\"Conveniently\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (curious), she decided to open the mysterious box.",
+    "answer": "Curiously",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"curious\"变为\"Curiously\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (accidental), I met my old friend on the street yesterday.",
+    "answer": "Accidentally",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"accidental\"变为\"Accidentally\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (probable), it will rain tomorrow according to the weather forecast.",
+    "answer": "Probably",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"probable\"变为\"Probably\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (evident), he has made great progress in his English recently.",
+    "answer": "Evidently",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"evident\"变为\"Evidently\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (luck), I found my lost wallet on the way home.",
+    "answer": "Luckily",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"luck\"变为\"Luckily\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (brief), the main idea of the passage is about environmental protection.",
+    "answer": "Briefly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"brief\"变为\"Briefly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (sincere), I hope you can forgive me for my mistake.",
+    "answer": "Sincerely",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"sincere\"变为\"Sincerely\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (strict), speaking, this is not a proper solution to the problem.",
+    "answer": "Strictly",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"strict\"变为\"Strictly\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "____ (happy), the children received many gifts on Christmas Day.",
+    "answer": "Happily",
+    "analysis": "修饰整个句子需用副词。常见的形容词变副词的原则可以概括为改y为ily,改le为ly,ic变ically,除此以外一般都加ly(包括辅音+e和l结尾的也是加ly,比如extreme变extremely；actual变actually。但是元音+e需要去e再加ly,比如true变truly,这里是易混淆点),部分形容词本身就是副词不变化。因此\"happy\"变为\"Happily\"。",
+    "category": "副词修饰句子",
+    "grammarPoint": "副词修饰句子",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "He ____ (break) the window by accident just now.",
+    "answer": "broke",
+    "analysis": "该句中需填入动词\"break\"的过去式\"broke\"。此处考查**不规则动词的元音变化和意外事件的表达**,具体analysis如下：\n1. **时态判断**：\n   - \"just now\"(刚才)表示刚刚发生的事情,是一般过去时的明确标志。\n2. **不规则动词变化**：\n   - \"break\"是不规则动词：break→broke→broken\n   - ea→o元音变化：break→broke, speak→spoke, steal→stole\n   - 这类变化遵循一定的音变规律\n3. **意外事件的描述**：\n   - \"by accident\"(意外地,偶然地)表示非故意的行为\n   - 与\"just now\"配合,描述刚刚发生的意外事件\n   - 一般过去时适合描述突发的、完成的动作\n4. **just now与just的区别**：\n   - just now：刚才(用于一般过去时)\n   - just：刚刚(通常用于现在完成时)\n   - 时间副词的选择决定时态的使用\n5. **语法要点**：\"break变broke记心上,ea变o有规律；just now表刚才,意外事件用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "We ____ (find) a lost dog on the street this morning.",
+    "answer": "found",
+    "analysis": "该句中需填入动词\"find\"的过去式\"found\"。此处考查**不规则动词变化和this morning时间表达**,具体analysis如下：\n1. **时态判断**：\n   - \"this morning\"(今天早上)在此语境下表示已经过去的今天早上,需要用一般过去时。\n2. **不规则动词变化**：\n   - \"find\"是不规则动词：find→found→found\n   - i→ou音变：find→found, bind→bound, wind→wound\n   - 过去式和过去分词形式相同的不规则动词\n3. **this morning的时态选择**：\n   - 当说话时间已过早上时,this morning用一般过去时\n   - 当说话时间仍在早上时,this morning可用现在完成时\n   - 语境决定具体的时态选择\n4. **发现动作的特点**：\n   - \"find\"表示发现、找到,强调结果\n   - \"find a lost dog\"描述发现丢失的狗这一完整事件\n   - 一般过去时表示在过去某时完成的发现动作\n5. **记忆技巧**：\"find变found要牢记,i变ou有规律；this morning看语境,过去完成选时态。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "She ____ (leave) her keys at home yesterday.",
+    "answer": "left",
+    "analysis": "该句中需填入动词\"leave\"的过去式\"left\"。此处考查**不规则动词的特殊变化和遗忘动作的表达**,具体analysis如下：\n1. **时态判断**：\n   - \"yesterday\"(昨天)是典型的过去时间标志,明确指向一般过去时。\n2. **不规则动词变化**：\n   - \"leave\"是不规则动词：leave→left→left\n   - 完全不规则变化,需要特殊记忆\n   - 类似变化较少,属于独特的变化类型\n3. **leave的多种含义**：\n   - 离开：leave home(离开家)\n   - 遗留、落下：leave sth. somewhere(把某物落在某地)\n   - 句中表示\"把钥匙落在家里\"\n4. **遗忘动作的表达**：\n   - \"leave sth. at/in + 地点\"表示把某物遗忘在某处\n   - 这是无意识的动作,常用一般过去时描述\n   - 强调动作的完成性和过去性\n5. **应用要点**：\"leave变left需记住,特殊变化要用心；昨天遗忘用过去,动作完成在昨日。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "They ____ (come) to our school for a visit last year.",
+    "answer": "came",
+    "analysis": "该句中需填入动词\"come\"的过去式\"came\"。此处考查**不规则动词的元音变化和目的性动作表达**,具体analysis如下：\n1. **时态判断**：\n   - \"last year\"(去年)表示过去的时间段,是一般过去时的典型标志。\n2. **不规则动词变化**：\n   - \"come\"是不规则动词：come→came→come\n   - o→a元音变化：come→came, become→became\n   - 注意：过去分词又回到原形come\n3. **目的性动作的表达**：\n   - \"come...for a visit\"表示\"来...参观\"\n   - \"for + 目的\"结构表示动作的目的\n   - 这类表达常用于描述正式的、有计划的活动\n4. **时间跨度的特点**：\n   - \"last year\"表示相对较长的过去时间\n   - 适合描述重要的、有纪念意义的事件\n   - 与\"come for a visit\"这类正式活动相匹配\n5. **语法要点**：\"come变came要记清,o变a音有规律；目的访问用for,去年事情用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The film ____ (begin) five minutes ago. We missed the beginning.",
+    "answer": "began",
+    "analysis": "该句中需填入动词\"begin\"的过去式\"began\"。此处考查**不规则动词变化和连续动作的逻辑关系**,具体analysis如下：\n1. **时态判断**：\n   - \"five minutes ago\"(五分钟前)明确表示过去的具体时间,需要使用一般过去时。\n2. **不规则动词变化**：\n   - \"begin\"是不规则动词：begin→began→begun\n   - i→a→u的三态变化：begin→began→begun\n   - 类似变化：sing→sang→sung, ring→rang→rung\n3. **动作的逻辑关系**：\n   - 前句：电影五分钟前开始了(过去时)\n   - 后句：我们错过了开头(过去时或现在完成时的结果)\n   - 两个动作有明确的因果关系\n4. **时间的精确性**：\n   - \"five minutes ago\"表示精确的时间点\n   - 比一般的过去时间表达更加具体\n   - 适合描述对时间敏感的事件(如电影开场)\n5. **记忆要点**：\"begin变began要熟记,i变a变u三态齐；精确时间用ago,错过开头因迟到。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "I ____ (meet) an old friend on my way to school this morning.",
+    "answer": "met",
+    "analysis": "该句中需填入动词\"meet\"的过去式\"met\"。此处考查**不规则动词的简单变化和偶遇事件的表达**,具体analysis如下：\n1. **时态判断**：\n   - \"this morning\"(今天早上)在此语境下表示已经过去的早上时间,需要使用一般过去时。\n2. **不规则动词变化**：\n   - \"meet\"是不规则动词：meet→met→met\n   - 属于过去式和过去分词相同的简单不规则变化\n   - 类似变化：feel→felt, keep→kept, sleep→slept\n3. **偶遇事件的特征**：\n   - \"meet an old friend\"表示偶然遇到老朋友\n   - \"on my way to school\"说明是在上学路上的偶遇\n   - 这类偶然事件适合用一般过去时描述\n4. **地点状语的作用**：\n   - \"on my way to school\"为动作提供了具体的地点背景\n   - 使事件描述更加生动和具体\n5. **记忆要点**：\"meet变met很简单,过去分词也是met；偶遇事件用过去,时间地点要明确。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "He ____ (give) me a present for my birthday last week.",
+    "answer": "gave",
+    "analysis": "该句中需填入动词\"give\"的过去式\"gave\"。此处考查**不规则动词的元音变化和节日礼物表达**,具体analysis如下：\n1. **时态判断**：\n   - \"last week\"(上周)表示过去的时间段,是一般过去时的典型标志。\n2. **不规则动词变化**：\n   - \"give\"是不规则动词：give→gave→given\n   - i→a→i的元音变化模式：give→gave→given\n   - 类似变化：forgive→forgave→forgiven\n3. **节日礼物的表达**：\n   - \"give sb. sth. for + 场合\"表示为某个场合给某人礼物\n   - \"for my birthday\"说明送礼物的原因和场合\n   - 这类表达常用一般过去时描述已经完成的赠送行为\n4. **双宾语结构**：\n   - \"give me a present\"是典型的双宾语结构\n   - give sb. sth. = give sth. to sb.\n   - 表示\"给某人某物\"\n5. **应用语境**：\"give变gave要记准,i变a变i三态分；生日礼物表心意,过去赠送用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "She ____ (hear) a strange noise outside her window last night.",
+    "answer": "heard",
+    "analysis": "该句中需填入动词\"hear\"的过去式\"heard\"。此处考查**不规则动词变化和感官动词的用法**,具体analysis如下：\n1. **时态判断**：\n   - \"last night\"(昨晚)表示过去的具体时间,明确指向一般过去时。\n2. **不规则动词变化**：\n   - \"hear\"是不规则动词：hear→heard→heard\n   - ear→eard的变化：hear→heard\n   - 类似变化较少,需要特殊记忆\n3. **感官动词的特点**：\n   - \"hear\"表示\"听到\",强调听觉结果\n   - 区别于\"listen\"(听,强调过程)\n   - 感官动词描述瞬间完成的感知动作\n4. **描述性语境**：\n   - \"a strange noise\"(奇怪的声音)增加了描述的具体性\n   - \"outside her window\"提供了声音的来源位置\n   - 这类描述适合用一般过去时表达完整的感知事件\n5. **语法要点**：\"hear变heard要记住,感官动词表结果；奇怪声音引注意,过去听到用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "They ____ (lose) their way in the forest yesterday.",
+    "answer": "lost",
+    "analysis": "该句中需填入动词\"lose\"的过去式\"lost\"。此处考查**不规则动词变化和迷路情境的表达**,具体analysis如下：\n1. **时态判断**：\n   - \"yesterday\"(昨天)是典型的过去时间标志,需要使用一般过去时。\n2. **不规则动词变化**：\n   - \"lose\"是不规则动词：lose→lost→lost\n   - o→o的特殊变化(改变拼写但发音类似)\n   - 过去式和过去分词形式相同\n3. **固定短语lose one's way**：\n   - \"lose one's way\"是固定搭配,表示\"迷路\"\n   - 等同于\"get lost\"或\"be lost\"\n   - 这类短语需要整体记忆和运用\n4. **情境描述的生动性**：\n   - \"in the forest\"(在森林里)提供了迷路的具体环境\n   - 森林环境使迷路情境更加真实和具体\n   - 一般过去时描述完整的迷路经历\n5. **记忆技巧**：\"lose变lost要记清,迷路短语lose way；森林环境易迷路,过去经历用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "We ____ (go) fishing by the river last weekend.",
+    "answer": "went",
+    "analysis": "该句中需填入动词\"go\"的过去式\"went\"。此处考查**go fishing结构和周末活动表达**,具体analysis如下：\n1. **时态判断**：\n   - \"last weekend\"(上周末)表示过去的时间段,是一般过去时的典型标志。\n2. **不规则动词变化(重现)**：\n   - \"go\"是不规则动词：go→went→gone\n   - 完全不规则变化,需要特殊记忆\n   - 是最常用的不规则动词之一\n3. **go + doing结构**：\n   - \"go fishing\"表示\"去钓鱼\",是固定搭配\n   - 类似结构：go swimming, go shopping, go hiking\n   - go + 动名词表示进行某种活动\n4. **周末活动的描述**：\n   - \"last weekend\"是描述过去休闲活动的常用时间表达\n   - \"by the river\"提供了钓鱼的具体地点\n   - 这类休闲活动常用一般过去时描述\n5. **语法要点**：\"go变went是基础,go fishing去钓鱼；周末活动多丰富,过去时态来描述。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "He ____ (read) an interesting book last night.",
+    "answer": "read",
+    "analysis": "该句中需填入动词\"read\"的过去式\"read\"。此处考查**同形异音的不规则动词变化**,具体analysis如下：\n1. **时态判断**：\n   - \"last night\"(昨晚)表示过去的具体时间,明确指向一般过去时。\n2. **特殊的不规则动词变化**：\n   - \"read\"是不规则动词：read/riːd/→read/red/→read/red/\n   - 拼写相同但发音不同：原形读/riːd/,过去式和过去分词读/red/\n   - 这是英语中较为特殊的变化类型\n3. **同形异音的识别**：\n   - 需要通过语境和时间状语判断具体的时态和读音\n   - 写作时拼写相同,但发音和意义不同\n   - 类似词汇较少,需要特别注意\n4. **阅读活动的描述**：\n   - \"read a book\"是常见的学习活动表达\n   - \"interesting\"增加了对书籍的评价\n   - 适合用一般过去时描述完整的阅读经历\n5. **记忆要点**：\"read过去还是read,发音变成/red/音；拼写相同音不同,语境时态要分清。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "She ____ (clean) her room yesterday. It looks much tidier now.",
+    "answer": "cleaned",
+    "analysis": "该句中需填入动词\"clean\"的过去式\"cleaned\"。此处考查**规则动词变化和动作结果的对比**,具体analysis如下：\n1. **时态判断**：\n   - \"yesterday\"(昨天)是明确的过去时间标志,需要使用一般过去时。\n2. **规则动词变化**：\n   - \"clean\"是规则动词,过去式为cleaned(clean + ed)\n   - 发音：/kliːnd/,-ed发/d/音(因为n是浊辅音)\n   - 规则动词的标准变化模式\n3. **动作与结果的逻辑关系**：\n   - 前句：昨天打扫房间(过去的动作)\n   - 后句：现在看起来更整洁(现在的结果)\n   - 体现了过去动作对现在状态的影响\n4. **结果状语的作用**：\n   - \"It looks much tidier now\"说明打扫的效果\n   - 现在时态表示当前的状态\n   - 与过去时态形成对比,突出动作的意义\n5. **语法要点**：\"clean加ed变过去,规则动词要记住；昨天动作今天果,时态对比效果好。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "They ____ (start) the project two months ago.",
+    "answer": "started",
+    "analysis": "该句中需填入动词\"start\"的过去式\"started\"。此处考查**规则动词变化和项目时间的表达**,具体analysis如下：\n1. **时态判断**：\n   - \"two months ago\"(两个月前)表示较长时间之前,是一般过去时的标志。\n2. **规则动词变化**：\n   - \"start\"是规则动词,过去式为started(start + ed)\n   - 发音：/ˈstɑːtɪd/,-ed发/ɪd/音(因为t是清辅音且与d音相近)\n   - 规则动词的标准变化\n3. **项目启动的表达**：\n   - \"start the project\"表示\"启动项目\"\n   - 常用于工作、学习等正式语境\n   - 项目类活动通常有明确的起始时间\n4. **较长时间跨度**：\n   - \"two months ago\"表示相对较长的过去时间\n   - 适合描述重要的、有计划的活动\n   - 与项目启动这类正式活动相匹配\n5. **记忆要点**：\"start加ed变过去,项目启动有计划；两月之前时间长,正式活动用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "The boy ____ (fall) off his bike and hurt his leg just now.",
+    "answer": "fell",
+    "analysis": "该句中需填入动词\"fall\"的过去式\"fell\"。此处考查**不规则动词变化和意外事故的连续动作**,具体analysis如下：\n1. **时态判断**：\n   - \"just now\"(刚才)表示刚刚发生的事件,是一般过去时的明确标志。\n2. **不规则动词变化**：\n   - \"fall\"是不规则动词：fall→fell→fallen\n   - a→e→a的元音变化：fall→fell→fallen\n   - 类似变化较少,需要特殊记忆\n3. **连续动作的表达**：\n   - \"fall off his bike and hurt his leg\"描述连续发生的两个动作\n   - 两个动作都用一般过去时,表示先后发生\n   - \"and\"连接的并列结构\n4. **意外事故的特征**：\n   - \"fall off\"表示\"从...上摔下来\"\n   - 意外事故通常发生迅速,适合用一般过去时描述\n   - \"just now\"强调事件的紧迫性和新鲜性\n5. **语法要点**：\"fall变fell要记准,意外摔倒刚发生；连续动作用and连,两个过去表先后。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  },
+  {
+    "text": "I ____ (take) a lot of photos during my trip last summer.",
+    "answer": "took",
+    "analysis": "该句中需填入动词\"take\"的过去式\"took\"。此处考查**不规则动词变化和旅行活动表达**,具体analysis如下：\n1. **时态判断**：\n   - \"last summer\"(去年夏天)表示过去的时间段,是一般过去时的典型标志。\n2. **不规则动词变化**：\n   - \"take\"是不规则动词：take→took→taken\n   - a→oo→a的元音变化：take→took→taken\n   - 类似变化：shake→shook→shaken\n3. **拍照活动的表达**：\n   - \"take photos\"是固定搭配,表示\"拍照\"\n   - \"a lot of photos\"说明拍照数量很多\n   - 这是旅行中的常见活动\n4. **时间段的使用**：\n   - \"during my trip\"表示\"在我旅行期间\"\n   - during + 时间段表示在某段时间内\n   - \"last summer\"提供了具体的时间背景\n5. **记忆技巧**：\"take变took要记清,拍照旅行好心情；去年夏天时间段,美好回忆用过去。\"",
+    "category": "谓语(2)",
+    "grammarPoint": "谓语(2)",
+    "type": "fill_blank",
+    "difficulty": "medium",
+    "createdAt": "2025-10-14T08:37:05.324Z"
+  }
+]

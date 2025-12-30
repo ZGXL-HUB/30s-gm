@@ -1,0 +1,10 @@
+{
+  "name": "generateStudentTemplate",
+  "version": "1.0.0",
+  "description": "生成学生导入Excel模板",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "xlsx": "^0.18.5"
+  }
+}

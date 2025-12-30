@@ -1,0 +1,21 @@
+<!--教师端通用卡片组件-->
+<view 
+  class="teacher-card {{clickable ? 'clickable' : ''}}"
+  style="{{customStyle}}"
+  bindtap="onCardTap"
+>
+  <view class="card-content">
+    <view class="card-icon" style="background: linear-gradient(135deg, {{color}} 0%, {{color}}CC 100%);" wx:if="{{icon}}">
+      <text class="icon">{{icon}}</text>
+    </view>
+    
+    <view class="card-text">
+      <text class="title">{{title}}</text>
+      <text class="subtitle" wx:if="{{subtitle}}">{{subtitle}}</text>
+    </view>
+    
+    <view class="card-arrow" wx:if="{{showArrow && clickable}}">
+      <text class="arrow">></text>
+    </view>
+  </view>
+</view>

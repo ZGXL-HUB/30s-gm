@@ -1,0 +1,40 @@
+<!-- 学生端个人中心页面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">我的</text>
+  </view>
+
+  <!-- 用户信息区域 -->
+  <view class="user-info">
+    <image class="avatar" src="../../images/icons/avatar.webp" mode="aspectFill" />
+    <view class="user-details">
+      <text class="username">学生</text>
+      <text class="user-desc">点击登录查看学习统计</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToJoinClass">
+      <view class="menu-icon">🏫</view>
+      <view class="menu-text">加入班级</view>
+      <view class="menu-arrow">></view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToAssignments">
+      <view class="menu-icon">📚</view>
+      <view class="menu-text">我的作业</view>
+      <view class="menu-arrow">></view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToFeedback">
+      <view class="menu-icon">💬</view>
+      <view class="menu-text">意见反馈</view>
+      <view class="menu-arrow">></view>
+    </view>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

@@ -22,6 +22,8 @@ functions=(
     "generateExcel"
     "generatePDF"
     "generateWord"
+    "parseStudentExcel"
+    "generateStudentTemplate"
 )
 
 echo "需要部署的云函数："

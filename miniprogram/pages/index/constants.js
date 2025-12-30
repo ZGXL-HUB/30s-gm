@@ -53,7 +53,7 @@ Page({
       {
         type: 'code',
         content: `
-const cloud = require('wx-server-sdk');
+// const cloud = require('wx-server-sdk'); // 小程序页面不需要引用云函数SDK
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 exports.main = async (event, context) => {
   return {
@@ -154,7 +154,7 @@ onLoad() {
       {
         type: 'code',
         content: `
-const cloud = require('wx-server-sdk');
+// const cloud = require('wx-server-sdk'); // 小程序页面不需要引用云函数SDK
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 
 const db = cloud.database();
@@ -195,7 +195,7 @@ exports.main = async (event, context) => {
       {
         type: 'code',
         content: `
-const cloud = require('wx-server-sdk');
+// const cloud = require('wx-server-sdk'); // 小程序页面不需要引用云函数SDK
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 

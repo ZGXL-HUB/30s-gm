@@ -1,14 +1,13 @@
 // app.js
+const { UserService } = require('./services/index.js');
+
 App({
   onLaunch: function () {
-    this.initCloud();
     this.globalData = {};
+    this.initCloud();
     
     // 静默登录
     this.silentLogin();
-    
-    // 检查是否需要显示水平测试
-    this.checkLevelTest();
   },
 
   // 初始化云开发
@@ -61,7 +60,12 @@ App({
       return;
     }
     
-    wx.cloud.database().collection('questions').limit(1).get({
+    // 优化查询，避免全表扫描，只查询一条记录测试连接
+    wx.cloud.database().collection('questions').limit(1).field({
+      _id: true,
+      text: true,
+      category: true
+    }).get({
       success: (res) => {
         console.log('✅ 云数据库连接成功，数据条数:', res.data.length);
         if (res.data.length > 0) {
@@ -110,49 +114,58 @@ App({
       return;
     }
     
-    // 尝试调用云函数获取用户信息
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {}
-    }).then(res => {
-      const { openid, appid, unionid } = res.result;
-      
-      // 保存用户信息到全局数据
-      this.globalData.userInfo = {
-        openid,
-        appid,
-        unionid,
-        loginTime: new Date().toISOString()
-      };
-      
-      this.globalData.isLoggedIn = true;
-      
-      // 保存到本地存储
-      wx.setStorageSync('userInfo', this.globalData.userInfo);
-      
-      console.log('✅ 静默登录成功:', this.globalData.userInfo);
-      
-      // 触发登录成功事件
-      this.onLoginSuccess();
-      
+    // 尝试调用云函数获取用户信息（使用统一API服务）
+    UserService.login({
+      showLoading: false,
+      showError: false
+    }).then(result => {
+      if (result.success) {
+        const { openid, appid, unionid } = result;
+        
+        // 保存用户信息到全局数据
+        this.globalData.userInfo = {
+          openid,
+          appid,
+          unionid,
+          loginTime: new Date().toISOString()
+        };
+        
+        this.globalData.isLoggedIn = true;
+        
+        // 保存到本地存储
+        UserService.saveUserInfo(this.globalData.userInfo);
+        
+        console.log('✅ 静默登录成功:', this.globalData.userInfo);
+        
+        // 触发登录成功事件
+        this.onLoginSuccess();
+      } else {
+        // 登录失败，使用匿名模式
+        this.handleLoginFailure();
+      }
     }).catch(err => {
-      console.error('❌ 静默登录失败:', err);
-      console.log('⚠️ 云函数调用失败，将使用匿名模式');
-      this.globalData.isLoggedIn = false;
-      
-      // 创建匿名用户信息
-      this.globalData.userInfo = {
-        openid: 'anonymous_' + Date.now(),
-        appid: 'anonymous',
-        unionid: null,
-        loginTime: new Date().toISOString(),
-        isAnonymous: true
-      };
-      
-      this.globalData.isLoggedIn = true;
-      wx.setStorageSync('userInfo', this.globalData.userInfo);
-      console.log('📱 使用匿名用户信息:', this.globalData.userInfo);
+      console.error('❌ 静默登录异常:', err);
+      this.handleLoginFailure();
     });
+  },
+  
+  // 处理登录失败
+  handleLoginFailure: function() {
+    console.log('⚠️ 云函数调用失败，将使用匿名模式');
+    this.globalData.isLoggedIn = false;
+    
+    // 创建匿名用户信息
+    this.globalData.userInfo = {
+      openid: 'anonymous_' + Date.now(),
+      appid: 'anonymous',
+      unionid: null,
+      loginTime: new Date().toISOString(),
+      isAnonymous: true
+    };
+    
+    this.globalData.isLoggedIn = true;
+    UserService.saveUserInfo(this.globalData.userInfo);
+    console.log('📱 使用匿名用户信息:', this.globalData.userInfo);
   },
   
   // 登录成功回调
@@ -163,7 +176,7 @@ App({
   
   // 获取用户信息
   getUserInfo: function() {
-    return this.globalData.userInfo;
+    return this.globalData.userInfo || UserService.getUserInfo();
   },
   
   // 检查是否已登录
@@ -171,17 +184,4 @@ App({
     return this.globalData.isLoggedIn && this.globalData.userInfo;
   },
   
-  // 检查是否需要显示水平测试
-  checkLevelTest: function() {
-    const levelTestCompleted = wx.getStorageSync('levelTestCompleted');
-    
-    if (!levelTestCompleted) {
-      // 延迟显示，确保页面加载完成
-      setTimeout(() => {
-        wx.navigateTo({
-          url: '/pages/level-test/index'
-        });
-      }, 1000);
-    }
-  }
 });

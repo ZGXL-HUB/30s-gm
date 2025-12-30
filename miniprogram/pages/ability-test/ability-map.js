@@ -221,24 +221,18 @@ Page({
     return { level: '未测试', color: '#9e9e9e', icon: '⏳' };
   },
 
-  // 开始语法测试
+  // 开始语法练习
   startGrammarTest() {
     wx.navigateTo({
-      url: '/pages/ability-test/grammar-test'
+      url: '/pages/grammar-select/index'
     });
   },
 
-  // 跳转到书写测试页面
-  navigateToWritingTest() {
-    wx.navigateTo({
-      url: '/pages/ability-test/writing-test'
-    });
-  },
 
-  // 开始书写测试
+  // 开始书写练习
   startWritingTest() {
     wx.navigateTo({
-      url: '/pages/ability-test/writing-test'
+      url: '/pages/grammar-writing/index'
     });
   },
 

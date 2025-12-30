@@ -1,7 +1,10 @@
 // 意见反馈页面
+const { FeedbackService } = require('../../services/index.js');
+
 Page({
   data: {
     selectedType: '', // 选中的反馈类型
+    feedbackTitle: '', // 反馈标题
     feedbackContent: '', // 反馈内容
     contactInfo: '', // 联系方式
     uploadedImages: [], // 上传的图片
@@ -12,20 +15,47 @@ Page({
   },
 
   onLoad(options) {
-    // 页面加载时的初始化
-    this.checkSubmitStatus();
+    console.log('反馈页面加载，URL参数:', options);
     
     // 处理URL参数
     if (options.type) {
       this.setData({
         selectedType: options.type
       });
+      console.log('设置反馈类型:', options.type);
+    }
+    
+    // 处理URL参数自动填写
+    if (options.title) {
+      this.setData({
+        feedbackTitle: decodeURIComponent(options.title)
+      });
+      console.log('设置反馈标题:', decodeURIComponent(options.title));
+    }
+    
+    if (options.content) {
+      this.setData({
+        feedbackContent: decodeURIComponent(options.content)
+      });
+      console.log('设置反馈内容，长度:', decodeURIComponent(options.content).length);
+    }
+    
+    if (options.contact) {
+      this.setData({
+        contactInfo: decodeURIComponent(options.contact)
+      });
+      console.log('设置联系方式:', decodeURIComponent(options.contact));
     }
     
     // 根据上下文预填充内容
     if (options.context) {
       this.setContextualContent(options.context);
     }
+    
+    // 延迟检查提交状态，确保所有数据都已设置
+    setTimeout(() => {
+      this.checkSubmitStatus();
+    }, 100);
   },
 
   // 选择反馈类型
@@ -55,7 +85,16 @@ Page({
   // 检查是否可以提交
   checkSubmitStatus() {
     const { selectedType, feedbackContent } = this.data;
-    const canSubmit = selectedType && feedbackContent.trim().length > 0;
+    const canSubmit = selectedType && feedbackContent && feedbackContent.trim().length > 0;
+    
+    // 调试信息
+    console.log('检查提交状态:', {
+      selectedType: selectedType,
+      feedbackContent: feedbackContent,
+      contentLength: feedbackContent ? feedbackContent.trim().length : 0,
+      canSubmit: canSubmit
+    });
+    
     this.setData({ canSubmit });
   },
 
@@ -96,25 +135,26 @@ Page({
   },
 
   // 提交反馈
-  submitFeedback() {
+  async submitFeedback() {
     if (!this.data.canSubmit || this.data.submitting) {
       return;
     }
 
     this.setData({ submitting: true });
 
-    // 先上传图片
-    this.uploadImages().then((imageUrls) => {
+    try {
+      // 先上传图片
+      const imageUrls = await this.uploadImages();
       // 提交反馈数据
-      this.submitFeedbackData(imageUrls);
-    }).catch((error) => {
-      console.error('上传图片失败:', error);
+      await this.submitFeedbackData(imageUrls);
+    } catch (error) {
+      console.error('提交反馈失败:', error);
       this.setData({ submitting: false });
       wx.showToast({
         title: '提交失败，请重试',
         icon: 'none'
       });
-    });
+    }
   },
 
   // 上传图片到云存储
@@ -146,8 +186,8 @@ Page({
   },
 
   // 提交反馈数据到云数据库
-  submitFeedbackData(imageUrls) {
-    const { selectedType, feedbackContent, contactInfo } = this.data;
+  async submitFeedbackData(imageUrls) {
+    const { selectedType, feedbackTitle, feedbackContent, contactInfo } = this.data;
     
     // 生成反馈编号
     const feedbackId = 'FB' + Date.now().toString().slice(-8);
@@ -155,38 +195,80 @@ Page({
     const feedbackData = {
       feedbackId: feedbackId,
       type: selectedType,
-      title: this.getFeedbackTitle(selectedType),
+      title: feedbackTitle || this.getFeedbackTitle(selectedType),
       content: feedbackContent.trim(),
       contact: contactInfo.trim(),
       images: imageUrls
     };
 
-    // 调用云函数提交反馈
-    wx.cloud.callFunction({
-      name: 'feedbackManager',
-      data: {
-        action: 'submitFeedback',
-        data: feedbackData
-      }
-    }).then((res) => {
-      if (res.result.success) {
-        console.log('反馈提交成功:', res.result);
-        this.setData({
-          submitting: false,
-          showSuccessModal: true,
-          feedbackId: feedbackId
-        });
-      } else {
-        throw new Error(res.result.message);
-      }
-    }).catch((error) => {
-      console.error('提交反馈失败:', error);
+    // 使用统一API服务提交反馈
+    const result = await FeedbackService.submitFeedback(feedbackData, {
+      showLoading: true,
+      loadingText: '提交中...'
+    });
+    
+    if (result.success) {
+      console.log('反馈提交成功:', result.data);
+      this.setData({
+        submitting: false,
+        showSuccessModal: true,
+        feedbackId: result.data?.feedbackId || feedbackId
+      });
+    } else {
+      // 提交失败，尝试本地存储备选方案
+      console.error('提交反馈失败:', result.error);
+      console.log('尝试使用本地存储备选方案...');
+      this.submitFeedbackToLocalStorage(feedbackData);
+    }
+  },
+
+  // 本地存储备选方案
+  submitFeedbackToLocalStorage(feedbackData) {
+    try {
+      console.log('使用本地存储保存反馈数据...');
+      
+      // 获取现有的反馈记录
+      const existingFeedbacks = wx.getStorageSync('local_feedbacks') || [];
+      
+      // 添加新的反馈记录
+      const feedbackRecord = {
+        ...feedbackData,
+        id: Date.now(),
+        status: 'pending',
+        createTime: new Date().toISOString(),
+        source: 'local_storage'
+      };
+      
+      existingFeedbacks.push(feedbackRecord);
+      
+      // 保存到本地存储
+      wx.setStorageSync('local_feedbacks', existingFeedbacks);
+      
+      console.log('反馈已保存到本地存储:', feedbackRecord);
+      
+      // 显示成功提示
+      this.setData({
+        submitting: false,
+        showSuccessModal: true,
+        feedbackId: feedbackData.feedbackId
+      });
+      
+      // 显示特殊提示
+      wx.showModal({
+        title: '反馈已保存',
+        content: '由于网络问题，反馈已保存到本地。我们会在网络恢复后自动提交。',
+        showCancel: false,
+        confirmText: '知道了'
+      });
+      
+    } catch (error) {
+      console.error('本地存储也失败:', error);
       this.setData({ submitting: false });
       wx.showToast({
-        title: error.message || '提交失败，请重试',
+        title: '保存失败，请稍后重试',
         icon: 'none'
       });
-    });
+    }
   },
 
   // 根据类型生成反馈标题

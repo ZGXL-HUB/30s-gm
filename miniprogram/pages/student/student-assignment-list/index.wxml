@@ -1,0 +1,71 @@
+<!-- 极简学生端界面 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">我的作业</text>
+    <button class="join-class-btn" bindtap="goToJoinClass">加入班级</button>
+  </view>
+
+  <!-- 作业列表 -->
+  <view class="assignment-list" wx:if="{{!loading}}">
+    <view 
+      wx:for="{{assignments}}" 
+      wx:key="_id" 
+      class="assignment-card {{item.isExpired ? 'expired' : ''}}"
+    >
+      <view class="card-header">
+        <text class="assignment-title">{{item.title}}</text>
+        <text class="assignment-status {{item.status}}">{{item.statusText}}</text>
+      </view>
+      
+      <view class="card-info">
+        <text class="info-text" wx:if="{{item.status === 'pending'}}">
+          剩余：{{formatRemainingTime(item.deadline)}}
+        </text>
+        <text class="info-text" wx:if="{{item.status === 'completed'}}">
+          得分：{{item.score}}/{{item.totalScore}} ({{item.accuracy}}%)
+        </text>
+      </view>
+      
+      <view class="card-action">
+        <button 
+          class="action-btn" 
+          bindtap="startAssignment" 
+          data-id="{{item._id}}"
+          wx:if="{{item.canSubmit}}"
+        >
+          开始练习
+        </button>
+        <button 
+          class="action-btn completed" 
+          bindtap="viewAssignmentResult" 
+          data-id="{{item._id}}"
+          wx:if="{{item.status === 'completed'}}"
+        >
+          查看结果
+        </button>
+        <button 
+          class="action-btn disabled" 
+          wx:if="{{item.isExpired && item.status !== 'completed'}}"
+        >
+          已过期
+        </button>
+      </view>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{assignments.length === 0}}">
+      <text class="empty-icon">📚</text>
+      <text class="empty-text">还没有作业</text>
+      <text class="empty-desc">等待老师布置作业</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 浮动反馈按钮 -->
+  <floating-feedback show="{{true}}" />
+</view>

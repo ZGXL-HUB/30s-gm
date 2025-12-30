@@ -1,10 +1,82 @@
 <view class="container">
-  <!-- 测试入口卡片 -->
-  <view class="test-entry-card" bindtap="navigateToGrammarTest">
-    <image src="/images/icon-test.png" class="test-icon"></image>
-    <text class="test-title">语法能力测评</text>
-    <text class="test-desc">测测你的语法水平，获取精准练习推荐</text>
-    <view class="test-button">开始测试</view>
+
+  <!-- 智能控制面板 -->
+  <view class="smart-control-panel">
+    <view class="control-header">
+      <text class="header-title">智能选题</text>
+      <view class="mode-switch">
+        <text class="mode-label">精确模式</text>
+        <switch checked="{{isPreciseMode}}" bindchange="toggleMode" color="#1890ff"/>
+        <text class="mode-label">快速模式</text>
+      </view>
+    </view>
+    
+    <!-- 精确模式：显示已选语法点详情 -->
+    <view class="precise-mode" wx:if="{{isPreciseMode}}">
+      <view class="selected-summary">
+        <text class="summary-text">已选 {{selectedCount}} 个语法点，共 {{totalQuestions}} 题</text>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{(totalQuestions / maxQuestions) * 100}}%"></view>
+        </view>
+      </view>
+      
+      <!-- 批量调节控制 -->
+      <view class="batch-control" wx:if="{{selectedCount > 0}}">
+        <text class="control-label">批量调节</text>
+        <view class="multiplier-control">
+          <text class="multiplier-label">每题×</text>
+          <slider 
+            class="multiplier-slider"
+            min="1" 
+            max="5" 
+            value="{{multiplier}}"
+            bindchange="onMultiplierChange"
+            activeColor="#667eea"
+          />
+          <text class="multiplier-value">{{multiplier}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 快速模式：总数控制 -->
+    <view class="quick-mode" wx:else>
+      <view class="total-control">
+        <text class="control-label">总题数</text>
+        <view class="total-slider-container">
+          <slider 
+            class="total-slider"
+            min="5" 
+            max="50" 
+            value="{{targetTotalQuestions}}"
+            bindchange="onTotalQuestionsChange"
+            activeColor="#667eea"
+          />
+          <text class="total-value">{{targetTotalQuestions}}题</text>
+        </view>
+      </view>
+      
+      <view class="category-selection">
+        <text class="selection-label">选择大类</text>
+        <view class="category-tags">
+          <view 
+            class="category-tag {{selectedCategories.includes(item) ? 'active' : ''}}"
+            wx:for="{{availableCategories}}" 
+            wx:key="*this"
+            bindtap="toggleCategory"
+            data-category="{{item}}"
+          >
+            {{item}}
+          </view>
+        </view>
+      </view>
+      
+      <!-- 智能分配提示 -->
+      <view class="smart-allocation-tip" wx:if="{{selectedCategories.length > 0}}">
+        <text class="tip-text">
+          💡 系统将智能分配 {{targetTotalQuestions}} 题到选中的 {{selectedCategories.length}} 个大类中
+        </text>
+      </view>
+    </view>
   </view>
 
   <!-- 主滚动区域 -->
@@ -24,7 +96,12 @@
         <view class="tags-container">
           <block wx:for="{{selectedTagsList}}" wx:key="index" wx:for-item="tagName">
             <view class="tag-item">
-              <text class="tag-text">{{tagName}} ({{selectedPoints[tagName]}}题)</text>
+              <text class="tag-text">{{tagName}}</text>
+              <view class="tag-count-control">
+                <view class="tag-control-btn" bindtap="decreaseTagCount" data-point="{{tagName}}">-</view>
+                <text class="tag-count-text">{{selectedPoints[tagName]}}题</text>
+                <view class="tag-control-btn" bindtap="increaseTagCount" data-point="{{tagName}}">+</view>
+              </view>
               <text class="remove-tag-btn" bindtap="removeTag" data-point="{{tagName}}">×</text>
             </view>
           </block>

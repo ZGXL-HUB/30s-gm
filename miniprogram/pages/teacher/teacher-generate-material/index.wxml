@@ -1,0 +1,50 @@
+<!-- 统一学案生成流程页面 -->
+<view class="container">
+  <!-- 头部信息 -->
+  <view class="header">
+    <view class="title">学案使用方法</view>
+    <view class="subtitle">1.点击下方的'学生版'或'教师版'字样；2.下滑预览对应版本的内容，若不满意点击下方的'返回重新选择'；3.若满意则点击最下方的'复制当前预览内容'；4.打开您的word或其他应用进行粘贴使用</view>
+  </view>
+
+  <!-- 变式题选择已移除，直接进入预览模式 -->
+
+  <!-- 预览区域 -->
+  <view class="preview-section">
+    <view class="preview-header">
+      <view class="preview-type-selector">
+        <button 
+          class="type-btn {{previewType === 'student' ? 'active' : ''}}"
+          data-type="student"
+          bindtap="switchPreviewType"
+        >学生版</button>
+        <button 
+          class="type-btn {{previewType === 'teacher' ? 'active' : ''}}"
+          data-type="teacher"
+          bindtap="switchPreviewType"
+        >教师版</button>
+      </view>
+    </view>
+    
+    <view class="preview-content">
+      <text class="preview-text">{{previewContent}}</text>
+    </view>
+    
+    <view class="preview-actions">
+      <button class="action-btn secondary" bindtap="reselectVariants">
+        返回重新选择
+      </button>
+    </view>
+  </view>
+
+  <!-- 复制按钮区域 -->
+  <view class="generate-section">
+    <view class="generate-buttons">
+      <button 
+        class="generate-btn primary"
+        bindtap="copyContentToClipboard"
+      >
+        复制当前预览内容
+      </button>
+    </view>
+  </view>
+</view>

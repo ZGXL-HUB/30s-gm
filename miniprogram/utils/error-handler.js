@@ -181,7 +181,20 @@ class ErrorHandler {
    */
   static logError(error, context = '') {
     // 生产环境只记录错误类型，不记录具体错误信息
-    const isProduction = wx.getSystemInfoSync().platform === 'devtools' ? false : true;
+    // 使用新的API替代已弃用的getSystemInfoSync
+    let isProduction = true;
+    try {
+      // 使用新的API获取设备信息
+      const deviceInfo = wx.getDeviceInfo();
+      const appBaseInfo = wx.getAppBaseInfo();
+      
+      // 检查是否为开发环境
+      isProduction = deviceInfo.platform !== 'devtools' && appBaseInfo.envVersion !== 'develop';
+    } catch (error) {
+      // 如果新API不可用，使用备用方案
+      console.warn('使用备用方案检测环境');
+      isProduction = true; // 默认认为生产环境
+    }
     
     if (isProduction) {
       console.error(`[${context}] 错误类型: ${error.name || 'Unknown'}`);

@@ -1,0 +1,9 @@
+{
+  "name": "syncClassStudentCount",
+  "version": "1.0.0",
+  "description": "同步班级学生数量统计云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

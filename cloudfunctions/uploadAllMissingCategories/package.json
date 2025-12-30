@@ -1,0 +1,10 @@
+{
+  "name": "uploadAllMissingCategories",
+  "version": "1.0.0",
+  "description": "批量上传所有缺失分类到云数据库",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
+
