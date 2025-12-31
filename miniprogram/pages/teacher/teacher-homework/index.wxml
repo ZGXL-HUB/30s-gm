@@ -139,8 +139,8 @@
         >
           <view class="section-title">
             <text class="topic-name">{{item.name}}</text>
-            <text class="topic-count" wx:if="{{categoryCounts[index] > 0}}" data-selected="true">已选{{categoryCounts[index]}}个语法点</text>
-            <text class="topic-count" wx:else>已选{{item.questionCount}}个语法点</text>
+            <text class="topic-count" wx:if="{{categoryCounts[index] > 0}}" data-selected="true">{{categoryCounts[index]}}个语法点</text>
+            <text class="topic-count" wx:else>{{item.questionCount}}个语法点</text>
           </view>
           <view class="section-actions">
             <!-- 专题模式：显示选择框，隐藏展开按钮 -->

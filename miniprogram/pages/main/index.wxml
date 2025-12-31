@@ -2,17 +2,25 @@
 <view class="main-container">
   <!-- 页面标题 -->
   <view class="header">
-    <text class="title">📚 语法练习系统</text>
+    <text class="title">📚 30s语法组题</text>
     <text class="subtitle">让教学更简单，让学习更高效</text>
   </view>
 
   <!-- 功能入口卡片 -->
   <view class="function-cards">
-    <!-- 语法组卷入口 -->
-    <view class="card teacher-card" bindtap="goToTeacherMode">
+    <!-- 高中入口 -->
+    <view class="card teacher-card" bindtap="goToHighSchool">
       <view class="card-icon">📝</view>
-      <view class="card-title">语法组卷</view>
+      <view class="card-title">高中</view>
       <view class="card-desc">智能组卷 • 高考配比 • 专题练习</view>
+      <view class="card-arrow">→</view>
+    </view>
+    
+    <!-- 初中入口 -->
+    <view class="card student-card" bindtap="goToMiddleSchool">
+      <view class="card-icon">📚</view>
+      <view class="card-title">初中</view>
+      <view class="card-desc">智能组卷 • 中考配比 • 专题练习</view>
       <view class="card-arrow">→</view>
     </view>
   </view>

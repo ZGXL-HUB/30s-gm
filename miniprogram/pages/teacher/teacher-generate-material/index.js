@@ -164,6 +164,11 @@ Page({
         const cloudDataLoader = require('../../../utils/cloudDataLoader.js');
         console.log('cloudDataLoader 加载成功:', typeof cloudDataLoader);
         
+        // 判断作业类型（从assignmentData中获取）
+        const assignmentType = this.data.assignmentData?.type || '';
+        const isGaokaoMode = assignmentType === 'gaokao';
+        const isTopicMode = assignmentType === 'topic';
+        
         // 统计每个语法点需要的题目数量（根据传入的questions数据）
         const pointCountMap = {};
         // 建立语法点到原始题目的映射，用于数据库查找失败时回退
@@ -177,10 +182,21 @@ Page({
           pointQuestionsMap[point].push(q);
         });
         
+        // 高考配比模式：如果有变式题，需要为每个语法点获取 (1 + variantCount) 道题目
+        if (isGaokaoMode && variantCount > 0) {
+          console.log(`🎯 高考配比模式，变式题数量: ${variantCount}，需要为每个语法点获取 ${1 + variantCount} 道题目`);
+          // 重新计算每个语法点需要的题目数量
+          Object.keys(pointCountMap).forEach(point => {
+            pointCountMap[point] = 1 + variantCount; // 1道原题 + variantCount道变式题
+          });
+          console.log('🎯 更新后的语法点及数量:', pointCountMap);
+        }
+        
         console.log('尝试从数据库获取真实题目，语法点及数量:', pointCountMap);
         
         // 为每个语法点获取真实题目
         // 专题模式：根据pointCountMap中的数量提取
+        // 高考配比模式（有变式题）：每个语法点提取 (1 + variantCount) 道题目
         // 其他模式：根据变式题数量，每个语法点提取 (1 + variantCount) 道题目
         for (const [point, count] of Object.entries(pointCountMap)) {
           try {
@@ -190,7 +206,7 @@ Page({
             
             if (dbQuestions && dbQuestions.length > 0) {
               // 根据需要的数量提取题目
-              const questionsNeeded = count; // 专题模式：使用统计的数量
+              const questionsNeeded = count;
               const selected = this.getRandomQuestions(dbQuestions, questionsNeeded);
               realQuestions.push(...selected);
               console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目`);
@@ -198,6 +214,18 @@ Page({
               // 数据库找不到题目，使用原始占位符题目
               console.log(`⚠️ 数据库未找到 ${point} 的题目，使用原始占位符题目 ${count} 道`);
               const originalQuestions = pointQuestionsMap[point] || [];
+              // 如果原始题目不够，需要生成占位符题目
+              if (originalQuestions.length < count) {
+                // 生成额外的占位符题目
+                for (let i = originalQuestions.length; i < count; i++) {
+                  const placeholder = {
+                    ...originalQuestions[0],
+                    id: `${originalQuestions[0].id}_variant_${i}`,
+                    text: `${originalQuestions[0].text} (变式题 ${i})`
+                  };
+                  originalQuestions.push(placeholder);
+                }
+              }
               const questionsToUse = originalQuestions.slice(0, count);
               realQuestions.push(...questionsToUse);
               console.log(`✅ 使用原始占位符题目 ${questionsToUse.length} 道 ${point} 题目`);
@@ -206,6 +234,17 @@ Page({
             console.warn(`⚠️ 获取 ${point} 题目失败:`, error);
             // 出错时也使用原始占位符题目
             const originalQuestions = pointQuestionsMap[point] || [];
+            // 如果原始题目不够，需要生成占位符题目
+            if (originalQuestions.length < count) {
+              for (let i = originalQuestions.length; i < count; i++) {
+                const placeholder = {
+                  ...originalQuestions[0],
+                  id: `${originalQuestions[0].id}_variant_${i}`,
+                  text: `${originalQuestions[0].text} (变式题 ${i})`
+                };
+                originalQuestions.push(placeholder);
+              }
+            }
             const questionsToUse = originalQuestions.slice(0, count);
             realQuestions.push(...questionsToUse);
             console.log(`✅ 出错后使用原始占位符题目 ${questionsToUse.length} 道 ${point} 题目`);
@@ -251,8 +290,15 @@ Page({
       groupedQuestions[point].push(question);
     }
     
-    // 判断是否为专题模式：如果某个语法点有多题且没有变式题，则为专题模式
-    const isTopicMode = Object.values(groupedQuestions).some(qs => qs.length > 1 && variantCount === 0);
+    // 判断是否为专题模式：
+    // 1. 从assignmentData中明确标记为topic模式
+    // 2. 或者某个语法点有多题且没有变式题（兼容旧逻辑）
+    // 注意：高考配比模式即使有多个题目，也应该按照变式题逻辑处理
+    const assignmentType = this.data.assignmentData?.type || '';
+    const isGaokaoModeForDisplay = assignmentType === 'gaokao';
+    const isTopicModeFromData = assignmentType === 'topic';
+    const isTopicMode = isTopicModeFromData || 
+      (Object.values(groupedQuestions).some(qs => qs.length > 1 && variantCount === 0) && !isGaokaoModeForDisplay);
     
     // 生成学案内容
     let exerciseIndex = 1;
