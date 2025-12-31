@@ -106,12 +106,16 @@ class CloudDataLoader {
         // 语态映射
         "语态(被动+八大时态)": "谓语(9)",
         
-        // 名词相关映射
+        // 名词相关映射（精确分类）
         "单复数同形": "单复数同形",
         "f/fe结尾": "f/fe结尾",
+        "以f/fe结尾": "f/fe结尾",  // 修复：支持"以"前缀
         "s/sh/ch/x结尾": "s/sh/ch/x结尾",
         "复合词和外来词": "复合词和外来词",
         "泛指与特指": "泛指与特指",
+        "不规则复数": "不规则复数",  // 新增
+        "以o结尾": "以o结尾",  // 新增
+        "以y结尾": "以y结尾",  // 新增
         
         // 代词相关映射
         "关系代词": "关系代词",
@@ -156,42 +160,84 @@ class CloudDataLoader {
         "状语从句综合": "状语从句综合"
       };
       
+      // ✅ 父分类映射（当精确分类找不到时，回退到父分类）
+      const parentCategoryMapping = {
+        // 名词子分类 -> 名词综合
+        "单复数同形": "名词综合",
+        "f/fe结尾": "名词综合",
+        "以f/fe结尾": "名词综合",
+        "s/sh/ch/x结尾": "名词综合",
+        "复合词和外来词": "名词综合",
+        "泛指与特指": "名词综合",
+        "不规则复数": "名词综合",
+        "以o结尾": "名词综合",
+        "以y结尾": "名词综合",
+        // 可以继续添加其他父分类映射
+      };
+      
       const actualCategory = specialMapping[grammarPoint] || grammarPoint;
       
       if (specialMapping[grammarPoint]) {
         console.log(`   📝 映射: "${grammarPoint}" → "${actualCategory}"`);
       }
       
-      // ✅ 直接查询
-      const result = await wx.cloud.database()
+      // ✅ 步骤1：直接查询精确分类
+      let result = await wx.cloud.database()
         .collection('questions')
         .where({ category: actualCategory })
         .limit(20)  // 每个语法点最多20题
         .get();
       
       if (result.data.length > 0) {
-        console.log(`   ✅ 找到 ${result.data.length} 题`);
+        console.log(`   ✅ 找到 ${result.data.length} 题（精确分类: ${actualCategory}）`);
         return result.data;
       }
       
-      // 如果直接查询没找到，尝试模糊匹配（兜底）
-      console.log(`   ⚠️ "${actualCategory}" 直接匹配失败，尝试模糊匹配...`);
+      // ✅ 步骤2：如果精确分类找不到，尝试查询父分类
+      const parentCategory = parentCategoryMapping[actualCategory] || parentCategoryMapping[grammarPoint];
+      if (parentCategory && parentCategory !== actualCategory) {
+        console.log(`   ⚠️ "${actualCategory}" 精确匹配失败，尝试父分类: "${parentCategory}"`);
+        result = await wx.cloud.database()
+          .collection('questions')
+          .where({ category: parentCategory })
+          .limit(20)
+          .get();
+        
+        if (result.data.length > 0) {
+          console.log(`   ✅ 找到 ${result.data.length} 题（父分类: ${parentCategory}）`);
+          return result.data;
+        }
+      }
+      
+      // ✅ 步骤3：如果父分类也找不到，尝试模糊匹配（兜底）
+      console.log(`   ⚠️ "${actualCategory}" 和父分类都匹配失败，尝试模糊匹配...`);
       const allResult = await wx.cloud.database()
         .collection('questions')
         .get();
       
       const filteredQuestions = allResult.data.filter(question => {
+        const category = (question.category || '').toLowerCase();
+        const grammarPointField = (question.grammarPoint || '').toLowerCase();
         const text = (question.text || '') + ' ' + (question.analysis || '');
         const keywords = this.getGrammarPointKeywords(grammarPoint);
         
-        return keywords.some(keyword => {
+        // 优先匹配category和grammarPoint字段
+        const categoryMatch = keywords.some(keyword => 
+          category.includes(keyword.toLowerCase()) || 
+          grammarPointField.includes(keyword.toLowerCase())
+        );
+        
+        // 其次匹配题目文本
+        const textMatch = keywords.some(keyword => {
           const lowerKeyword = keyword.toLowerCase();
           const lowerText = text.toLowerCase();
           return lowerText.includes(lowerKeyword);
         });
+        
+        return categoryMatch || textMatch;
       });
       
-      console.log(`筛选找到 ${filteredQuestions.length} 道 ${grammarPoint} 题目`);
+      console.log(`   ${filteredQuestions.length > 0 ? '✅' : '⚠️'} 模糊匹配找到 ${filteredQuestions.length} 道 ${grammarPoint} 题目`);
       return filteredQuestions;
         
       } catch (error) {
@@ -204,7 +250,8 @@ class CloudDataLoader {
     getGrammarPointKeywords(grammarPoint) {
       const keywordMap = {
         '固定搭配': ['固定搭配', '固定短语', '固定用法'],
-        '以f/fe结尾': ['f结尾', 'fe结尾', '以f结尾', '以fe结尾', 'f/fe结尾'],
+        '以f/fe结尾': ['f结尾', 'fe结尾', '以f结尾', '以fe结尾', 'f/fe结尾', 'f/fe'],
+        'f/fe结尾': ['f结尾', 'fe结尾', '以f结尾', '以fe结尾', 'f/fe结尾', 'f/fe'],
         '时态(一般将来时)': ['一般将来时', '将来时', 'will', 'be going to'],
         '介词综合': ['介词', 'preposition'],
         '代词综合': ['代词', 'pronoun', '人称代词', '物主代词', '反身代词', '关系代词'],
@@ -213,7 +260,7 @@ class CloudDataLoader {
         '连词与名/动/形/副综合': ['连词', 'conjunction', '连词与', '并列连词', '从属连词'],
         '冠词综合': ['冠词', 'article', 'a', 'an', 'the'],
         'the的特殊用法': ['the', 'the的特殊用法', '定冠词', '特指'],
-        '名词综合': ['名词', 'noun', '复数', '单复数'],
+        '名词综合': ['名词', 'noun', '复数', '单复数', '名词复数', '复数形式'],
         '动词综合': ['动词', 'verb'],
         '并列句与动词': ['并列句', '动词', 'and', 'but', 'or'],
         '谓语': ['谓语', 'predicate'],
@@ -223,7 +270,14 @@ class CloudDataLoader {
         '副词综合': ['副词', 'adverb'],
         '副词修饰动词': ['副词', 'adverb', '修饰动词', '副词修饰'],
         '定语从句综合': ['定语从句', 'attributive clause', 'that', 'which', 'who'],
-        '状语从句综合': ['状语从句', 'adverbial clause', 'when', 'where', 'how', 'why']
+        '状语从句综合': ['状语从句', 'adverbial clause', 'when', 'where', 'how', 'why'],
+        // 新增：名词子分类的关键词
+        '复合词和外来词': ['复合词', '外来词', 'compound', 'loanword', '复合', '外来'],
+        '单复数同形': ['单复数同形', '单复数相同', '同形'],
+        '不规则复数': ['不规则复数', '不规则', 'irregular plural'],
+        '以o结尾': ['o结尾', '以o结尾', 'o ending'],
+        '以y结尾': ['y结尾', '以y结尾', 'y ending'],
+        's/sh/ch/x结尾': ['s结尾', 'sh结尾', 'ch结尾', 'x结尾', 's/sh/ch/x结尾']
       };
       
       return keywordMap[grammarPoint] || [grammarPoint];
