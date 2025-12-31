@@ -166,9 +166,15 @@ Page({
         
         // 统计每个语法点需要的题目数量（根据传入的questions数据）
         const pointCountMap = {};
+        // 建立语法点到原始题目的映射，用于数据库查找失败时回退
+        const pointQuestionsMap = {};
         questions.forEach(q => {
           const point = q.grammarPoint || q.category;
           pointCountMap[point] = (pointCountMap[point] || 0) + 1;
+          if (!pointQuestionsMap[point]) {
+            pointQuestionsMap[point] = [];
+          }
+          pointQuestionsMap[point].push(q);
         });
         
         console.log('尝试从数据库获取真实题目，语法点及数量:', pointCountMap);
@@ -188,19 +194,31 @@ Page({
               const selected = this.getRandomQuestions(dbQuestions, questionsNeeded);
               realQuestions.push(...selected);
               console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目`);
+            } else {
+              // 数据库找不到题目，使用原始占位符题目
+              console.log(`⚠️ 数据库未找到 ${point} 的题目，使用原始占位符题目 ${count} 道`);
+              const originalQuestions = pointQuestionsMap[point] || [];
+              const questionsToUse = originalQuestions.slice(0, count);
+              realQuestions.push(...questionsToUse);
+              console.log(`✅ 使用原始占位符题目 ${questionsToUse.length} 道 ${point} 题目`);
             }
           } catch (error) {
             console.warn(`⚠️ 获取 ${point} 题目失败:`, error);
+            // 出错时也使用原始占位符题目
+            const originalQuestions = pointQuestionsMap[point] || [];
+            const questionsToUse = originalQuestions.slice(0, count);
+            realQuestions.push(...questionsToUse);
+            console.log(`✅ 出错后使用原始占位符题目 ${questionsToUse.length} 道 ${point} 题目`);
           }
         }
         
-        // 缓存真实题目，避免重复获取
+        // 确保题目总数正确
         if (realQuestions.length > 0) {
-          console.log(`✅ 使用数据库真实题目，共 ${realQuestions.length} 道`);
+          console.log(`✅ 使用数据库真实题目和占位符题目，共 ${realQuestions.length} 道（目标: ${questions.length} 道）`);
           this.setData({ cachedRealQuestions: realQuestions });
           questions = realQuestions;
         } else {
-          console.log('⚠️ 未获取到真实题目，使用原题目');
+          console.log('⚠️ 未获取到任何题目，使用原题目');
           this.setData({ cachedRealQuestions: questions });
         }
       } catch (error) {
@@ -841,13 +859,25 @@ Page({
       }
 
       console.log('最终复制内容长度:', textToCopy.length);
+      console.log('最终复制内容预览:', textToCopy.substring(0, 200));
 
       wx.hideLoading();
+
+      // 检查内容是否为空
+      if (!textToCopy || textToCopy.trim().length === 0) {
+        wx.showToast({
+          title: '没有可复制的内容',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
 
       // 直接复制为纯文本
       wx.setClipboardData({
         data: textToCopy,
         success: () => {
+          console.log('复制成功，内容长度:', textToCopy.length);
           wx.showToast({
             title: '内容已复制到剪贴板',
             icon: 'success',

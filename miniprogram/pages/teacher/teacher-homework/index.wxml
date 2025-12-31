@@ -89,7 +89,7 @@
                 
                 <!-- 增加按钮 -->
                 <view 
-                  class="control-btn increase-btn {{item.count >= getSliderMax(index) ? 'disabled' : ''}}"
+                  class="control-btn increase-btn {{item.count >= getSliderMax(index) || totalQuestions >= 20 ? 'disabled' : ''}}"
                   bindtap="increaseSliderValue"
                   data-index="{{index}}"
                 >+</view>

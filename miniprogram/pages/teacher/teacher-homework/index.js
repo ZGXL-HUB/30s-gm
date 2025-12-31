@@ -1072,6 +1072,17 @@ Page({
     const index = e.currentTarget.dataset.index;
     const selectedTags = [...this.data.selectedTags];
     const maxCount = this.getSliderMax(index);
+    const totalQuestions = this.data.totalQuestions || 0;
+    
+    // 如果总题数已经达到20，不允许再增加
+    if (totalQuestions >= 20) {
+      wx.showToast({
+        title: '总题数不能超过20题',
+        icon: 'none',
+        duration: 1500
+      });
+      return;
+    }
     
     if (selectedTags[index] && selectedTags[index].count < maxCount) {
       selectedTags[index].count = selectedTags[index].count + 1;
@@ -1089,6 +1100,19 @@ Page({
     const index = e.currentTarget.dataset.index;
     const value = parseInt(e.currentTarget.dataset.value);
     const selectedTags = [...this.data.selectedTags];
+    const totalQuestions = this.data.totalQuestions || 0;
+    const currentCount = selectedTags[index] ? (selectedTags[index].count || 1) : 0;
+    const otherTotal = totalQuestions - currentCount;
+    
+    // 如果设置新值后总题数会超过20，则不允许
+    if (otherTotal + value > 20) {
+      wx.showToast({
+        title: '总题数不能超过20题',
+        icon: 'none',
+        duration: 1500
+      });
+      return;
+    }
     
     if (selectedTags[index]) {
       selectedTags[index].count = value;
@@ -1210,7 +1234,7 @@ Page({
     const topicId = e.currentTarget.dataset.topicId;
     console.log('📋 目标专题ID:', topicId);
     console.log('📋 当前homeworkType:', this.data.homeworkType);
-    const { grammarTopics } = this.data;
+    const { grammarTopics, homeworkType, selectedTags } = this.data;
     
     // 防止重复点击
     if (this.selectAllProcessing) {
@@ -1219,32 +1243,81 @@ Page({
     }
     this.selectAllProcessing = true;
     
+    // 更新grammarTopics，标记当前专题的所有小点为选中
     const updatedTopics = grammarTopics.map(topic => {
       if (topic.id === topicId) {
         const updatedPoints = topic.points.map(point => ({
           ...point,
           selected: true,
-          selectedCount: 1 // 默认每个小点1题
+          selectedCount: 1 // 临时值，后续会重新分配
         }));
         
         return {
           ...topic,
+          expanded: true, // 全选后自动展开专题子菜单
           points: updatedPoints
         };
       }
       return topic;
     });
     
-    this.setData({ grammarTopics: updatedTopics }, () => {
+    // 收集所有选中的小点（包括新选中的和之前已选中的其他专题的知识点）
+    let allSelectedPoints = [];
+    if (homeworkType !== 'topic') {
+      updatedTopics.forEach(topic => {
+        topic.points.forEach(point => {
+          if (point.selected) {
+            // 所有选中的知识点都加入列表，数量会在后续重新分配
+            allSelectedPoints.push({
+              name: point.name,
+              count: 1 // 临时值，后续会重新分配
+            });
+          }
+        });
+      });
+      console.log('🎯 全选后收集的所有选中小点:', allSelectedPoints.map(p => p.name));
+    }
+    
+    // 自选模式：先计算重新分配后的题目数量
+    let finalTags = allSelectedPoints;
+    if (homeworkType === 'custom' && allSelectedPoints.length > 0) {
+      console.log('🎯 自选模式：开始重新分配题目，当前标签数量:', allSelectedPoints.length);
+      const maxTotal = 20;
+      const perTag = Math.floor(maxTotal / allSelectedPoints.length);
+      const remainder = maxTotal % allSelectedPoints.length;
+      
+      finalTags = allSelectedPoints.map((tag, index) => ({
+        ...tag,
+        count: perTag + (index < remainder ? 1 : 0)
+      }));
+      
+      console.log('🎯 重新分配后的标签:', finalTags);
+      console.log('🎯 总题数:', finalTags.reduce((sum, tag) => sum + tag.count, 0));
+    }
+    
+    // 更新数据，包括重新分配后的题目数量
+    this.setData({ 
+      grammarTopics: updatedTopics,
+      selectedTags: finalTags
+    }, () => {
       // 确保数据更新完成后再执行后续操作
       setTimeout(() => {
-        this.updateSelectedTags();
-        this.updateSelectedCount();
-        this.updateCategoryCounts();
-        this.redistributeQuestions(); // 重新分配题目
+        if (homeworkType === 'custom' && finalTags.length > 0) {
+          // 自选模式：同步更新grammarTopics中的selectedCount
+          this.updateGrammarTopicsFromTags(finalTags);
+          this.updateSelectedCount();
+          this.updateCategoryCounts();
+        } else {
+          // 非自选模式，直接更新标签和计数
+          this.updateSelectedTags();
+          this.updateSelectedCount();
+          this.updateCategoryCounts();
+        }
         
         // 重置处理标志
         this.selectAllProcessing = false;
+        console.log('🎯 全选操作完成，最终selectedTags:', this.data.selectedTags);
+        console.log('🎯 最终总题数:', this.data.totalQuestions);
       }, 50);
     });
     
@@ -1266,6 +1339,12 @@ Page({
     }, 0);
     const maxTotal = 20;
     const available = maxTotal - otherTotal + currentCount;
+    
+    // 如果总题数已经达到20，则返回当前值（不允许再增加）
+    const totalQuestions = this.data.totalQuestions || 0;
+    if (totalQuestions >= 20) {
+      return currentCount;
+    }
     
     // 确保最大值至少为当前值，并且不超过10
     return Math.max(currentCount, Math.min(10, available));
@@ -1928,6 +2007,16 @@ Page({
 
   // 显示变式题选择器
   showVariantSelector() {
+    const { homeworkType } = this.data;
+    
+    // 自选20题模式：直接进入预览界面，跳过变式题弹窗
+    if (homeworkType === 'custom') {
+      this.setData({ variantCount: 0 });
+      this.goToPreview();
+      return;
+    }
+    
+    // 其他模式：显示变式题选择弹窗
     this.setData({ 
       showPreview: true,
       variantCount: 0 
@@ -2047,14 +2136,6 @@ Page({
 
   // 无变式题，直接进入预览（保留给其他模式使用）
   goToPreview() {
-    if (this.data.variantCount === 0) {
-      wx.showToast({
-        title: '无变式题，即将进入预览',
-        icon: 'success',
-        duration: 1500
-      });
-    }
-    
     // 获取当前选择的题目数据
     const { homeworkType, selectedTags, selectedTopics, gaokaoRatio, variantCount } = this.data;
     
@@ -2101,6 +2182,10 @@ Page({
   buildAssignmentData() {
     const { homeworkType, selectedTags, selectedTopics, gaokaoRatio, smartTitle } = this.data;
     
+    console.log('【buildAssignmentData】开始构建作业数据，homeworkType:', homeworkType);
+    console.log('【buildAssignmentData】selectedTags:', selectedTags);
+    console.log('【buildAssignmentData】selectedTopics:', selectedTopics);
+    
     let questions = [];
     let title = smartTitle || '语法练习学案';
     
@@ -2119,7 +2204,9 @@ Page({
       title = '专题练习';
     } else if (homeworkType === 'custom') {
       // 自选模式
+      console.log('【自选模式】调用generateCustomQuestions，selectedTags:', selectedTags);
       questions = this.generateCustomQuestions();
+      console.log('【自选模式】generateCustomQuestions返回题目数量:', questions.length);
       title = '自选语法练习';
     }
     
@@ -2369,16 +2456,38 @@ A. 选项A    B. 选项B    C. 选项C    D. 选项D
   // 生成自选题目
   generateCustomQuestions() {
     // 根据用户选择的语法点生成题目
-    return [
-      {
-        id: 'q1',
-        text: 'This is a custom question 1',
-        grammarPoint: '时态',
-        category: '时态综合',
-        answer: 'D',
-        analysis: '这是时态的解析'
+    const { selectedTags } = this.data;
+    const questions = [];
+    
+    if (!selectedTags || selectedTags.length === 0) {
+      console.warn('【自选模式】selectedTags为空，无法生成题目');
+      return [];
+    }
+    
+    console.log('【自选模式】开始生成题目，selectedTags:', selectedTags);
+    
+    // 遍历每个选中的语法点
+    selectedTags.forEach((tag, tagIndex) => {
+      const grammarPoint = tag.name || tag;
+      const count = tag.count || 1;
+      
+      console.log(`【自选模式】为语法点 "${grammarPoint}" 生成 ${count} 道题目`);
+      
+      // 为每个语法点生成指定数量的题目
+      for (let i = 0; i < count; i++) {
+        questions.push({
+          id: `custom_q${tagIndex}_${i + 1}`,
+          text: `${grammarPoint} 练习题 ${i + 1}`,
+          grammarPoint: grammarPoint,
+          category: grammarPoint,
+          answer: 'A',
+          analysis: `这是${grammarPoint}的解析`
+        });
       }
-    ];
+    });
+    
+    console.log('【自选模式】生成题目完成，共', questions.length, '道');
+    return questions;
   },
 
   // 跳转到配套材料
