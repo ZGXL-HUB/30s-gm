@@ -18,10 +18,10 @@ Page({
     });
   },
 
-  // 跳转到初中语法组卷（暂时跳转到同一个页面，后续可以单独实现）
+  // 跳转到初中语法组卷（独立页面）
   goToMiddleSchool() {
     wx.navigateTo({
-      url: '/pages/teacher/teacher-homework/index'
+      url: '/pages/teacher/teacher-homework-middle/index'
     });
   }
 });

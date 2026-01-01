@@ -55,6 +55,7 @@
         "teacher-assignment-list/index",
         "teacher-dashboard/index",
         "teacher-homework/index",
+        "teacher-homework-middle/index",
         "teacher-materials/index",
         "teacher-class/index",
         "teacher-generate-material/index"

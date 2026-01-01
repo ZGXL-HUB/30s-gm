@@ -34,9 +34,9 @@ Page({
     }
     
     // 从布置作业页面传递的作业数据
-    if (options.assignmentData) {
+    if (options.data) {
       try {
-        const assignmentData = JSON.parse(decodeURIComponent(options.assignmentData));
+        const assignmentData = JSON.parse(decodeURIComponent(options.data));
         this.setData({
           assignmentData: assignmentData,
           selectedQuestions: assignmentData.questions || []
@@ -48,6 +48,20 @@ Page({
           title: '数据加载失败',
           icon: 'error'
         });
+      }
+    }
+    
+    // 兼容旧参数名
+    if (options.assignmentData) {
+      try {
+        const assignmentData = JSON.parse(decodeURIComponent(options.assignmentData));
+        this.setData({
+          assignmentData: assignmentData,
+          selectedQuestions: assignmentData.questions || []
+        });
+        console.log('接收到作业数据（旧参数）:', assignmentData);
+      } catch (error) {
+        console.error('解析作业数据失败:', error);
       }
     }
     

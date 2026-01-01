@@ -1,0 +1,348 @@
+<!--教师端布置语法作业页面（初中版）-->
+<view class="teacher-homework">
+  <!-- 作业类型选择卡片弹窗 -->
+  <view class="homework-type-selector" wx:if="{{!homeworkType}}">
+    <view class="selector-header">
+      <text class="title">选择作业类型</text>
+      <text class="subtitle">请选择您要布置的作业类型（初中）</text>
+    </view>
+    <view class="type-cards">
+      <view 
+        class="type-card"
+        wx:for="{{homeworkTypes}}" 
+        wx:key="id"
+        data-type="{{item.id}}"
+        bindtap="selectHomeworkType"
+      >
+        <view class="card-icon" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color}}CC 100%);">
+          <text class="icon">{{item.icon}}</text>
+        </view>
+        <view class="card-content">
+          <text class="title">{{item.title}}</text>
+          <text class="subtitle">{{item.subtitle}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统一文件树界面 -->
+  <view class="homework-content" wx:if="{{homeworkType}}">
+    <!-- 考情分析展示（仅在中考配比模式显示） -->
+    <view class="exam-analysis-section" wx:if="{{homeworkType === 'zhongkao'}}">
+      <view class="analysis-header">
+        <text class="analysis-title">📊 考情分析</text>
+        <text class="analysis-subtitle">基于云南2023-2025年中考真题</text>
+      </view>
+      <view class="analysis-items">
+        <view class="analysis-item" wx:for="{{examAnalysis.categories}}" wx:key="name">
+          <text class="analysis-name">{{item.name}}:</text>
+          <text class="analysis-percentage">{{item.percentage}}%</text>
+          <text class="analysis-frequency">{{item.frequency}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 顶部已选内容标签 -->
+    <view class="selected-content-header">
+      <view class="header-row">
+        <text class="header-title">已选内容</text>
+        <!-- 乱序开关 -->
+        <view class="shuffle-toggle">
+          <text class="shuffle-label">乱序出题</text>
+          <switch 
+            checked="{{shuffleQuestions}}" 
+            bindchange="toggleShuffle"
+            color="#1890ff"
+          />
+        </view>
+      </view>
+      <!-- 专题模式：双题型控制 -->
+      <view class="topic-mode-control" wx:if="{{homeworkType === 'topic-middle'}}">
+        <view class="type-control-section">
+          <text class="type-control-label">选择题数量:</text>
+          <view class="type-control-buttons">
+            <text 
+              class="type-control-btn {{topicModeTypeControl.choice.current === item ? 'active' : ''}}"
+              wx:for="{{topicModeTypeControl.choice.options}}" 
+              wx:key="*this"
+              data-count="{{item}}"
+              bindtap="switchTopicChoiceCount"
+            >{{item}}</text>
+          </view>
+        </view>
+        <view class="type-control-section">
+          <text class="type-control-label">填空题数量:</text>
+          <view class="type-control-buttons">
+            <text 
+              class="type-control-btn {{topicModeTypeControl.fill.current === item ? 'active' : ''}}"
+              wx:for="{{topicModeTypeControl.fill.options}}" 
+              wx:key="*this"
+              data-count="{{item}}"
+              bindtap="switchTopicFillCount"
+            >{{item}}</text>
+          </view>
+        </view>
+        <view class="total-info-section">
+          <text class="total-label">总题数:</text>
+          <text class="total-count">{{totalQuestions}}题</text>
+          <text class="type-breakdown">(选择{{totalChoiceQuestions}}+填空{{totalFillQuestions}})</text>
+        </view>
+        
+        <!-- 知识点分配显示（如果已选专题） -->
+        <view class="point-distribution" wx:if="{{selectedTopics.length > 0 && topicPointsList.length > 0}}">
+          <text class="distribution-title">知识点分配（可微调）:</text>
+          <view class="distribution-items">
+            <view 
+              class="distribution-point-item"
+              wx:for="{{topicPointsList}}" 
+              wx:key="id"
+            >
+              <text class="point-name">{{item.name}}</text>
+              <view class="point-type-controls">
+                <view class="type-control-group choice-group">
+                  <text class="type-label choice-label">选择:</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="choice" data-delta="-1" bindtap="adjustPointTypeCount">−</text>
+                  <text class="type-count">{{item.choiceCount || 0}}</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="choice" data-delta="1" bindtap="adjustPointTypeCount">+</text>
+                </view>
+                <view class="type-control-group fill-group">
+                  <text class="type-label fill-label">填空:</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="fill" data-delta="-1" bindtap="adjustPointTypeCount">−</text>
+                  <text class="type-count">{{item.fillCount || 0}}</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="fill" data-delta="1" bindtap="adjustPointTypeCount">+</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="selected-tags" wx:if="{{homeworkType === 'custom-middle'}}">
+        <!-- 自选模式：双题型控制 -->
+        <view class="custom-mode-control">
+          <view class="type-control-section">
+            <text class="type-control-label">选择题数量:</text>
+            <view class="type-control-buttons">
+              <text 
+                class="type-control-btn {{customModeTypeControl.choice.current === item ? 'active' : ''}}"
+                wx:for="{{customModeTypeControl.choice.options}}" 
+                wx:key="*this"
+                data-count="{{item}}"
+                bindtap="switchCustomChoiceCount"
+              >{{item}}</text>
+            </view>
+          </view>
+          <view class="type-control-section">
+            <text class="type-control-label">填空题数量:</text>
+            <view class="type-control-buttons">
+              <text 
+                class="type-control-btn {{customModeTypeControl.fill.current === item ? 'active' : ''}}"
+                wx:for="{{customModeTypeControl.fill.options}}" 
+                wx:key="*this"
+                data-count="{{item}}"
+                bindtap="switchCustomFillCount"
+              >{{item}}</text>
+            </view>
+          </view>
+          <view class="total-info-section">
+            <text class="total-label">总题数:</text>
+            <text class="total-count">{{totalQuestions}}题</text>
+            <text class="type-breakdown">(选择{{totalChoiceQuestions}}+填空{{totalFillQuestions}})</text>
+          </view>
+        </view>
+        
+        <!-- 总题数显示和进度条 -->
+        <view class="total-questions-section" wx:if="{{selectedTags.length > 0}}">
+          <view class="total-info">
+            <text class="total-label">总题数:</text>
+            <text class="total-count">{{totalQuestions}}题</text>
+          </view>
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{(totalQuestions / 20) * 100}}%"></view>
+          </view>
+        </view>
+        
+        <!-- 自选模式：知识点题型分配 -->
+        <view class="point-type-distribution" wx:if="{{homeworkType === 'custom-middle' && selectedTags.length > 0}}">
+          <text class="distribution-title">知识点分配（可微调）:</text>
+          <view class="distribution-items">
+            <view 
+              class="distribution-point-item"
+              wx:for="{{selectedTags}}" 
+              wx:key="id"
+            >
+              <text class="point-name">{{item.name}}</text>
+              <view class="point-type-controls">
+                <view class="type-control-group choice-group">
+                  <text class="type-label choice-label">选择:</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="choice" data-delta="-1" bindtap="adjustPointTypeCount">−</text>
+                  <text class="type-count">{{item.choiceCount || 0}}</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="choice" data-delta="1" bindtap="adjustPointTypeCount">+</text>
+                </view>
+                <view class="type-control-group fill-group">
+                  <text class="type-label fill-label">填空:</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="fill" data-delta="-1" bindtap="adjustPointTypeCount">−</text>
+                  <text class="type-count">{{item.fillCount || 0}}</text>
+                  <text class="type-btn" data-point-id="{{item.name}}" data-type="fill" data-delta="1" bindtap="adjustPointTypeCount">+</text>
+                </view>
+              </view>
+              <text class="point-remove" data-index="{{index}}" bindtap="removeSelectedTag">×</text>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 空状态提示 -->
+        <view class="empty-state" wx:if="{{selectedTags.length === 0 && selectedTopics.length === 0}}">
+          <text class="empty-text">
+            {{homeworkType === 'topic-middle' ? '请选择语法专题' : '请选择语法小点'}}
+          </text>
+        </view>
+      </view>
+      
+      <!-- 中考配比模式显示已选语法点 -->
+      <view class="gaokao-selected-points" wx:if="{{homeworkType === 'zhongkao'}}">
+        <view class="gaokao-header">
+          <view class="gaokao-header-top">
+            <text class="gaokao-title">中考配比已生成</text>
+            <view class="year-package-selector">
+              <text class="year-label">年份套餐:</text>
+              <view class="year-buttons">
+                <text class="year-btn {{zhongkaoRatio.yearPackage === '2025' ? 'active' : ''}}" data-year="2025" bindtap="switchYearPackage">2025</text>
+                <text class="year-btn {{zhongkaoRatio.yearPackage === '2024' ? 'active' : ''}}" data-year="2024" bindtap="switchYearPackage">2024</text>
+                <text class="year-btn {{zhongkaoRatio.yearPackage === '2023' ? 'active' : ''}}" data-year="2023" bindtap="switchYearPackage">2023</text>
+              </view>
+            </view>
+          </view>
+          <text class="gaokao-subtitle">共{{zhongkaoRatio.selectedGrammarPoints.length}}个语法点（选择{{zhongkaoRatio.choiceCount}}题+填空{{zhongkaoRatio.fillCount}}题）</text>
+          <button class="btn btn-small btn-white regenerate-btn" bindtap="regenerateZhongkaoCombo">↻ 重选一批</button>
+        </view>
+        <view class="selected-points-grid">
+          <view 
+            class="selected-point-item"
+            wx:for="{{zhongkaoRatio.selectedGrammarPoints}}" 
+            wx:key="*this"
+          >
+            <text class="point-name">{{item}}</text>
+            <text class="point-remove" data-point="{{item}}" bindtap="removeZhongkaoPoint">×</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    
+    <!-- 专题模式：一级菜单作为分组标签，二级菜单作为选择项 -->
+    <view class="grammar-menu" wx:if="{{homeworkType === 'topic-middle' && grammarMenuData.length > 0}}">
+      <view class="menu-group" wx:for="{{grammarMenuData}}" wx:key="id">
+        <!-- 一级菜单：分组标签（不可点击） -->
+        <view class="group-label">
+          <text class="group-name">{{item.name}}</text>
+        </view>
+        
+        <!-- 二级菜单：选择项 -->
+        <view class="level2-topics">
+          <view 
+            class="topic-item {{topic.selected ? 'selected' : ''}}"
+            wx:for="{{item.children}}"
+            wx:for-item="topic"
+            wx:key="id"
+            data-id="{{topic.id}}"
+            bindtap="selectGrammarTopic"
+          >
+            <view class="topic-content">
+              <view class="topic-header">
+                <text class="topic-name">{{topic.name}}</text>
+                <text class="topic-frequency" wx:if="{{topic.examFrequency}}">{{topic.examFrequency}}</text>
+              </view>
+              <view class="topic-meta">
+                <text class="topic-years" wx:if="{{topic.examYears && topic.examYears.length > 0}}">{{topic.examYears.join('、')}}年</text>
+                <text class="topic-region" wx:if="{{topic.examRegion}}">{{topic.examRegion}}</text>
+                <text class="topic-subcount" wx:if="{{topic.children}}">{{topic.children.length}}个子知识点</text>
+              </view>
+              <!-- 子知识点预览 -->
+              <view class="sub-points-preview" wx:if="{{topic.children && topic.children.length > 0}}">
+                <text class="sub-points-label">子知识点：</text>
+                <text class="sub-point-name" wx:for="{{topic.children}}" wx:for-item="subPoint" wx:key="id">{{subPoint.name}}</text>
+              </view>
+            </view>
+            <view class="topic-checkbox {{topic.selected ? 'checked' : ''}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 自选模式：一级菜单作为分组标签，三级菜单作为选择项 -->
+    <view class="grammar-menu" wx:if="{{homeworkType === 'custom-middle' && grammarMenuData.length > 0}}">
+      <!-- 筛选栏 -->
+      <view class="filter-bar">
+        <view class="filter-group">
+          <text class="filter-label">年份：</text>
+          <text class="filter-btn {{selectedYear === null ? 'active' : ''}}" data-year="null" bindtap="filterByYear">全部</text>
+          <text class="filter-btn {{selectedYear === 2025 ? 'active' : ''}}" data-year="2025" bindtap="filterByYear">2025</text>
+          <text class="filter-btn {{selectedYear === 2024 ? 'active' : ''}}" data-year="2024" bindtap="filterByYear">2024</text>
+          <text class="filter-btn {{selectedYear === 2023 ? 'active' : ''}}" data-year="2023" bindtap="filterByYear">2023</text>
+        </view>
+      </view>
+      
+      <view class="menu-group" wx:for="{{grammarMenuData}}" wx:key="id">
+        <!-- 一级菜单：分组标签（不可点击） -->
+        <view class="group-label">
+          <text class="group-name">{{item.name}}</text>
+        </view>
+        
+        <!-- 二级菜单：可折叠显示 -->
+        <view class="level2-section" wx:for="{{item.children}}" wx:for-item="level2" wx:key="id">
+          <view class="level2-header" bindtap="toggleLevel2" data-level2-id="{{level2.id}}">
+            <text class="level2-name">{{level2.name}}</text>
+            <view class="level2-actions">
+              <text class="select-all-btn" catchtap="selectAllPoints" data-level2-id="{{level2.id}}">全选</text>
+              <text class="expand-icon">{{level2.expanded ? '▼' : '▶'}}</text>
+            </view>
+          </view>
+          
+          <!-- 三级菜单：选择项 -->
+          <view class="level3-points" wx:if="{{level2.expanded}}">
+            <view 
+              class="point-item {{point.selected ? 'selected' : ''}}"
+              wx:for="{{level2.children}}"
+              wx:for-item="point"
+              wx:key="id"
+              data-point-id="{{point.id}}"
+              bindtap="selectPoint"
+            >
+              <view class="point-content">
+                <view class="point-header">
+                  <text class="point-name">{{point.name}}</text>
+                  <text class="point-frequency" wx:if="{{point.examFrequency}}">{{point.examFrequency}}</text>
+                </view>
+                <view class="point-meta">
+                  <text class="point-years" wx:if="{{point.examYears && point.examYears.length > 0}}">{{point.examYears.join('、')}}年</text>
+                  <text class="point-region" wx:if="{{point.examRegion}}">{{point.examRegion}}</text>
+                </view>
+              </view>
+              <view class="point-checkbox {{point.selected ? 'checked' : ''}}"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <!-- 专题模式：选择专题和题型后显示按钮 -->
+  <view class="action-buttons" wx:if="{{homeworkType === 'topic-middle' && selectedTopics.length > 0}}">
+    <button 
+      class="btn btn-primary btn-full" 
+      bindtap="goToPreview"
+    >进入预览</button>
+  </view>
+  
+  <!-- 自选模式：选择知识点后显示按钮 -->
+  <view class="action-buttons" wx:if="{{homeworkType === 'custom-middle' && selectedTags.length > 0}}">
+    <button 
+      class="btn btn-primary btn-full" 
+      bindtap="goToPreview"
+    >我选好了</button>
+  </view>
+
+</view>
+
