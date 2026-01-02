@@ -156,19 +156,6 @@
   color: #6c757d;
 }
 
-.progress-bar {
-  height: 8rpx;
-  background-color: #e9ecef;
-  border-radius: 4rpx;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(135deg, #4096ff 0%, #1677ff 100%);
-  border-radius: 4rpx;
-  transition: width 0.3s ease;
-}
 
 .slider-section {
   display: flex;

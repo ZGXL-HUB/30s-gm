@@ -25,7 +25,6 @@
 let grammarData;
 try {
   grammarData = require('../config/middle-school-grammar-data.js');
-  console.log('✅ 成功加载语法数据（从分包内）', grammarData ? Object.keys(grammarData) : 'null');
 } catch (error) {
   console.error('加载语法数据失败:', error);
   grammarData = null;
@@ -105,6 +104,9 @@ Page({
     
     // 当前选中的年份（中考配比模式和自选模式筛选）
     selectedYear: null, // null表示全部，2023/2024/2025表示筛选特定年份
+    
+    // 当前选中的考频（自选模式筛选）
+    selectedFrequency: null, // null表示全部，'low'/'medium'/'high'表示低频/中频/高频
     
     // 中考配比模式：已生成的知识点列表
     zhongkaoGeneratedPoints: [],
@@ -555,7 +557,6 @@ Page({
   },
 
   onLoad(options) {
-    console.log('初中版语法作业页面加载');
     try {
       // 设置页面标题
       wx.setNavigationBarTitle({
@@ -579,7 +580,6 @@ Page({
    */
   initGrammarData() {
     try {
-      console.log('initGrammarData开始，grammarData存在:', !!grammarData);
       if (!grammarData) {
         console.error('语法数据未加载');
         wx.showToast({
@@ -620,17 +620,11 @@ Page({
       this.setData({
         level2Topics: topicsWithSelection,
         level3Points: pointsWithSelection,
-        grammarMenuData: menuDataWithExpanded
+        grammarMenuData: menuDataWithExpanded,
+        originalGrammarMenuData: menuDataWithExpanded // 保存原始数据副本
       });
-      
-      console.log('初始化完成，二级菜单数量:', topicsWithSelection.length, '三级菜单数量:', pointsWithSelection.length);
-      console.log('grammarMenuData长度:', menuDataWithExpanded.length);
-      if (menuDataWithExpanded.length > 0) {
-        console.log('grammarMenuData第一个元素:', menuDataWithExpanded[0]);
-      }
     } catch (error) {
       console.error('初始化语法数据失败:', error);
-      console.error('错误堆栈:', error.stack);
       wx.showToast({
         title: '初始化失败: ' + error.message,
         icon: 'error',
@@ -642,11 +636,9 @@ Page({
   // 选择作业类型
   async selectHomeworkType(e) {
     const type = e.currentTarget.dataset.type;
-    console.log('选择作业类型（初中）:', type);
     
     // 确保数据已初始化
     if (!this.data.grammarMenuData || this.data.grammarMenuData.length === 0) {
-      console.log('数据未初始化，重新初始化...');
       this.initGrammarData();
       // 等待一下确保数据设置完成
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -656,8 +648,6 @@ Page({
       homeworkType: type,
       showTypeSelector: false
     });
-    
-    console.log('当前grammarMenuData:', this.data.grammarMenuData);
 
     // 根据类型执行相应逻辑
     if (type === 'zhongkao') {
@@ -728,11 +718,13 @@ Page({
    */
   switchCustomChoiceCount(e) {
     const count = parseInt(e.currentTarget.dataset.count);
+    const currentFill = this.data.customModeTypeControl ? this.data.customModeTypeControl.fill.current : this.data.totalFillQuestions;
     this.setData({
       'customModeTypeControl.choice.current': count,
       totalChoiceQuestions: count,
-      totalQuestions: count + this.data.totalFillQuestions
+      totalQuestions: count + currentFill
     }, () => {
+      // 重新分配题目到已选知识点
       this.redistributeCustomQuestions();
     });
   },
@@ -742,11 +734,13 @@ Page({
    */
   switchCustomFillCount(e) {
     const count = parseInt(e.currentTarget.dataset.count);
+    const currentChoice = this.data.customModeTypeControl ? this.data.customModeTypeControl.choice.current : this.data.totalChoiceQuestions;
     this.setData({
       'customModeTypeControl.fill.current': count,
       totalFillQuestions: count,
-      totalQuestions: this.data.totalChoiceQuestions + count
+      totalQuestions: currentChoice + count
     }, () => {
+      // 重新分配题目到已选知识点
       this.redistributeCustomQuestions();
     });
   },
@@ -813,30 +807,35 @@ Page({
 
   /**
    * 重新分配自选模式题目（均分到所有已选知识点）
+   * 除不尽的优先分配给先选的知识点
    */
   redistributeCustomQuestions() {
-    const { selectedTags, totalChoiceQuestions, totalFillQuestions } = this.data;
+    const { selectedTags, totalChoiceQuestions, totalFillQuestions, customModeTypeControl } = this.data;
+    
+    // 使用用户设定的总题量（而不是实际分配的总数）
+    const targetChoice = customModeTypeControl ? customModeTypeControl.choice.current : totalChoiceQuestions;
+    const targetFill = customModeTypeControl ? customModeTypeControl.fill.current : totalFillQuestions;
     
     if (selectedTags.length === 0) {
       this.setData({ 
         pointTypeDistribution: {},
-        selectedTags: selectedTags.map(tag => ({
-          ...tag,
-          choiceCount: 0,
-          fillCount: 0
-        }))
+        selectedTags: [],
+        totalChoiceQuestions: 0,
+        totalFillQuestions: 0,
+        totalQuestions: 0
       });
       return;
     }
     
-    // 均分到所有已选知识点
+    // 均分到所有已选知识点，除不尽的优先分配给先选的知识点
     const distribution = {};
-    const baseChoice = Math.floor(totalChoiceQuestions / selectedTags.length);
-    const baseFill = Math.floor(totalFillQuestions / selectedTags.length);
-    const choiceRemainder = totalChoiceQuestions % selectedTags.length;
-    const fillRemainder = totalFillQuestions % selectedTags.length;
+    const baseChoice = Math.floor(targetChoice / selectedTags.length);
+    const baseFill = Math.floor(targetFill / selectedTags.length);
+    const choiceRemainder = targetChoice % selectedTags.length;
+    const fillRemainder = targetFill % selectedTags.length;
     
     const updatedTags = selectedTags.map((tag, index) => {
+      // 优先分配给先选的知识点（index小的）
       const choiceCount = baseChoice + (index < choiceRemainder ? 1 : 0);
       const fillCount = baseFill + (index < fillRemainder ? 1 : 0);
       
@@ -855,8 +854,14 @@ Page({
     this.setData({ 
       pointTypeDistribution: distribution,
       selectedTags: updatedTags
+    }, () => {
+      // 更新总题数显示（应该等于用户设定的总数）
+      this.setData({
+        totalChoiceQuestions: targetChoice,
+        totalFillQuestions: targetFill,
+        totalQuestions: targetChoice + targetFill
+      });
     });
-    this.updateSelectedCount();
   },
 
   /**
@@ -923,7 +928,6 @@ Page({
       
       for (const rule of requiredRules) {
         const grammarPoints = this.getGrammarPointsByCategory(rule.category, yearPackage);
-        console.log(`必选分类 ${rule.category} 下的语法点:`, grammarPoints);
         
         // 选择选择题语法点
         if (rule.choice > 0 && grammarPoints.length > 0) {
@@ -932,7 +936,6 @@ Page({
             const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
             selectedPoints.choice.push(randomPoint);
             usedGrammarPoints.add(randomPoint);
-            console.log(`✅ 必选选择题 ${randomPoint}`);
           }
         }
         
@@ -943,7 +946,6 @@ Page({
             const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
             selectedPoints.fill.push(randomPoint);
             usedGrammarPoints.add(randomPoint);
-            console.log(`✅ 必选填空题 ${randomPoint}`);
           }
         }
       }
@@ -956,9 +958,6 @@ Page({
       const allCategories = this.getAllCategories(yearPackage);
       const usedCategories = new Set(['时态', '被动语态']);
       const availableCategories = allCategories.filter(cat => !usedCategories.has(cat));
-      
-      console.log(`剩余需要选择：${remainingChoiceCount}选择 + ${remainingFillCount}填空`);
-      console.log('可用分类:', availableCategories);
       
       // 随机选择分类并分配题目
       const shuffledCategories = [...availableCategories].sort(() => Math.random() - 0.5);
@@ -974,7 +973,6 @@ Page({
           const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
           selectedPoints.choice.push(randomPoint);
           usedGrammarPoints.add(randomPoint);
-          console.log(`✅ 选择选择题 ${randomPoint}`);
         }
         choiceIndex++;
       }
@@ -990,7 +988,6 @@ Page({
           const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
           selectedPoints.fill.push(randomPoint);
           usedGrammarPoints.add(randomPoint);
-          console.log(`✅ 选择填空题 ${randomPoint}`);
         }
         fillIndex++;
       }
@@ -1028,8 +1025,6 @@ Page({
         icon: 'success'
       });
       
-      console.log('中考配比系统组合已生成:', selectedPoints);
-      
     } catch (error) {
       console.error('生成中考配比失败:', error);
       wx.hideLoading();
@@ -1045,7 +1040,6 @@ Page({
    */
   switchYearPackage(e) {
     const year = e.currentTarget.dataset.year;
-    console.log('切换年份套餐:', year);
     
     this.setData({
       'zhongkaoRatio.yearPackage': year
@@ -1125,7 +1119,6 @@ Page({
    */
   selectGrammarTopic(e) {
     const topicId = e.currentTarget.dataset.id;
-    console.log('【专题模式-初中】选择二级菜单, topicId:', topicId);
     
     // 从新的数据结构中查找二级菜单
     const selectedTopic = this.data.level2Topics.find(t => t.id === topicId);
@@ -1179,15 +1172,11 @@ Page({
       return point;
     });
     
-    this.setData({ level3Points: points });
-    this.updateSelectedTags();
-    this.updateSelectedCount();
-    this.updateCategoryCounts();
-    
-    // 自选模式下，重新分配题目数量
-    if (homeworkType === 'custom-middle') {
-      this.redistributeCustomQuestions();
-    }
+    this.setData({ level3Points: points }, () => {
+      // 先更新已选标签，然后重新分配题目
+      this.updateSelectedTags();
+      this.updateCategoryCounts();
+    });
   },
 
   /**
@@ -1208,26 +1197,62 @@ Page({
   },
   
   /**
-   * 按年份筛选（自选模式）
+   * 按考频筛选（自选模式）
+   * 低频：0次（⭐或空）
+   * 中频：1-2次（⭐⭐或⭐⭐⭐）
+   * 高频：3次及以上（⭐⭐⭐⭐或⭐⭐⭐⭐⭐）
    */
-  filterByYear(e) {
-    const year = e.currentTarget.dataset.year === 'null' ? null : parseInt(e.currentTarget.dataset.year);
+  filterByFrequency(e) {
+    const frequency = e.currentTarget.dataset.frequency === 'null' ? null : e.currentTarget.dataset.frequency;
     
-    // 更新菜单数据，只显示符合条件的知识点
-    const menuData = this.data.grammarMenuData.map(level1 => ({
+    // 根据考频字符串判断考频等级
+    // 根据calculateFrequency函数：
+    // 0次 -> '⭐'
+    // 1次 -> '⭐⭐'
+    // 2次 -> '⭐⭐⭐'
+    // 3-4次 -> '⭐⭐⭐⭐'
+    // 5次及以上 -> '⭐⭐⭐⭐⭐'
+    const getFrequencyLevel = (examFrequency) => {
+      if (!examFrequency || examFrequency === '') return 'low'; // 无考频或空字符串为低频
+      const starCount = examFrequency.length; // 星星数量（每个⭐占1个字符）
+      if (starCount === 1) return 'low'; // ⭐ = 0次，低频
+      if (starCount === 2) return 'medium'; // ⭐⭐ = 1次，中频
+      if (starCount === 3) return 'medium'; // ⭐⭐⭐ = 2次，中频
+      if (starCount >= 4) return 'high'; // ⭐⭐⭐⭐及以上 = 3次及以上，高频
+      return 'low';
+    };
+    
+    // 使用原始数据进行筛选，确保每次筛选都基于完整数据
+    const sourceData = this.data.originalGrammarMenuData.length > 0 
+      ? this.data.originalGrammarMenuData 
+      : this.data.grammarMenuData;
+    
+    // 更新菜单数据，筛选并自动展开符合条件的二级菜单
+    const menuData = sourceData.map(level1 => ({
       ...level1,
-      children: level1.children.map(level2 => ({
-        ...level2,
-        children: year ? 
-          level2.children.filter(point => 
-            point.examYears && point.examYears.includes(year)
-          ) : 
-          level2.children
-      }))
+      children: level1.children.map(level2 => {
+        // 筛选三级菜单（知识点）
+        const filteredChildren = frequency ? 
+          level2.children.filter(point => {
+            const pointFrequency = getFrequencyLevel(point.examFrequency);
+            return pointFrequency === frequency;
+          }) : 
+          level2.children;
+        
+        // 如果筛选后还有知识点，且当前筛选不是"全部"，则自动展开
+        // 如果选择"全部"，则收起所有二级菜单
+        const shouldExpand = frequency !== null && filteredChildren.length > 0;
+        
+        return {
+          ...level2,
+          expanded: frequency === null ? false : (shouldExpand || (level2.expanded || false)),
+          children: filteredChildren
+        };
+      }).filter(level2 => level2.children.length > 0) // 过滤掉没有知识点的二级菜单
     }));
     
     this.setData({ 
-      selectedYear: year,
+      selectedFrequency: frequency,
       grammarMenuData: menuData
     });
   },
@@ -1240,7 +1265,7 @@ Page({
     const { level3Points, pointTypeDistribution } = this.data;
     const selectedTags = [];
     
-    // 遍历三级菜单，找出所有选中的知识点
+    // 遍历三级菜单，找出所有选中的知识点（保持选择顺序）
     level3Points.forEach(point => {
       if (point.selected) {
         const pointName = point.name || point.id;
@@ -1259,8 +1284,8 @@ Page({
     });
     
     this.setData({ selectedTags }, () => {
-      // 如果已选标签有变化，重新分配题目
-      if (this.data.homeworkType === 'custom-middle' && selectedTags.length > 0) {
+      // 自选模式下，重新分配题目数量（实时更新）
+      if (this.data.homeworkType === 'custom-middle') {
         this.redistributeCustomQuestions();
       }
     });
@@ -1339,13 +1364,10 @@ Page({
       return point;
     });
     
-    this.setData({ 
-      selectedTags,
-      level3Points: points
-    }, () => {
-      if (this.data.homeworkType === 'custom-middle') {
-        this.redistributeCustomQuestions();
-      }
+    this.setData({ level3Points: points }, () => {
+      // 更新已选标签，会自动触发重新分配
+      this.updateSelectedTags();
+      this.updateCategoryCounts();
     });
   },
   
@@ -1419,9 +1441,10 @@ Page({
     }
     
     const currentCount = distribution[pointId][type] || 0;
-    const newCount = Math.max(0, currentCount + parseInt(delta));
+    const deltaValue = parseInt(delta);
+    const newCount = Math.max(0, currentCount + deltaValue);
     
-    // 检查总数限制
+    // 计算当前所有知识点的总数（不包括当前要修改的知识点）
     let totalChoice = 0;
     let totalFill = 0;
     Object.keys(distribution).forEach(key => {
@@ -1430,20 +1453,41 @@ Page({
         totalFill += distribution[key].fill || 0;
       }
     });
-    totalChoice += newCount;  // 加上新值
-    if (type === 'fill') {
-      totalFill += newCount;
+    
+    // 加上新值后计算总数
+    if (type === 'choice') {
+      totalChoice += newCount;
+      totalFill += distribution[pointId].fill || 0; // 保持填空题不变
     } else {
-      totalFill += distribution[pointId].fill || 0;
+      totalFill += newCount;
+      totalChoice += distribution[pointId].choice || 0; // 保持选择题不变
     }
     
-    if (type === 'choice' && newCount > currentCount && totalChoice > this.data.totalChoiceQuestions) {
-      wx.showToast({ title: '选择题总数已达上限', icon: 'none' });
-      return;
+    // 获取用户设定的上限（专题模式使用topicModeTypeControl，自选模式使用customModeTypeControl）
+    let maxChoice = 0;
+    let maxFill = 0;
+    if (this.data.homeworkType === 'topic-middle') {
+      maxChoice = this.data.topicModeTypeControl.choice.current || 0;
+      maxFill = this.data.topicModeTypeControl.fill.current || 0;
+    } else if (this.data.homeworkType === 'custom-middle') {
+      maxChoice = this.data.customModeTypeControl.choice.current || 0;
+      maxFill = this.data.customModeTypeControl.fill.current || 0;
+    } else {
+      // 中考配比模式使用实际分配的总数
+      maxChoice = this.data.totalChoiceQuestions;
+      maxFill = this.data.totalFillQuestions;
     }
-    if (type === 'fill' && newCount > currentCount && totalFill > this.data.totalFillQuestions) {
-      wx.showToast({ title: '填空题总数已达上限', icon: 'none' });
-      return;
+    
+    // 检查上限：只有当增加数量（delta > 0）且总数超过上限时才提示
+    if (deltaValue > 0) {
+      if (type === 'choice' && totalChoice > maxChoice) {
+        wx.showToast({ title: '选择题总数已达上限', icon: 'none' });
+        return;
+      }
+      if (type === 'fill' && totalFill > maxFill) {
+        wx.showToast({ title: '填空题总数已达上限', icon: 'none' });
+        return;
+      }
     }
     
     distribution[pointId][type] = newCount;
@@ -1542,7 +1586,6 @@ Page({
         createdAt: new Date().toISOString()
       };
       
-      console.log('跳转到预览页面，作业数据:', assignmentData);
       
       wx.hideLoading();
       

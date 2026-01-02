@@ -151,16 +151,6 @@
           </view>
         </view>
         
-        <!-- 总题数显示和进度条 -->
-        <view class="total-questions-section" wx:if="{{selectedTags.length > 0}}">
-          <view class="total-info">
-            <text class="total-label">总题数:</text>
-            <text class="total-count">{{totalQuestions}}题</text>
-          </view>
-          <view class="progress-bar">
-            <view class="progress-fill" style="width: {{(totalQuestions / 20) * 100}}%"></view>
-          </view>
-        </view>
         
         <!-- 自选模式：知识点题型分配 -->
         <view class="point-type-distribution" wx:if="{{homeworkType === 'custom-middle' && selectedTags.length > 0}}">
@@ -275,11 +265,11 @@
       <!-- 筛选栏 -->
       <view class="filter-bar">
         <view class="filter-group">
-          <text class="filter-label">年份：</text>
-          <text class="filter-btn {{selectedYear === null ? 'active' : ''}}" data-year="null" bindtap="filterByYear">全部</text>
-          <text class="filter-btn {{selectedYear === 2025 ? 'active' : ''}}" data-year="2025" bindtap="filterByYear">2025</text>
-          <text class="filter-btn {{selectedYear === 2024 ? 'active' : ''}}" data-year="2024" bindtap="filterByYear">2024</text>
-          <text class="filter-btn {{selectedYear === 2023 ? 'active' : ''}}" data-year="2023" bindtap="filterByYear">2023</text>
+          <text class="filter-label">考频：</text>
+          <text class="filter-btn {{selectedFrequency === null ? 'active' : ''}}" data-frequency="null" bindtap="filterByFrequency">全部</text>
+          <text class="filter-btn {{selectedFrequency === 'high' ? 'active' : ''}}" data-frequency="high" bindtap="filterByFrequency">高频</text>
+          <text class="filter-btn {{selectedFrequency === 'medium' ? 'active' : ''}}" data-frequency="medium" bindtap="filterByFrequency">中频</text>
+          <text class="filter-btn {{selectedFrequency === 'low' ? 'active' : ''}}" data-frequency="low" bindtap="filterByFrequency">低频</text>
         </view>
       </view>
       
