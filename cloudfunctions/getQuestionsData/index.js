@@ -9,26 +9,26 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { action, category, type, limit = 10, offset = 0, grammarPoints = [] } = event
+  const { action, category, type, limit = 10, offset = 0, grammarPoints = [], schoolLevel = 'middle' } = event
   
   try {
     switch (action) {
       case 'getQuestionsByCategory':
-        return await getQuestionsByCategory(category, type, limit, offset)
+        return await getQuestionsByCategory(category, type, limit, offset, schoolLevel)
       case 'getQuestionsByGrammarPoints':
-        return await getQuestionsByGrammarPoints(grammarPoints, limit, offset)
+        return await getQuestionsByGrammarPoints(grammarPoints, limit, offset, schoolLevel)
       case 'getSystemComboQuestions':
-        return await getSystemComboQuestions(limit)
+        return await getSystemComboQuestions(limit, schoolLevel)
       case 'getCategories':
         return await getCategories()
       case 'getQuestionCount':
-        return await getQuestionCount(category, type)
+        return await getQuestionCount(category, type, schoolLevel)
       case 'getByType':
-        return await getByType(type, limit, offset)
+        return await getByType(type, limit, offset, schoolLevel)
       case 'getNotes':
-        return await getByType('note', limit, offset)
+        return await getByType('note', limit, offset, schoolLevel)
       case 'getTables':
-        return await getByType('table', limit, offset)
+        return await getByType('table', limit, offset, schoolLevel)
       default:
         return {
           success: false,
@@ -54,29 +54,31 @@ exports.main = async (event, context) => {
 }
 
 // 按分类获取题目
-async function getQuestionsByCategory(category, type, limit, offset) {
+async function getQuestionsByCategory(category, type, limit, offset, schoolLevel = 'middle') {
   const collection = db.collection('questions')
-  
+
   let query = collection
-  const whereCondition = {}
-  
+  const whereCondition = {
+    schoolLevel: schoolLevel // 添加学段过滤
+  }
+
   if (category && category !== 'all') {
     whereCondition.category = category
   }
-  
+
   if (type && type !== 'all') {
     whereCondition.type = type
   }
-  
+
   if (Object.keys(whereCondition).length > 0) {
     query = query.where(whereCondition)
   }
-  
+
   const result = await query
     .skip(offset)
     .limit(limit)
     .get()
-  
+
   return {
     success: true,
     data: result.data,
@@ -106,26 +108,28 @@ async function getCategories() {
 }
 
 // 获取题目数量
-async function getQuestionCount(category, type) {
+async function getQuestionCount(category, type, schoolLevel = 'middle') {
   const collection = db.collection('questions')
-  
+
   let query = collection
-  const whereCondition = {}
-  
+  const whereCondition = {
+    schoolLevel: schoolLevel // 添加学段过滤
+  }
+
   if (category && category !== 'all') {
     whereCondition.category = category
   }
-  
+
   if (type && type !== 'all') {
     whereCondition.type = type
   }
-  
+
   if (Object.keys(whereCondition).length > 0) {
     query = query.where(whereCondition)
   }
-  
+
   const result = await query.count()
-  
+
   return {
     success: true,
     count: result.total
@@ -133,24 +137,25 @@ async function getQuestionCount(category, type) {
 }
 
 // 根据语法点列表获取题目（用于系统组合）
-async function getQuestionsByGrammarPoints(grammarPoints, limit, offset) {
+async function getQuestionsByGrammarPoints(grammarPoints, limit, offset, schoolLevel = 'middle') {
   if (!grammarPoints || grammarPoints.length === 0) {
     return {
       success: false,
       error: 'Grammar points array is required'
     }
   }
-  
+
   const collection = db.collection('questions')
-  
+
   const result = await collection
     .where({
-      category: db.command.in(grammarPoints)
+      category: db.command.in(grammarPoints),
+      schoolLevel: schoolLevel // 添加学段过滤
     })
     .skip(offset)
     .limit(limit)
     .get()
-  
+
   return {
     success: true,
     data: result.data,
@@ -160,7 +165,7 @@ async function getQuestionsByGrammarPoints(grammarPoints, limit, offset) {
 }
 
 // 生成系统组合题目
-async function getSystemComboQuestions(limit = 10) {
+async function getSystemComboQuestions(limit = 10, schoolLevel = 'middle') {
   try {
     // 调用分类映射云函数获取系统组合规则
     const categoryMappingResult = await cloud.callFunction({
@@ -220,7 +225,7 @@ async function getSystemComboQuestions(limit = 10) {
     }
     
     // 获取对应的题目
-    const questionsResult = await getQuestionsByGrammarPoints(selectedGrammarPoints, limit, 0)
+    const questionsResult = await getQuestionsByGrammarPoints(selectedGrammarPoints, limit, 0, schoolLevel)
     
     return {
       success: true,
@@ -241,17 +246,18 @@ async function getSystemComboQuestions(limit = 10) {
 }
 
 // 按类型获取数据
-async function getByType(type, limit, offset) {
+async function getByType(type, limit, offset, schoolLevel = 'middle') {
   const collection = db.collection('questions')
-  
+
   const result = await collection
     .where({
-      type: type
+      type: type,
+      schoolLevel: schoolLevel // 添加学段过滤
     })
     .skip(offset)
     .limit(limit)
     .get()
-  
+
   return {
     success: true,
     data: result.data,

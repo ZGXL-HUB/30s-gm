@@ -30,22 +30,52 @@ exports.main = async (event, context) => {
   }
 };
 
-// 上传题目
+// 检查题目是否已存在（去重）
+async function checkDuplicate(question) {
+  try {
+    const result = await db.collection('questions')
+      .where({
+        text: question.text,
+        answer: question.answer,
+        schoolLevel: question.schoolLevel || 'middle' // 默认初中
+      })
+      .limit(1)
+      .get();
+
+    return result.data.length > 0;
+  } catch (error) {
+    console.warn('检查重复失败:', error.message);
+    return false; // 出错时假设不重复，继续上传
+  }
+}
+
+// 上传题目（支持去重和schoolLevel）
 async function uploadQuestions(questions) {
   if (!questions || questions.length === 0) {
     return { success: false, message: '没有题目数据' };
   }
-  
+
   let successCount = 0;
+  let duplicateCount = 0;
   let failCount = 0;
-  
+
   // 分批添加（每次20题，避免超时）
   const batchSize = 20;
   for (let i = 0; i < questions.length; i += batchSize) {
     const batch = questions.slice(i, i + batchSize);
-    
+
     for (const question of batch) {
       try {
+        // 检查是否重复（可选）
+        const skipDuplicates = true; // 可以配置
+        if (skipDuplicates) {
+          const isDuplicate = await checkDuplicate(question);
+          if (isDuplicate) {
+            duplicateCount++;
+            continue; // 跳过重复题目
+          }
+        }
+
         await db.collection('questions').add({
           data: {
             text: question.text,
@@ -53,8 +83,12 @@ async function uploadQuestions(questions) {
             analysis: question.analysis || '',
             category: question.category,
             grammarPoint: question.grammarPoint || question.category,
-            type: 'fill_blank',
+            type: question.type || 'fill_blank',
             difficulty: question.difficulty || 'medium',
+            province: question.province || '云南',
+            year: question.year || 2025,
+            source: question.source || '变式题',
+            schoolLevel: question.schoolLevel || 'middle', // 新增：初高中区分
             createdAt: db.serverDate()
           }
         });
@@ -64,13 +98,14 @@ async function uploadQuestions(questions) {
         failCount++;
       }
     }
-    
-    console.log(`已上传 ${successCount}/${questions.length} 题`);
+
+    console.log(`已上传 ${successCount}/${questions.length} 题${duplicateCount > 0 ? `，跳过重复 ${duplicateCount} 题` : ''}`);
   }
-  
+
   return {
     success: true,
     uploaded: successCount,
+    duplicates: duplicateCount,
     failed: failCount,
     total: questions.length
   };

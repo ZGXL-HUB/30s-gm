@@ -1,0 +1,26 @@
+[
+  {
+    "text": "____ beautiful painting! The colors are so bright and full of life.",
+    "answer": "C",
+    "grammarPoint": "感叹句",
+    "category": "特殊句式",
+    "type": "choice",
+    "analysis": "本题考查感叹句的结构。中心词是名词短语'beautiful painting'，其中painting是可数名词单数，beautiful以辅音音素开头，因此感叹句结构为'What a + adj. + 可数名词单数！'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2024,
+    "source": "变式题"
+  },
+  {
+    "text": "My sister ________ (visit) the zoo with her friends yesterday afternoon.",
+    "answer": "visited",
+    "grammarPoint": "一般过去时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查一般过去时的用法。句中有明确表示过去的时间状语'yesterday afternoon'（昨天下午），因此谓语动词需用过去式。",
+    "difficulty": "easy",
+    "province": "云南",
+    "year": 2025,
+    "source": "变式题"
+  }
+]
