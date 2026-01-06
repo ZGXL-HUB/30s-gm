@@ -134,6 +134,110 @@ Page({
     }
   },
 
+  // 生成智能占位符题目
+  generateSmartPlaceholders(grammarPoint, count, originalQuestions) {
+    const placeholders = [];
+
+    // 如果有原始题目作为基础
+    if (originalQuestions.length > 0) {
+      for (let i = 0; i < count; i++) {
+        const baseQuestion = originalQuestions[i % originalQuestions.length];
+        const placeholder = {
+          ...baseQuestion,
+          id: `${baseQuestion.id}_placeholder_${i}`,
+          text: `${baseQuestion.text} (智能占位符 - ${grammarPoint})`,
+          isPlaceholder: true,
+          grammarPoint: grammarPoint
+        };
+        placeholders.push(placeholder);
+      }
+    } else {
+      // 如果没有任何原始题目，生成标准格式的占位符题目
+      for (let i = 0; i < count; i++) {
+        const placeholder = this.createStandardPlaceholder(grammarPoint, i);
+        placeholders.push(placeholder);
+      }
+    }
+
+    return placeholders;
+  },
+
+  // 创建标准格式的占位符题目
+  createStandardPlaceholder(grammarPoint, index) {
+    const templates = {
+      'must/need': {
+        text: `You ____ finish your homework on time. A. can B. must C. may D. need (Placeholder for ${grammarPoint})`,
+        answer: 'B',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      },
+      '时间介词': {
+        text: `We have classes ____ Monday. A. at B. on C. in D. for (Placeholder for ${grammarPoint})`,
+        answer: 'B',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      },
+      '感叹句': {
+        text: `____ beautiful the scenery is! A. What B. How C. What a D. What an (Placeholder for ${grammarPoint})`,
+        answer: 'C',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      },
+      '疑问句': {
+        text: `____ is your name? A. What B. How C. Why D. When (Placeholder for ${grammarPoint})`,
+        answer: 'A',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      },
+      'There be句型': {
+        text: `____ a book on the table. A. There is B. There are C. There has D. There have (Placeholder for ${grammarPoint})`,
+        answer: 'A',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      },
+      '关系代词': {
+        text: `This is the man ____ helped me. A. who B. whom C. whose D. which (Placeholder for ${grammarPoint})`,
+        answer: 'A',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      },
+      '祈使句': {
+        text: `____ the window, please. A. Open B. Opens C. Opened D. Opening (Placeholder for ${grammarPoint})`,
+        answer: 'A',
+        analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+      }
+    };
+
+    const template = templates[grammarPoint] || {
+      text: `This is a placeholder question for ${grammarPoint}. Please replace with actual content.`,
+      answer: 'A',
+      analysis: `This is a placeholder question for ${grammarPoint}. In actual teaching, replace with real grammar exercises.`
+    };
+
+    return {
+      id: `placeholder_${grammarPoint}_${index}`,
+      text: template.text,
+      answer: template.answer,
+      grammarPoint: grammarPoint,
+      category: this.getCategoryForGrammarPoint(grammarPoint),
+      type: 'choice',
+      analysis: template.analysis,
+      difficulty: 'easy',
+      province: '云南',
+      year: 2025,
+      source: '系统占位符',
+      isPlaceholder: true
+    };
+  },
+
+  // 根据语法点获取分类
+  getCategoryForGrammarPoint(grammarPoint) {
+    const categoryMap = {
+      'must/need': '情态动词',
+      '时间介词': '介词',
+      '感叹句': '特殊句式',
+      '疑问句': '特殊句式',
+      'There be句型': '特殊句式',
+      '关系代词': '代词',
+      '祈使句': '特殊句式'
+    };
+    return categoryMap[grammarPoint] || '其他';
+  },
+
   // 显示变式题选择器（已移除，变式题选择在前一步完成）
 
   // 生成预览内容
@@ -182,6 +286,9 @@ Page({
         const assignmentType = this.data.assignmentData?.type || '';
         const isGaokaoMode = assignmentType === 'gaokao';
         const isTopicMode = assignmentType === 'topic';
+        // 判断是否是初中模块
+        const isMiddleSchoolMode = assignmentType === 'zhongkao' || assignmentType === 'topic-middle' || assignmentType === 'custom-middle';
+        const schoolLevel = isMiddleSchoolMode ? 'middle' : 'high'; // 初中模块使用 'middle'，高中模块使用 'high'
         
         // 统计每个语法点需要的题目数量（根据传入的questions数据）
         const pointCountMap = {};
@@ -208,62 +315,46 @@ Page({
         
         console.log('尝试从数据库获取真实题目，语法点及数量:', pointCountMap);
         
-        // 为每个语法点获取真实题目
+        // 为每个语法点获取真实题目（优化：并行查询）
         // 专题模式：根据pointCountMap中的数量提取
         // 高考配比模式（有变式题）：每个语法点提取 (1 + variantCount) 道题目
         // 其他模式：根据变式题数量，每个语法点提取 (1 + variantCount) 道题目
-        for (const [point, count] of Object.entries(pointCountMap)) {
+        
+        // 🚀 性能优化：使用 Promise.all 并行查询所有知识点
+        const queryStartTime = Date.now();
+        const queryPromises = Object.entries(pointCountMap).map(async ([point, count]) => {
           try {
-            console.log(`正在获取 ${point} 的题目，需要 ${count} 道...`);
-            const dbQuestions = await cloudDataLoader.getQuestionsByGrammarPoint(point);
+            console.log(`正在获取 ${point} 的题目，需要 ${count} 道...传递的 schoolLevel: ${schoolLevel}`);
+            const dbQuestions = await cloudDataLoader.getQuestionsByGrammarPoint(point, schoolLevel);
             console.log(`获取到 ${point} 题目数量:`, dbQuestions ? dbQuestions.length : 0);
-            
-            if (dbQuestions && dbQuestions.length > 0) {
-              // 根据需要的数量提取题目
-              const questionsNeeded = count;
-              const selected = this.getRandomQuestions(dbQuestions, questionsNeeded);
-              realQuestions.push(...selected);
-              console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目`);
-            } else {
-              // 数据库找不到题目，使用原始占位符题目
-              console.log(`⚠️ 数据库未找到 ${point} 的题目，使用原始占位符题目 ${count} 道`);
-              const originalQuestions = pointQuestionsMap[point] || [];
-              // 如果原始题目不够，需要生成占位符题目
-              if (originalQuestions.length < count) {
-                // 生成额外的占位符题目
-                for (let i = originalQuestions.length; i < count; i++) {
-                  const placeholder = {
-                    ...originalQuestions[0],
-                    id: `${originalQuestions[0].id}_variant_${i}`,
-                    text: `${originalQuestions[0].text} (变式题 ${i})`
-                  };
-                  originalQuestions.push(placeholder);
-                }
-              }
-              const questionsToUse = originalQuestions.slice(0, count);
-              realQuestions.push(...questionsToUse);
-              console.log(`✅ 使用原始占位符题目 ${questionsToUse.length} 道 ${point} 题目`);
-            }
+            return { point, count, questions: dbQuestions || [], success: true };
           } catch (error) {
             console.warn(`⚠️ 获取 ${point} 题目失败:`, error);
-            // 出错时也使用原始占位符题目
-            const originalQuestions = pointQuestionsMap[point] || [];
-            // 如果原始题目不够，需要生成占位符题目
-            if (originalQuestions.length < count) {
-              for (let i = originalQuestions.length; i < count; i++) {
-                const placeholder = {
-                  ...originalQuestions[0],
-                  id: `${originalQuestions[0].id}_variant_${i}`,
-                  text: `${originalQuestions[0].text} (变式题 ${i})`
-                };
-                originalQuestions.push(placeholder);
-              }
-            }
-            const questionsToUse = originalQuestions.slice(0, count);
-            realQuestions.push(...questionsToUse);
-            console.log(`✅ 出错后使用原始占位符题目 ${questionsToUse.length} 道 ${point} 题目`);
+            return { point, count, questions: [], success: false, error };
           }
-        }
+        });
+        
+        // 等待所有查询完成
+        const queryResults = await Promise.all(queryPromises);
+        const queryEndTime = Date.now();
+        console.log(`⚡ 并行查询完成，耗时: ${queryEndTime - queryStartTime}ms`);
+        
+        // 处理查询结果
+        queryResults.forEach(({ point, count, questions, success, error }) => {
+          if (success && questions.length > 0) {
+            // 根据需要的数量提取题目
+            const selected = this.getRandomQuestions(questions, count);
+            realQuestions.push(...selected);
+            console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目`);
+          } else {
+            // 数据库找不到题目或查询失败，使用智能占位符题目生成
+            const reason = success ? '未找到题目' : '查询失败';
+            console.log(`⚠️ ${point} ${reason}，使用智能占位符题目生成 ${count} 道`);
+            const smartPlaceholders = this.generateSmartPlaceholders(point, count, pointQuestionsMap[point] || []);
+            realQuestions.push(...smartPlaceholders);
+            console.log(`✅ 使用智能占位符题目 ${smartPlaceholders.length} 道 ${point} 题目`);
+          }
+        });
         
         // 确保题目总数正确
         if (realQuestions.length > 0) {
@@ -322,7 +413,10 @@ Page({
         for (let i = 0; i < pointQuestions.length; i++) {
           const question = pointQuestions[i];
           content += `### 练习${exerciseIndex}：${point}\n`;
-          content += `**题目**: ${question.text}\n`;
+          
+          // 格式化题目文本：根据题目类型显示
+          const formattedQuestion = this.formatQuestionText(question);
+          content += `**题目**: ${formattedQuestion}\n`;
           
           if (type === 'teacher') {
             content += `**答案**: ${question.answer || question.correctAnswer}\n`;
@@ -338,7 +432,10 @@ Page({
         const variantQuestions = pointQuestions.slice(1);
         
         content += `### 练习${exerciseIndex}：${point}\n`;
-        content += `**题目**: ${mainQuestion.text}\n`;
+        
+        // 格式化题目文本：根据题目类型显示
+        const formattedQuestion = this.formatQuestionText(mainQuestion);
+        content += `**题目**: ${formattedQuestion}\n`;
         
         if (type === 'teacher') {
           content += `**答案**: ${mainQuestion.answer || mainQuestion.correctAnswer}\n`;
@@ -350,7 +447,8 @@ Page({
           content += `\n**变式练习题**:\n`;
           for (let j = 0; j < variantQuestions.length; j++) {
             const variant = variantQuestions[j];
-            content += `${j + 1}. ${variant.text}`;
+            const formattedVariant = this.formatQuestionText(variant);
+            content += `${j + 1}. ${formattedVariant}`;
             if (type === 'teacher') {
               content += ` (答案: ${variant.answer || variant.correctAnswer})`;
             }
@@ -367,6 +465,90 @@ Page({
     // 教师版额外信息可在需要时单独生成，不耦合在题目文本中
 
     return content;
+  },
+
+  // 从文本中提取选项
+  extractOptionsFromText(text) {
+    const options = [];
+    // 匹配格式：A. xxx B. xxx C. xxx D. xxx
+    const optionPattern = /([A-D])\.\s*([^A-D]+?)(?=\s+[A-D]\.|$)/g;
+    let match;
+    
+    while ((match = optionPattern.exec(text)) !== null) {
+      options.push({
+        label: match[1],
+        text: match[2].trim()
+      });
+    }
+    
+    return options;
+  },
+
+  // 从文本中移除选项部分
+  removeOptionsFromText(text) {
+    // 匹配选项开始：空格 + A-D + 点号 + 空格
+    const optionStartPattern = /\s+[A-D]\.\s+/;
+    const cutIndex = text.search(optionStartPattern);
+    
+    if (cutIndex > 0) {
+      return text.substring(0, cutIndex).trim();
+    }
+    
+    return text;
+  },
+
+  // 格式化题目文本：根据题目类型正确显示
+  formatQuestionText(question) {
+    if (!question) return '';
+    
+    const questionType = question.type || '';
+    let questionText = question.text || '';
+    
+    // 如果是选择题（choice），需要检查文本中是否已包含选项
+    if (questionType === 'choice') {
+      // 检查文本中是否已经包含选项（格式如 "A. xxx B. xxx" 或 "A. xxx  B. xxx"）
+      const hasOptionsInText = /[A-D]\.\s+[A-Z]/.test(questionText) || 
+                                /[A-D]\.\s{2,}[A-Z]/.test(questionText) ||
+                                /选项\s*[A-D]/.test(questionText);
+      
+      // 如果没有选项，尝试从options字段添加
+      if (!hasOptionsInText) {
+        if (question.options && Array.isArray(question.options) && question.options.length > 0) {
+          // 选项可能是字符串数组或对象数组
+          const optionsText = question.options.map((opt, index) => {
+            const label = String.fromCharCode(65 + index); // A, B, C, D
+            // 处理选项格式：可能是字符串或对象
+            let optionText = typeof opt === 'string' ? opt : (opt.text || opt.label || opt);
+            
+            // 检查选项是否已经包含标签（如 "A. xxx"），如果包含就不重复添加
+            const labelPattern = new RegExp(`^${label}\\.\\s*`, 'i');
+            if (!labelPattern.test(optionText)) {
+              // 选项不包含标签，添加标签
+              optionText = `${label}. ${optionText}`;
+            }
+            // 如果已经包含标签，直接使用
+            
+            return optionText;
+          }).join('\n');
+          questionText = `${questionText}\n${optionsText}`;
+        } else {
+          // 尝试从文本中提取选项（如果文本格式是 "题目 A. xxx B. xxx"）
+          const extractedOptions = this.extractOptionsFromText(questionText);
+          if (extractedOptions.length >= 2) {
+            // 成功提取到选项，移除text中的选项部分
+            const cleanedText = this.removeOptionsFromText(questionText);
+            const optionsText = extractedOptions.map(opt => `${opt.label}. ${opt.text}`).join('\n');
+            questionText = `${cleanedText}\n${optionsText}`;
+          } else {
+            // 无法提取选项，保持原样但给出警告
+            console.log('⚠️ 选择题缺少选项字段且无法从text中提取:', question);
+          }
+        }
+      }
+    }
+    
+    // 填空题或其他类型，直接返回文本（不添加选项）
+    return questionText;
   },
 
   // 随机选择题目

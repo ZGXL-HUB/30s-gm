@@ -1,0 +1,2786 @@
+[
+  {
+    "_id": "middle_1_1_1_choice_1_1767644233932_awwda7ljq",
+    "text": "This is ________ book. It's not mine.",
+    "answer": "B",
+    "grammarPoint": "名词所有格",
+    "category": "名词",
+    "type": "choice",
+    "options": [
+      "A. Tom",
+      "B. Tom's",
+      "C. Toms",
+      "D. Toms'"
+    ],
+    "analysis": "本题考查名词所有格的用法。表示'汤姆的书'，需要在名词后加's，即Tom's。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_1_1_choice_2_1767644233932_e6nlvdc8x",
+    "text": "The ________ room is very clean and tidy.",
+    "answer": "C",
+    "grammarPoint": "名词所有格",
+    "category": "名词",
+    "type": "choice",
+    "options": [
+      "A. children",
+      "B. childrens",
+      "C. children's",
+      "D. childrens'"
+    ],
+    "analysis": "本题考查复数名词的所有格。children是复数形式，其所有格是children's。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_1_1_fill_1_1767644233932_pekwlb6bk",
+    "text": "This is my ________ (friend) birthday party.",
+    "answer": "friend's",
+    "grammarPoint": "名词所有格",
+    "category": "名词",
+    "type": "fill_blank",
+    "analysis": "本题考查名词所有格的用法。表示'我朋友的生日聚会'，friend后需要加's构成所有格。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_1_2_choice_1_1767644233932_ax2r3e8yq",
+    "text": "There are many ________ in the park.",
+    "answer": "C",
+    "grammarPoint": "名词的复数",
+    "category": "名词",
+    "type": "choice",
+    "options": [
+      "A. child",
+      "B. childs",
+      "C. children",
+      "D. childrens"
+    ],
+    "analysis": "本题考查名词的复数形式。child的复数形式是不规则变化children，不是childs。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_1_2_choice_2_1767644233932_rjzdnlh1i",
+    "text": "I bought three ________ at the market.",
+    "answer": "C",
+    "grammarPoint": "名词的复数",
+    "category": "名词",
+    "type": "choice",
+    "options": [
+      "A. tomato",
+      "B. tomatos",
+      "C. tomatoes",
+      "D. tomato's"
+    ],
+    "analysis": "本题考查以o结尾的名词复数。tomato的复数形式是tomatoes，需要加es。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_1_2_fill_1_1767644233932_l9xjej4eh",
+    "text": "We need more ________ (visitor) to help with the event.",
+    "answer": "visitors",
+    "grammarPoint": "名词的复数",
+    "category": "名词",
+    "type": "fill_blank",
+    "analysis": "本题考查名词的复数形式。visitor是可数名词，many后需要接复数形式visitors。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_1_choice_1_1767644233932_7dnbdowq2",
+    "text": "My teacher asked ________ to finish the homework on time.",
+    "answer": "B",
+    "grammarPoint": "人称代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. I",
+      "B. me",
+      "C. my",
+      "D. mine"
+    ],
+    "analysis": "本题考查人称代词的宾格用法。ask是及物动词，后接宾语，需用人称代词宾格me。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_1_choice_2_1767644233932_afp4jtc5t",
+    "text": "________ are good friends and often play together.",
+    "answer": "A",
+    "grammarPoint": "人称代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. We",
+      "B. Us",
+      "C. Our",
+      "D. Ours"
+    ],
+    "analysis": "本题考查人称代词主格的用法。句子缺少主语，需用人称代词主格We。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_1_fill_1_1767644233932_i95te360l",
+    "text": "Please give ________ (we) some time to think about it.",
+    "answer": "us",
+    "grammarPoint": "人称代词",
+    "category": "代词",
+    "type": "fill_blank",
+    "analysis": "本题考查人称代词宾格的用法。give是及物动词，后接间接宾语，需用人称代词宾格us。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_2_choice_1_1767644233932_rixcgz4ts",
+    "text": "This is not my book. It's ________.",
+    "answer": "B",
+    "grammarPoint": "物主代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. her",
+      "B. hers",
+      "C. she",
+      "D. she's"
+    ],
+    "analysis": "本题考查名词性物主代词的用法。hers是名词性物主代词，相当于her book，可以单独使用。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_2_choice_2_1767644233932_wl5nrlqaw",
+    "text": "The red bike is ________. The blue one is mine.",
+    "answer": "B",
+    "grammarPoint": "物主代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. your",
+      "B. yours",
+      "C. you",
+      "D. you're"
+    ],
+    "analysis": "本题考查名词性物主代词的用法。yours相当于your bike，可以单独作表语。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_2_fill_1_1767644233932_ery7mkqn6",
+    "text": "This bag is ________ (she). Please give it to her.",
+    "answer": "hers",
+    "grammarPoint": "物主代词",
+    "category": "代词",
+    "type": "fill_blank",
+    "analysis": "本题考查名词性物主代词的用法。hers是名词性物主代词，相当于her bag，可以单独使用。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_2_3_choice_1_1767644233932_mjdh1mwox",
+    "text": "You should take care of ________ when you are alone.",
+    "answer": "C",
+    "grammarPoint": "反身代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. you",
+      "B. your",
+      "C. yourself",
+      "D. yours"
+    ],
+    "analysis": "本题考查反身代词的用法。take care of oneself表示'照顾自己'，需用反身代词yourself。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_2_3_choice_2_1767644233932_0w39o3zmr",
+    "text": "The children enjoyed ________ at the party.",
+    "answer": "C",
+    "grammarPoint": "反身代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. them",
+      "B. their",
+      "C. themselves",
+      "D. theirs"
+    ],
+    "analysis": "本题考查反身代词的用法。enjoy oneself表示'玩得开心'，需用反身代词themselves。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_2_3_fill_1_1767644233933_07gqn4t48",
+    "text": "He taught ________ (he) English by watching movies.",
+    "answer": "himself",
+    "grammarPoint": "反身代词",
+    "category": "代词",
+    "type": "fill_blank",
+    "analysis": "本题考查反身代词的用法。teach oneself表示'自学'，需用反身代词himself。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_2_4_choice_1_1767644233933_pgziivj8h",
+    "text": "There is ________ wrong with my computer. It doesn't work.",
+    "answer": "A",
+    "grammarPoint": "不定代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. something",
+      "B. anything",
+      "C. nothing",
+      "D. everything"
+    ],
+    "analysis": "本题考查不定代词的用法。something wrong表示'有问题'，用于肯定句。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_2_4_choice_2_1767644233933_emhncmzzi",
+    "text": "Would you like ________ to drink?",
+    "answer": "A",
+    "grammarPoint": "不定代词",
+    "category": "代词",
+    "type": "choice",
+    "options": [
+      "A. something",
+      "B. anything",
+      "C. nothing",
+      "D. everything"
+    ],
+    "analysis": "本题考查不定代词的用法。在表示建议或请求的疑问句中，通常用something。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_2_4_fill_1_1767644233933_b8mmzafo1",
+    "text": "There is ________ (some) important in today's newspaper.",
+    "answer": "something",
+    "grammarPoint": "不定代词",
+    "category": "代词",
+    "type": "fill_blank",
+    "analysis": "本题考查不定代词的用法。something important表示'重要的事情'，用于肯定句。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_3_1_choice_1_1767644233933_ntaz8xgbd",
+    "text": "The weather is ________ today. Let's go for a walk.",
+    "answer": "B",
+    "grammarPoint": "形容词作定语",
+    "category": "形容词与副词",
+    "type": "choice",
+    "options": [
+      "A. wind",
+      "B. windy",
+      "C. windily",
+      "D. winding"
+    ],
+    "analysis": "本题考查形容词作表语的用法。is后需接形容词作表语，windy表示'有风的'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_1_choice_2_1767644233933_33dzt3clo",
+    "text": "This is an ________ story. I want to read it again.",
+    "answer": "C",
+    "grammarPoint": "形容词作定语",
+    "category": "形容词与副词",
+    "type": "choice",
+    "options": [
+      "A. interest",
+      "B. interested",
+      "C. interesting",
+      "D. interestingly"
+    ],
+    "analysis": "本题考查形容词作定语的用法。interesting修饰名词story，表示'有趣的'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_1_fill_1_1767644233933_tlz3uo5xz",
+    "text": "The food tastes ________ (wonder). We all like it.",
+    "answer": "wonderful",
+    "grammarPoint": "形容词作定语",
+    "category": "形容词与副词",
+    "type": "fill_blank",
+    "analysis": "本题考查形容词作表语的用法。taste是系动词，后接形容词作表语，wonderful表示'美味的'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_2_choice_1_1767644233933_74rjigyjk",
+    "text": "You should think ________ before making a decision.",
+    "answer": "B",
+    "grammarPoint": "副词的基本用法",
+    "category": "形容词与副词",
+    "type": "choice",
+    "options": [
+      "A. careful",
+      "B. carefully",
+      "C. care",
+      "D. caring"
+    ],
+    "analysis": "本题考查副词的用法。think是动词，需用副词carefully修饰，表示'仔细地思考'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_2_choice_2_1767644233933_44ss3okb2",
+    "text": "She speaks English very ________.",
+    "answer": "B",
+    "grammarPoint": "副词的基本用法",
+    "category": "形容词与副词",
+    "type": "choice",
+    "options": [
+      "A. good",
+      "B. well",
+      "C. better",
+      "D. best"
+    ],
+    "analysis": "本题考查副词的用法。speak是动词，需用副词well修饰，表示'说得好'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_2_fill_1_1767644233933_isbvjkjt4",
+    "text": "Please listen to the teacher ________ (careful) in class.",
+    "answer": "carefully",
+    "grammarPoint": "副词的基本用法",
+    "category": "形容词与副词",
+    "type": "fill_blank",
+    "analysis": "本题考查副词的用法。listen是动词，需用副词carefully修饰，表示'仔细地听'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_3_choice_1_1767644233933_ok20oxap9",
+    "text": "This book is ________ than that one.",
+    "answer": "B",
+    "grammarPoint": "比较级和最高级",
+    "category": "形容词与副词",
+    "type": "choice",
+    "options": [
+      "A. interesting",
+      "B. more interesting",
+      "C. most interesting",
+      "D. the most interesting"
+    ],
+    "analysis": "本题考查形容词比较级的用法。than表示两者比较，需用比较级more interesting。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_3_choice_2_1767644233933_a2l334e2h",
+    "text": "Mount Qomolangma is ________ mountain in the world.",
+    "answer": "D",
+    "grammarPoint": "比较级和最高级",
+    "category": "形容词与副词",
+    "type": "choice",
+    "options": [
+      "A. high",
+      "B. higher",
+      "C. highest",
+      "D. the highest"
+    ],
+    "analysis": "本题考查形容词最高级的用法。in the world表示范围，需用最高级the highest。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_3_3_fill_1_1767644233933_s1iev8nj4",
+    "text": "This is the ________ (old) building in our city.",
+    "answer": "oldest",
+    "grammarPoint": "比较级和最高级",
+    "category": "形容词与副词",
+    "type": "fill_blank",
+    "analysis": "本题考查形容词最高级的用法。in our city表示范围，需用最高级oldest，前面加the。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_4_1_choice_1_1767644233933_0mgo4zhqd",
+    "text": "Please ________ the lights when you leave the room.",
+    "answer": "B",
+    "grammarPoint": "动词的形式",
+    "category": "动词",
+    "type": "choice",
+    "options": [
+      "A. turn on",
+      "B. turn off",
+      "C. turn up",
+      "D. turn down"
+    ],
+    "analysis": "本题考查动词短语的用法。turn off表示'关闭'，符合语境'离开房间时关灯'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_4_1_choice_2_1767644233933_23fc0gy2x",
+    "text": "I need to ________ this math problem.",
+    "answer": "B",
+    "grammarPoint": "动词的形式",
+    "category": "动词",
+    "type": "choice",
+    "options": [
+      "A. work on",
+      "B. work out",
+      "C. work at",
+      "D. work for"
+    ],
+    "analysis": "本题考查动词短语的用法。work out表示'解决'，符合语境'解决数学题'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_4_1_fill_1_1767644233933_1bdluub02",
+    "text": "Don't forget to ________ (turn) off the TV before you go to bed.",
+    "answer": "turn",
+    "grammarPoint": "动词的形式",
+    "category": "动词",
+    "type": "fill_blank",
+    "analysis": "本题考查动词短语的用法。turn off是固定搭配，表示'关闭'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_4_2_choice_1_1767644233933_k9cbma0qn",
+    "text": "—Can you play the piano? —Yes, I ________.",
+    "answer": "A",
+    "grammarPoint": "情态动词",
+    "category": "动词",
+    "type": "choice",
+    "options": [
+      "A. can",
+      "B. can't",
+      "C. must",
+      "D. mustn't"
+    ],
+    "analysis": "本题考查情态动词can表示能力的用法。can表示'能够'，用于回答can引导的疑问句。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_4_2_choice_2_1767644233933_tkgi7hcgi",
+    "text": "You ________ be careful when crossing the street.",
+    "answer": "C",
+    "grammarPoint": "情态动词",
+    "category": "动词",
+    "type": "choice",
+    "options": [
+      "A. can",
+      "B. may",
+      "C. must",
+      "D. might"
+    ],
+    "analysis": "本题考查情态动词must表示必须的用法。must表示'必须'，强调必要性。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_4_2_fill_1_1767644233933_aer4ztc2o",
+    "text": "Students ________ (can) use mobile phones in class.",
+    "answer": "can't",
+    "grammarPoint": "情态动词",
+    "category": "动词",
+    "type": "fill_blank",
+    "analysis": "本题考查情态动词can的否定形式。can't表示'不能'，表示禁止。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_4_3_choice_1_1767644233933_lrschias3",
+    "text": "I want ________ English well.",
+    "answer": "B",
+    "grammarPoint": "非谓语动词",
+    "category": "动词",
+    "type": "choice",
+    "options": [
+      "A. learn",
+      "B. to learn",
+      "C. learning",
+      "D. learned"
+    ],
+    "analysis": "本题考查非谓语动词的用法。want后接不定式to do作宾语，表示'想要做某事'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_4_3_choice_2_1767644233933_2c6i76snx",
+    "text": "She is interested in ________ stamps.",
+    "answer": "C",
+    "grammarPoint": "非谓语动词",
+    "category": "动词",
+    "type": "choice",
+    "options": [
+      "A. collect",
+      "B. to collect",
+      "C. collecting",
+      "D. collected"
+    ],
+    "analysis": "本题考查非谓语动词的用法。be interested in后接动名词doing作宾语，表示'对做某事感兴趣'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_4_3_fill_1_1767644233933_14txzixqm",
+    "text": "My hobby is ________ (read) books in my free time.",
+    "answer": "reading",
+    "grammarPoint": "非谓语动词",
+    "category": "动词",
+    "type": "fill_blank",
+    "analysis": "本题考查非谓语动词的用法。动名词reading作表语，表示'阅读'这一活动。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_5_1_choice_1_1767644233933_y0c3tuzkn",
+    "text": "We usually have breakfast ________ 7 o'clock in the morning.",
+    "answer": "C",
+    "grammarPoint": "时间介词",
+    "category": "介词",
+    "type": "choice",
+    "options": [
+      "A. in",
+      "B. on",
+      "C. at",
+      "D. for"
+    ],
+    "analysis": "本题考查时间介词的用法。at用于具体的钟点时间，如at 7 o'clock。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_5_1_choice_2_1767644233933_qne0mbkaj",
+    "text": "The meeting will be held ________ April 24th.",
+    "answer": "B",
+    "grammarPoint": "时间介词",
+    "category": "介词",
+    "type": "choice",
+    "options": [
+      "A. in",
+      "B. on",
+      "C. at",
+      "D. for"
+    ],
+    "analysis": "本题考查时间介词的用法。on用于具体的日期，如on April 24th。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_5_1_fill_1_1767644233933_sz1dqnuv9",
+    "text": "We have English class ________ (在) Monday morning.",
+    "answer": "on",
+    "grammarPoint": "时间介词",
+    "category": "介词",
+    "type": "fill_blank",
+    "analysis": "本题考查时间介词的用法。on用于表示星期几或具体某天的上午/下午/晚上。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_5_2_choice_1_1767644233933_9xpzc07d4",
+    "text": "The library is ________ the school. It's very convenient.",
+    "answer": "A",
+    "grammarPoint": "地点介词",
+    "category": "介词",
+    "type": "choice",
+    "options": [
+      "A. in",
+      "B. on",
+      "C. at",
+      "D. to"
+    ],
+    "analysis": "本题考查地点介词的用法。in表示'在...里面'，the library is in the school表示'图书馆在学校里'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_5_2_choice_2_1767644233933_0rjt6jnw0",
+    "text": "Put the book ________ the desk, please.",
+    "answer": "B",
+    "grammarPoint": "地点介词",
+    "category": "介词",
+    "type": "choice",
+    "options": [
+      "A. in",
+      "B. on",
+      "C. at",
+      "D. to"
+    ],
+    "analysis": "本题考查地点介词的用法。on表示'在...上面'，put...on表示'把...放在...上面'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_5_2_fill_1_1767644233933_3q0rkm94i",
+    "text": "The cat is hiding ________ (在...下面) the table.",
+    "answer": "under",
+    "grammarPoint": "地点介词",
+    "category": "介词",
+    "type": "fill_blank",
+    "analysis": "本题考查地点介词的用法。under表示'在...下面'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_5_3_choice_1_1767644233933_ijnruzifj",
+    "text": "I go to school ________ bus every day.",
+    "answer": "C",
+    "grammarPoint": "其他介词",
+    "category": "介词",
+    "type": "choice",
+    "options": [
+      "A. in",
+      "B. on",
+      "C. by",
+      "D. with"
+    ],
+    "analysis": "本题考查表示交通方式的介词。by bus表示'乘公交车'，是固定搭配。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_5_3_choice_2_1767644233933_qukj3dwqp",
+    "text": "She came to the party ________ her friend.",
+    "answer": "D",
+    "grammarPoint": "其他介词",
+    "category": "介词",
+    "type": "choice",
+    "options": [
+      "A. in",
+      "B. on",
+      "C. by",
+      "D. with"
+    ],
+    "analysis": "本题考查介词的用法。with表示'和...一起'，符合语境。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_5_3_fill_1_1767644233933_t24fql0b0",
+    "text": "We traveled to Beijing ________ (乘) train last summer.",
+    "answer": "by",
+    "grammarPoint": "其他介词",
+    "category": "介词",
+    "type": "fill_blank",
+    "analysis": "本题考查表示交通方式的介词。by train表示'乘火车'，是固定搭配。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_6_1_choice_1_1767644233933_x0m65jx3g",
+    "text": "I need ________ hour to finish my homework.",
+    "answer": "B",
+    "grammarPoint": "不定冠词",
+    "category": "冠词",
+    "type": "choice",
+    "options": [
+      "A. a",
+      "B. an",
+      "C. the",
+      "D. /"
+    ],
+    "analysis": "本题考查不定冠词的用法。hour以元音音素开头，需用an。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_6_1_choice_2_1767644233933_55n5cyxgt",
+    "text": "There is ________ apple on the table.",
+    "answer": "B",
+    "grammarPoint": "不定冠词",
+    "category": "冠词",
+    "type": "choice",
+    "options": [
+      "A. a",
+      "B. an",
+      "C. the",
+      "D. /"
+    ],
+    "analysis": "本题考查不定冠词的用法。apple以元音音素开头，需用an。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_6_1_fill_1_1767644233933_7gnm3jluj",
+    "text": "This is ________ (a) useful book for students.",
+    "answer": "a",
+    "grammarPoint": "不定冠词",
+    "category": "冠词",
+    "type": "fill_blank",
+    "analysis": "本题考查不定冠词的用法。useful以辅音音素开头，需用a。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_1_6_2_choice_1_1767644233933_5dwivlrsk",
+    "text": "________ sun rises in the east.",
+    "answer": "C",
+    "grammarPoint": "定冠词",
+    "category": "冠词",
+    "type": "choice",
+    "options": [
+      "A. A",
+      "B. An",
+      "C. The",
+      "D. /"
+    ],
+    "analysis": "本题考查定冠词的用法。the用于表示世界上独一无二的事物，如the sun。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_6_2_choice_2_1767644233933_4ns3w0lw8",
+    "text": "I like playing ________ piano in my free time.",
+    "answer": "C",
+    "grammarPoint": "定冠词",
+    "category": "冠词",
+    "type": "choice",
+    "options": [
+      "A. a",
+      "B. an",
+      "C. the",
+      "D. /"
+    ],
+    "analysis": "本题考查定冠词的用法。the用于表示乐器的名称，如play the piano。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_6_2_fill_1_1767644233933_j8bx41i01",
+    "text": "________ (the) earth goes around the sun.",
+    "answer": "The",
+    "grammarPoint": "定冠词",
+    "category": "冠词",
+    "type": "fill_blank",
+    "analysis": "本题考查定冠词的用法。the用于表示世界上独一无二的事物，如the earth。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_6_3_choice_1_1767644233933_v3p56pdsl",
+    "text": "We have ________ lunch at 12 o'clock.",
+    "answer": "D",
+    "grammarPoint": "零冠词",
+    "category": "冠词",
+    "type": "choice",
+    "options": [
+      "A. a",
+      "B. an",
+      "C. the",
+      "D. /"
+    ],
+    "analysis": "本题考查零冠词的用法。have lunch是固定搭配，表示'吃午饭'，不需要冠词。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_6_3_choice_2_1767644233933_2ec3uqu6c",
+    "text": "She goes to ________ school by bike every day.",
+    "answer": "D",
+    "grammarPoint": "零冠词",
+    "category": "冠词",
+    "type": "choice",
+    "options": [
+      "A. a",
+      "B. an",
+      "C. the",
+      "D. /"
+    ],
+    "analysis": "本题考查零冠词的用法。go to school表示'去上学'，是固定搭配，不需要冠词。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_6_3_fill_1_1767644233933_l247fir50",
+    "text": "We usually play ________ (/) basketball after school.",
+    "answer": "",
+    "grammarPoint": "零冠词",
+    "category": "冠词",
+    "type": "fill_blank",
+    "analysis": "本题考查零冠词的用法。play basketball是固定搭配，表示'打篮球'，不需要冠词。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_7_1_choice_1_1767644233933_8qv3e361j",
+    "text": "Today is the ________ Saturday of this month.",
+    "answer": "B",
+    "grammarPoint": "基数词与序数词",
+    "category": "数词",
+    "type": "choice",
+    "options": [
+      "A. two",
+      "B. second",
+      "C. twice",
+      "D. second's"
+    ],
+    "analysis": "本题考查序数词的用法。the second Saturday表示'第二个星期六'，需用序数词second。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_7_1_choice_2_1767644233933_jo4ci6u7b",
+    "text": "There are ________ students in our class.",
+    "answer": "A",
+    "grammarPoint": "基数词与序数词",
+    "category": "数词",
+    "type": "choice",
+    "options": [
+      "A. twenty",
+      "B. twentieth",
+      "C. twenties",
+      "D. twenty's"
+    ],
+    "analysis": "本题考查基数词的用法。表示数量，需用基数词twenty。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_7_1_fill_1_1767644233933_x8qy6w6li",
+    "text": "This is my ________ (one) time to visit Beijing.",
+    "answer": "first",
+    "grammarPoint": "基数词与序数词",
+    "category": "数词",
+    "type": "fill_blank",
+    "analysis": "本题考查序数词的用法。the first time表示'第一次'，需用序数词first。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_7_2_choice_1_1767644233933_6ed4zlit6",
+    "text": "I go to the library ________ a week.",
+    "answer": "B",
+    "grammarPoint": "数词的应用",
+    "category": "数词",
+    "type": "choice",
+    "options": [
+      "A. one",
+      "B. once",
+      "C. first",
+      "D. ones"
+    ],
+    "analysis": "本题考查数词的应用。once a week表示'一周一次'，once表示'一次'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2023
+    ]
+  },
+  {
+    "_id": "middle_1_7_2_choice_2_1767644233933_5pdq6zk0l",
+    "text": "The book costs ________ dollars.",
+    "answer": "A",
+    "grammarPoint": "数词的应用",
+    "category": "数词",
+    "type": "choice",
+    "options": [
+      "A. ten",
+      "B. tenth",
+      "C. tens",
+      "D. ten's"
+    ],
+    "analysis": "本题考查基数词的用法。表示价格，需用基数词ten。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2023
+    ]
+  },
+  {
+    "_id": "middle_1_7_2_fill_1_1767644233933_08mietavq",
+    "text": "I brush my teeth ________ (two) a day.",
+    "answer": "twice",
+    "grammarPoint": "数词的应用",
+    "category": "数词",
+    "type": "fill_blank",
+    "analysis": "本题考查数词的应用。twice a day表示'一天两次'，twice表示'两次'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2023
+    ]
+  },
+  {
+    "_id": "middle_1_8_1_choice_1_1767644233933_f9odbzdxp",
+    "text": "I like English, ________ I don't like math.",
+    "answer": "B",
+    "grammarPoint": "并列连词",
+    "category": "连词",
+    "type": "choice",
+    "options": [
+      "A. and",
+      "B. but",
+      "C. or",
+      "D. so"
+    ],
+    "analysis": "本题考查并列连词的用法。but表示转折，符合语境'喜欢英语但不喜欢数学'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_8_1_choice_2_1767644233933_egfvcou7f",
+    "text": "You can have an apple ________ a banana.",
+    "answer": "C",
+    "grammarPoint": "并列连词",
+    "category": "连词",
+    "type": "choice",
+    "options": [
+      "A. and",
+      "B. but",
+      "C. or",
+      "D. so"
+    ],
+    "analysis": "本题考查并列连词的用法。or表示选择，符合语境'可以要苹果或香蕉'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_8_1_fill_1_1767644233933_nseq5y1u7",
+    "text": "Hurry up, ________ (or) you will be late for school.",
+    "answer": "or",
+    "grammarPoint": "并列连词",
+    "category": "连词",
+    "type": "fill_blank",
+    "analysis": "本题考查并列连词的用法。or表示'否则'，用于警告或建议。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_1_8_2_choice_1_1767644233933_3rlokw1hr",
+    "text": "I will call you ________ I arrive at the station.",
+    "answer": "A",
+    "grammarPoint": "从属连词",
+    "category": "连词",
+    "type": "choice",
+    "options": [
+      "A. when",
+      "B. where",
+      "C. what",
+      "D. which"
+    ],
+    "analysis": "本题考查从属连词的用法。when引导时间状语从句，表示'当...的时候'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_8_2_choice_2_1767644233933_wv2xhkhra",
+    "text": "I don't know ________ he will come or not.",
+    "answer": "A",
+    "grammarPoint": "从属连词",
+    "category": "连词",
+    "type": "choice",
+    "options": [
+      "A. if",
+      "B. that",
+      "C. what",
+      "D. which"
+    ],
+    "analysis": "本题考查从属连词的用法。if引导宾语从句，表示'是否'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_1_8_2_fill_1_1767644233933_tjgm4gymz",
+    "text": "We will go to the park ________ (if) it doesn't rain tomorrow.",
+    "answer": "if",
+    "grammarPoint": "从属连词",
+    "category": "连词",
+    "type": "fill_blank",
+    "analysis": "本题考查从属连词的用法。if引导条件状语从句，表示'如果'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_1_1_choice_1_1767644233933_idyz61296",
+    "text": "The students ________ English every day.",
+    "answer": "A",
+    "grammarPoint": "主谓宾结构",
+    "category": "句子成分与基本句型",
+    "type": "choice",
+    "options": [
+      "A. study",
+      "B. studies",
+      "C. studied",
+      "D. studying"
+    ],
+    "analysis": "本题考查主谓宾结构的用法。The students是复数主语，谓语动词用原形study。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_1_1_choice_2_1767644233933_r4skx4c2c",
+    "text": "My mother ________ delicious food for us.",
+    "answer": "B",
+    "grammarPoint": "主谓宾结构",
+    "category": "句子成分与基本句型",
+    "type": "choice",
+    "options": [
+      "A. cook",
+      "B. cooks",
+      "C. cooked",
+      "D. cooking"
+    ],
+    "analysis": "本题考查主谓宾结构的用法。My mother是第三人称单数主语，谓语动词用第三人称单数形式cooks。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_1_1_fill_1_1767644233933_wpi6ixix0",
+    "text": "The children ________ (play) football in the playground now.",
+    "answer": "are playing",
+    "grammarPoint": "主谓宾结构",
+    "category": "句子成分与基本句型",
+    "type": "fill_blank",
+    "analysis": "本题考查主谓宾结构的用法。The children是复数主语，现在进行时用are playing。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_1_2_choice_1_1767644233933_sttnsnhmz",
+    "text": "The flowers ________ beautiful in spring.",
+    "answer": "B",
+    "grammarPoint": "主系表结构",
+    "category": "句子成分与基本句型",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. was",
+      "D. were"
+    ],
+    "analysis": "本题考查主系表结构的用法。The flowers是复数主语，系动词用are。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_1_2_choice_2_1767644233933_19yqmfjg0",
+    "text": "She ________ a teacher in our school.",
+    "answer": "A",
+    "grammarPoint": "主系表结构",
+    "category": "句子成分与基本句型",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. was",
+      "D. were"
+    ],
+    "analysis": "本题考查主系表结构的用法。She是第三人称单数主语，系动词用is。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_1_2_fill_1_1767644233933_2pubzjra4",
+    "text": "The weather ________ (be) very nice today.",
+    "answer": "is",
+    "grammarPoint": "主系表结构",
+    "category": "句子成分与基本句型",
+    "type": "fill_blank",
+    "analysis": "本题考查主系表结构的用法。The weather是不可数名词，作单数处理，系动词用is。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_1_choice_1_1767644233933_gyck8p4t3",
+    "text": "The sun ________ in the east every day.",
+    "answer": "B",
+    "grammarPoint": "一般现在时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. rise",
+      "B. rises",
+      "C. rose",
+      "D. rising"
+    ],
+    "analysis": "本题考查一般现在时的用法。The sun是第三人称单数主语，谓语动词用第三人称单数形式rises。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2023
+    ]
+  },
+  {
+    "_id": "middle_2_2_1_choice_2_1767644233933_n2zffoftr",
+    "text": "We ________ to school by bus every morning.",
+    "answer": "A",
+    "grammarPoint": "一般现在时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. go",
+      "B. goes",
+      "C. went",
+      "D. going"
+    ],
+    "analysis": "本题考查一般现在时的用法。We是复数主语，谓语动词用原形go。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2023
+    ]
+  },
+  {
+    "_id": "middle_2_2_1_fill_1_1767644233933_0t49j6zz6",
+    "text": "The earth ________ (go) around the sun.",
+    "answer": "goes",
+    "grammarPoint": "一般现在时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查一般现在时的用法。表示客观真理，用一般现在时，The earth是第三人称单数，谓语动词用goes。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2023
+    ]
+  },
+  {
+    "_id": "middle_2_2_2_choice_1_1767644233933_ipafsnon9",
+    "text": "I ________ a movie with my friend yesterday.",
+    "answer": "B",
+    "grammarPoint": "一般过去时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. see",
+      "B. saw",
+      "C. seen",
+      "D. seeing"
+    ],
+    "analysis": "本题考查一般过去时的用法。yesterday表示过去时间，需用一般过去时saw。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_2_choice_2_1767644233933_7awl8hlno",
+    "text": "They ________ to the park last Sunday.",
+    "answer": "C",
+    "grammarPoint": "一般过去时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. go",
+      "B. goes",
+      "C. went",
+      "D. going"
+    ],
+    "analysis": "本题考查一般过去时的用法。last Sunday表示过去时间，需用一般过去时went。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_2_fill_1_1767644233933_rjq9qb81b",
+    "text": "She ________ (buy) a new dress last week.",
+    "answer": "bought",
+    "grammarPoint": "一般过去时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查一般过去时的用法。last week表示过去时间，需用一般过去时bought。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_3_choice_1_1767644233933_6w6lxeg8a",
+    "text": "I ________ visit my grandparents next week.",
+    "answer": "A",
+    "grammarPoint": "一般将来时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. will",
+      "B. would",
+      "C. shall",
+      "D. should"
+    ],
+    "analysis": "本题考查一般将来时的用法。next week表示将来时间，需用will表示将来。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_3_choice_2_1767644233933_ymosq2eqo",
+    "text": "We ________ have a party tomorrow evening.",
+    "answer": "A",
+    "grammarPoint": "一般将来时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. will",
+      "B. would",
+      "C. shall",
+      "D. should"
+    ],
+    "analysis": "本题考查一般将来时的用法。tomorrow evening表示将来时间，需用will表示将来。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_3_fill_1_1767644233933_9w0p3reeh",
+    "text": "They ________ (go) to Beijing next month.",
+    "answer": "will go",
+    "grammarPoint": "一般将来时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查一般将来时的用法。next month表示将来时间，需用will go表示将来。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_4_choice_1_1767644233933_ibaljqwu5",
+    "text": "Look! The children ________ in the playground.",
+    "answer": "C",
+    "grammarPoint": "现在进行时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. play",
+      "B. plays",
+      "C. are playing",
+      "D. played"
+    ],
+    "analysis": "本题考查现在进行时的用法。Look!表示正在进行的动作，需用现在进行时are playing。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_4_choice_2_1767644233933_7a2pocqxp",
+    "text": "Listen! Someone ________ at the door.",
+    "answer": "C",
+    "grammarPoint": "现在进行时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. knock",
+      "B. knocks",
+      "C. is knocking",
+      "D. knocked"
+    ],
+    "analysis": "本题考查现在进行时的用法。Listen!表示正在进行的动作，需用现在进行时is knocking。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_4_fill_1_1767644233933_ejod8obt9",
+    "text": "The students ________ (read) books in the library now.",
+    "answer": "are reading",
+    "grammarPoint": "现在进行时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查现在进行时的用法。now表示正在进行的动作，需用现在进行时are reading。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_5_choice_1_1767644233933_i77viojod",
+    "text": "I ________ my homework at 8 o'clock last night.",
+    "answer": "C",
+    "grammarPoint": "过去进行时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. do",
+      "B. did",
+      "C. was doing",
+      "D. am doing"
+    ],
+    "analysis": "本题考查过去进行时的用法。at 8 o'clock last night表示过去某个时间点正在进行的动作，需用过去进行时was doing。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_2_2_5_choice_2_1767644233933_axl0na6zf",
+    "text": "They ________ basketball when it started to rain.",
+    "answer": "C",
+    "grammarPoint": "过去进行时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. play",
+      "B. played",
+      "C. were playing",
+      "D. are playing"
+    ],
+    "analysis": "本题考查过去进行时的用法。when引导的时间状语从句表示过去某个时间点，主句需用过去进行时were playing。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_2_2_5_fill_1_1767644233933_zudpfb9oa",
+    "text": "She ________ (practice) the piano at that time yesterday.",
+    "answer": "was practicing",
+    "grammarPoint": "过去进行时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查过去进行时的用法。at that time yesterday表示过去某个时间点正在进行的动作，需用过去进行时was practicing。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_2_2_6_choice_1_1767644233933_exn89ejbq",
+    "text": "I ________ this book three times.",
+    "answer": "C",
+    "grammarPoint": "现在完成时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. read",
+      "B. reads",
+      "C. have read",
+      "D. had read"
+    ],
+    "analysis": "本题考查现在完成时的用法。three times表示动作发生的次数，强调结果，需用现在完成时have read。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_2_6_choice_2_1767644233933_9et80nhb9",
+    "text": "She ________ to Beijing twice.",
+    "answer": "C",
+    "grammarPoint": "现在完成时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. go",
+      "B. goes",
+      "C. has been",
+      "D. had been"
+    ],
+    "analysis": "本题考查现在完成时的用法。twice表示动作发生的次数，强调经历，需用现在完成时has been。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_2_6_fill_1_1767644233933_cr9esz2uy",
+    "text": "We ________ (know) each other for five years.",
+    "answer": "have known",
+    "grammarPoint": "现在完成时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查现在完成时的用法。for five years表示持续的时间，需用现在完成时have known。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_2_7_choice_1_1767644233933_q0hzu0tjs",
+    "text": "By the time I arrived, the meeting ________ already started.",
+    "answer": "B",
+    "grammarPoint": "过去完成时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. has",
+      "B. had",
+      "C. have",
+      "D. having"
+    ],
+    "analysis": "本题考查过去完成时的用法。By the time表示'到...时候为止'，主句动作发生在过去动作之前，需用过去完成时had started。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_7_choice_2_1767644233933_ha04x432n",
+    "text": "I ________ my homework before my father came back.",
+    "answer": "D",
+    "grammarPoint": "过去完成时",
+    "category": "动词时态",
+    "type": "choice",
+    "options": [
+      "A. finish",
+      "B. finished",
+      "C. have finished",
+      "D. had finished"
+    ],
+    "analysis": "本题考查过去完成时的用法。before表示'在...之前'，主句动作发生在过去动作之前，需用过去完成时had finished。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_2_7_fill_1_1767644233933_qzbt46ku7",
+    "text": "She ________ (leave) when I got to the station.",
+    "answer": "had left",
+    "grammarPoint": "过去完成时",
+    "category": "动词时态",
+    "type": "fill_blank",
+    "analysis": "本题考查过去完成时的用法。when引导的时间状语从句表示过去时间，主句动作发生在该时间之前，需用过去完成时had left。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_3_1_choice_1_1767644233933_mqaklntju",
+    "text": "English ________ all over the world.",
+    "answer": "C",
+    "grammarPoint": "一般时态的被动语态",
+    "category": "被动语态",
+    "type": "choice",
+    "options": [
+      "A. speak",
+      "B. speaks",
+      "C. is spoken",
+      "D. spoke"
+    ],
+    "analysis": "本题考查一般现在时被动语态的用法。English是动作的承受者，需用被动语态is spoken。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_3_1_choice_2_1767644233933_chm22eow5",
+    "text": "The meeting ________ next Monday.",
+    "answer": "B",
+    "grammarPoint": "一般时态的被动语态",
+    "category": "被动语态",
+    "type": "choice",
+    "options": [
+      "A. will hold",
+      "B. will be held",
+      "C. holds",
+      "D. held"
+    ],
+    "analysis": "本题考查一般将来时被动语态的用法。The meeting是动作的承受者，需用被动语态will be held。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_3_1_fill_1_1767644233933_juucspkpd",
+    "text": "Many trees ________ (plant) in our school every year.",
+    "answer": "are planted",
+    "grammarPoint": "一般时态的被动语态",
+    "category": "被动语态",
+    "type": "fill_blank",
+    "analysis": "本题考查一般现在时被动语态的用法。Many trees是动作的承受者，需用被动语态are planted。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_3_2_choice_1_1767644233933_vgvfyls8e",
+    "text": "The work ________ by the workers.",
+    "answer": "B",
+    "grammarPoint": "完成时态的被动语态",
+    "category": "被动语态",
+    "type": "choice",
+    "options": [
+      "A. has finished",
+      "B. has been finished",
+      "C. finished",
+      "D. finishes"
+    ],
+    "analysis": "本题考查现在完成时被动语态的用法。The work是动作的承受者，需用被动语态has been finished。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_3_2_choice_2_1767644233933_27s8p23c1",
+    "text": "The bridge ________ before we arrived.",
+    "answer": "C",
+    "grammarPoint": "完成时态的被动语态",
+    "category": "被动语态",
+    "type": "choice",
+    "options": [
+      "A. built",
+      "B. was built",
+      "C. had been built",
+      "D. has been built"
+    ],
+    "analysis": "本题考查过去完成时被动语态的用法。The bridge是动作的承受者，动作发生在过去动作之前，需用过去完成时被动语态had been built。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_3_2_fill_1_1767644233933_8g1y88uib",
+    "text": "All the tickets ________ (sell) out by the time we got there.",
+    "answer": "had been sold",
+    "grammarPoint": "完成时态的被动语态",
+    "category": "被动语态",
+    "type": "fill_blank",
+    "analysis": "本题考查过去完成时被动语态的用法。All the tickets是动作的承受者，动作发生在过去动作之前，需用过去完成时被动语态had been sold。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_1_choice_1_1767644233933_5bg7v68pg",
+    "text": "Each of the students ________ a book.",
+    "answer": "B",
+    "grammarPoint": "语法一致原则",
+    "category": "主谓一致",
+    "type": "choice",
+    "options": [
+      "A. have",
+      "B. has",
+      "C. having",
+      "D. had"
+    ],
+    "analysis": "本题考查主谓一致的语法一致原则。Each of the students作主语时，谓语动词用单数形式has。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_1_choice_2_1767644233933_79o7brsxq",
+    "text": "The number of students ________ increasing.",
+    "answer": "A",
+    "grammarPoint": "语法一致原则",
+    "category": "主谓一致",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. be",
+      "D. being"
+    ],
+    "analysis": "本题考查主谓一致的语法一致原则。The number of表示'...的数量'，作主语时，谓语动词用单数形式is。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_1_fill_1_1767644233933_cdefwn6ow",
+    "text": "Neither of the two boys ________ (be) good at math.",
+    "answer": "is",
+    "grammarPoint": "语法一致原则",
+    "category": "主谓一致",
+    "type": "fill_blank",
+    "analysis": "本题考查主谓一致的语法一致原则。Neither of表示'两者都不'，作主语时，谓语动词用单数形式is。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_2_choice_1_1767644233933_odi386r0y",
+    "text": "The family ________ watching TV now.",
+    "answer": "B",
+    "grammarPoint": "意义一致原则",
+    "category": "主谓一致",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. be",
+      "D. being"
+    ],
+    "analysis": "本题考查主谓一致的意义一致原则。The family表示'家庭成员'，强调个体，谓语动词用复数形式are。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_2_choice_2_1767644233933_ehyxi2lrn",
+    "text": "Three years ________ a long time.",
+    "answer": "A",
+    "grammarPoint": "意义一致原则",
+    "category": "主谓一致",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. be",
+      "D. being"
+    ],
+    "analysis": "本题考查主谓一致的意义一致原则。Three years表示'三年时间'，作为一个整体，谓语动词用单数形式is。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_2_fill_1_1767644233933_xqizqlkfe",
+    "text": "The police ________ (be) looking for the missing child.",
+    "answer": "are",
+    "grammarPoint": "意义一致原则",
+    "category": "主谓一致",
+    "type": "fill_blank",
+    "analysis": "本题考查主谓一致的意义一致原则。The police表示'警察'，是复数概念，谓语动词用复数形式are。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_4_3_choice_1_1767644233933_r5o8jth8p",
+    "text": "Either you or I ________ wrong.",
+    "answer": "C",
+    "grammarPoint": "就近原则",
+    "category": "主谓一致",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. am",
+      "D. be"
+    ],
+    "analysis": "本题考查主谓一致的就近原则。Either...or连接两个主语时，谓语动词与最近的主语I保持一致，用am。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_2_4_3_choice_2_1767644233933_ikz3e5al8",
+    "text": "Neither the teacher nor the students ________ in the classroom.",
+    "answer": "B",
+    "grammarPoint": "就近原则",
+    "category": "主谓一致",
+    "type": "choice",
+    "options": [
+      "A. is",
+      "B. are",
+      "C. be",
+      "D. being"
+    ],
+    "analysis": "本题考查主谓一致的就近原则。Neither...nor连接两个主语时，谓语动词与最近的主语the students保持一致，用are。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_2_4_3_fill_1_1767644233933_gmi0hgcts",
+    "text": "Not only Tom but also his friends ________ (like) playing basketball.",
+    "answer": "like",
+    "grammarPoint": "就近原则",
+    "category": "主谓一致",
+    "type": "fill_blank",
+    "analysis": "本题考查主谓一致的就近原则。Not only...but also连接两个主语时，谓语动词与最近的主语his friends保持一致，用复数形式like。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐",
+    "examYears": [
+      2024
+    ]
+  },
+  {
+    "_id": "middle_2_5_1_choice_1_1767644233933_k83pdxjzf",
+    "text": "I don't know ________ he will come tomorrow.",
+    "answer": "C",
+    "grammarPoint": "宾语从句",
+    "category": "复合句",
+    "type": "choice",
+    "options": [
+      "A. that",
+      "B. what",
+      "C. if",
+      "D. which"
+    ],
+    "analysis": "本题考查宾语从句的用法。if引导宾语从句，表示'是否'，符合语境。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_1_choice_2_1767644233933_huidvqkvt",
+    "text": "Can you tell me ________ the library is?",
+    "answer": "C",
+    "grammarPoint": "宾语从句",
+    "category": "复合句",
+    "type": "choice",
+    "options": [
+      "A. that",
+      "B. what",
+      "C. where",
+      "D. which"
+    ],
+    "analysis": "本题考查宾语从句的用法。where引导宾语从句，表示'在哪里'，符合语境。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_1_fill_1_1767644233933_z84hnuxah",
+    "text": "I wonder ________ (when) you joined the club.",
+    "answer": "when",
+    "grammarPoint": "宾语从句",
+    "category": "复合句",
+    "type": "fill_blank",
+    "analysis": "本题考查宾语从句的用法。when引导宾语从句，表示'什么时候'，符合语境。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2023,
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_2_choice_1_1767644233933_5jen08cvw",
+    "text": "The book ________ I bought yesterday is very interesting.",
+    "answer": "A",
+    "grammarPoint": "定语从句",
+    "category": "复合句",
+    "type": "choice",
+    "options": [
+      "A. that",
+      "B. what",
+      "C. where",
+      "D. which"
+    ],
+    "analysis": "本题考查定语从句的用法。that引导定语从句，修饰先行词The book，在从句中作宾语。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_2_choice_2_1767644233933_evo1jio26",
+    "text": "This is the school ________ I studied three years ago.",
+    "answer": "C",
+    "grammarPoint": "定语从句",
+    "category": "复合句",
+    "type": "choice",
+    "options": [
+      "A. that",
+      "B. what",
+      "C. where",
+      "D. which"
+    ],
+    "analysis": "本题考查定语从句的用法。where引导定语从句，修饰先行词the school，在从句中作地点状语。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_2_fill_1_1767644233933_ehah7ttoj",
+    "text": "The girl ________ (who) is singing is my sister.",
+    "answer": "who",
+    "grammarPoint": "定语从句",
+    "category": "复合句",
+    "type": "fill_blank",
+    "analysis": "本题考查定语从句的用法。who引导定语从句，修饰先行词The girl，在从句中作主语。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐⭐",
+    "examYears": [
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_3_choice_1_1767644233933_gqp6vkxsk",
+    "text": "I will call you ________ I arrive at the station.",
+    "answer": "A",
+    "grammarPoint": "状语从句",
+    "category": "复合句",
+    "type": "choice",
+    "options": [
+      "A. when",
+      "B. where",
+      "C. what",
+      "D. which"
+    ],
+    "analysis": "本题考查状语从句的用法。when引导时间状语从句，表示'当...的时候'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_3_choice_2_1767644233933_ddgv8kc55",
+    "text": "We will go to the park ________ it doesn't rain tomorrow.",
+    "answer": "A",
+    "grammarPoint": "状语从句",
+    "category": "复合句",
+    "type": "choice",
+    "options": [
+      "A. if",
+      "B. that",
+      "C. what",
+      "D. which"
+    ],
+    "analysis": "本题考查状语从句的用法。if引导条件状语从句，表示'如果'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_5_3_fill_1_1767644233933_rowbkudvc",
+    "text": "She was so tired ________ (that) she fell asleep immediately.",
+    "answer": "that",
+    "grammarPoint": "状语从句",
+    "category": "复合句",
+    "type": "fill_blank",
+    "analysis": "本题考查状语从句的用法。so...that引导结果状语从句，表示'如此...以至于'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_6_1_choice_1_1767644233933_mxdk4cs4d",
+    "text": "________ a book on the desk.",
+    "answer": "A",
+    "grammarPoint": "There be 句型",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. There is",
+      "B. There are",
+      "C. It is",
+      "D. They are"
+    ],
+    "analysis": "本题考查There be句型的用法。There is用于单数名词，表示'有'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_1_choice_2_1767644233933_r5r6547vv",
+    "text": "________ many students in the classroom.",
+    "answer": "B",
+    "grammarPoint": "There be 句型",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. There is",
+      "B. There are",
+      "C. It is",
+      "D. They are"
+    ],
+    "analysis": "本题考查There be句型的用法。There are用于复数名词，表示'有'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_1_fill_1_1767644233933_pr8i4tk39",
+    "text": "________ (there) be a meeting this afternoon.",
+    "answer": "There will",
+    "grammarPoint": "There be 句型",
+    "category": "特殊句式",
+    "type": "fill_blank",
+    "analysis": "本题考查There be句型的用法。There will be表示将来'将有'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_2_choice_1_1767644233933_2dkmrjj2b",
+    "text": "________ a beautiful day it is!",
+    "answer": "A",
+    "grammarPoint": "感叹句",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. What",
+      "B. How",
+      "C. That",
+      "D. Which"
+    ],
+    "analysis": "本题考查感叹句的用法。What a + 形容词 + 名词 + 主谓结构，表示'多么...的一天'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_6_2_choice_2_1767644233933_8604h5ksa",
+    "text": "________ kind the boy is!",
+    "answer": "B",
+    "grammarPoint": "感叹句",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. What",
+      "B. How",
+      "C. That",
+      "D. Which"
+    ],
+    "analysis": "本题考查感叹句的用法。How + 形容词 + 主谓结构，表示'多么...'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_6_2_fill_1_1767644233933_d3pstcmhi",
+    "text": "________ (what) a meaningful day it is!",
+    "answer": "What",
+    "grammarPoint": "感叹句",
+    "category": "特殊句式",
+    "type": "fill_blank",
+    "analysis": "本题考查感叹句的用法。What a + 形容词 + 名词 + 主谓结构，表示'多么有意义的一天'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐⭐⭐",
+    "examYears": [
+      2024,
+      2025
+    ]
+  },
+  {
+    "_id": "middle_2_6_3_choice_1_1767644233933_o6ufwch3c",
+    "text": "________ quiet, please. The baby is sleeping.",
+    "answer": "A",
+    "grammarPoint": "祈使句",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. Be",
+      "B. Being",
+      "C. To be",
+      "D. Been"
+    ],
+    "analysis": "本题考查祈使句的用法。Be quiet是祈使句，表示'请安静'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_3_choice_2_1767644233933_bgfpsmyk9",
+    "text": "________ the door when you leave.",
+    "answer": "A",
+    "grammarPoint": "祈使句",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. Close",
+      "B. Closing",
+      "C. To close",
+      "D. Closed"
+    ],
+    "analysis": "本题考查祈使句的用法。Close the door是祈使句，表示'关门'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_3_fill_1_1767644233933_5xb562uyq",
+    "text": "________ (not) be late for school again.",
+    "answer": "Don't",
+    "grammarPoint": "祈使句",
+    "category": "特殊句式",
+    "type": "fill_blank",
+    "analysis": "本题考查祈使句的用法。Don't be late是祈使句的否定形式，表示'不要迟到'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_4_choice_1_1767644233933_l90m8cj4k",
+    "text": "________ did I know that he was a teacher.",
+    "answer": "A",
+    "grammarPoint": "倒装句",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. Little",
+      "B. Few",
+      "C. Many",
+      "D. Much"
+    ],
+    "analysis": "本题考查倒装句的用法。Little放在句首，句子需倒装，表示'我几乎不知道'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_4_choice_2_1767644233933_076afn9tz",
+    "text": "________ can you find such a good friend.",
+    "answer": "A",
+    "grammarPoint": "倒装句",
+    "category": "特殊句式",
+    "type": "choice",
+    "options": [
+      "A. Seldom",
+      "B. Often",
+      "C. Always",
+      "D. Usually"
+    ],
+    "analysis": "本题考查倒装句的用法。Seldom放在句首，句子需倒装，表示'很少能找到'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  },
+  {
+    "_id": "middle_2_6_4_fill_1_1767644233933_eo9k0u9ic",
+    "text": "________ (never) have I seen such a beautiful sunset.",
+    "answer": "Never",
+    "grammarPoint": "倒装句",
+    "category": "特殊句式",
+    "type": "fill_blank",
+    "analysis": "本题考查倒装句的用法。Never放在句首，句子需倒装，表示'我从未见过'。",
+    "difficulty": "medium",
+    "province": "云南",
+    "year": 2025,
+    "source": "题库",
+    "schoolLevel": "middle",
+    "examFrequency": "⭐",
+    "examYears": []
+  }
+]

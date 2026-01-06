@@ -125,3 +125,4 @@ console.log('2. 替换数组内容为您的题目数据');
 console.log('3. 运行: wx.validateBatchData(您的变量名, "批次名称")');
 console.log('4. 确认验证通过后再进行导入');
 
+

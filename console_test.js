@@ -43,3 +43,4 @@ if (typeof wx !== 'undefined') {
   console.log('❌ 不在小程序环境中，请在微信开发者工具控制台中运行');
 }
 
+

@@ -317,21 +317,41 @@
     </view>
   </view>
 
-  <!-- 操作按钮 -->
-  <!-- 专题模式：选择专题和题型后显示按钮 -->
-  <view class="action-buttons" wx:if="{{homeworkType === 'topic-middle' && selectedTopics.length > 0}}">
-    <button 
-      class="btn btn-primary btn-full" 
-      bindtap="goToPreview"
-    >进入预览</button>
+  <!-- 悬浮预览按钮（小球样式） -->
+  <!-- 专题模式：选择专题和题型后显示 -->
+  <view 
+    class="floating-preview-btn show" 
+    wx:if="{{homeworkType === 'topic-middle' && selectedTopics.length > 0}}"
+    bindtap="goToPreview"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">👁</text>
+      <text class="floating-btn-text">预览</text>
+    </view>
   </view>
   
-  <!-- 自选模式：选择知识点后显示按钮 -->
-  <view class="action-buttons" wx:if="{{homeworkType === 'custom-middle' && selectedTags.length > 0}}">
-    <button 
-      class="btn btn-primary btn-full" 
-      bindtap="goToPreview"
-    >我选好了</button>
+  <!-- 自选模式：选择知识点后显示 -->
+  <view 
+    class="floating-preview-btn show" 
+    wx:if="{{homeworkType === 'custom-middle' && selectedTags.length > 0}}"
+    bindtap="goToPreview"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">✓</text>
+      <text class="floating-btn-text">我选好了</text>
+    </view>
+  </view>
+  
+  <!-- 中考配比模式：生成配比后显示 -->
+  <view 
+    class="floating-preview-btn show" 
+    wx:if="{{homeworkType === 'zhongkao' && zhongkaoRatio.selectedGrammarPoints.length > 0}}"
+    bindtap="goToPreview"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">👁</text>
+      <text class="floating-btn-text">预览</text>
+    </view>
   </view>
 
 </view>

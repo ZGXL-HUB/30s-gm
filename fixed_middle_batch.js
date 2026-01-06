@@ -21,3 +21,4 @@ var middleBatch_001 = [
 console.log(`准备上传第1批初中习题，共 ${middleBatch_001.length} 道题目`);
 wx.syncUpload(middleBatch_001, {schoolLevel: "middle"});
 
+

@@ -668,37 +668,86 @@
   transform: scale(0.9);
 }
 
-/* 操作按钮 */
-.action-buttons {
-  display: flex;
-  gap: 20rpx;
-  padding: 30rpx 0;
-  position: relative;
-  z-index: 1001;
-  background: #f8f9fa;
-  border-top: 1rpx solid #e0e0e0;
-}
-
-.btn-full {
-  width: 100%;
-  margin: 0;
-}
-
-.btn {
-  flex: 1;
-  height: 80rpx;
-  border-radius: 40rpx;
-  font-size: 26rpx;
-  font-weight: bold;
+/* 悬浮预览按钮（小球样式） */
+.floating-preview-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 120rpx;
+  z-index: 999;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 12rpx 40rpx rgba(102, 126, 234, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  opacity: 0;
+  transform: scale(0.8) translateY(20rpx);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+.floating-preview-btn.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  animation: floatingBounce 2s ease-in-out infinite;
+}
+
+.floating-preview-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.floating-btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: white;
+}
+
+.floating-btn-icon {
+  font-size: 44rpx;
+  line-height: 1;
+  margin-bottom: 4rpx;
+  display: block;
+}
+
+.floating-btn-text {
+  font-size: 20rpx;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 悬浮动画 */
+@keyframes floatingBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10rpx) scale(1.02);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 350px) {
+  .floating-preview-btn {
+    right: 30rpx;
+    bottom: 100rpx;
+    width: 100rpx;
+    height: 100rpx;
+  }
+  
+  .floating-btn-icon {
+    font-size: 36rpx;
+  }
+  
+  .floating-btn-text {
+    font-size: 18rpx;
+  }
 }
 
 /* 开发提示样式 */

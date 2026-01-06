@@ -59,3 +59,4 @@ try {
 } catch (error) {
   console.error('❌ 检查过程中出错:', error);
 }
+

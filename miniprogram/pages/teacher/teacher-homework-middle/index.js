@@ -135,8 +135,8 @@ Page({
             selected: false,
             disabled: false,
             points: [
-              { id: '可数与不可数名词', name: '可数与不可数名词', status: 'covered', years: [2024], questionCount: { choice: 20, fill: 20 } },
-              { id: '名词所有格', name: '名词所有格', status: 'covered', years: [2024], questionCount: { choice: 20, fill: 20 } }
+              { id: '名词所有格', name: '名词所有格', status: 'covered', years: [2023, 2024], questionCount: { choice: 20, fill: 20 } },
+              { id: '名词的复数', name: '名词的复数', status: 'covered', years: [2023, 2025], questionCount: { choice: 20, fill: 20 } }
             ]
           },
           {
@@ -899,9 +899,10 @@ Page({
   },
 
   /**
-   * 【中考配比专用函数】
+   * 【中考配比专用函数 - 基于真题清单】
    * 执行中考配比系统组合逻辑
-   * 功能：生成正好15题（10选择+5填空），其中"时态"必选2题，"语态"必选1题
+   * 功能：严格按照真题清单生成知识点，避免模糊匹配
+   * 根据2023-2025年云南中考真题清单生成
    */
   async executeZhongkaoSystemCombo() {
     try {
@@ -913,111 +914,166 @@ Page({
       
       console.log(`生成${yearPackage}年套餐，${choiceCount}选择+${fillCount}填空`);
       
-      // 根据年份套餐筛选知识点（优先选择该年份考过的）
-      const selectedPoints = {
-        choice: [],  // 选择题语法点
-        fill: []     // 填空题语法点
+      // 根据真题清单定义的知识点（严格按照真题）
+      const examPointsByYear = {
+        '2025': {
+          choice: [
+            { grammarPoint: '物主代词', path: '1.2.2', category: '代词' },
+            { grammarPoint: '情态动词', path: '1.4.2', category: '动词' },
+            { grammarPoint: '其他介词', path: '1.5.3', category: '介词' },
+            { grammarPoint: '感叹句', path: '2.6.2', category: '特殊句式' },
+            { grammarPoint: '并列连词', path: '1.8.1', category: '连词' },
+            { grammarPoint: '名词的复数', path: '1.1.2', category: '名词' },
+            { grammarPoint: '比较级和最高级', path: '1.3.3', category: '形容词与副词' },
+            { grammarPoint: '现在完成时', path: '2.2.6', category: '动词时态' },
+            { grammarPoint: '一般时态的被动语态', path: '2.3.1', category: '被动语态' },
+            { grammarPoint: '宾语从句', path: '2.5.1', category: '复合句' }
+          ],
+          fill: [
+            { grammarPoint: '基数词与序数词', path: '1.7.1', category: '数词' },
+            { grammarPoint: '人称代词', path: '1.2.1', category: '代词' },
+            { grammarPoint: '形容词作定语', path: '1.3.1', category: '形容词与副词' },
+            { grammarPoint: '副词的基本用法', path: '1.3.2', category: '形容词与副词' },
+            { grammarPoint: '名词的复数', path: '1.1.2', category: '名词' }
+          ]
+        },
+        '2024': {
+          choice: [
+            { grammarPoint: '反身代词', path: '1.2.3', category: '代词' },
+            { grammarPoint: '时间介词', path: '1.5.1', category: '介词' },
+            { grammarPoint: '情态动词', path: '1.4.2', category: '动词' },
+            { grammarPoint: '感叹句', path: '2.6.2', category: '特殊句式' },
+            { grammarPoint: '动词的形式', path: '1.4.1', category: '动词' },
+            { grammarPoint: '比较级和最高级', path: '1.3.3', category: '形容词与副词' },
+            { grammarPoint: '过去进行时', path: '2.2.5', category: '动词时态' },
+            { grammarPoint: '一般时态的被动语态', path: '2.3.1', category: '被动语态' },
+            { grammarPoint: '非谓语动词', path: '1.4.3', category: '动词' },
+            { grammarPoint: '宾语从句', path: '2.5.1', category: '复合句' }
+          ],
+          fill: [
+            { grammarPoint: '名词所有格', path: '1.1.1', category: '名词' },
+            { grammarPoint: '形容词作定语', path: '1.3.1', category: '形容词与副词' },
+            { grammarPoint: '形容词作定语', path: '1.3.1', category: '形容词与副词' }, // 重复，但真题中有2题
+            { grammarPoint: '副词的基本用法', path: '1.3.2', category: '形容词与副词' },
+            { grammarPoint: '现在完成时', path: '2.2.6', category: '动词时态' }
+          ]
+        },
+        '2023': {
+          choice: [
+            { grammarPoint: '物主代词', path: '1.2.2', category: '代词' },
+            { grammarPoint: '时间介词', path: '1.5.1', category: '介词' },
+            { grammarPoint: '情态动词', path: '1.4.2', category: '动词' },
+            { grammarPoint: '并列连词', path: '1.8.1', category: '连词' },
+            { grammarPoint: '动词的形式', path: '1.4.1', category: '动词' },
+            { grammarPoint: '比较级和最高级', path: '1.3.3', category: '形容词与副词' },
+            { grammarPoint: '现在进行时', path: '2.2.4', category: '动词时态' },
+            { grammarPoint: '现在完成时', path: '2.2.6', category: '动词时态' },
+            { grammarPoint: '非谓语动词', path: '1.4.3', category: '动词' },
+            { grammarPoint: '宾语从句', path: '2.5.1', category: '复合句' }
+          ],
+          fill: [
+            { grammarPoint: '数词的应用', path: '1.7.2', category: '数词' },
+            { grammarPoint: '名词的复数', path: '1.1.2', category: '名词' },
+            { grammarPoint: '形容词作定语', path: '1.3.1', category: '形容词与副词' },
+            { grammarPoint: '名词所有格', path: '1.1.1', category: '名词' },
+            { grammarPoint: '副词的基本用法', path: '1.3.2', category: '形容词与副词' }
+          ]
+        }
       };
-      const usedGrammarPoints = new Set();
       
-      // 第一步：必选"时态"2题（1选择+1填空）和"语态"1题（1选择）
-      const requiredRules = [
-        { category: '时态', choice: 1, fill: 1 },
-        { category: '被动语态', choice: 1, fill: 0 }
-      ];
-      
-      for (const rule of requiredRules) {
-        const grammarPoints = this.getGrammarPointsByCategory(rule.category, yearPackage);
-        
-        // 选择选择题语法点
-        if (rule.choice > 0 && grammarPoints.length > 0) {
-          const availablePoints = grammarPoints.filter(p => !usedGrammarPoints.has(p));
-          if (availablePoints.length > 0) {
-            const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
-            selectedPoints.choice.push(randomPoint);
-            usedGrammarPoints.add(randomPoint);
-          }
-        }
-        
-        // 选择填空题语法点
-        if (rule.fill > 0 && grammarPoints.length > 0) {
-          const availablePoints = grammarPoints.filter(p => !usedGrammarPoints.has(p));
-          if (availablePoints.length > 0) {
-            const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
-            selectedPoints.fill.push(randomPoint);
-            usedGrammarPoints.add(randomPoint);
-          }
-        }
+      // 获取当前年份的知识点配置
+      const yearPoints = examPointsByYear[yearPackage];
+      if (!yearPoints) {
+        throw new Error(`未找到${yearPackage}年的真题配置`);
       }
       
-      // 第二步：从其他分类中随机选择剩余题目
-      const remainingChoiceCount = choiceCount - selectedPoints.choice.length;
-      const remainingFillCount = fillCount - selectedPoints.fill.length;
+      // 构建选中知识点列表
+      const selectedPoints = {
+        choice: yearPoints.choice.slice(0, choiceCount).map(p => ({
+          grammarPoint: p.grammarPoint,
+          type: 'choice',
+          count: 1,
+          category: p.category,
+          path: p.path
+        })),
+        fill: yearPoints.fill.slice(0, fillCount).map(p => ({
+          grammarPoint: p.grammarPoint,
+          type: 'fill_blank',
+          count: 1,
+          category: p.category,
+          path: p.path
+        }))
+      };
       
-      // 获取所有可用分类（排除已选的必选分类）
-      const allCategories = this.getAllCategories(yearPackage);
-      const usedCategories = new Set(['时态', '被动语态']);
-      const availableCategories = allCategories.filter(cat => !usedCategories.has(cat));
+      console.log(`✅ 根据真题清单生成知识点：选择${selectedPoints.choice.length}题，填空${selectedPoints.fill.length}题`);
       
-      // 随机选择分类并分配题目
-      const shuffledCategories = [...availableCategories].sort(() => Math.random() - 0.5);
-      
-      // 分配选择题
-      let choiceIndex = 0;
-      for (let i = 0; i < remainingChoiceCount && choiceIndex < shuffledCategories.length; i++) {
-        const category = shuffledCategories[choiceIndex % shuffledCategories.length];
-        const grammarPoints = this.getGrammarPointsByCategory(category, yearPackage);
-        const availablePoints = grammarPoints.filter(p => !usedGrammarPoints.has(p));
-        
-        if (availablePoints.length > 0) {
-          const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
-          selectedPoints.choice.push(randomPoint);
-          usedGrammarPoints.add(randomPoint);
+      // 构建知识点+type+数量的标签列表（用于前端显示）
+      // 注意：每个题目都生成一个标签，即使知识点重复也要显示
+      const selectedTags = [];
+      selectedPoints.choice.forEach(point => {
+        for (let i = 0; i < point.count; i++) {
+          selectedTags.push({
+            name: point.grammarPoint,
+            type: 'choice',
+            category: point.category,
+            path: point.path,
+            displayName: `${point.grammarPoint}（选择）`
+          });
         }
-        choiceIndex++;
-      }
-      
-      // 分配填空题
-      let fillIndex = 0;
-      for (let i = 0; i < remainingFillCount && fillIndex < shuffledCategories.length; i++) {
-        const category = shuffledCategories[fillIndex % shuffledCategories.length];
-        const grammarPoints = this.getGrammarPointsByCategory(category, yearPackage);
-        const availablePoints = grammarPoints.filter(p => !usedGrammarPoints.has(p));
-        
-        if (availablePoints.length > 0) {
-          const randomPoint = availablePoints[Math.floor(Math.random() * availablePoints.length)];
-          selectedPoints.fill.push(randomPoint);
-          usedGrammarPoints.add(randomPoint);
-        }
-        fillIndex++;
-      }
-      
-      // 更新界面显示
-      const allSelectedPoints = [...selectedPoints.choice, ...selectedPoints.fill];
-      const topics = this.data.grammarTopics.map(topic => {
-        const updatedPoints = topic.points ? topic.points.map(point => {
-          const pointName = point.name || point.id;
-          return {
-            ...point,
-            selected: allSelectedPoints.includes(pointName)
-          };
-        }) : [];
-        
-        return {
-          ...topic,
-          points: updatedPoints
-        };
       });
+      selectedPoints.fill.forEach(point => {
+        for (let i = 0; i < point.count; i++) {
+          selectedTags.push({
+            name: point.grammarPoint,
+            type: 'fill_blank',
+            category: point.category,
+            path: point.path,
+            displayName: `${point.grammarPoint}（填空）`
+          });
+        }
+      });
+      
+      // 验证：确保生成了15个标签（10选择+5填空）
+      const expectedTotal = choiceCount + fillCount;
+      
+      // 统计唯一知识点数量
+      const uniquePoints = new Set(selectedTags.map(t => t.name));
+      const uniqueCount = uniquePoints.size;
+      
+      console.log(`📊 ${yearPackage}年知识点统计：`);
+      console.log(`   - 总题数：${expectedTotal}题（${choiceCount}选择+${fillCount}填空）`);
+      console.log(`   - 生成的标签数：${selectedTags.length}个`);
+      console.log(`   - 唯一知识点数：${uniqueCount}个`);
+      console.log(`   - 唯一知识点列表：[${Array.from(uniquePoints).join(', ')}]`);
+      
+      if (selectedTags.length !== expectedTotal) {
+        console.warn(`⚠️ 标签数量不匹配：期望${expectedTotal}个，实际${selectedTags.length}个`);
+      } else {
+        console.log(`✅ 标签生成正确：共${selectedTags.length}个标签（${choiceCount}选择+${fillCount}填空）`);
+      }
       
       // 更新中考配比数据
+      const distributionData = {
+        choice: selectedPoints.choice,
+        fill: selectedPoints.fill
+      };
+      
+      console.log(`📝 executeZhongkaoSystemCombo 设置 distribution:`);
+      console.log(`   - 年份：${yearPackage}`);
+      console.log(`   - 选择题知识点：${selectedPoints.choice.map(p => p.grammarPoint).join(', ')}`);
+      console.log(`   - 填空题知识点：${selectedPoints.fill.map(p => p.grammarPoint).join(', ')}`);
+      console.log(`   - distribution 数据：`, JSON.stringify(distributionData, null, 2));
+      
       this.setData({ 
-        grammarTopics: topics,
-        'zhongkaoRatio.selectedGrammarPoints': allSelectedPoints,
-        'zhongkaoRatio.distribution': {
-          choice: selectedPoints.choice,
-          fill: selectedPoints.fill
-        }
+        'zhongkaoRatio.selectedGrammarPoints': selectedTags.map(t => t.name),
+        'zhongkaoRatio.distribution': distributionData,
+        selectedTags: selectedTags,
+        totalChoiceQuestions: choiceCount,
+        totalFillQuestions: fillCount,
+        totalQuestions: choiceCount + fillCount
       });
+      
+      console.log(`✅ executeZhongkaoSystemCombo 完成，已设置 distribution`);
       
       wx.hideLoading();
       wx.showToast({
@@ -1029,10 +1085,53 @@ Page({
       console.error('生成中考配比失败:', error);
       wx.hideLoading();
       wx.showToast({
-        title: '生成失败',
-        icon: 'error'
+        title: '生成失败: ' + error.message,
+        icon: 'error',
+        duration: 3000
       });
     }
+  },
+  
+  /**
+   * 查找二级菜单（根据名称）
+   */
+  findLevel2CategoryByName(grammarMenuData, name) {
+    for (const level1 of grammarMenuData) {
+      if (level1.children) {
+        const found = level1.children.find(level2 => level2.name === name);
+        if (found) return found;
+      }
+    }
+    return null;
+  },
+  
+  /**
+   * 获取指定年份考过的三级知识点
+   */
+  getLevel3PointsByYear(level2Category, year) {
+    if (!level2Category || !level2Category.children) return [];
+    return level2Category.children.filter(point => 
+      point.examYears && point.examYears.includes(year)
+    );
+  },
+  
+  /**
+   * 获取所有可用二级菜单（根据年份筛选）
+   */
+  getAllLevel2Categories(grammarMenuData, year) {
+    const categories = [];
+    for (const level1 of grammarMenuData) {
+      if (level1.children) {
+        for (const level2 of level1.children) {
+          // 检查该二级菜单下是否有该年份考过的三级知识点
+          const points = this.getLevel3PointsByYear(level2, year);
+          if (points.length > 0) {
+            categories.push(level2);
+          }
+        }
+      }
+    }
+    return categories;
   },
 
   /**
@@ -1057,59 +1156,73 @@ Page({
   },
 
   /**
-   * 获取指定分类下的所有语法点（根据年份筛选）
+   * 获取指定分类下的所有语法点（根据年份筛选）- 重构版
+   * 使用新的三级菜单数据结构
    */
   getGrammarPointsByCategory(category, yearPackage = null) {
-    // 遍历所有一级分类
-    for (const topic of this.data.grammarTopics) {
-      // 查找匹配的二级分类
-      if (topic.points) {
-        const matchedPoint = topic.points.find(p => p.name === category || p.id === category);
-        if (matchedPoint) {
-          // 如果有三级知识点，返回三级知识点
-          if (matchedPoint.points && matchedPoint.points.length > 0) {
-            let points = matchedPoint.points;
-            // 如果指定了年份，优先选择该年份考过的
-            if (yearPackage && matchedPoint.years) {
-              const year = parseInt(yearPackage);
-              const yearPoints = points.filter(p => p.years && p.years.includes(year));
-              if (yearPoints.length > 0) {
-                return yearPoints.map(p => p.name || p.id);
-              }
-            }
-            return points.map(p => p.name || p.id);
-          }
-          // 否则返回二级分类本身
-          return [matchedPoint.name || matchedPoint.id];
+    const grammarMenuData = this.data.grammarMenuData || [];
+    
+    // 查找匹配的二级菜单
+    const level2Category = this.findLevel2CategoryByName(grammarMenuData, category);
+    if (!level2Category) {
+      return [];
+    }
+    
+    // 如果有三级知识点，返回三级知识点
+    if (level2Category.children && level2Category.children.length > 0) {
+      let points = level2Category.children;
+      
+      // 如果指定了年份，优先选择该年份考过的
+      if (yearPackage) {
+        const year = parseInt(yearPackage);
+        const yearPoints = points.filter(p => 
+          p.examYears && p.examYears.includes(year)
+        );
+        if (yearPoints.length > 0) {
+          return yearPoints.map(p => p.name || p.id);
         }
       }
+      
+      return points.map(p => p.name || p.id);
     }
-    return [];
+    
+    // 否则返回二级分类本身
+    return [level2Category.name || level2Category.id];
   },
 
   /**
-   * 获取所有可用分类（根据年份筛选）
+   * 获取所有可用分类（根据年份筛选）- 重构版
+   * 使用新的三级菜单数据结构
    */
   getAllCategories(yearPackage = null) {
+    const grammarMenuData = this.data.grammarMenuData || [];
     const categories = [];
-    for (const topic of this.data.grammarTopics) {
-      if (topic.points) {
-        for (const point of topic.points) {
+    
+    for (const level1 of grammarMenuData) {
+      if (level1.children) {
+        for (const level2 of level1.children) {
           // 如果指定了年份，只返回该年份考过的分类
-          if (yearPackage && point.years) {
+          if (yearPackage) {
             const year = parseInt(yearPackage);
-            if (point.years.includes(year)) {
-              categories.push(point.name || point.id);
+            const points = this.getLevel3PointsByYear(level2, year);
+            if (points.length > 0) {
+              categories.push(level2.name || level2.id);
             }
           } else {
-            // 否则返回所有已考的分类
-            if (point.status === 'covered') {
-              categories.push(point.name || point.id);
+            // 否则返回所有有考过知识点的分类
+            if (level2.children && level2.children.length > 0) {
+              const hasExamPoints = level2.children.some(p => 
+                p.examYears && p.examYears.length > 0
+              );
+              if (hasExamPoints) {
+                categories.push(level2.name || level2.id);
+              }
             }
           }
         }
       }
     }
+    
     return categories;
   },
 
@@ -1569,6 +1682,10 @@ Page({
         questions = await this.generateCustomQuestions();
       }
       
+      // 按题型分组排序：先显示选择题，再显示填空题
+      // 如果启用乱序，只在同一题型内部打乱
+      questions = this.sortQuestionsByType(questions, this.data.shuffleQuestions);
+      
       // 构建作业数据
       const assignmentData = {
         id: `assignment_middle_${Date.now()}`,
@@ -1589,8 +1706,22 @@ Page({
       
       wx.hideLoading();
       
+      // 统一使用assignmentData参数名（与高中模块一致）
+      const variantCount = 0; // 初中模块暂不支持变式题
+      const url = `/pages/teacher/teacher-generate-material/index?assignmentData=${encodeURIComponent(JSON.stringify(assignmentData))}&variantCount=${variantCount}`;
+      
       wx.navigateTo({
-        url: `/pages/teacher/teacher-generate-material/index?data=${encodeURIComponent(JSON.stringify(assignmentData))}`
+        url: url,
+        success: () => {
+          console.log('跳转到预览页面成功');
+        },
+        fail: (error) => {
+          console.error('跳转失败:', error);
+          wx.showToast({
+            title: '跳转失败，请重试',
+            icon: 'error'
+          });
+        }
       });
     } catch (error) {
       wx.hideLoading();
@@ -1622,42 +1753,106 @@ Page({
   },
 
   /**
-   * 生成中考配比题目
+   * 生成中考配比题目（支持按知识点+type+数量查询）
    */
   async generateZhongkaoQuestions() {
     const { zhongkaoRatio } = this.data;
     const questions = [];
     
-    // 从selectedGrammarPoints生成题目
-    if (zhongkaoRatio.selectedGrammarPoints && zhongkaoRatio.selectedGrammarPoints.length > 0) {
-      const distribution = zhongkaoRatio.distribution || {};
-      const choicePoints = distribution.choice || [];
-      const fillPoints = distribution.fill || [];
-      
-      // 生成选择题
-      for (const point of choicePoints) {
-        questions.push({
-          id: `question_${Date.now()}_${Math.random()}`,
-          grammarPoint: point,
-          category: point,
-          type: '选择题',
-          text: `[选择题] ${point} 相关题目`,
-          answer: 'A',
-          analysis: `${point} 选择题解析`
-        });
+    // 从distribution中获取知识点+type+数量信息
+    const distribution = zhongkaoRatio.distribution || {};
+    const choicePoints = distribution.choice || [];
+    const fillPoints = distribution.fill || [];
+    
+    console.log('🔍 generateZhongkaoQuestions 开始生成题目');
+    console.log('🔍 zhongkaoRatio:', JSON.stringify(zhongkaoRatio, null, 2));
+    console.log('🔍 distribution:', JSON.stringify(distribution, null, 2));
+    console.log('🔍 choicePoints:', JSON.stringify(choicePoints, null, 2));
+    console.log('🔍 fillPoints:', JSON.stringify(fillPoints, null, 2));
+    
+    if (choicePoints.length === 0 && fillPoints.length === 0) {
+      console.error('❌ 错误：distribution 为空，请先调用 executeZhongkaoSystemCombo()');
+      wx.showToast({
+        title: '请先生成知识点配置',
+        icon: 'error'
+      });
+      return [];
+    }
+    
+    // 引入云数据加载器（分包引用主包需要向上三级）
+    const loader = require('../../../utils/cloudDataLoader.js');
+    
+    // 生成选择题（按知识点+type+数量查询）
+    for (const point of choicePoints) {
+      try {
+        const pointQuestions = await loader.getQuestionsByGrammarPoint(
+          point.grammarPoint,
+          'middle',
+          'choice', // 指定题型为选择题
+          point.count || 1 // 指定数量
+        );
+        
+        // 随机选择指定数量的题目
+        const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
+        const selectedQuestions = shuffled.slice(0, point.count || 1);
+        
+        questions.push(...selectedQuestions.map(q => ({
+          ...q,
+          grammarPoint: point.grammarPoint,
+          category: point.category || q.category,
+          type: q.type || 'choice'
+        })));
+      } catch (error) {
+        console.error(`获取${point.grammarPoint}选择题失败:`, error);
+        // 如果查询失败，创建占位题目
+        for (let i = 0; i < (point.count || 1); i++) {
+          questions.push({
+            id: `question_${Date.now()}_${Math.random()}`,
+            grammarPoint: point.grammarPoint,
+            category: point.category || point.grammarPoint,
+            type: 'choice',
+            text: `[选择题] ${point.grammarPoint} 相关题目`,
+            answer: 'A',
+            analysis: `${point.grammarPoint} 选择题解析`
+          });
+        }
       }
-      
-      // 生成填空题
-      for (const point of fillPoints) {
-        questions.push({
-          id: `question_${Date.now()}_${Math.random()}`,
-          grammarPoint: point,
-          category: point,
-          type: '填空题',
-          text: `[填空题] ${point} 相关题目`,
-          answer: '答案',
-          analysis: `${point} 填空题解析`
-        });
+    }
+    
+    // 生成填空题（按知识点+type+数量查询）
+    for (const point of fillPoints) {
+      try {
+        const pointQuestions = await loader.getQuestionsByGrammarPoint(
+          point.grammarPoint,
+          'middle',
+          'fill_blank', // 指定题型为填空题
+          point.count || 1 // 指定数量
+        );
+        
+        // 随机选择指定数量的题目
+        const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
+        const selectedQuestions = shuffled.slice(0, point.count || 1);
+        
+        questions.push(...selectedQuestions.map(q => ({
+          ...q,
+          grammarPoint: point.grammarPoint,
+          category: point.category || q.category,
+          type: q.type || 'fill_blank'
+        })));
+      } catch (error) {
+        console.error(`获取${point.grammarPoint}填空题失败:`, error);
+        // 如果查询失败，创建占位题目
+        for (let i = 0; i < (point.count || 1); i++) {
+          questions.push({
+            id: `question_${Date.now()}_${Math.random()}`,
+            grammarPoint: point.grammarPoint,
+            category: point.category || point.grammarPoint,
+            type: 'fill_blank',
+            text: `[填空题] ${point.grammarPoint} 相关题目`,
+            answer: '答案',
+            analysis: `${point.grammarPoint} 填空题解析`
+          });
+        }
       }
     }
     
@@ -1665,7 +1860,7 @@ Page({
   },
 
   /**
-   * 生成专题模式题目
+   * 生成专题模式题目（支持按知识点+type+数量查询）
    */
   async generateTopicQuestions() {
     const { selectedTopics, pointTypeDistribution } = this.data;
@@ -1675,32 +1870,81 @@ Page({
       return questions;
     }
     
+    // 引入云数据加载器（分包引用主包需要向上三级）
+    const loader = require('../../../utils/cloudDataLoader.js');
+    
     // 根据pointTypeDistribution生成题目
     for (const [pointName, dist] of Object.entries(pointTypeDistribution)) {
-      // 生成选择题
-      for (let i = 0; i < (dist.choice || 0); i++) {
-        questions.push({
-          id: `question_${Date.now()}_${Math.random()}`,
-          grammarPoint: pointName,
-          category: pointName,
-          type: '选择题',
-          text: `[选择题] ${pointName} 相关题目 ${i + 1}`,
-          answer: 'A',
-          analysis: `${pointName} 选择题解析`
-        });
+      // 生成选择题（按知识点+type+数量查询）
+      if (dist.choice > 0) {
+        try {
+          const pointQuestions = await loader.getQuestionsByGrammarPoint(
+            pointName,
+            'middle',
+            'choice',
+            dist.choice
+          );
+          
+          const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
+          const selectedQuestions = shuffled.slice(0, dist.choice);
+          
+          questions.push(...selectedQuestions.map(q => ({
+            ...q,
+            grammarPoint: pointName,
+            category: q.category || pointName,
+            type: q.type || 'choice'
+          })));
+        } catch (error) {
+          console.error(`获取${pointName}选择题失败:`, error);
+          // 如果查询失败，创建占位题目
+          for (let i = 0; i < dist.choice; i++) {
+            questions.push({
+              id: `question_${Date.now()}_${Math.random()}`,
+              grammarPoint: pointName,
+              category: pointName,
+              type: 'choice',
+              text: `[选择题] ${pointName} 相关题目 ${i + 1}`,
+              answer: 'A',
+              analysis: `${pointName} 选择题解析`
+            });
+          }
+        }
       }
       
-      // 生成填空题
-      for (let i = 0; i < (dist.fill || 0); i++) {
-        questions.push({
-          id: `question_${Date.now()}_${Math.random()}`,
-          grammarPoint: pointName,
-          category: pointName,
-          type: '填空题',
-          text: `[填空题] ${pointName} 相关题目 ${i + 1}`,
-          answer: '答案',
-          analysis: `${pointName} 填空题解析`
-        });
+      // 生成填空题（按知识点+type+数量查询）
+      if (dist.fill > 0) {
+        try {
+          const pointQuestions = await loader.getQuestionsByGrammarPoint(
+            pointName,
+            'middle',
+            'fill_blank',
+            dist.fill
+          );
+          
+          const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
+          const selectedQuestions = shuffled.slice(0, dist.fill);
+          
+          questions.push(...selectedQuestions.map(q => ({
+            ...q,
+            grammarPoint: pointName,
+            category: q.category || pointName,
+            type: q.type || 'fill_blank'
+          })));
+        } catch (error) {
+          console.error(`获取${pointName}填空题失败:`, error);
+          // 如果查询失败，创建占位题目
+          for (let i = 0; i < dist.fill; i++) {
+            questions.push({
+              id: `question_${Date.now()}_${Math.random()}`,
+              grammarPoint: pointName,
+              category: pointName,
+              type: 'fill_blank',
+              text: `[填空题] ${pointName} 相关题目 ${i + 1}`,
+              answer: '答案',
+              analysis: `${pointName} 填空题解析`
+            });
+          }
+        }
       }
     }
     
@@ -1708,7 +1952,7 @@ Page({
   },
 
   /**
-   * 生成自选模式题目
+   * 生成自选模式题目（支持按知识点+type+数量查询）
    */
   async generateCustomQuestions() {
     const { selectedTags, pointTypeDistribution } = this.data;
@@ -1718,39 +1962,156 @@ Page({
       return questions;
     }
     
+    // 引入云数据加载器（分包引用主包需要向上三级）
+    const loader = require('../../../utils/cloudDataLoader.js');
+    
     // 根据pointTypeDistribution生成题目
     for (const tag of selectedTags) {
       const pointName = tag.name;
       const dist = pointTypeDistribution[pointName] || { choice: 0, fill: 0 };
       
-      // 生成选择题
-      for (let i = 0; i < (dist.choice || 0); i++) {
-        questions.push({
-          id: `question_${Date.now()}_${Math.random()}`,
-          grammarPoint: pointName,
-          category: pointName,
-          type: '选择题',
-          text: `[选择题] ${pointName} 相关题目 ${i + 1}`,
-          answer: 'A',
-          analysis: `${pointName} 选择题解析`
-        });
+      // 生成选择题（按知识点+type+数量查询）
+      if (dist.choice > 0) {
+        try {
+          const pointQuestions = await loader.getQuestionsByGrammarPoint(
+            pointName,
+            'middle',
+            'choice',
+            dist.choice
+          );
+          
+          const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
+          const selectedQuestions = shuffled.slice(0, dist.choice);
+          
+          questions.push(...selectedQuestions.map(q => ({
+            ...q,
+            grammarPoint: pointName,
+            category: q.category || pointName,
+            type: q.type || 'choice'
+          })));
+        } catch (error) {
+          console.error(`获取${pointName}选择题失败:`, error);
+          // 如果查询失败，创建占位题目
+          for (let i = 0; i < dist.choice; i++) {
+            questions.push({
+              id: `question_${Date.now()}_${Math.random()}`,
+              grammarPoint: pointName,
+              category: pointName,
+              type: 'choice',
+              text: `[选择题] ${pointName} 相关题目 ${i + 1}`,
+              answer: 'A',
+              analysis: `${pointName} 选择题解析`
+            });
+          }
+        }
       }
       
-      // 生成填空题
-      for (let i = 0; i < (dist.fill || 0); i++) {
-        questions.push({
-          id: `question_${Date.now()}_${Math.random()}`,
-          grammarPoint: pointName,
-          category: pointName,
-          type: '填空题',
-          text: `[填空题] ${pointName} 相关题目 ${i + 1}`,
-          answer: '答案',
-          analysis: `${pointName} 填空题解析`
-        });
+      // 生成填空题（按知识点+type+数量查询）
+      if (dist.fill > 0) {
+        try {
+          const pointQuestions = await loader.getQuestionsByGrammarPoint(
+            pointName,
+            'middle',
+            'fill_blank',
+            dist.fill
+          );
+          
+          const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
+          const selectedQuestions = shuffled.slice(0, dist.fill);
+          
+          questions.push(...selectedQuestions.map(q => ({
+            ...q,
+            grammarPoint: pointName,
+            category: q.category || pointName,
+            type: q.type || 'fill_blank'
+          })));
+        } catch (error) {
+          console.error(`获取${pointName}填空题失败:`, error);
+          // 如果查询失败，创建占位题目
+          for (let i = 0; i < dist.fill; i++) {
+            questions.push({
+              id: `question_${Date.now()}_${Math.random()}`,
+              grammarPoint: pointName,
+              category: pointName,
+              type: 'fill_blank',
+              text: `[填空题] ${pointName} 相关题目 ${i + 1}`,
+              answer: '答案',
+              analysis: `${pointName} 填空题解析`
+            });
+          }
+        }
       }
     }
     
     return questions;
+  },
+
+  /**
+   * 按题型分组排序题目
+   * 先显示选择题，再显示填空题
+   * 如果启用乱序，只在同一题型内部打乱
+   * @param {Array} questions - 题目数组
+   * @param {Boolean} shuffle - 是否乱序
+   * @returns {Array} 排序后的题目数组
+   */
+  sortQuestionsByType(questions, shuffle = false) {
+    if (!questions || questions.length === 0) {
+      return questions;
+    }
+    
+    console.log('📋 开始按题型排序题目，总数:', questions.length, '乱序:', shuffle);
+    
+    // 分离选择题和填空题
+    const choiceQuestions = [];
+    const fillQuestions = [];
+    
+    questions.forEach((q, index) => {
+      const questionType = (q.type || '').toLowerCase();
+      // 判断题型：choice 或 fill_blank
+      if (questionType === 'choice' || questionType === '选择题') {
+        choiceQuestions.push(q);
+      } else if (questionType === 'fill_blank' || questionType === '填空题' || questionType === 'fill') {
+        fillQuestions.push(q);
+      } else {
+        // 如果无法判断题型，根据题目文本或其他特征判断
+        // 如果有options字段，通常是选择题
+        if (q.options && Array.isArray(q.options) && q.options.length > 0) {
+          choiceQuestions.push(q);
+        } else {
+          // 默认归类为填空题
+          fillQuestions.push(q);
+        }
+        console.warn(`⚠️ 题目 ${index + 1} 无法明确判断题型 (type: ${q.type})，已根据特征归类`);
+      }
+    });
+    
+    console.log(`📊 题型统计: 选择题 ${choiceQuestions.length} 道，填空题 ${fillQuestions.length} 道`);
+    
+    // 如果启用乱序，只在同一题型内部打乱
+    if (shuffle) {
+      // Fisher-Yates 洗牌算法
+      const shuffleArray = (arr) => {
+        const shuffled = [...arr];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      };
+      
+      // 分别打乱选择题和填空题
+      const shuffledChoice = shuffleArray(choiceQuestions);
+      const shuffledFill = shuffleArray(fillQuestions);
+      
+      console.log('✅ 题型内乱序完成: 选择题已打乱，填空题已打乱');
+      
+      // 先返回选择题，再返回填空题
+      return [...shuffledChoice, ...shuffledFill];
+    } else {
+      // 不启用乱序，直接按顺序返回：选择题在前，填空题在后
+      console.log('✅ 按题型分组完成: 选择题在前，填空题在后');
+      return [...choiceQuestions, ...fillQuestions];
+    }
   },
 
   // TODO: 实现其他必要的方法
