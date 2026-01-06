@@ -50,6 +50,9 @@ Page({
     exportProgress: 0, // 导出进度
     exportStatus: '', // 导出状态
     canExport: false, // 是否可以导出
+    exportedFileUrl: null, // 导出文件的URL
+    exportedFileName: null, // 导出文件的名称
+    exportedFileFormat: null, // 导出文件的格式
     
     // 新增：解析展开状态
     analysisExpanded: {}, // 存储每个题目解析的展开状态
@@ -3124,15 +3127,17 @@ Page({
       // 记录导出操作
       this.exportService.recordExport(filteredQuestions.length);
 
+      // 保存导出结果
+      const fileFormat = this.data.exportFormat === 'pdf' ? 'pdf' : 
+                        this.data.exportFormat === 'word' ? 'docx' : 'xlsx';
+
       this.setData({
         exportProgress: 100,
-        exportStatus: '导出完成！'
+        exportStatus: '导出完成！',
+        exportedFileUrl: result.downloadUrl || result.fileId,
+        exportedFileName: result.fileName,
+        exportedFileFormat: fileFormat
       });
-
-      // 自动下载文件
-      setTimeout(() => {
-        this.downloadFile(result.downloadUrl, result.fileName);
-      }, 1000);
 
     } catch (error) {
       console.error('导出失败:', error);
@@ -3149,9 +3154,14 @@ Page({
   // 下载文件
   async downloadFile(fileUrl, fileName) {
     try {
-      await this.exportService.downloadFile(fileUrl, fileName);
+      const url = fileUrl || this.data.exportedFileUrl;
+      const name = fileName || this.data.exportedFileName;
+      await this.exportService.downloadFile(url, name);
       this.setData({
-        showExportProgress: false
+        showExportProgress: false,
+        exportedFileUrl: null,
+        exportedFileName: null,
+        exportedFileFormat: null
       });
     } catch (error) {
       console.error('下载失败:', error);
@@ -3161,12 +3171,43 @@ Page({
     }
   },
 
+  // 分享到微信
+  async shareToWechat() {
+    try {
+      const fileUrl = this.data.exportedFileUrl;
+      const fileName = this.data.exportedFileName;
+      const fileFormat = this.data.exportedFileFormat;
+
+      if (!fileUrl || !fileName) {
+        wx.showToast({
+          title: '文件不存在，请重新导出',
+          icon: 'error'
+        });
+        return;
+      }
+
+      await this.exportService.shareToWechat(fileUrl, fileName, fileFormat);
+      
+      // 分享后不关闭进度窗口，让用户操作
+      // 用户可以在文档中点击分享，或者关闭文档后自动关闭
+    } catch (error) {
+      console.error('分享失败:', error);
+      wx.showToast({
+        title: '分享失败',
+        icon: 'error'
+      });
+    }
+  },
+
   // 取消导出
   cancelExport() {
     this.setData({
       showExportProgress: false,
       exportProgress: 0,
-      exportStatus: ''
+      exportStatus: '',
+      exportedFileUrl: null,
+      exportedFileName: null,
+      exportedFileFormat: null
     });
   },
 

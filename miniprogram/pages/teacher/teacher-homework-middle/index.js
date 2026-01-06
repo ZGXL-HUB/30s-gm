@@ -1483,6 +1483,68 @@ Page({
       this.updateCategoryCounts();
     });
   },
+
+  /**
+   * 清空所有选择（自选模式）
+   */
+  clearAllSelections() {
+    const { homeworkType } = this.data;
+    
+    if (homeworkType !== 'custom-middle') {
+      return;
+    }
+    
+    wx.showModal({
+      title: '确认清空',
+      content: '确定要清空所有已选择的语法点吗？',
+      success: (res) => {
+        if (res.confirm) {
+          // 清空所有选中的语法点
+          const points = this.data.level3Points.map(point => ({
+            ...point,
+            selected: false
+          }));
+          
+          // 更新grammarMenuData中的选中状态
+          const menuData = this.data.grammarMenuData.map(level1 => {
+            const updatedLevel2 = level1.children.map(level2 => {
+              const updatedLevel3 = level2.children.map(level3 => ({
+                ...level3,
+                selected: false
+              }));
+              return {
+                ...level2,
+                children: updatedLevel3,
+                expanded: level2.expanded
+              };
+            });
+            return {
+              ...level1,
+              children: updatedLevel2
+            };
+          });
+          
+          this.setData({
+            selectedTags: [],
+            level3Points: points,
+            grammarMenuData: menuData,
+            pointTypeDistribution: {},
+            totalChoiceQuestions: 0,
+            totalFillQuestions: 0,
+            totalQuestions: 0
+          });
+          
+          // 更新大类计数
+          this.updateCategoryCounts();
+          
+          wx.showToast({
+            title: '已清空',
+            icon: 'success'
+          });
+        }
+      }
+    });
+  },
   
   /**
    * 全选某个二级菜单下的所有三级菜单（自选模式）

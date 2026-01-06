@@ -145,7 +145,10 @@
     
     <view class="progress-actions">
       <button class="progress-btn" bindtap="cancelExport" wx:if="{{exportProgress < 100}}">取消</button>
-      <button class="progress-btn primary" bindtap="downloadFile" wx:if="{{exportProgress === 100}}">下载文件</button>
+      <view wx:if="{{exportProgress === 100}}" class="progress-complete-actions">
+        <button class="progress-btn secondary" bindtap="downloadFile">下载文件</button>
+        <button class="progress-btn primary" bindtap="shareToWechat">发送到微信</button>
+      </view>
     </view>
   </view>
 </view>

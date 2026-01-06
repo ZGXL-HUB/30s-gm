@@ -956,6 +956,77 @@ Page({
     });
   },
 
+  // 以Word格式发送到微信
+  async shareWordToWechat() {
+    try {
+      wx.showLoading({
+        title: '正在准备分享内容...',
+        mask: true
+      });
+
+      // 优先使用缓存的真实题目，如果没有则使用选中的题目
+      const questions = this.data.cachedRealQuestions || this.data.selectedQuestions;
+      const { variantCount, previewType } = this.data;
+      
+      if (!questions || questions.length === 0) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '没有可分享的内容',
+          icon: 'none'
+        });
+        return;
+      }
+
+      console.log('开始生成Word文档，题目数量:', questions.length, '预览类型:', previewType);
+      
+      // 生成学案内容（完整内容）
+      const markdownContent = await this.generateMaterialContent(questions, variantCount, previewType);
+      
+      // 将Markdown转换为纯文本（保留基本格式）
+      const { stripMarkdown } = require('../../../utils/markdown.js');
+      const textContent = stripMarkdown(markdownContent);
+      
+      wx.hideLoading();
+      
+      // 由于小程序限制，txt文件无法直接通过openDocument打开分享
+      // 采用复制到剪贴板的方式，用户可以在微信中粘贴
+      wx.setClipboardData({
+        data: textContent,
+        success: () => {
+          wx.showModal({
+            title: '内容已复制',
+            content: '学案内容已复制到剪贴板！\n\n请打开微信，在聊天窗口长按输入框，选择"粘贴"即可分享。',
+            confirmText: '我知道了',
+            showCancel: false,
+            success: () => {
+              // 尝试打开微信（如果小程序支持）
+              wx.showToast({
+                title: '内容已复制，请到微信粘贴',
+                icon: 'success',
+                duration: 3000
+              });
+            }
+          });
+        },
+        fail: (error) => {
+          console.error('复制失败:', error);
+          wx.showToast({
+            title: '复制失败，请重试',
+            icon: 'error'
+          });
+        }
+      });
+      
+    } catch (error) {
+      wx.hideLoading();
+      console.error('生成Word文档失败:', error);
+      wx.showToast({
+        title: '生成失败，请稍后重试',
+        icon: 'error'
+      });
+    }
+  },
+
   // 复制内容到剪贴板（只包含题目部分：练习标题 + 题干）
   async copyContentToClipboard() {
     try {

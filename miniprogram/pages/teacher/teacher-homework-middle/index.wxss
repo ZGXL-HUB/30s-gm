@@ -700,6 +700,38 @@
   box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
 }
 
+/* 悬浮清空按钮（自选模式） */
+.floating-clear-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 260rpx;
+  z-index: 999;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  box-shadow: 0 12rpx 40rpx rgba(255, 107, 107, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8) translateY(20rpx);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+}
+
+.floating-clear-btn.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  animation: floatingBounce 2s ease-in-out infinite;
+}
+
+.floating-clear-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, 0.3);
+}
+
 .floating-btn-content {
   display: flex;
   flex-direction: column;
@@ -737,6 +769,13 @@
   .floating-preview-btn {
     right: 30rpx;
     bottom: 100rpx;
+    width: 100rpx;
+    height: 100rpx;
+  }
+  
+  .floating-clear-btn {
+    right: 30rpx;
+    bottom: 240rpx;
     width: 100rpx;
     height: 100rpx;
   }

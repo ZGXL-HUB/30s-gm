@@ -186,6 +186,18 @@
         >我选好了</button>
   </view>
 
+  <!-- 悬浮清空按钮（自选模式） -->
+  <view 
+    class="floating-clear-btn show" 
+    wx:if="{{homeworkType === 'custom' && selectedTags.length > 0}}"
+    bindtap="clearAllSelections"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">🗑️</text>
+      <text class="floating-btn-text">清空</text>
+    </view>
+  </view>
+
   <!-- 作业类型选择弹窗 -->
   <view class="modal" wx:if="{{showTypeSelector}}">
     <view class="modal-content">

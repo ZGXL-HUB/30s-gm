@@ -284,6 +284,116 @@ class ExportService {
       });
     }
   }
+
+  /**
+   * 分享文件到微信
+   */
+  async shareToWechat(fileUrl, fileName, fileFormat = 'docx') {
+    try {
+      wx.showLoading({
+        title: '准备分享文件...'
+      });
+
+      let tempFilePath = '';
+
+      // 判断是云存储fileID还是URL
+      if (fileUrl.startsWith('cloud://')) {
+        // 云存储fileID，需要获取临时URL后下载
+        const tempFileResult = await wx.cloud.getTempFileURL({
+          fileList: [fileUrl]
+        });
+        if (tempFileResult.fileList && tempFileResult.fileList[0] && tempFileResult.fileList[0].tempFileURL) {
+          const downloadResult = await wx.downloadFile({
+            url: tempFileResult.fileList[0].tempFileURL
+          });
+          if (downloadResult.statusCode === 200) {
+            tempFilePath = downloadResult.tempFilePath;
+          } else {
+            throw new Error('下载失败');
+          }
+        } else {
+          throw new Error('获取下载链接失败');
+        }
+      } else {
+        // 普通URL，直接下载
+        const downloadResult = await wx.downloadFile({
+          url: fileUrl
+        });
+        if (downloadResult.statusCode === 200) {
+          tempFilePath = downloadResult.tempFilePath;
+        } else {
+          throw new Error('下载失败');
+        }
+      }
+
+      wx.hideLoading();
+
+      if (!tempFilePath) {
+        throw new Error('文件下载失败');
+      }
+
+      // 确定文件类型
+      const fileTypeMap = {
+        'pdf': 'pdf',
+        'docx': 'docx',
+        'xlsx': 'xlsx',
+        'xls': 'xls'
+      };
+      const fileType = fileTypeMap[fileFormat] || 'docx';
+
+      // 打开文档，显示分享菜单
+      wx.openDocument({
+        filePath: tempFilePath,
+        fileType: fileType,
+        showMenu: true, // 显示分享菜单
+        success: () => {
+          wx.showToast({
+            title: '请在打开的文档中点击右上角分享',
+            icon: 'none',
+            duration: 3000
+          });
+        },
+        fail: (error) => {
+          console.error('打开文档失败:', error);
+          // 如果无法打开文档，提供备用方案
+          wx.showModal({
+            title: '分享文件',
+            content: '无法直接打开文件。是否保存文件后手动分享？',
+            confirmText: '保存文件',
+            cancelText: '取消',
+            success: (modalRes) => {
+              if (modalRes.confirm) {
+                // 保存文件
+                wx.saveFile({
+                  tempFilePath: tempFilePath,
+                  success: () => {
+                    wx.showToast({
+                      title: '文件已保存，可在文件管理器中分享',
+                      icon: 'success',
+                      duration: 2000
+                    });
+                  },
+                  fail: () => {
+                    wx.showToast({
+                      title: '保存失败',
+                      icon: 'error'
+                    });
+                  }
+                });
+              }
+            }
+          });
+        }
+      });
+    } catch (error) {
+      console.error('分享文件失败:', error);
+      wx.hideLoading();
+      wx.showToast({
+        title: '分享失败，请稍后重试',
+        icon: 'error'
+      });
+    }
+  }
 }
 
 module.exports = ExportService;

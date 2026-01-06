@@ -1658,6 +1658,51 @@ Page({
     });
   },
 
+  // 清空所有选择（自选模式）
+  clearAllSelections() {
+    const { homeworkType } = this.data;
+    
+    if (homeworkType !== 'custom') {
+      return;
+    }
+    
+    wx.showModal({
+      title: '确认清空',
+      content: '确定要清空所有已选择的语法点吗？',
+      success: (res) => {
+        if (res.confirm) {
+          // 清空所有选中的语法点
+          const topics = this.data.grammarTopics.map(topic => {
+            const updatedPoints = topic.points.map(point => ({
+              ...point,
+              selected: false
+            }));
+            return {
+              ...topic,
+              selected: false,
+              points: updatedPoints
+            };
+          });
+          
+          this.setData({
+            selectedTags: [],
+            grammarTopics: topics,
+            totalQuestions: 0
+          });
+          
+          // 更新大类计数和智能标题
+          this.updateCategoryCounts();
+          this.updateSmartTitle();
+          
+          wx.showToast({
+            title: '已清空',
+            icon: 'success'
+          });
+        }
+      }
+    });
+  },
+
   // 更新选中数量和总题数
   updateSelectedCount() {
     const { homeworkType, grammarTopics, grammarPoints, selectedTags } = this.data;

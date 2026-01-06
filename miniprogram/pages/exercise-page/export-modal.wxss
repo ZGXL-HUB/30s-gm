@@ -435,6 +435,12 @@
   gap: 16rpx;
 }
 
+.progress-complete-actions {
+  display: flex;
+  gap: 16rpx;
+  width: 100%;
+}
+
 .progress-btn {
   flex: 1;
   padding: 20rpx;
@@ -445,13 +451,29 @@
 }
 
 .progress-btn.primary {
-  background: #52c41a;
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
   color: white;
+  box-shadow: 0 4rpx 12rpx rgba(24, 144, 255, 0.3);
 }
 
-.progress-btn:not(.primary) {
+.progress-btn.secondary {
   background: #f5f5f5;
   color: #666;
+  border: 1rpx solid #d9d9d9;
+}
+
+.progress-btn:not(.primary):not(.secondary) {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.progress-btn.primary:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 2rpx 8rpx rgba(24, 144, 255, 0.3);
+}
+
+.progress-btn.secondary:active {
+  background: #e6e6e6;
 }
 
 /* 导出按钮样式 */

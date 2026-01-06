@@ -342,6 +342,18 @@
     </view>
   </view>
   
+  <!-- 悬浮清空按钮（自选模式） -->
+  <view 
+    class="floating-clear-btn show" 
+    wx:if="{{homeworkType === 'custom-middle' && selectedTags.length > 0}}"
+    bindtap="clearAllSelections"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">🗑️</text>
+      <text class="floating-btn-text">清空</text>
+    </view>
+  </view>
+  
   <!-- 中考配比模式：生成配比后显示 -->
   <view 
     class="floating-preview-btn show" 

@@ -40,10 +40,16 @@
   <view class="generate-section">
     <view class="generate-buttons">
       <button 
-        class="generate-btn primary"
+        class="generate-btn secondary"
         bindtap="copyContentToClipboard"
       >
         复制当前预览内容
+      </button>
+      <button 
+        class="generate-btn primary"
+        bindtap="shareWordToWechat"
+      >
+        以Word格式发送到微信
       </button>
     </view>
   </view>
