@@ -186,6 +186,18 @@
         >我选好了</button>
   </view>
 
+  <!-- 悬浮预览按钮（自选模式） -->
+  <view 
+    class="floating-preview-btn show" 
+    wx:if="{{homeworkType === 'custom' && selectedTags.length > 0}}"
+    bindtap="showVariantSelector"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">✓</text>
+      <text class="floating-btn-text">我选好了</text>
+    </view>
+  </view>
+  
   <!-- 悬浮清空按钮（自选模式） -->
   <view 
     class="floating-clear-btn show" 

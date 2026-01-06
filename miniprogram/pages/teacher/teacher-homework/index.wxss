@@ -1619,11 +1619,43 @@
   color: #666;
 }
 
+/* 悬浮预览按钮（自选模式） */
+.floating-preview-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 120rpx;
+  z-index: 999;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 12rpx 40rpx rgba(102, 126, 234, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8) translateY(20rpx);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+}
+
+.floating-preview-btn.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  animation: floatingBounce 2s ease-in-out infinite;
+}
+
+.floating-preview-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
 /* 悬浮清空按钮（自选模式） */
 .floating-clear-btn {
   position: fixed;
   right: 40rpx;
-  bottom: 120rpx;
+  bottom: 260rpx;
   z-index: 999;
   width: 120rpx;
   height: 120rpx;
@@ -1651,7 +1683,7 @@
   box-shadow: 0 8rpx 24rpx rgba(255, 107, 107, 0.3);
 }
 
-.floating-clear-btn .floating-btn-content {
+.floating-btn-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1659,14 +1691,14 @@
   color: white;
 }
 
-.floating-clear-btn .floating-btn-icon {
+.floating-btn-icon {
   font-size: 44rpx;
   line-height: 1;
   margin-bottom: 4rpx;
   display: block;
 }
 
-.floating-clear-btn .floating-btn-text {
+.floating-btn-text {
   font-size: 20rpx;
   font-weight: 600;
   line-height: 1;
@@ -1685,18 +1717,25 @@
 
 /* 响应式设计 */
 @media (max-width: 350px) {
-  .floating-clear-btn {
+  .floating-preview-btn {
     right: 30rpx;
     bottom: 100rpx;
     width: 100rpx;
     height: 100rpx;
   }
   
-  .floating-clear-btn .floating-btn-icon {
+  .floating-clear-btn {
+    right: 30rpx;
+    bottom: 240rpx;
+    width: 100rpx;
+    height: 100rpx;
+  }
+  
+  .floating-btn-icon {
     font-size: 36rpx;
   }
   
-  .floating-clear-btn .floating-btn-text {
+  .floating-btn-text {
     font-size: 18rpx;
   }
 }
