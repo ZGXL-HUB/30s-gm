@@ -1088,6 +1088,13 @@ Page({
             continue;
           }
 
+          // 选项行：以字母+点号开头（如 "A. ", "B. " 等），紧跟在题目行之后
+          // 匹配格式：A. xxx, B. xxx, C. xxx, D. xxx 等（大小写不限）
+          if (/^[A-E]\.\s+/.test(line.trim())) {
+            currentBlock.push(line.trim());
+            continue;
+          }
+
           // 教师版额外包含答案和解析
           if (isTeacher && /^\*\*答案\*\*\s*:/.test(line)) {
             const answerLine = line.replace(/^\*\*答案\*\*\s*:/, '答案:').trim();
@@ -1149,6 +1156,9 @@ Page({
             } else if (previewBlock) {
               if (/^\*\*题目\*\*\s*:/.test(line)) {
                 previewBlock.push(line.replace(/^\*\*题目\*\*\s*:/, '题目:').trim());
+              } else if (/^[A-E]\.\s+/.test(line.trim())) {
+                // 选项行：以字母+点号开头
+                previewBlock.push(line.trim());
               } else if (isTeacher && /^\*\*答案\*\*\s*:/.test(line)) {
                 previewBlock.push(line.replace(/^\*\*答案\*\*\s*:/, '答案:').trim());
               } else if (isTeacher && /^\*\*解析\*\*\s*:/.test(line)) {

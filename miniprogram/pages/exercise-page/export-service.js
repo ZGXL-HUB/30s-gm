@@ -56,6 +56,106 @@ class ExportService {
   }
 
   /**
+   * 从文本中提取选项
+   * @param {string} text - 题目文本
+   * @returns {Array} 选项数组
+   */
+  extractOptionsFromText(text) {
+    if (!text) return [];
+    
+    const foundOptions = [];
+    // 匹配格式：A. xxx B. xxx C. xxx D. xxx 或 A. xxx\nB. xxx 等
+    // 使用更简单的正则表达式，匹配 A. 到下一个选项字母或结尾之间的内容
+    const optionPattern = /([A-E])\.\s*([^A-E]+?)(?=\s+[A-E]\.|$)/g;
+    let match;
+    
+    while ((match = optionPattern.exec(text)) !== null) {
+      foundOptions.push({
+        label: match[1],
+        text: match[2].trim()
+      });
+    }
+    
+    // 如果找到选项，转换为字符串数组格式
+    if (foundOptions.length >= 2) {
+      return foundOptions.map(opt => {
+        // 选项文本已经提取出来，添加标签
+        return `${opt.label}. ${opt.text}`;
+      });
+    }
+    
+    return [];
+  }
+
+  /**
+   * 从文本中移除选项部分
+   * @param {string} text - 题目文本
+   * @returns {string} 移除选项后的文本
+   */
+  removeOptionsFromText(text) {
+    if (!text) return text;
+    
+    // 匹配选项开始：空格/换行 + A-D + 点号 + 空格
+    const optionStartPattern = /[\s\n]+[A-E]\.\s+/;
+    const cutIndex = text.search(optionStartPattern);
+    
+    if (cutIndex > 0) {
+      return text.substring(0, cutIndex).trim();
+    }
+    
+    return text;
+  }
+
+  /**
+   * 获取题目的选项数组（优先从options字段，如果没有则从text中提取）
+   * @param {Object} question - 题目对象
+   * @returns {Array} 选项数组
+   */
+  getQuestionOptions(question) {
+    // 优先使用 options 字段
+    if (question.options && Array.isArray(question.options) && question.options.length > 0) {
+      return question.options;
+    }
+    
+    // 如果是选择题，尝试从 text 字段中提取选项
+    const questionType = (question.type || '').toLowerCase();
+    if (questionType === 'choice' || questionType === '选择题') {
+      const text = question.text || question.question || '';
+      const extractedOptions = this.extractOptionsFromText(text);
+      if (extractedOptions.length >= 2) {
+        return extractedOptions;
+      }
+    }
+    
+    return [];
+  }
+
+  /**
+   * 获取题目的纯文本（移除选项部分）
+   * @param {Object} question - 题目对象
+   * @returns {string} 题目文本
+   */
+  getQuestionText(question) {
+    const text = question.question || question.text || '';
+    
+    // 如果题目有独立的 options 字段，直接返回 text
+    if (question.options && Array.isArray(question.options) && question.options.length > 0) {
+      return text;
+    }
+    
+    // 如果 options 为空，尝试从 text 中提取选项，并移除选项部分
+    const questionType = (question.type || '').toLowerCase();
+    if (questionType === 'choice' || questionType === '选择题') {
+      const extractedOptions = this.extractOptionsFromText(text);
+      if (extractedOptions.length >= 2) {
+        return this.removeOptionsFromText(text);
+      }
+    }
+    
+    return text;
+  }
+
+  /**
    * 记录导出操作
    */
   recordExport(questionCount) {
@@ -92,9 +192,9 @@ class ExportService {
       subtitle: `共${questions.length}题 - ${new Date().toLocaleDateString()}`,
       questions: questions.map((q, index) => ({
         number: index + 1,
-        question: q.question,
-        options: q.options,
-        answer: includeAnswer ? q.correctAnswer : null,
+        question: this.getQuestionText(q),
+        options: this.getQuestionOptions(q),
+        answer: includeAnswer ? (q.correctAnswer || q.answer || '') : null,
         analysis: includeAnalysis ? q.analysis : null,
         difficulty: q.difficulty || 'medium'
       })),
@@ -128,9 +228,9 @@ class ExportService {
       subtitle: `共${questions.length}题 - ${new Date().toLocaleDateString()}`,
       questions: questions.map((q, index) => ({
         number: index + 1,
-        question: q.question,
-        options: q.options,
-        answer: includeAnswer ? q.correctAnswer : null,
+        question: this.getQuestionText(q),
+        options: this.getQuestionOptions(q),
+        answer: includeAnswer ? (q.correctAnswer || q.answer || '') : null,
         analysis: includeAnalysis ? q.analysis : null,
         difficulty: q.difficulty || 'medium'
       })),
@@ -161,19 +261,37 @@ class ExportService {
     
     const excelData = {
       title: '英语语法练习题目',
-      questions: questions.map((q, index) => ({
-        '题号': index + 1,
-        '题目': q.question,
-        '选项A': q.options[0] || '',
-        '选项B': q.options[1] || '',
-        '选项C': q.options[2] || '',
-        '选项D': q.options[3] || '',
-        '选项E': q.options[4] || '',
-        '正确答案': includeAnswer ? q.correctAnswer : '',
-        '解析': includeAnalysis ? q.analysis : '',
-        '难度': q.difficulty || 'medium',
-        '标签': q.tags ? q.tags.join(',') : ''
-      }))
+      questions: questions.map((q, index) => {
+        const options = this.getQuestionOptions(q);
+        // 处理选项格式：如果选项是 "A. xxx" 格式，保持原样；如果是数组索引，添加标签
+        const formatOption = (opt, idx) => {
+          if (!opt) return '';
+          if (typeof opt === 'string') {
+            // 检查是否已经包含标签
+            const labelPattern = new RegExp(`^[A-E]\\.\\s*`, 'i');
+            if (labelPattern.test(opt)) {
+              return opt;
+            } else {
+              return `${String.fromCharCode(65 + idx)}. ${opt}`;
+            }
+          }
+          return opt.text || opt.label || opt || '';
+        };
+        
+        return {
+          '题号': index + 1,
+          '题目': this.getQuestionText(q),
+          '选项A': formatOption(options[0], 0),
+          '选项B': formatOption(options[1], 1),
+          '选项C': formatOption(options[2], 2),
+          '选项D': formatOption(options[3], 3),
+          '选项E': formatOption(options[4], 4),
+          '正确答案': includeAnswer ? (q.correctAnswer || q.answer || '') : '',
+          '解析': includeAnalysis ? q.analysis : '',
+          '难度': q.difficulty || 'medium',
+          '标签': q.tags ? q.tags.join(',') : ''
+        };
+      })
     };
 
     try {
@@ -223,6 +341,43 @@ class ExportService {
   }
 
   /**
+   * 按题型排序题目（选择题在前，填空题在后）
+   * @param {Array} questions - 题目数组
+   * @returns {Array} 排序后的题目数组
+   */
+  sortQuestionsByType(questions) {
+    if (!questions || questions.length === 0) {
+      return questions;
+    }
+    
+    // 分离选择题和填空题
+    const choiceQuestions = [];
+    const fillQuestions = [];
+    
+    questions.forEach((q) => {
+      const questionType = (q.type || '').toLowerCase();
+      // 判断题型：choice 或 fill_blank
+      if (questionType === 'choice' || questionType === '选择题') {
+        choiceQuestions.push(q);
+      } else if (questionType === 'fill_blank' || questionType === '填空题' || questionType === 'fill') {
+        fillQuestions.push(q);
+      } else {
+        // 如果无法判断题型，根据题目特征判断
+        // 如果有options字段且不为空，通常是选择题
+        if (q.options && Array.isArray(q.options) && q.options.length > 0) {
+          choiceQuestions.push(q);
+        } else {
+          // 默认归类为填空题
+          fillQuestions.push(q);
+        }
+      }
+    });
+    
+    // 先返回选择题，再返回填空题
+    return [...choiceQuestions, ...fillQuestions];
+  }
+
+  /**
    * 筛选题目
    */
   filterQuestions(questions, filters) {
@@ -237,10 +392,36 @@ class ExportService {
     
     // 按数量限制
     if (filters.quantity && filters.quantity < filtered.length) {
-      // 随机选择指定数量的题目
-      const shuffled = filtered.sort(() => Math.random() - 0.5);
-      filtered = shuffled.slice(0, filters.quantity);
+      // 先按题型排序，分离选择题和填空题
+      filtered = this.sortQuestionsByType(filtered);
+      
+      // 分离选择题和填空题
+      const choiceQuestions = [];
+      const fillQuestions = [];
+      
+      filtered.forEach((q) => {
+        const questionType = (q.type || '').toLowerCase();
+        if (questionType === 'choice' || questionType === '选择题' || 
+            (q.options && Array.isArray(q.options) && q.options.length > 0)) {
+          choiceQuestions.push(q);
+        } else {
+          fillQuestions.push(q);
+        }
+      });
+      
+      // 分别从选择题和填空题中随机选择，保持选择题在前
+      const shuffledChoice = [...choiceQuestions].sort(() => Math.random() - 0.5);
+      const shuffledFill = [...fillQuestions].sort(() => Math.random() - 0.5);
+      
+      // 优先选择选择题，剩余数量选择填空题
+      const choiceCount = Math.min(choiceQuestions.length, filters.quantity);
+      const fillCount = Math.min(fillQuestions.length, filters.quantity - choiceCount);
+      
+      filtered = [...shuffledChoice.slice(0, choiceCount), ...shuffledFill.slice(0, fillCount)];
     }
+    
+    // 最后按题型排序，确保选择题在前，填空题在后
+    filtered = this.sortQuestionsByType(filtered);
     
     return filtered;
   }
