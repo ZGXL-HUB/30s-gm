@@ -404,57 +404,10 @@ Page({
     const isTopicModeFromData = assignmentType === 'topic';
     const isTopicMode = isTopicModeFromData || 
       (Object.values(groupedQuestions).some(qs => qs.length > 1 && variantCount === 0) && !isGaokaoModeForDisplay);
-
-    // 初中模块：确保预览中先显示所有选择题，再显示所有填空题
-    const isMiddleSchoolModeForDisplay = assignmentType === 'zhongkao' 
-      || assignmentType === 'topic-middle' 
-      || assignmentType === 'custom-middle';
-
-    /**
-     * 根据题目类型拆分为选择题 / 填空题两个数组
-     * 并保持每个语法点内部的顺序稳定
-     */
-    const splitPointQuestionsByType = (pointQuestions) => {
-      const choiceQs = [];
-      const fillQs = [];
-      pointQuestions.forEach(q => {
-        const qt = (q.type || '').toLowerCase();
-        // 判断是否选择题
-        const isChoice = qt === 'choice' || qt === '选择题' || (q.options && Array.isArray(q.options) && q.options.length > 0);
-        // 其他视为填空题 / 非选择题
-        if (isChoice) {
-          choiceQs.push(q);
-        } else {
-          fillQs.push(q);
-        }
-      });
-      return { choiceQs, fillQs };
-    };
-
-    // 默认按对象原顺序遍历
-    let groupedEntries = Object.entries(groupedQuestions);
-
-    // 初中模块预览：先遍历所有选择题分组，再遍历所有填空题分组
-    if (isMiddleSchoolModeForDisplay) {
-      const choiceEntries = [];
-      const fillEntries = [];
-
-      groupedEntries.forEach(([point, pointQuestions]) => {
-        const { choiceQs, fillQs } = splitPointQuestionsByType(pointQuestions);
-        if (choiceQs.length > 0) {
-          choiceEntries.push([point, choiceQs]);
-        }
-        if (fillQs.length > 0) {
-          fillEntries.push([point, fillQs]);
-        }
-      });
-
-      groupedEntries = [...choiceEntries, ...fillEntries];
-    }
     
     // 生成学案内容
     let exerciseIndex = 1;
-    for (const [point, pointQuestions] of groupedEntries) {
+    for (const [point, pointQuestions] of Object.entries(groupedQuestions)) {
       if (isTopicMode && pointQuestions.length > 1) {
         // 专题模式：每个语法点的多道题目都作为独立练习展示
         for (let i = 0; i < pointQuestions.length; i++) {
@@ -548,16 +501,11 @@ Page({
   formatQuestionText(question) {
     if (!question) return '';
     
-    const questionType = (question.type || '').toLowerCase();
+    const questionType = question.type || '';
     let questionText = question.text || '';
     
-    // 判断是否选择题：与splitPointQuestionsByType中的判断逻辑保持一致
-    // 选择题的判断条件：type为'choice'或'选择题'，或者有options字段
-    const isChoice = questionType === 'choice' || questionType === '选择题' || 
-                    (question.options && Array.isArray(question.options) && question.options.length > 0);
-    
-    // 如果是选择题，需要检查文本中是否已包含选项
-    if (isChoice) {
+    // 如果是选择题（choice），需要检查文本中是否已包含选项
+    if (questionType === 'choice') {
       // 检查文本中是否已经包含选项（格式如 "A. xxx B. xxx" 或 "A. xxx  B. xxx"）
       const hasOptionsInText = /[A-D]\.\s+[A-Z]/.test(questionText) || 
                                 /[A-D]\.\s{2,}[A-Z]/.test(questionText) ||
@@ -581,16 +529,16 @@ Page({
             // 如果已经包含标签，直接使用
             
             return optionText;
-          }).join('\n');
-          questionText = `${questionText}\n${optionsText}`;
+          }).join(' ');
+          questionText = `${questionText} ${optionsText}`;
         } else {
           // 尝试从文本中提取选项（如果文本格式是 "题目 A. xxx B. xxx"）
           const extractedOptions = this.extractOptionsFromText(questionText);
           if (extractedOptions.length >= 2) {
             // 成功提取到选项，移除text中的选项部分
             const cleanedText = this.removeOptionsFromText(questionText);
-            const optionsText = extractedOptions.map(opt => `${opt.label}. ${opt.text}`).join('\n');
-            questionText = `${cleanedText}\n${optionsText}`;
+            const optionsText = extractedOptions.map(opt => `${opt.label}. ${opt.text}`).join(' ');
+            questionText = `${cleanedText} ${optionsText}`;
           } else {
             // 无法提取选项，保持原样但给出警告
             console.log('⚠️ 选择题缺少选项字段且无法从text中提取:', question);
@@ -1008,77 +956,6 @@ Page({
     });
   },
 
-  // 以Word格式发送到微信
-  async shareWordToWechat() {
-    try {
-      wx.showLoading({
-        title: '正在准备分享内容...',
-        mask: true
-      });
-
-      // 优先使用缓存的真实题目，如果没有则使用选中的题目
-      const questions = this.data.cachedRealQuestions || this.data.selectedQuestions;
-      const { variantCount, previewType } = this.data;
-      
-      if (!questions || questions.length === 0) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '没有可分享的内容',
-          icon: 'none'
-        });
-        return;
-      }
-
-      console.log('开始生成Word文档，题目数量:', questions.length, '预览类型:', previewType);
-      
-      // 生成学案内容（完整内容）
-      const markdownContent = await this.generateMaterialContent(questions, variantCount, previewType);
-      
-      // 将Markdown转换为纯文本（保留基本格式）
-      const { stripMarkdown } = require('../../../utils/markdown.js');
-      const textContent = stripMarkdown(markdownContent);
-      
-      wx.hideLoading();
-      
-      // 由于小程序限制，txt文件无法直接通过openDocument打开分享
-      // 采用复制到剪贴板的方式，用户可以在微信中粘贴
-      wx.setClipboardData({
-        data: textContent,
-        success: () => {
-          wx.showModal({
-            title: '内容已复制',
-            content: '学案内容已复制到剪贴板！\n\n请打开微信，在聊天窗口长按输入框，选择"粘贴"即可分享。',
-            confirmText: '我知道了',
-            showCancel: false,
-            success: () => {
-              // 尝试打开微信（如果小程序支持）
-              wx.showToast({
-                title: '内容已复制，请到微信粘贴',
-                icon: 'success',
-                duration: 3000
-              });
-            }
-          });
-        },
-        fail: (error) => {
-          console.error('复制失败:', error);
-          wx.showToast({
-            title: '复制失败，请重试',
-            icon: 'error'
-          });
-        }
-      });
-      
-    } catch (error) {
-      wx.hideLoading();
-      console.error('生成Word文档失败:', error);
-      wx.showToast({
-        title: '生成失败，请稍后重试',
-        icon: 'error'
-      });
-    }
-  },
-
   // 复制内容到剪贴板（只包含题目部分：练习标题 + 题干）
   async copyContentToClipboard() {
     try {
@@ -1137,13 +1014,6 @@ Page({
           if (/^\*\*题目\*\*\s*:/.test(line)) {
             const plainLine = line.replace(/^\*\*题目\*\*\s*:/, '题目:').trim();
             currentBlock.push(plainLine);
-            continue;
-          }
-
-          // 选项行：以字母+点号开头（如 "A. ", "B. " 等），紧跟在题目行之后
-          // 匹配格式：A. xxx, B. xxx, C. xxx, D. xxx 等（大小写不限）
-          if (/^[A-E]\.\s+/.test(line.trim())) {
-            currentBlock.push(line.trim());
             continue;
           }
 
@@ -1208,9 +1078,6 @@ Page({
             } else if (previewBlock) {
               if (/^\*\*题目\*\*\s*:/.test(line)) {
                 previewBlock.push(line.replace(/^\*\*题目\*\*\s*:/, '题目:').trim());
-              } else if (/^[A-E]\.\s+/.test(line.trim())) {
-                // 选项行：以字母+点号开头
-                previewBlock.push(line.trim());
               } else if (isTeacher && /^\*\*答案\*\*\s*:/.test(line)) {
                 previewBlock.push(line.replace(/^\*\*答案\*\*\s*:/, '答案:').trim());
               } else if (isTeacher && /^\*\*解析\*\*\s*:/.test(line)) {
