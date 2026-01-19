@@ -404,10 +404,57 @@ Page({
     const isTopicModeFromData = assignmentType === 'topic';
     const isTopicMode = isTopicModeFromData || 
       (Object.values(groupedQuestions).some(qs => qs.length > 1 && variantCount === 0) && !isGaokaoModeForDisplay);
+
+    // 初中模块：确保预览中先显示所有选择题，再显示所有填空题
+    const isMiddleSchoolModeForDisplay = assignmentType === 'zhongkao' 
+      || assignmentType === 'topic-middle' 
+      || assignmentType === 'custom-middle';
+
+    /**
+     * 根据题目类型拆分为选择题 / 填空题两个数组
+     * 并保持每个语法点内部的顺序稳定
+     */
+    const splitPointQuestionsByType = (pointQuestions) => {
+      const choiceQs = [];
+      const fillQs = [];
+      pointQuestions.forEach(q => {
+        const qt = (q.type || '').toLowerCase();
+        // 判断是否选择题
+        const isChoice = qt === 'choice' || qt === '选择题' || (q.options && Array.isArray(q.options) && q.options.length > 0);
+        // 其他视为填空题 / 非选择题
+        if (isChoice) {
+          choiceQs.push(q);
+        } else {
+          fillQs.push(q);
+        }
+      });
+      return { choiceQs, fillQs };
+    };
+
+    // 默认按对象原顺序遍历
+    let groupedEntries = Object.entries(groupedQuestions);
+
+    // 初中模块预览：先遍历所有选择题分组，再遍历所有填空题分组
+    if (isMiddleSchoolModeForDisplay) {
+      const choiceEntries = [];
+      const fillEntries = [];
+
+      groupedEntries.forEach(([point, pointQuestions]) => {
+        const { choiceQs, fillQs } = splitPointQuestionsByType(pointQuestions);
+        if (choiceQs.length > 0) {
+          choiceEntries.push([point, choiceQs]);
+        }
+        if (fillQs.length > 0) {
+          fillEntries.push([point, fillQs]);
+        }
+      });
+
+      groupedEntries = [...choiceEntries, ...fillEntries];
+    }
     
     // 生成学案内容
     let exerciseIndex = 1;
-    for (const [point, pointQuestions] of Object.entries(groupedQuestions)) {
+    for (const [point, pointQuestions] of groupedEntries) {
       if (isTopicMode && pointQuestions.length > 1) {
         // 专题模式：每个语法点的多道题目都作为独立练习展示
         for (let i = 0; i < pointQuestions.length; i++) {
