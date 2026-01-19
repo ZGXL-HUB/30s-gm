@@ -548,11 +548,16 @@ Page({
   formatQuestionText(question) {
     if (!question) return '';
     
-    const questionType = question.type || '';
+    const questionType = (question.type || '').toLowerCase();
     let questionText = question.text || '';
     
-    // 如果是选择题（choice），需要检查文本中是否已包含选项
-    if (questionType === 'choice') {
+    // 判断是否选择题：与splitPointQuestionsByType中的判断逻辑保持一致
+    // 选择题的判断条件：type为'choice'或'选择题'，或者有options字段
+    const isChoice = questionType === 'choice' || questionType === '选择题' || 
+                    (question.options && Array.isArray(question.options) && question.options.length > 0);
+    
+    // 如果是选择题，需要检查文本中是否已包含选项
+    if (isChoice) {
       // 检查文本中是否已经包含选项（格式如 "A. xxx B. xxx" 或 "A. xxx  B. xxx"）
       const hasOptionsInText = /[A-D]\.\s+[A-Z]/.test(questionText) || 
                                 /[A-D]\.\s{2,}[A-Z]/.test(questionText) ||
