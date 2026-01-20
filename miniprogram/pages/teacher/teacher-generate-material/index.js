@@ -285,7 +285,8 @@ Page({
         // 判断作业类型（从assignmentData中获取）
         const assignmentType = this.data.assignmentData?.type || '';
         const isGaokaoMode = assignmentType === 'gaokao';
-        const isTopicMode = assignmentType === 'topic';
+        // 专题模式判断：从assignmentData或type参数判断
+        const isTopicMode = assignmentType === 'topic' || type === 'topic';
         // 判断是否是初中模块
         const isMiddleSchoolMode = assignmentType === 'zhongkao' || assignmentType === 'topic-middle' || assignmentType === 'custom-middle';
         const schoolLevel = isMiddleSchoolMode ? 'middle' : 'high'; // 初中模块使用 'middle'，高中模块使用 'high'
@@ -339,28 +340,234 @@ Page({
         const queryEndTime = Date.now();
         console.log(`⚡ 并行查询完成，耗时: ${queryEndTime - queryStartTime}ms`);
         
-        // 处理查询结果
+        // 处理查询结果 - 专题模式需要智能补足机制
+        // 注意：isTopicMode 已在上面声明，这里直接使用
+        const pointResults = [];
+        const usedQuestionIds = new Set(); // 用于去重
+        
         queryResults.forEach(({ point, count, questions, success, error }) => {
           if (success && questions.length > 0) {
             // 根据需要的数量提取题目
             const selected = this.getRandomQuestions(questions, count);
-            realQuestions.push(...selected);
-            console.log(`✅ 从数据库获取到 ${selected.length} 道 ${point} 题目`);
+            const actualCount = selected.length;
+            
+            pointResults.push({
+              point,
+              requestedCount: count,
+              actualCount: actualCount,
+              questions: selected,
+              hasShortage: actualCount < count,
+              shortage: Math.max(0, count - actualCount),
+              availableQuestions: questions // 保存所有可用题目，用于补足
+            });
+            
+            // 记录已使用的题目ID
+            selected.forEach(q => {
+              const uniqueKey = q._id || q.id || q.text;
+              usedQuestionIds.add(uniqueKey);
+            });
+            
+            console.log(`✅ 从数据库获取到 ${actualCount}/${count} 道 ${point} 题目`);
           } else {
-            // 数据库找不到题目或查询失败，使用智能占位符题目生成
+            // 数据库找不到题目或查询失败
             const reason = success ? '未找到题目' : '查询失败';
-            console.log(`⚠️ ${point} ${reason}，使用智能占位符题目生成 ${count} 道`);
-            const smartPlaceholders = this.generateSmartPlaceholders(point, count, pointQuestionsMap[point] || []);
-            realQuestions.push(...smartPlaceholders);
-            console.log(`✅ 使用智能占位符题目 ${smartPlaceholders.length} 道 ${point} 题目`);
+            console.log(`⚠️ ${point} ${reason}，需要 ${count} 道题目`);
+            
+            pointResults.push({
+              point,
+              requestedCount: count,
+              actualCount: 0,
+              questions: [],
+              hasShortage: true,
+              shortage: count,
+              availableQuestions: []
+            });
           }
         });
         
+        // 专题模式：智能补足机制
+        if (isTopicMode) {
+          const totalRequested = pointResults.reduce((sum, r) => sum + r.requestedCount, 0);
+          const totalActual = pointResults.reduce((sum, r) => sum + r.actualCount, 0);
+          const totalShortage = totalRequested - totalActual;
+          
+          console.log(`📊 专题模式题目统计: 需要 ${totalRequested} 道，已获取 ${totalActual} 道，缺少 ${totalShortage} 道`);
+          
+          if (totalShortage > 0) {
+            // 获取当前专题的所有子知识点名称，用于验证题目分类
+            const validPoints = new Set(pointResults.map(r => r.point));
+            
+            // 找出有富余题目的子知识点（题目数量 > 已分配数量）
+            const pointsWithSurplus = pointResults.filter(r => 
+              r.availableQuestions && r.availableQuestions.length > r.actualCount
+            );
+            
+            if (pointsWithSurplus.length > 0) {
+              console.log(`🔄 开始从 ${pointsWithSurplus.length} 个有富余的子知识点补足题目...`);
+              
+              // 按富余题目数量排序，优先从富余最多的子知识点补足
+              pointsWithSurplus.sort((a, b) => {
+                const surplusA = a.availableQuestions.length - a.actualCount;
+                const surplusB = b.availableQuestions.length - b.actualCount;
+                return surplusB - surplusA;
+              });
+              
+              let remainingShortage = totalShortage;
+              
+              // 从有富余的子知识点补足
+              for (const pointResult of pointsWithSurplus) {
+                if (remainingShortage <= 0) break;
+                
+                const surplus = pointResult.availableQuestions.length - pointResult.actualCount;
+                if (surplus <= 0) continue;
+                
+                // 获取未使用的题目，并验证题目分类是否正确
+                const unusedQuestions = pointResult.availableQuestions.filter(q => {
+                  const uniqueKey = q._id || q.id || q.text;
+                  if (usedQuestionIds.has(uniqueKey)) return false;
+                  
+                  // 验证题目的分类是否属于当前专题的子知识点
+                  const qGrammarPoint = (q.grammarPoint || '').trim();
+                  const qCategory = (q.category || '').trim();
+                  
+                  // 如果题目的 grammarPoint 或 category 不在当前专题的子知识点列表中，跳过
+                  if (qGrammarPoint && !validPoints.has(qGrammarPoint) && qCategory && !validPoints.has(qCategory)) {
+                    console.log(`  ⚠️ 跳过不属于当前专题的题目: ${qGrammarPoint || qCategory} (来自 ${pointResult.point})`);
+                    return false;
+                  }
+                  
+                  return true;
+                });
+                
+                if (unusedQuestions.length > 0) {
+                  const supplementCount = Math.min(remainingShortage, unusedQuestions.length);
+                  const supplementQuestions = this.getRandomQuestions(unusedQuestions, supplementCount);
+                  
+                  // 添加到该子知识点的题目列表
+                  pointResult.questions.push(...supplementQuestions);
+                  pointResult.actualCount += supplementCount;
+                  // 更新 hasShortage 和 shortage
+                  pointResult.hasShortage = pointResult.actualCount < pointResult.requestedCount;
+                  pointResult.shortage = Math.max(0, pointResult.requestedCount - pointResult.actualCount);
+                  remainingShortage -= supplementCount;
+                  
+                  // 记录已使用的题目ID
+                  supplementQuestions.forEach(q => {
+                    const uniqueKey = q._id || q.id || q.text;
+                    usedQuestionIds.add(uniqueKey);
+                  });
+                  
+                  console.log(`  ✅ 从 ${pointResult.point} 补足 ${supplementCount} 道题目（剩余富余: ${unusedQuestions.length - supplementCount}）`);
+                }
+              }
+              
+              if (remainingShortage > 0) {
+                console.log(`⚠️ 仍有 ${remainingShortage} 道题目无法补足，将使用占位符题目`);
+              }
+            } else {
+              console.log(`⚠️ 没有富余的子知识点可以补足，将使用占位符题目`);
+            }
+          }
+        }
+        
+        // 收集所有题目
+        pointResults.forEach(({ point, actualCount, questions, requestedCount }) => {
+          if (questions.length > 0) {
+            realQuestions.push(...questions);
+          }
+          
+          // 如果仍有不足，使用占位符题目补足（使用更新后的 actualCount）
+          if (actualCount < requestedCount) {
+            const placeholderCount = requestedCount - actualCount;
+            console.log(`⚠️ ${point} 仍缺少 ${placeholderCount} 道题目，使用占位符补足`);
+            const smartPlaceholders = this.generateSmartPlaceholders(point, placeholderCount, pointQuestionsMap[point] || []);
+            realQuestions.push(...smartPlaceholders);
+          }
+        });
+        
+        // 去重：确保同一道题目不会出现两次
+        const uniqueQuestions = this.removeDuplicateQuestions(realQuestions);
+        
+        // 专题模式：去重后如果数量不足，再次补足
+        if (isTopicMode && uniqueQuestions.length < questions.length) {
+          const shortageAfterDedup = questions.length - uniqueQuestions.length;
+          console.log(`🔄 去重后缺少 ${shortageAfterDedup} 道题目，尝试再次补足...`);
+          
+          // 找出仍有富余题目的子知识点
+          const pointsWithSurplus = pointResults.filter(r => 
+            r.availableQuestions && r.availableQuestions.length > r.actualCount
+          );
+          
+          if (pointsWithSurplus.length > 0) {
+            // 获取当前专题的所有子知识点名称，用于验证题目分类
+            const validPoints = new Set(pointResults.map(r => r.point));
+            
+            // 按富余题目数量排序
+            pointsWithSurplus.sort((a, b) => {
+              const surplusA = a.availableQuestions.length - a.actualCount;
+              const surplusB = b.availableQuestions.length - b.actualCount;
+              return surplusB - surplusA;
+            });
+            
+            let remainingShortage = shortageAfterDedup;
+            const usedIds = new Set(uniqueQuestions.map(q => q._id || q.id || q.text));
+            
+            for (const pointResult of pointsWithSurplus) {
+              if (remainingShortage <= 0) break;
+              
+              const unusedQuestions = pointResult.availableQuestions.filter(q => {
+                const uniqueKey = q._id || q.id || q.text;
+                if (usedIds.has(uniqueKey)) return false;
+                
+                // 验证题目分类
+                const qGrammarPoint = (q.grammarPoint || '').trim();
+                const qCategory = (q.category || '').trim();
+                if (qGrammarPoint && !validPoints.has(qGrammarPoint) && qCategory && !validPoints.has(qCategory)) {
+                  return false;
+                }
+                
+                return true;
+              });
+              
+              if (unusedQuestions.length > 0) {
+                const supplementCount = Math.min(remainingShortage, unusedQuestions.length);
+                const supplementQuestions = this.getRandomQuestions(unusedQuestions, supplementCount);
+                uniqueQuestions.push(...supplementQuestions);
+                remainingShortage -= supplementCount;
+                
+                supplementQuestions.forEach(q => {
+                  const uniqueKey = q._id || q.id || q.text;
+                  usedIds.add(uniqueKey);
+                });
+                
+                console.log(`  ✅ 去重后从 ${pointResult.point} 补足 ${supplementCount} 道题目`);
+              }
+            }
+            
+            if (remainingShortage > 0) {
+              console.log(`⚠️ 去重后仍有 ${remainingShortage} 道题目无法补足`);
+            }
+          }
+        }
+        
         // 确保题目总数正确
-        if (realQuestions.length > 0) {
-          console.log(`✅ 使用数据库真实题目和占位符题目，共 ${realQuestions.length} 道（目标: ${questions.length} 道）`);
-          this.setData({ cachedRealQuestions: realQuestions });
-          questions = realQuestions;
+        if (uniqueQuestions.length > 0) {
+          const finalCount = uniqueQuestions.length;
+          const targetCount = questions.length;
+          console.log(`✅ 使用数据库真实题目和占位符题目，共 ${finalCount} 道（去重后，目标: ${targetCount} 道）`);
+          if (finalCount < targetCount) {
+            console.log(`⚠️ 题目数量不足: 需要 ${targetCount} 道，实际 ${finalCount} 道，缺少 ${targetCount - finalCount} 道`);
+          } else if (finalCount > targetCount) {
+            // 如果数量超过目标，随机删除多余的题目
+            const shuffled = [...uniqueQuestions].sort(() => Math.random() - 0.5);
+            const trimmedQuestions = shuffled.slice(0, targetCount);
+            console.log(`⚠️ 题目数量超出: 需要 ${targetCount} 道，实际 ${finalCount} 道，已删除 ${finalCount - targetCount} 道`);
+            this.setData({ cachedRealQuestions: trimmedQuestions });
+            questions = trimmedQuestions;
+          } else {
+            this.setData({ cachedRealQuestions: uniqueQuestions });
+            questions = uniqueQuestions;
+          }
         } else {
           console.log('⚠️ 未获取到任何题目，使用原题目');
           this.setData({ cachedRealQuestions: questions });
@@ -557,6 +764,32 @@ Page({
     
     const shuffled = [...questions].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
+  },
+
+  // 去重题目列表（基于题目的唯一标识）
+  removeDuplicateQuestions(questions) {
+    if (!questions || questions.length === 0) return [];
+    
+    const seen = new Set();
+    const uniqueQuestions = [];
+    
+    for (const question of questions) {
+      // 优先使用 _id，其次使用 id，最后使用 text 作为唯一标识
+      const uniqueKey = question._id || question.id || question.text;
+      
+      if (!seen.has(uniqueKey)) {
+        seen.add(uniqueKey);
+        uniqueQuestions.push(question);
+      } else {
+        console.log(`⚠️ 发现重复题目，已跳过: ${uniqueKey}`);
+      }
+    }
+    
+    if (questions.length !== uniqueQuestions.length) {
+      console.log(`✅ 去重完成: 原始 ${questions.length} 道题目，去重后 ${uniqueQuestions.length} 道题目`);
+    }
+    
+    return uniqueQuestions;
   },
 
   // 生成变式题内容

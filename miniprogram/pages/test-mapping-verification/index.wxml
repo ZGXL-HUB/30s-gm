@@ -1,0 +1,35 @@
+<!-- 映射验证测试页面 -->
+<view class="container">
+  <view class="header">
+    <text class="title">映射验证测试</text>
+    <text class="subtitle">验证 cloudDataLoader 映射表与实际数据库的匹配性</text>
+  </view>
+
+  <view class="actions">
+    <button class="btn" bindtap="rerunTests" disabled="{{isRunning}}">
+      {{isRunning ? '测试运行中...' : '重新运行测试'}}
+    </button>
+    <button class="btn" bindtap="exportResults" disabled="{{isRunning || testResults.length === 0}}">
+      导出结果
+    </button>
+  </view>
+
+  <view class="tips">
+    <text class="tip-text">💡 提示：测试结果会同时显示在控制台和页面上</text>
+    <text class="tip-text">📋 请打开开发者工具的控制台查看详细日志</text>
+  </view>
+
+  <view class="results" wx:if="{{testResults.length > 0}}">
+    <view class="result-item" wx:for="{{testResults}}" wx:key="test">
+      <view class="result-title">{{item.test}}</view>
+      <view class="result-content">
+        <text class="result-text">{{item.test}} 已完成</text>
+        <text class="result-text">详细结果请查看控制台</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!isRunning && testResults.length === 0}}">
+    <text class="empty-text">点击"重新运行测试"开始测试</text>
+  </view>
+</view>

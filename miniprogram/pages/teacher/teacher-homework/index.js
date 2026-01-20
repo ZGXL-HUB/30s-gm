@@ -1195,10 +1195,11 @@ Page({
   },
   
   // 智能分配题目到小点
+  // 优化：确保每个子知识点至少分配1题（如果题目数>=子知识点数），然后平均分配剩余题目
   distributeQuestionsToPoints(points, totalCount) {
     if (points.length === 0) return [];
     
-    // 如果题目数 <= 小点数，每个小点1题
+    // 如果题目数 <= 小点数，每个小点1题（前totalCount个小点各1题）
     if (totalCount <= points.length) {
       return points.map((point, index) => ({
         ...point,
@@ -1206,17 +1207,28 @@ Page({
       }));
     }
     
-    // 如果题目数 > 小点数，均分后随机分配余数
-    const baseCount = Math.floor(totalCount / points.length);
-    const remainder = totalCount % points.length;
+    // 如果题目数 > 小点数，确保每个子知识点至少1题，然后平均分配剩余题目
+    // 步骤1：每个子知识点先分配1题
+    const guaranteedCount = 1;
+    const remainingCount = totalCount - (points.length * guaranteedCount);
     
-    // 随机选择小点分配余数
+    // 步骤2：将剩余题目平均分配到各个子知识点
+    const baseExtraCount = Math.floor(remainingCount / points.length);
+    const extraRemainder = remainingCount % points.length;
+    
+    // 步骤3：随机选择子知识点分配余数
     const shuffledIndices = points.map((_, index) => index).sort(() => Math.random() - 0.5);
     
-    return points.map((point, index) => ({
-      ...point,
-      count: baseCount + (shuffledIndices.indexOf(index) < remainder ? 1 : 0)
-    }));
+    return points.map((point, index) => {
+      // 基础分配：每个子知识点至少1题
+      // 额外分配：平均分配剩余题目
+      // 余数分配：随机分配给部分子知识点
+      const extraCount = baseExtraCount + (shuffledIndices.indexOf(index) < extraRemainder ? 1 : 0);
+      return {
+        ...point,
+        count: guaranteedCount + extraCount
+      };
+    });
   },
   
   // ===== 自选模式增强函数 =====
@@ -1946,8 +1958,11 @@ Page({
         }
       }
       
-      console.log(`✅ 共获取 ${allQuestions.length} 道题目`);
-      return allQuestions;
+      // 去重：确保同一道题目不会出现两次
+      const uniqueQuestions = this.removeDuplicateQuestions(allQuestions);
+      
+      console.log(`✅ 共获取 ${uniqueQuestions.length} 道题目（去重后）`);
+      return uniqueQuestions;
       
     } catch (error) {
       console.error('❌ 获取题目失败:', error);
@@ -1965,6 +1980,32 @@ Page({
     
     const shuffled = questions.sort(() => Math.random() - 0.5);
     return shuffled.slice(0, Math.min(count, questions.length));
+  },
+
+  // 去重题目列表（基于题目的唯一标识）
+  removeDuplicateQuestions(questions) {
+    if (!questions || questions.length === 0) return [];
+    
+    const seen = new Set();
+    const uniqueQuestions = [];
+    
+    for (const question of questions) {
+      // 优先使用 _id，其次使用 id，最后使用 text 作为唯一标识
+      const uniqueKey = question._id || question.id || question.text;
+      
+      if (!seen.has(uniqueKey)) {
+        seen.add(uniqueKey);
+        uniqueQuestions.push(question);
+      } else {
+        console.log(`⚠️ 发现重复题目，已跳过: ${uniqueKey}`);
+      }
+    }
+    
+    if (questions.length !== uniqueQuestions.length) {
+      console.log(`✅ 去重完成: 原始 ${questions.length} 道题目，去重后 ${uniqueQuestions.length} 道题目`);
+    }
+    
+    return uniqueQuestions;
   },
 
   // 发布作业
@@ -2255,12 +2296,15 @@ Page({
       title = '自选语法练习';
     }
     
+    // 对所有模式的题目进行去重，确保同一道题目不会出现两次
+    const uniqueQuestions = this.removeDuplicateQuestions(questions);
+    
     return {
       id: `assignment_${Date.now()}`,
       title: title,
       type: homeworkType,
-      questions: questions,
-      totalQuestions: questions.length,
+      questions: uniqueQuestions,
+      totalQuestions: uniqueQuestions.length,
       createdAt: new Date().toISOString()
     };
   },

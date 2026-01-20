@@ -1744,9 +1744,12 @@ Page({
         questions = await this.generateCustomQuestions();
       }
       
+      // 对所有模式的题目进行去重，确保同一道题目不会出现两次
+      const uniqueQuestions = this.removeDuplicateQuestions(questions);
+      
       // 按题型分组排序：先显示选择题，再显示填空题
       // 如果启用乱序，只在同一题型内部打乱
-      questions = this.sortQuestionsByType(questions, this.data.shuffleQuestions);
+      const sortedQuestions = this.sortQuestionsByType(uniqueQuestions, this.data.shuffleQuestions);
       
       // 构建作业数据
       const assignmentData = {
@@ -1759,8 +1762,8 @@ Page({
         zhongkaoRatio: homeworkType === 'zhongkao' ? zhongkaoRatio : null,
         totalChoiceQuestions: totalChoiceQuestions || 0,
         totalFillQuestions: totalFillQuestions || 0,
-        questions: questions,
-        totalQuestions: questions.length,
+        questions: sortedQuestions,
+        totalQuestions: sortedQuestions.length,
         shuffleQuestions: this.data.shuffleQuestions,
         createdAt: new Date().toISOString()
       };
@@ -1918,7 +1921,38 @@ Page({
       }
     }
     
-    return questions;
+    // 去重：确保同一道题目不会出现两次
+    const uniqueQuestions = this.removeDuplicateQuestions(questions);
+    
+    return uniqueQuestions;
+  },
+
+  /**
+   * 去重题目列表（基于题目的唯一标识）
+   */
+  removeDuplicateQuestions(questions) {
+    if (!questions || questions.length === 0) return [];
+    
+    const seen = new Set();
+    const uniqueQuestions = [];
+    
+    for (const question of questions) {
+      // 优先使用 _id，其次使用 id，最后使用 text 作为唯一标识
+      const uniqueKey = question._id || question.id || question.text;
+      
+      if (!seen.has(uniqueKey)) {
+        seen.add(uniqueKey);
+        uniqueQuestions.push(question);
+      } else {
+        console.log(`⚠️ 发现重复题目，已跳过: ${uniqueKey}`);
+      }
+    }
+    
+    if (questions.length !== uniqueQuestions.length) {
+      console.log(`✅ 去重完成: 原始 ${questions.length} 道题目，去重后 ${uniqueQuestions.length} 道题目`);
+    }
+    
+    return uniqueQuestions;
   },
 
   /**
@@ -2010,7 +2044,10 @@ Page({
       }
     }
     
-    return questions;
+    // 去重：确保同一道题目不会出现两次
+    const uniqueQuestions = this.removeDuplicateQuestions(questions);
+    
+    return uniqueQuestions;
   },
 
   /**
@@ -2105,7 +2142,10 @@ Page({
       }
     }
     
-    return questions;
+    // 去重：确保同一道题目不会出现两次
+    const uniqueQuestions = this.removeDuplicateQuestions(questions);
+    
+    return uniqueQuestions;
   },
 
   /**

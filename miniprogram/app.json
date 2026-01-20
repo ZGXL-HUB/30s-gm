@@ -44,7 +44,8 @@
     "pages/feedback/history",
     "pages/admin/feedback-management",
     "pages/test-cloud/index",
-    "pages/student-join-class/index"
+    "pages/student-join-class/index",
+    "pages/test-mapping-verification/index"
   ],
   "subPackages": [
     {
