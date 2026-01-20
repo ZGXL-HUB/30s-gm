@@ -1,5 +1,5 @@
 // app.js
-const { UserService } = require('./services/index.js');
+const { UserService, FeedbackService } = require('./services/index.js');
 
 App({
   onLaunch: function () {
@@ -8,6 +8,9 @@ App({
     
     // 静默登录
     this.silentLogin();
+    
+    // 尝试同步本地反馈到云端
+    this.syncLocalFeedbacks();
   },
 
   // 初始化云开发
@@ -182,6 +185,31 @@ App({
   // 检查是否已登录
   isUserLoggedIn: function() {
     return this.globalData.isLoggedIn && this.globalData.userInfo;
+  },
+  
+  // 同步本地反馈到云端
+  syncLocalFeedbacks: function() {
+    // 延迟执行，确保云开发已初始化
+    setTimeout(async () => {
+      try {
+        if (!wx.cloud || !this.globalData.useCloud) {
+          console.log('云开发不可用，跳过反馈同步');
+          return;
+        }
+
+        const result = await FeedbackService.syncLocalFeedbacksToCloud({
+          showLoading: false,
+          showError: false
+        });
+
+        if (result.success && result.syncedCount > 0) {
+          console.log(`✅ 应用启动时成功同步 ${result.syncedCount} 条反馈到云端`);
+        }
+      } catch (error) {
+        console.error('应用启动时同步反馈失败:', error);
+        // 静默失败，不影响应用启动
+      }
+    }, 2000); // 延迟2秒，确保云开发已完全初始化
   },
   
 });

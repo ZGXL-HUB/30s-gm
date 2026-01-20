@@ -45,12 +45,6 @@
       >
         复制当前预览内容
       </button>
-      <button 
-        class="generate-btn primary"
-        bindtap="shareWordToWechat"
-      >
-        以Word格式发送到微信
-      </button>
     </view>
   </view>
 </view>

@@ -21,9 +21,16 @@
   font-size: 32rpx;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20rpx;
+  margin-bottom: 12rpx;
   display: flex;
   align-items: center;
+}
+
+.section-desc {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  line-height: 1.5;
 }
 
 .required {
@@ -36,54 +43,6 @@
   font-size: 24rpx;
   font-weight: normal;
   margin-left: 8rpx;
-}
-
-/* 反馈类型选择 */
-.type-options {
-  display: flex;
-  flex-direction: column;
-  gap: 20rpx;
-}
-
-.type-option {
-  display: flex;
-  align-items: center;
-  padding: 30rpx;
-  background: #f8f9fa;
-  border-radius: 15rpx;
-  border: 2rpx solid transparent;
-  transition: all 0.3s ease;
-}
-
-.type-option:active {
-  transform: scale(0.98);
-}
-
-.type-option.selected {
-  background: #e3f2fd;
-  border-color: #2196f3;
-}
-
-.type-icon {
-  font-size: 40rpx;
-  margin-right: 20rpx;
-}
-
-.type-content {
-  flex: 1;
-}
-
-.type-title {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 8rpx;
-}
-
-.type-desc {
-  font-size: 24rpx;
-  color: #666;
-  line-height: 1.4;
 }
 
 /* 问题描述 */
@@ -110,98 +69,6 @@
   font-size: 24rpx;
   color: #999;
   margin-top: 10rpx;
-}
-
-/* 联系方式 */
-.contact-input {
-  width: 100%;
-  height: 80rpx;
-  padding: 0 20rpx;
-  background: #f8f9fa;
-  border-radius: 15rpx;
-  border: 2rpx solid #e0e0e0;
-  font-size: 28rpx;
-  color: #333;
-  box-sizing: border-box;
-}
-
-.contact-input:focus {
-  border-color: #2196f3;
-  background: white;
-}
-
-/* 图片上传 */
-.image-upload {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20rpx;
-}
-
-.upload-item {
-  position: relative;
-  width: 160rpx;
-  height: 160rpx;
-}
-
-.uploaded-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 15rpx;
-  object-fit: cover;
-}
-
-.delete-btn {
-  position: absolute;
-  top: -10rpx;
-  right: -10rpx;
-  width: 40rpx;
-  height: 40rpx;
-  background: #ff4757;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24rpx;
-  font-weight: bold;
-}
-
-.upload-btn {
-  width: 160rpx;
-  height: 160rpx;
-  background: #f8f9fa;
-  border: 2rpx dashed #ccc;
-  border-radius: 15rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.upload-btn:active {
-  transform: scale(0.98);
-}
-
-.upload-btn.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-.upload-icon {
-  font-size: 40rpx;
-  margin-bottom: 10rpx;
-}
-
-.upload-text {
-  font-size: 24rpx;
-  color: #666;
-}
-
-.upload-tip {
-  font-size: 24rpx;
-  color: #999;
-  margin-top: 15rpx;
 }
 
 /* 提交按钮 */

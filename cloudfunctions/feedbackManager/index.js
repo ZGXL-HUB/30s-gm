@@ -71,21 +71,17 @@ async function submitFeedback(data, openId) {
   } = data;
 
   // 验证必填字段
-  if (!type || !content) {
+  if (!content) {
     return {
       success: false,
-      message: '反馈类型和内容不能为空'
+      message: '反馈内容不能为空'
     };
   }
 
   // 输入验证和清理
-  const allowedTypes = ['technical', 'function', 'content', 'experience', 'other'];
-  if (!allowedTypes.includes(type)) {
-    return {
-      success: false,
-      message: '无效的反馈类型'
-    };
-  }
+  const allowedTypes = ['technical', 'function', 'content', 'experience', 'other', 'general'];
+  // 如果没有提供类型或类型不在允许列表中，使用 'general'
+  const validType = type && allowedTypes.includes(type) ? type : 'general';
 
   // 清理用户输入
   const sanitizedContent = content.replace(/[<>]/g, '').trim();
@@ -100,14 +96,14 @@ async function submitFeedback(data, openId) {
   const sanitizedContact = contact ? contact.replace(/[<>]/g, '').trim().substring(0, 100) : '';
 
   // 智能分类和优先级分析
-  const analysisResult = await analyzeFeedback(content, type);
+  const analysisResult = await analyzeFeedback(content, validType);
   
   // 创建反馈记录
   const feedbackData = {
     feedbackId: feedbackId || generateSecureId(),
     openId,
-    type: analysisResult.suggestedType || type,
-    title: sanitizedTitle || getFeedbackTitle(analysisResult.suggestedType || type),
+    type: analysisResult.suggestedType || validType,
+    title: sanitizedTitle || getFeedbackTitle(analysisResult.suggestedType || validType),
     content: sanitizedContent,
     contact: sanitizedContact,
     images: Array.isArray(images) ? images.slice(0, 5) : [], // 限制图片数量
@@ -119,6 +115,14 @@ async function submitFeedback(data, openId) {
     createTime: new Date(),
     updateTime: new Date()
   };
+  
+  // 如果提供了 existingIssues 或 unmetNeeds，也保存
+  if (data.existingIssues) {
+    feedbackData.existingIssues = data.existingIssues;
+  }
+  if (data.unmetNeeds) {
+    feedbackData.unmetNeeds = data.unmetNeeds;
+  }
 
   try {
     const result = await db.collection('user_feedback').add({
@@ -130,7 +134,7 @@ async function submitFeedback(data, openId) {
       message: '反馈提交成功',
       data: {
         _id: result._id,
-        feedbackId: feedbackId
+        feedbackId: feedbackData.feedbackId
       }
     };
   } catch (error) {
@@ -225,7 +229,9 @@ function getFeedbackTitle(type) {
     'function': '功能问题反馈',
     'content': '内容质量反馈',
     'experience': '用户体验反馈',
-    'technical': '技术问题反馈'
+    'technical': '技术问题反馈',
+    'general': '功能反馈',
+    'other': '其他反馈'
   };
   return titles[type] || '用户反馈';
 }
