@@ -353,6 +353,7 @@ class CloudDataLoader {
         }
       };
 
+
       // 根据学段选择对应的映射表
       console.log('🔍 CloudDataLoader 接收到的 schoolLevel 参数:', schoolLevel);
       const finalSchoolLevel = schoolLevel || 'high'; // 默认使用 high
@@ -859,9 +860,109 @@ class CloudDataLoader {
          ...keywordTables[finalSchoolLevel]
        };
 
-       return keywordMap[grammarPoint] || [grammarPoint];
-      
       return keywordMap[grammarPoint] || [grammarPoint];
+    }
+
+    // 获取专题到子知识点的映射表
+    getTopicToSubPointsMapping(schoolLevel = 'high') {
+      const TOPIC_TO_SUB_POINTS_MAPPING = {
+        // 高中模块
+        high: {
+          "连词": [
+            "连词综合",           // 映射到"连词与名/动/形/副综合"
+            "连词与名词",
+            "连词与动词",
+            "连词与形容词",
+            "并列连词综合",
+            "从属连词综合",
+            "连词与名/动/形/副综合"
+          ],
+          "时态/谓语": [
+            "时态综合",
+            "谓语综合",
+            "谓语(1)",
+            "谓语(2)",
+            "谓语(3)",
+            "谓语(4)",
+            "谓语(5)",
+            "谓语(6)",
+            "谓语(7)",
+            "现在时",
+            "过去时",
+            "完成时",
+            "进行时"
+          ],
+          "冠词": [
+            "冠词综合",
+            "a和an",
+            "the的特殊用法",
+            "泛指与特指"
+          ],
+          "形容词": [
+            "形容词综合",
+            "比较级",
+            "最高级"
+          ],
+          "副词": [
+            "副词综合",
+            "副词修饰动词",
+            "副词修饰形容词/副词",
+            "副词修饰句子"
+          ],
+          "名词": [
+            "名词综合",
+            "名词复数书写综合",
+            "f/fe结尾",
+            "以o结尾",
+            "以y结尾",
+            "s/sh/ch/x结尾"
+          ],
+          "代词": [
+            "代词综合",
+            "人称代词",
+            "物主代词",
+            "反身代词",
+            "关系代词",
+            "it相关"
+          ],
+          "介词": [
+            "介词综合",
+            "介词 + 名词/动名词",
+            "固定搭配"
+          ],
+          "动词": [
+            "动词综合",
+            "并列句与动词",
+            "主从句与动词",
+            "插入语与动词"
+          ],
+          "非谓语": [
+            "非谓语综合",
+            "现在分词综合",
+            "过去分词综合",
+            "不定式综合"
+          ],
+          "从句": [
+            "定语从句综合",
+            "状语从句综合",
+            "that能填吗",
+            "who和which选哪个",
+            "whose",
+            "which和when/where混淆",
+            "when",
+            "where",
+            "how",
+            "why"
+          ]
+        },
+        // 初中模块（可根据需要扩展）
+        middle: {
+          // 可以基于 middle 映射表建立类似的专题映射
+        }
+      };
+
+      const finalSchoolLevel = schoolLevel || 'high';
+      return TOPIC_TO_SUB_POINTS_MAPPING[finalSchoolLevel] || TOPIC_TO_SUB_POINTS_MAPPING.high;
     }
   
     // 从云数据库加载题目

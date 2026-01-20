@@ -710,6 +710,7 @@ Page({
       this.updateSelectedTags();
       this.updateCategoryCounts();
       this.updateSmartTitle();
+      this.updateSelectedCount(); // 更新总题数（考虑变式题数量）
       
       wx.hideLoading();
       wx.showToast({
@@ -770,6 +771,7 @@ Page({
             this.updateSelectedTags();
             this.updateCategoryCounts();
             this.updateSmartTitle();
+            this.updateSelectedCount(); // 更新总题数（考虑变式题数量）
             
             // 清除可能存在的旧数据
             this.setData({
@@ -822,6 +824,7 @@ Page({
     this.updateSelectedTags();
     this.updateCategoryCounts();
     this.updateSmartTitle();
+    this.updateSelectedCount(); // 更新总题数（考虑变式题数量）
     
     wx.showToast({
       title: '添加成功',
@@ -866,6 +869,7 @@ Page({
     // 更新大类计数和智能标题
     this.updateCategoryCounts();
     this.updateSmartTitle();
+    this.updateSelectedCount(); // 更新总题数（考虑变式题数量）
     
     wx.showToast({
       title: '已删除语法点',
@@ -1744,7 +1748,11 @@ Page({
       }
     } else if (homeworkType === 'gaokao') {
       selectedCount = this.data.gaokaoRatio.selectedGrammarPoints.length;
-      totalQuestions = selectedCount; // 高考配比每个点1题
+      const variantCount = this.data.variantCount || 0;
+      // 高考配比：10个原题 + 每个原题的变式题数量
+      // 如果选择了2个变式题，应该是 10个原题 + 20个变式题 = 30题
+      // 公式：总题数 = 原题数量 * (1 + 变式题数量)
+      totalQuestions = selectedCount * (1 + variantCount);
     }
     
     this.setData({ 
@@ -2117,6 +2125,9 @@ Page({
       success: (res) => {
         const variantCount = res.tapIndex + 1;
         this.setData({ variantCount });
+        
+        // 更新总题数（高考配比模式需要考虑变式题数量）
+        this.updateSelectedCount();
         
         // 显示提示
         wx.showToast({

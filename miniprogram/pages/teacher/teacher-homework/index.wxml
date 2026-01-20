@@ -111,7 +111,7 @@
       <view class="gaokao-selected-points" wx:if="{{homeworkType === 'gaokao'}}">
         <view class="gaokao-header">
           <text class="gaokao-title">高考配比已生成</text>
-          <text class="gaokao-subtitle">共{{gaokaoRatio.selectedGrammarPoints.length}}个语法点，每题1道</text>
+          <text class="gaokao-subtitle">共{{gaokaoRatio.selectedGrammarPoints.length}}个语法点{{variantCount > 0 ? '，总题数：' + totalQuestions + '题（' + gaokaoRatio.selectedGrammarPoints.length + '道原题 + ' + (gaokaoRatio.selectedGrammarPoints.length * variantCount) + '道变式题）' : '，每题1道'}}</text>
         </view>
         <view class="selected-points-grid">
           <view 
