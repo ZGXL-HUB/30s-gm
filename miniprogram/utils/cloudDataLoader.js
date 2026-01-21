@@ -470,7 +470,9 @@ class CloudDataLoader {
       }
       
       // ✅ 步骤1：优先使用 grammarPoint 进行精确匹配（仅初中模块）
-      if (finalSchoolLevel === 'middle' && actualGrammarPoint && actualGrammarPoint !== grammarPoint) {
+      // 如果 grammarPoint 在映射表中，说明需要按 grammarPoint 精确查询
+      const hasGrammarPointMapping = grammarPointMapping[grammarPoint] !== undefined;
+      if (finalSchoolLevel === 'middle' && actualGrammarPoint && hasGrammarPointMapping) {
         const grammarPointCondition = { grammarPoint: actualGrammarPoint };
         if (schoolLevel) {
           grammarPointCondition.schoolLevel = schoolLevel;
@@ -489,6 +491,8 @@ class CloudDataLoader {
         if (result.data.length > 0) {
           console.log(`   ✅ 找到 ${result.data.length} 题（grammarPoint: ${actualGrammarPoint}, type: ${type || '全部'}）`);
           return result.data;
+        } else {
+          console.log(`   ⚠️ 步骤1a未找到题目，将尝试步骤1b`);
         }
       }
       
@@ -502,8 +506,9 @@ class CloudDataLoader {
       
       if (result.data.length > 0) {
         console.log(`   ✅ 找到 ${result.data.length} 题（category: ${actualCategory}, type: ${type || '全部'}）`);
-        // 如果同时有 grammarPoint，进一步过滤
-        if (finalSchoolLevel === 'middle' && actualGrammarPoint && actualGrammarPoint !== grammarPoint) {
+        // 如果同时有 grammarPoint 映射，进一步过滤（作为步骤1a的兜底）
+        const hasGrammarPointMapping = grammarPointMapping[grammarPoint] !== undefined;
+        if (finalSchoolLevel === 'middle' && actualGrammarPoint && hasGrammarPointMapping) {
           const filtered = result.data.filter(q => {
             const qGrammarPoint = (q.grammarPoint || '').trim();
             const targetGrammarPoint = actualGrammarPoint.trim();
@@ -523,8 +528,10 @@ class CloudDataLoader {
             return exactMatch;
           });
           if (filtered.length > 0) {
-            console.log(`   ✅ 进一步过滤后找到 ${filtered.length} 题（grammarPoint精确匹配, type: ${type || '全部'}）`);
+            console.log(`   ✅ 进一步过滤后找到 ${filtered.length} 题（grammarPoint精确匹配: ${actualGrammarPoint}, type: ${type || '全部'}）`);
             return filtered;
+          } else {
+            console.log(`   ⚠️ 过滤后未找到匹配的题目（期望grammarPoint: ${actualGrammarPoint}），返回原始结果`);
           }
         }
         return result.data;

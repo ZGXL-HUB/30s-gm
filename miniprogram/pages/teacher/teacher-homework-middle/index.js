@@ -1850,16 +1850,23 @@ Page({
     // 生成选择题（按知识点+type+数量查询）
     for (const point of choicePoints) {
       try {
+        const count = point.count || 1;
         const pointQuestions = await loader.getQuestionsByGrammarPoint(
           point.grammarPoint,
           'middle',
           'choice', // 指定题型为选择题
-          point.count || 1 // 指定数量
+          count * 2 // 查询更多题目以确保有足够的选择
         );
+        
+        if (pointQuestions.length < count) {
+          console.warn(`⚠️ ${point.grammarPoint} 选择题数量不足: 需要 ${count} 题，但只找到 ${pointQuestions.length} 题`);
+        }
         
         // 随机选择指定数量的题目
         const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
-        const selectedQuestions = shuffled.slice(0, point.count || 1);
+        const selectedQuestions = shuffled.slice(0, count);
+        
+        console.log(`✅ ${point.grammarPoint} 选择题: 查询到 ${pointQuestions.length} 题，选择 ${selectedQuestions.length} 题`);
         
         questions.push(...selectedQuestions.map(q => ({
           ...q,
@@ -1887,16 +1894,23 @@ Page({
     // 生成填空题（按知识点+type+数量查询）
     for (const point of fillPoints) {
       try {
+        const count = point.count || 1;
         const pointQuestions = await loader.getQuestionsByGrammarPoint(
           point.grammarPoint,
           'middle',
           'fill_blank', // 指定题型为填空题
-          point.count || 1 // 指定数量
+          count * 2 // 查询更多题目以确保有足够的选择
         );
+        
+        if (pointQuestions.length < count) {
+          console.warn(`⚠️ ${point.grammarPoint} 填空题数量不足: 需要 ${count} 题，但只找到 ${pointQuestions.length} 题`);
+        }
         
         // 随机选择指定数量的题目
         const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
-        const selectedQuestions = shuffled.slice(0, point.count || 1);
+        const selectedQuestions = shuffled.slice(0, count);
+        
+        console.log(`✅ ${point.grammarPoint} 填空题: 查询到 ${pointQuestions.length} 题，选择 ${selectedQuestions.length} 题`);
         
         questions.push(...selectedQuestions.map(q => ({
           ...q,
@@ -1978,11 +1992,17 @@ Page({
             pointName,
             'middle',
             'choice',
-            dist.choice
+            dist.choice * 2 // 查询更多题目以确保有足够的选择
           );
+          
+          if (pointQuestions.length < dist.choice) {
+            console.warn(`⚠️ ${pointName} 选择题数量不足: 需要 ${dist.choice} 题，但只找到 ${pointQuestions.length} 题`);
+          }
           
           const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
           const selectedQuestions = shuffled.slice(0, dist.choice);
+          
+          console.log(`✅ ${pointName} 选择题: 查询到 ${pointQuestions.length} 题，选择 ${selectedQuestions.length} 题`);
           
           questions.push(...selectedQuestions.map(q => ({
             ...q,
@@ -2014,11 +2034,17 @@ Page({
             pointName,
             'middle',
             'fill_blank',
-            dist.fill
+            dist.fill * 2 // 查询更多题目以确保有足够的选择
           );
+          
+          if (pointQuestions.length < dist.fill) {
+            console.warn(`⚠️ ${pointName} 填空题数量不足: 需要 ${dist.fill} 题，但只找到 ${pointQuestions.length} 题`);
+          }
           
           const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
           const selectedQuestions = shuffled.slice(0, dist.fill);
+          
+          console.log(`✅ ${pointName} 填空题: 查询到 ${pointQuestions.length} 题，选择 ${selectedQuestions.length} 题`);
           
           questions.push(...selectedQuestions.map(q => ({
             ...q,
@@ -2076,11 +2102,17 @@ Page({
             pointName,
             'middle',
             'choice',
-            dist.choice
+            dist.choice * 2 // 查询更多题目以确保有足够的选择
           );
+          
+          if (pointQuestions.length < dist.choice) {
+            console.warn(`⚠️ ${pointName} 选择题数量不足: 需要 ${dist.choice} 题，但只找到 ${pointQuestions.length} 题`);
+          }
           
           const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
           const selectedQuestions = shuffled.slice(0, dist.choice);
+          
+          console.log(`✅ ${pointName} 选择题: 查询到 ${pointQuestions.length} 题，选择 ${selectedQuestions.length} 题`);
           
           questions.push(...selectedQuestions.map(q => ({
             ...q,
@@ -2112,11 +2144,17 @@ Page({
             pointName,
             'middle',
             'fill_blank',
-            dist.fill
+            dist.fill * 2 // 查询更多题目以确保有足够的选择
           );
+          
+          if (pointQuestions.length < dist.fill) {
+            console.warn(`⚠️ ${pointName} 填空题数量不足: 需要 ${dist.fill} 题，但只找到 ${pointQuestions.length} 题`);
+          }
           
           const shuffled = pointQuestions.sort(() => Math.random() - 0.5);
           const selectedQuestions = shuffled.slice(0, dist.fill);
+          
+          console.log(`✅ ${pointName} 填空题: 查询到 ${pointQuestions.length} 题，选择 ${selectedQuestions.length} 题`);
           
           questions.push(...selectedQuestions.map(q => ({
             ...q,
