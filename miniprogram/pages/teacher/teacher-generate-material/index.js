@@ -572,18 +572,31 @@ Page({
               const selected = this.getRandomQuestions(questions, count);
               const actualCount = selected.length;
               
+              // 为每个题目添加原始的 grammarPoint 字段，确保分组时能正确区分
+              // 如果题目没有 grammarPoint，使用查询的 point 作为 grammarPoint
+              const selectedWithGrammarPoint = selected.map(q => ({
+                ...q,
+                grammarPoint: q.grammarPoint || point // 保留原始 grammarPoint，如果没有则使用 point
+              }));
+              
+              // 同样为 availableQuestions 添加 grammarPoint
+              const availableQuestionsWithGrammarPoint = questions.map(q => ({
+                ...q,
+                grammarPoint: q.grammarPoint || point
+              }));
+              
               pointResults.push({
                 point,
                 requestedCount: count,
                 actualCount: actualCount,
-                questions: selected,
+                questions: selectedWithGrammarPoint,
                 hasShortage: actualCount < count,
                 shortage: Math.max(0, count - actualCount),
-                availableQuestions: questions // 保存所有可用题目，用于补足
+                availableQuestions: availableQuestionsWithGrammarPoint // 保存所有可用题目，用于补足
               });
               
               // 记录已使用的题目ID
-              selected.forEach(q => {
+              selectedWithGrammarPoint.forEach(q => {
                 const uniqueKey = q._id || q.id || q.text;
                 usedQuestionIds.add(uniqueKey);
               });
@@ -691,44 +704,52 @@ Page({
             }
           }
           
-          // 收集所有题目
+          // 收集所有真实题目（先不生成占位符）
           pointResults.forEach(({ point, actualCount, questions, requestedCount }) => {
             if (questions.length > 0) {
               realQuestions.push(...questions);
             }
-            
-            // 如果仍有不足，使用占位符题目补足（使用更新后的 actualCount）
-            if (actualCount < requestedCount) {
-              const placeholderCount = requestedCount - actualCount;
-              console.log(`⚠️ ${point} 仍缺少 ${placeholderCount} 道题目，使用占位符补足`);
-              const smartPlaceholders = this.generateSmartPlaceholders(point, placeholderCount, pointQuestionsMap[point] || []);
-              realQuestions.push(...smartPlaceholders);
-            }
+            // 不再在这里生成占位符，等去重后再决定
           });
           
-          // 去重：确保同一道题目不会出现两次
-          const uniqueQuestions = this.removeDuplicateQuestions(realQuestions);
+          // 先对真实题目去重
+          let uniqueQuestions = this.removeDuplicateQuestions(realQuestions);
           
-          // 专题模式：去重后如果数量不足，再次补足（仅旧逻辑需要）
-          if (isTopicMode && realQuestions.length === 0 && uniqueQuestions.length < questions.length) {
-            const shortageAfterDedup = questions.length - uniqueQuestions.length;
-            console.log(`🔄 去重后缺少 ${shortageAfterDedup} 道题目，尝试再次补足...`);
+          // 计算目标总数
+          let targetCount = questions.length;
+          if (isGaokaoMode && variantCount > 0) {
+            targetCount = questions.length * (1 + variantCount);
+          }
+          
+          // 计算去重后的短缺数量
+          const shortageAfterDedup = Math.max(0, targetCount - uniqueQuestions.length);
+          
+          // 如果去重后数量不足，尝试从其他语法点的富余题目中补足
+          if (shortageAfterDedup > 0) {
+            console.log(`🔄 去重后缺少 ${shortageAfterDedup} 道题目，尝试从其他语法点补足...`);
             
-            // 找出仍有富余题目的子知识点
-            const pointsWithSurplus = pointResults.filter(r => 
-              r.availableQuestions && r.availableQuestions.length > r.actualCount
-            );
+            // 找出仍有富余题目的语法点
+            const pointsWithSurplus = pointResults.filter(r => {
+              if (!r.availableQuestions || r.availableQuestions.length === 0) return false;
+              // 计算该语法点的富余题目（未使用的题目）
+              const usedIds = new Set(uniqueQuestions.map(q => q._id || q.id || q.text));
+              const unusedCount = r.availableQuestions.filter(q => {
+                const uniqueKey = q._id || q.id || q.text;
+                return !usedIds.has(uniqueKey);
+              }).length;
+              return unusedCount > 0;
+            });
             
             if (pointsWithSurplus.length > 0) {
-              // 获取当前专题的所有子知识点名称，用于验证题目分类
-              const validPoints = new Set(pointResults.map(r => r.point));
-              
               // 按富余题目数量排序
-              pointsWithSurplus.sort((a, b) => {
-                const surplusA = a.availableQuestions.length - a.actualCount;
-                const surplusB = b.availableQuestions.length - b.actualCount;
-                return surplusB - surplusA;
+              pointsWithSurplus.forEach(r => {
+                const usedIds = new Set(uniqueQuestions.map(q => q._id || q.id || q.text));
+                r.unusedCount = r.availableQuestions.filter(q => {
+                  const uniqueKey = q._id || q.id || q.text;
+                  return !usedIds.has(uniqueKey);
+                }).length;
               });
+              pointsWithSurplus.sort((a, b) => b.unusedCount - a.unusedCount);
               
               let remainingShortage = shortageAfterDedup;
               const usedIds = new Set(uniqueQuestions.map(q => q._id || q.id || q.text));
@@ -736,38 +757,41 @@ Page({
               for (const pointResult of pointsWithSurplus) {
                 if (remainingShortage <= 0) break;
                 
+                // 获取未使用的题目
                 const unusedQuestions = pointResult.availableQuestions.filter(q => {
                   const uniqueKey = q._id || q.id || q.text;
-                  if (usedIds.has(uniqueKey)) return false;
-                  
-                  // 验证题目分类
-                  const qGrammarPoint = (q.grammarPoint || '').trim();
-                  const qCategory = (q.category || '').trim();
-                  if (qGrammarPoint && !validPoints.has(qGrammarPoint) && qCategory && !validPoints.has(qCategory)) {
-                    return false;
-                  }
-                  
-                  return true;
+                  return !usedIds.has(uniqueKey);
                 });
                 
                 if (unusedQuestions.length > 0) {
                   const supplementCount = Math.min(remainingShortage, unusedQuestions.length);
                   const supplementQuestions = this.getRandomQuestions(unusedQuestions, supplementCount);
-                  uniqueQuestions.push(...supplementQuestions);
+                  
+                  // 确保补足的题目也有正确的 grammarPoint
+                  const supplementQuestionsWithGrammarPoint = supplementQuestions.map(q => ({
+                    ...q,
+                    grammarPoint: q.grammarPoint || pointResult.point
+                  }));
+                  
+                  uniqueQuestions.push(...supplementQuestionsWithGrammarPoint);
                   remainingShortage -= supplementCount;
                   
-                  supplementQuestions.forEach(q => {
+                  supplementQuestionsWithGrammarPoint.forEach(q => {
                     const uniqueKey = q._id || q.id || q.text;
                     usedIds.add(uniqueKey);
                   });
                   
-                  console.log(`  ✅ 去重后从 ${pointResult.point} 补足 ${supplementCount} 道题目`);
+                  console.log(`  ✅ 从 ${pointResult.point} 补足 ${supplementCount} 道题目（剩余富余: ${unusedQuestions.length - supplementCount}）`);
                 }
               }
               
               if (remainingShortage > 0) {
-                console.log(`⚠️ 去重后仍有 ${remainingShortage} 道题目无法补足`);
+                console.warn(`⚠️ 仍有 ${remainingShortage} 道题目无法从数据库补足，但不使用占位符`);
+              } else {
+                console.log(`✅ 成功补足所有短缺的题目`);
               }
+            } else {
+              console.warn(`⚠️ 没有富余的语法点可以补足，但不使用占位符`);
             }
           }
           
@@ -775,30 +799,58 @@ Page({
           if (!isTopicMode || realQuestions.length === 0) {
             if (uniqueQuestions.length > 0) {
               const finalCount = uniqueQuestions.length;
-              // 计算目标题数：高考配比模式有变式题时，需要考虑变式题数量
-              let targetCount = questions.length;
-              if (isGaokaoMode && variantCount > 0) {
-                // 高考配比模式有变式题：目标题数 = 原题数量 * (1 + 变式题数量)
-                targetCount = questions.length * (1 + variantCount);
-                console.log(`🎯 高考配比模式有变式题：原题 ${questions.length} 道，变式题 ${variantCount} 道/题，目标总数 ${targetCount} 道`);
-              }
-              console.log(`✅ 使用数据库真实题目和占位符题目，共 ${finalCount} 道（去重后，目标: ${targetCount} 道）`);
+              // targetCount 已在去重补足时计算过
+              console.log(`✅ 使用数据库真实题目，共 ${finalCount} 道（去重后，目标: ${targetCount} 道）`);
+              
               if (finalCount < targetCount) {
-                console.log(`⚠️ 题目数量不足: 需要 ${targetCount} 道，实际 ${finalCount} 道，缺少 ${targetCount - finalCount} 道`);
+                console.warn(`⚠️ 题目数量不足: 需要 ${targetCount} 道，实际 ${finalCount} 道，缺少 ${targetCount - finalCount} 道`);
+                // 不生成占位符，只使用真实题目
               } else if (finalCount > targetCount) {
-                // 如果数量超过目标，随机删除多余的题目
+                // 如果数量超过目标，按语法点均匀删除多余的题目，而不是随机删除
                 // 注意：高考配比模式有变式题时不应该执行此删除逻辑，因为题目数量是正确的
                 if (isGaokaoMode && variantCount > 0) {
                   console.log(`✅ 高考配比模式有变式题：保留所有 ${finalCount} 道题目（${questions.length} 道原题 + ${questions.length * variantCount} 道变式题）`);
                   this.setData({ cachedRealQuestions: uniqueQuestions });
                   questions = uniqueQuestions;
                 } else {
-                  // 其他模式：如果数量超过目标，随机删除多余的题目
-                  const shuffled = [...uniqueQuestions].sort(() => Math.random() - 0.5);
-                  const trimmedQuestions = shuffled.slice(0, targetCount);
-                  console.log(`⚠️ 题目数量超出: 需要 ${targetCount} 道，实际 ${finalCount} 道，已删除 ${finalCount - targetCount} 道`);
-                  this.setData({ cachedRealQuestions: trimmedQuestions });
-                  questions = trimmedQuestions;
+                  // 其他模式：按语法点分组，然后从每组中按比例删除多余的题目
+                  const groupedByPoint = {};
+                  uniqueQuestions.forEach(q => {
+                    const point = q.grammarPoint || q.category || '综合';
+                    if (!groupedByPoint[point]) {
+                      groupedByPoint[point] = [];
+                    }
+                    groupedByPoint[point].push(q);
+                  });
+                  
+                  // 计算需要删除的总数
+                  const toRemove = finalCount - targetCount;
+                  console.log(`⚠️ 题目数量超出: 需要 ${targetCount} 道，实际 ${finalCount} 道，需要删除 ${toRemove} 道`);
+                  
+                  // 按语法点均匀删除（保持每个语法点的题目比例）
+                  const trimmedQuestions = [];
+                  const points = Object.keys(groupedByPoint);
+                  const totalQuestions = finalCount;
+                  
+                  points.forEach(point => {
+                    const pointQuestions = groupedByPoint[point];
+                    const pointRatio = pointQuestions.length / totalQuestions;
+                    const targetPointCount = Math.max(1, Math.floor(targetCount * pointRatio));
+                    const pointToKeep = pointQuestions.slice(0, targetPointCount);
+                    trimmedQuestions.push(...pointToKeep);
+                    console.log(`  ${point}: 保留 ${pointToKeep.length}/${pointQuestions.length} 道题目`);
+                  });
+                  
+                  // 如果删除后总数仍然超过目标，继续删除
+                  if (trimmedQuestions.length > targetCount) {
+                    const finalTrimmed = trimmedQuestions.slice(0, targetCount);
+                    console.log(`⚠️ 最终保留 ${finalTrimmed.length} 道题目`);
+                    this.setData({ cachedRealQuestions: finalTrimmed });
+                    questions = finalTrimmed;
+                  } else {
+                    this.setData({ cachedRealQuestions: trimmedQuestions });
+                    questions = trimmedQuestions;
+                  }
                 }
               } else {
                 this.setData({ cachedRealQuestions: uniqueQuestions });
@@ -806,11 +858,25 @@ Page({
               }
             } else {
               console.log('⚠️ 未获取到任何题目，使用原题目');
-              this.setData({ cachedRealQuestions: questions });
+              // 检查原题目是否包含占位符
+              const originalPlaceholderCount = questions.filter(q => 
+                q.isPlaceholder || (q.text && q.text.includes('占位'))
+              ).length;
+              if (originalPlaceholderCount === 0) {
+                // 只有原题目不包含占位符时才缓存
+                this.setData({ cachedRealQuestions: questions });
+              } else {
+                console.warn(`⚠️ 原题目包含 ${originalPlaceholderCount} 道占位符，不缓存`);
+              }
             }
           } else {
             // 专题模式：使用新函数返回的题目
             console.log(`✅ 专题模式：使用新函数生成的 ${realQuestions.length} 道题目`);
+            // 验证题目不是占位符
+            const placeholderCount = realQuestions.filter(q => q.isPlaceholder || (q.text && q.text.includes('占位'))).length;
+            if (placeholderCount > 0) {
+              console.warn(`⚠️ 专题模式：发现 ${placeholderCount} 道占位符题目，这不应该发生！`);
+            }
             this.setData({ cachedRealQuestions: realQuestions });
             questions = realQuestions;
           }
@@ -833,17 +899,30 @@ Page({
       type: type
     });
     
+    // 调试：打印所有题目的grammarPoint和category
+    console.log('📋 所有题目的语法点信息:');
+    questions.forEach((q, index) => {
+      console.log(`  题目${index + 1}: grammarPoint="${q.grammarPoint}", category="${q.category}", text="${q.text?.substring(0, 30)}..."`);
+    });
+    
     // 将题目按语法点分组
     const groupedQuestions = {};
     
-    // 按语法点分组题目
+    // 按语法点分组题目（优先使用grammarPoint，如果没有则使用category）
     for (const question of questions) {
+      // 优先使用grammarPoint，如果没有则使用category
       const point = question.grammarPoint || question.category || '综合';
       if (!groupedQuestions[point]) {
         groupedQuestions[point] = [];
       }
       groupedQuestions[point].push(question);
     }
+    
+    // 调试：打印分组结果
+    console.log('📊 题目分组结果:');
+    Object.entries(groupedQuestions).forEach(([point, qs]) => {
+      console.log(`  ${point}: ${qs.length} 道题目`);
+    });
     
     // 判断是否为专题模式：
     // 1. 从assignmentData中明确标记为topic模式
