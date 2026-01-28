@@ -3,8 +3,7 @@ const { FeedbackService } = require('../../services/index.js');
 
 Page({
   data: {
-    existingIssues: '', // 现有功能的不足之处
-    unmetNeeds: '', // 未被满足的需求
+    feedbackContent: '', // 反馈内容
     canSubmit: false, // 是否可以提交
     submitting: false, // 是否正在提交
     showSuccessModal: false, // 显示成功模态框
@@ -23,28 +22,18 @@ Page({
     this.syncLocalFeedbacks();
   },
 
-  // 输入现有功能不足
-  onExistingIssuesInput(e) {
+  // 输入反馈内容
+  onFeedbackInput(e) {
     this.setData({
-      existingIssues: e.detail.value
+      feedbackContent: e.detail.value
     });
     this.checkSubmitStatus();
   },
 
-  // 输入未被满足的需求
-  onUnmetNeedsInput(e) {
-    this.setData({
-      unmetNeeds: e.detail.value
-    });
-    this.checkSubmitStatus();
-  },
-
-  // 检查是否可以提交（至少填写一个文本框）
+  // 检查是否可以提交（至少填写内容）
   checkSubmitStatus() {
-    const { existingIssues, unmetNeeds } = this.data;
-    const hasExistingIssues = existingIssues && existingIssues.trim().length > 0;
-    const hasUnmetNeeds = unmetNeeds && unmetNeeds.trim().length > 0;
-    const canSubmit = hasExistingIssues || hasUnmetNeeds;
+    const { feedbackContent } = this.data;
+    const canSubmit = feedbackContent && feedbackContent.trim().length > 0;
     
     this.setData({ canSubmit });
   },
@@ -72,23 +61,13 @@ Page({
 
   // 提交反馈数据到云数据库
   async submitFeedbackData() {
-    const { existingIssues, unmetNeeds } = this.data;
+    const { feedbackContent } = this.data;
     
     // 生成反馈编号
     const feedbackId = 'FB' + Date.now().toString().slice(-8);
     
-    // 构建反馈内容
-    let content = '';
-    if (existingIssues && existingIssues.trim()) {
-      content += '【现有功能的不足之处】\n' + existingIssues.trim();
-    }
-    if (unmetNeeds && unmetNeeds.trim()) {
-      if (content) content += '\n\n';
-      content += '【未被满足的需求】\n' + unmetNeeds.trim();
-    }
-    
     // 确保内容不为空
-    const finalContent = content.trim();
+    const finalContent = feedbackContent ? feedbackContent.trim() : '';
     if (!finalContent || finalContent.length < 5) {
       this.setData({ submitting: false });
       wx.showToast({
@@ -102,9 +81,7 @@ Page({
       feedbackId: feedbackId,
       type: 'general', // 统一类型
       title: '功能反馈',
-      content: finalContent,
-      existingIssues: existingIssues ? existingIssues.trim() : '',
-      unmetNeeds: unmetNeeds ? unmetNeeds.trim() : ''
+      content: finalContent
     };
 
     // 使用统一API服务提交反馈
@@ -203,9 +180,9 @@ Page({
   hideSuccessModal() {
     this.setData({
       showSuccessModal: false,
-      existingIssues: '',
-      unmetNeeds: ''
+      feedbackContent: ''
     });
+    this.checkSubmitStatus();
   },
 
   // 查看历史记录

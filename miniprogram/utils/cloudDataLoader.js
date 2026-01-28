@@ -97,6 +97,10 @@ class CloudDataLoader {
         throw new Error('云开发不可用');
       }
       
+      // 初始化数据库和命令对象
+      const db = wx.cloud.database();
+      const _ = db.command;
+      
       // 构建查询条件
       const buildWhereCondition = (category, questionType = null) => {
         const condition = { category };
@@ -496,60 +500,245 @@ class CloudDataLoader {
         }
       }
       
-      // ✅ 步骤1b：使用 category 进行精确匹配
-      console.log(`   🔍 步骤1b: 使用 category 精确查询:`, buildWhereCondition(actualCategory, type));
-      let result = await wx.cloud.database()
-        .collection('questions')
-        .where(buildWhereCondition(actualCategory, type))
-        .limit(limit)
+      // ✅ 步骤1b：使用 OR 查询同时匹配 category 和 grammarPoint
+      // 这样可以同时查询到只有 category 或只有 grammarPoint 的题目
+      // 构建 OR 查询条件，同时包含原始值和映射后的值
+      const orConditions = [
+        // 使用映射后的 category
+        { category: actualCategory },
+        // 使用原始 grammarPoint（可能数据库中存储的就是原始值）
+        { category: grammarPoint },
+        // 使用映射后的 grammarPoint
+        { grammarPoint: actualGrammarPoint || actualCategory },
+        // 使用原始 grammarPoint 作为 grammarPoint 字段
+        { grammarPoint: grammarPoint },
+        // 兼容旧数据中的 tag 字段
+        { tag: actualGrammarPoint || actualCategory },
+        { tag: grammarPoint }
+      ];
+      
+      // 去重：如果映射后的值和原始值相同，避免重复条件
+      const uniqueConditions = [];
+      const seenKeys = new Set();
+      orConditions.forEach(condition => {
+        const key = JSON.stringify(condition);
+        if (!seenKeys.has(key)) {
+          seenKeys.add(key);
+          uniqueConditions.push(condition);
+        }
+      });
+      
+      // 为每个条件添加 schoolLevel 和 type（如果存在）
+      if (schoolLevel || type) {
+        uniqueConditions.forEach(condition => {
+          if (schoolLevel) {
+            condition.schoolLevel = schoolLevel;
+          }
+          if (type) {
+            condition.type = type;
+          }
+        });
+      }
+      
+      console.log(`   🔍 步骤1b: 使用 OR 查询（category 或 grammarPoint）:`, uniqueConditions);
+      // 🔧 修复：增加查询limit，确保能获取到所有相关题目
+      let result = await db.collection('questions')
+        .where(_.or(uniqueConditions))
+        .limit(Math.max(limit, 50)) // 至少查询50条，确保能获取到所有相关题目
         .get();
       
       if (result.data.length > 0) {
-        console.log(`   ✅ 找到 ${result.data.length} 题（category: ${actualCategory}, type: ${type || '全部'}）`);
-        // 如果同时有 grammarPoint 映射，进一步过滤（作为步骤1a的兜底）
-        const hasGrammarPointMapping = grammarPointMapping[grammarPoint] !== undefined;
-        if (finalSchoolLevel === 'middle' && actualGrammarPoint && hasGrammarPointMapping) {
-          const filtered = result.data.filter(q => {
-            const qGrammarPoint = (q.grammarPoint || '').trim();
-            const targetGrammarPoint = actualGrammarPoint.trim();
-            
-            // 排除包含"可数与不可数名词"的错误匹配
+        console.log(`   ✅ 找到 ${result.data.length} 题（OR查询: category="${actualCategory}" 或 grammarPoint="${actualGrammarPoint || actualCategory}", type: ${type || '全部'}）`);
+        
+        // 🔧 修复：对所有学段都进行 grammarPoint 过滤，确保返回的题目匹配目标语法点
+        // 支持多种可能的 grammarPoint 值（原始值和映射后的值）
+        const targetGrammarPoints = [
+          grammarPoint,                    // 原始值："以f/fe结尾"
+          actualGrammarPoint || actualCategory, // 映射后的值："f/fe结尾"
+          actualCategory                  // 映射后的 category："f/fe结尾"
+        ].filter(Boolean); // 过滤掉空值
+        
+        // 去重
+        const uniqueTargetGrammarPoints = [...new Set(targetGrammarPoints)];
+        
+        console.log(`   🔍 步骤1b过滤: grammarPoint 应为以下值之一:`, uniqueTargetGrammarPoints);
+        
+        const filtered = result.data.filter(q => {
+          const qGrammarPoint = (q.grammarPoint || q.tag || '').trim();
+          const qCategory = (q.category || '').trim();
+          
+          // 排除包含"可数与不可数名词"的错误匹配（仅初中模块）
+          if (finalSchoolLevel === 'middle') {
             if (qGrammarPoint.includes('可数与不可数') || qGrammarPoint.includes('不可数与可数')) {
               return false;
             }
-            
-            // 精确匹配：grammarPoint 必须完全相等
-            const exactMatch = qGrammarPoint === targetGrammarPoint;
-            
-            // 如果指定了type，还需要匹配type
-            if (type) {
-              return exactMatch && q.type === type;
-            }
-            return exactMatch;
-          });
-          if (filtered.length > 0) {
-            console.log(`   ✅ 进一步过滤后找到 ${filtered.length} 题（grammarPoint精确匹配: ${actualGrammarPoint}, type: ${type || '全部'}）`);
-            return filtered;
-          } else {
-            console.log(`   ⚠️ 过滤后未找到匹配的题目（期望grammarPoint: ${actualGrammarPoint}），返回原始结果`);
           }
+          
+          // 检查 grammarPoint 是否匹配目标值
+          const grammarPointMatch = uniqueTargetGrammarPoints.some(target => 
+            qGrammarPoint === target.trim()
+          );
+          
+          // 检查 category 是否匹配目标值（作为备选，但优先级较低）
+          const categoryMatch = uniqueTargetGrammarPoints.some(target => 
+            qCategory === target.trim()
+          );
+          
+          // 🔧 修复：对于"以f/fe结尾"和"f/fe结尾"，也支持模糊匹配（包含关系）
+          // 这样可以匹配到更多相关题目
+          const fuzzyMatch = uniqueTargetGrammarPoints.some(target => {
+            const targetLower = target.trim().toLowerCase();
+            const qGrammarPointLower = qGrammarPoint.toLowerCase();
+            const qCategoryLower = qCategory.toLowerCase();
+            // 如果目标值包含"f/fe结尾"，也匹配包含"f/fe结尾"的grammarPoint或category
+            if (targetLower.includes('f/fe结尾') || targetLower.includes('以f/fe结尾')) {
+              return qGrammarPointLower.includes('f/fe结尾') || qCategoryLower.includes('f/fe结尾');
+            }
+            return false;
+          });
+          
+          // 如果指定了type，还需要匹配type
+          if (type) {
+            return (grammarPointMatch || categoryMatch || fuzzyMatch) && q.type === type;
+          }
+          
+          // 优先匹配 grammarPoint，如果没有则匹配 category，最后尝试模糊匹配
+          return grammarPointMatch || categoryMatch || fuzzyMatch;
+        });
+        
+        if (filtered.length > 0) {
+          console.log(`   ✅ 步骤1b过滤后找到 ${filtered.length} 题（grammarPoint匹配: ${uniqueTargetGrammarPoints.join(' 或 ')}, type: ${type || '全部'}）`);
+          // 如果过滤后的题目数量足够，直接返回
+          if (filtered.length >= limit) {
+            return filtered.slice(0, limit);
+          }
+          // 🔧 修复：如果过滤后的题目数量不足，继续执行步骤2（父分类查询）来获取更多题目
+          console.log(`   ⚠️ 步骤1b只找到 ${filtered.length}/${limit} 题，继续执行步骤2（父分类查询）以获取更多题目`);
+          // 保存已找到的题目，后续会合并
+          result.data = filtered;
+        } else {
+          console.log(`   ⚠️ 步骤1b过滤后未找到匹配的题目（期望grammarPoint: ${uniqueTargetGrammarPoints.join(' 或 ')}），将尝试父分类查询`);
+          // 如果过滤后没有结果，继续执行步骤2（父分类查询）
+          result.data = [];
         }
-        return result.data;
+      } else {
+        // 如果步骤1b没有找到任何题目，继续执行步骤2
+        result.data = [];
       }
       
-      // ✅ 步骤2：如果精确分类找不到，尝试查询父分类
+      // ✅ 步骤2：如果精确分类找不到，尝试查询父分类（也使用 OR 查询）
       const parentCategory = parentCategoryMapping[actualCategory] || parentCategoryMapping[grammarPoint];
       if (parentCategory && parentCategory !== actualCategory) {
         console.log(`   ⚠️ "${actualCategory}" 精确匹配失败，尝试父分类: "${parentCategory}"`);
-        result = await wx.cloud.database()
-          .collection('questions')
-          .where(buildWhereCondition(parentCategory))
-          .limit(20)
+        
+        // 使用 OR 查询父分类
+        const parentOrConditions = [
+          { category: parentCategory },
+          { grammarPoint: parentCategory }
+        ];
+        
+        if (schoolLevel || type) {
+          parentOrConditions.forEach(condition => {
+            if (schoolLevel) {
+              condition.schoolLevel = schoolLevel;
+            }
+            if (type) {
+              condition.type = type;
+            }
+          });
+        }
+        
+        const parentResult = await db.collection('questions')
+          .where(_.or(parentOrConditions))
+          .limit(limit * 3) // 查询更多题目，以便后续过滤
           .get();
         
-        if (result.data.length > 0) {
-          console.log(`   ✅ 找到 ${result.data.length} 题（父分类: ${parentCategory}）`);
-          return result.data;
+        if (parentResult.data.length > 0) {
+          console.log(`   ✅ 从父分类 "${parentCategory}" 找到 ${parentResult.data.length} 题，开始过滤 grammarPoint...`);
+          
+          // 🔧 关键修复：进一步过滤 grammarPoint，确保只返回目标语法点的题目
+          // 支持多种可能的 grammarPoint 值（原始值和映射后的值）
+          const targetGrammarPoints = [
+            grammarPoint,                    // 原始值："以f/fe结尾"
+            actualGrammarPoint || actualCategory, // 映射后的值："f/fe结尾"
+            actualCategory                  // 映射后的 category："f/fe结尾"
+          ].filter(Boolean); // 过滤掉空值
+          
+          // 去重
+          const uniqueTargetGrammarPoints = [...new Set(targetGrammarPoints)];
+          
+          console.log(`   🔍 过滤条件: grammarPoint 应为以下值之一:`, uniqueTargetGrammarPoints);
+          
+          // 🔧 修复：合并步骤1b找到的题目（如果有的话）
+          const existingQuestionIds = new Set();
+          if (result.data && result.data.length > 0) {
+            result.data.forEach(q => {
+              const id = q._id || q.id || q.text;
+              existingQuestionIds.add(id);
+            });
+            console.log(`   📋 步骤1b已找到 ${result.data.length} 题，将合并到步骤2的结果中`);
+          }
+          
+          const filtered = parentResult.data.filter(q => {
+            // 排除已存在的题目（去重）
+            const id = q._id || q.id || q.text;
+            if (existingQuestionIds.has(id)) {
+              return false;
+            }
+            
+            const qGrammarPoint = (q.grammarPoint || q.tag || '').trim();
+            const qCategory = (q.category || '').trim();
+            
+            // 检查 grammarPoint 是否匹配目标值
+            const grammarPointMatch = uniqueTargetGrammarPoints.some(target => 
+              qGrammarPoint === target.trim()
+            );
+            
+            // 检查 category 是否匹配目标值（作为备选）
+            const categoryMatch = uniqueTargetGrammarPoints.some(target => 
+              qCategory === target.trim()
+            );
+            
+            // 🔧 修复：对于"以f/fe结尾"和"f/fe结尾"，也支持模糊匹配（包含关系）
+            // 这样可以匹配到更多相关题目
+            const fuzzyMatch = uniqueTargetGrammarPoints.some(target => {
+              const targetLower = target.trim().toLowerCase();
+              const qGrammarPointLower = qGrammarPoint.toLowerCase();
+              const qCategoryLower = qCategory.toLowerCase();
+              // 如果目标值包含"f/fe结尾"，也匹配包含"f/fe结尾"的grammarPoint或category
+              if (targetLower.includes('f/fe结尾') || targetLower.includes('以f/fe结尾')) {
+                return qGrammarPointLower.includes('f/fe结尾') || qCategoryLower.includes('f/fe结尾');
+              }
+              return false;
+            });
+            
+            // 如果指定了type，还需要匹配type
+            if (type) {
+              return (grammarPointMatch || categoryMatch || fuzzyMatch) && q.type === type;
+            }
+            
+            // 优先匹配 grammarPoint，如果没有则匹配 category，最后尝试模糊匹配
+            return grammarPointMatch || categoryMatch || fuzzyMatch;
+          });
+          
+          // 合并步骤1b和步骤2的结果
+          const combinedResults = [...(result.data || []), ...filtered];
+          
+          if (combinedResults.length > 0) {
+            console.log(`   ✅ 步骤2过滤后找到 ${filtered.length} 题，合并步骤1b的 ${result.data?.length || 0} 题，共 ${combinedResults.length} 题（grammarPoint匹配: ${uniqueTargetGrammarPoints.join(' 或 ')}, type: ${type || '全部'}）`);
+            // 限制返回数量
+            return combinedResults.slice(0, limit);
+          } else {
+            console.log(`   ⚠️ 步骤2过滤后未找到匹配的题目（期望grammarPoint: ${uniqueTargetGrammarPoints.join(' 或 ')}），继续执行步骤3（模糊匹配）`);
+            // 如果过滤后没有结果，继续执行步骤3（模糊匹配）
+            result.data = result.data || [];
+          }
+        } else {
+          // 如果父分类查询没有结果，但步骤1b有结果，返回步骤1b的结果
+          if (result.data && result.data.length > 0) {
+            console.log(`   ⚠️ 父分类查询无结果，返回步骤1b找到的 ${result.data.length} 题`);
+            return result.data.slice(0, limit);
+          }
         }
       }
       
