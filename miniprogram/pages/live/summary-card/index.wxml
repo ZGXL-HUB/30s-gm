@@ -1,0 +1,57 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{allDone}}" class="result-page">
+    <view class="result-title">第十环节：一句话卡片</view>
+    <view class="result-rate">本次正确率 {{correctRate}}%（共{{totalBlanks}}空）</view>
+    <view class="encourage">{{encourageCopy}}</view>
+    <button class="btn primary" bindtap="finishAndExit">完成，返回课程</button>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <view wx:elif="{{text}}" class="content">
+    <view class="section-title">{{sectionTitle}}</view>
+    <view class="action-row">
+      <button class="btn hint-btn" bindtap="showHint">查看提示</button>
+      <button class="btn skip-btn" bindtap="skipSegment">跳过本组练习</button>
+    </view>
+    <view class="q-text">{{text}}</view>
+    <view class="blanks">
+      <block wx:for="{{blanks}}" wx:key="index">
+        <view class="blank-row">
+          <text class="blank-label">空{{index + 1}}：</text>
+          <input
+            class="blank-input"
+            placeholder="填写答案"
+            value="{{answers[index]}}"
+            data-bi="{{index}}"
+            bindinput="onBlankInput"
+            disabled="{{checked[index]}}"
+          />
+          <text wx:if="{{checked[index]}}" class="check-mark">✓</text>
+        </view>
+      </block>
+    </view>
+    <button class="btn primary" bindtap="checkAll">核对答案</button>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <view wx:if="{{showHint}}" class="modal-mask" catchtap="hideHint">
+    <view class="modal-box" catchtap="">
+      <view class="modal-title">知识点提示</view>
+      <view class="modal-body">{{hintContent}}</view>
+      <button class="btn primary" bindtap="hideHint">知道了</button>
+    </view>
+  </view>
+
+  <view wx:if="{{showSkipConfirm}}" class="modal-mask" catchtap="skipCancel">
+    <view class="modal-box" catchtap="">
+      <view class="modal-title">恭喜</view>
+      <view class="modal-body">恭喜你完成本节课的所有内容！</view>
+      <view class="modal-actions">
+        <button class="btn outline" bindtap="skipCancel">取消</button>
+        <button class="btn primary" bindtap="skipConfirm">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

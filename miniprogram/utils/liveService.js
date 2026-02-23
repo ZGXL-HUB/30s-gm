@@ -2,11 +2,14 @@
  * 直播课活动 · 学生端服务
  * 活动配置、题目拉取、提交记录（含 openid）
  */
-const { getActivityById, getSegmentConfig, SEGMENT_TYPES } = require('../config/liveActivityConfig.js');
+const { getActivityById, getSegmentConfig, SEGMENT_TYPES, LESSON1_SEGMENTS } = require('../config/liveActivityConfig.js');
 const cloudDataLoader = require('./cloudDataLoader.js');
 
 const STORAGE_KEY_PREFIX = 'live_result_';
 const STORAGE_PRE_TEST_PREFIX = 'live_pre_test_';
+const STORAGE_PREPRACTICE_RATE = 'live_prepractice_rate_'; // 第一环节正确率，仅本地，供最后环节对比
+const STORAGE_RETEST_RATE = 'live_retest_rate_';           // 第七环节正确率，仅本地，与第一环节对比
+const STORAGE_LESSON1_STARS = 'live_lesson1_stars';       // 第一课入口卡片星级（1/2/3）
 const STORAGE_COMPLETED_LESSONS = 'live_completed_lessons';
 
 function getOpenId() {
@@ -358,7 +361,7 @@ function matchTranslationWithHint(userAnswer, correctEn) {
   return { match: false, hint: hints };
 }
 
-/** 环节顺序（连贯流程用） */
+/** 环节顺序（连贯流程用），非第一课使用 */
 const SEGMENT_ORDER = [
   SEGMENT_TYPES.PRE_CLASS_TEST,
   SEGMENT_TYPES.KEYWORD_CHECK,
@@ -367,7 +370,24 @@ const SEGMENT_ORDER = [
   SEGMENT_TYPES.TRANSLATION
 ];
 
+/** 第一课环节顺序（含第一、第二环节） */
+const LESSON1_ORDER = (LESSON1_SEGMENTS || []).map(s => s.type);
+
+function getSegmentOrder(activityId) {
+  return activityId === 'lesson1' && LESSON1_ORDER.length > 0 ? LESSON1_ORDER : SEGMENT_ORDER;
+}
+
 const SEGMENT_NAMES = {
+  [SEGMENT_TYPES.REAL_EXAM_PREPRACTICE]: '第一环节·真题预练',
+  [SEGMENT_TYPES.SIGNAL_WORD_RECOGNITION]: '第二环节·标志词识别',
+  [SEGMENT_TYPES.PLURAL_FORM_RECOGNITION]: '第三环节·复数形式识别',
+  [SEGMENT_TYPES.TRUE_FALSE_JUDGE]: '第四环节·正误判断',
+  [SEGMENT_TYPES.ES_PLURAL_CHOICE]: '第五环节·书写名词复数',
+  [SEGMENT_TYPES.FILL_MOCK]: '第六环节·模拟演练',
+  [SEGMENT_TYPES.REAL_RETEST]: '第七环节·真题再练',
+  [SEGMENT_TYPES.SENTENCE_ERROR_CLICK]: '第八环节·帮同学找错',
+  [SEGMENT_TYPES.APPLY_USE]: '第九环节·学以致用',
+  [SEGMENT_TYPES.SUMMARY_CARD]: '第十环节·一句话卡片',
   [SEGMENT_TYPES.PRE_CLASS_TEST]: '课前·真题检测',
   [SEGMENT_TYPES.KEYWORD_CHECK]: '课中·关键词识别',
   [SEGMENT_TYPES.FILL_RULE]: '课中·填空运用规则',
@@ -378,12 +398,19 @@ const SEGMENT_NAMES = {
 /** 当前活动第一个未完成的环节，用于进入后自动跳转 */
 function getFirstIncompleteSegment(activityId) {
   if (!activityId) return null;
-  const order = SEGMENT_ORDER;
+  const order = getSegmentOrder(activityId);
   for (let i = 0; i < order.length; i++) {
     const type = order[i];
-    const done = type === SEGMENT_TYPES.PRE_CLASS_TEST
-      ? getPreTestResult(activityId)
-      : getSegmentResult(activityId, type);
+    let done = false;
+    if (type === SEGMENT_TYPES.PRE_CLASS_TEST) {
+      done = !!getPreTestResult(activityId);
+    } else if (type === SEGMENT_TYPES.REAL_EXAM_PREPRACTICE) {
+      done = !!getRealExamPrepracticeResult(activityId);
+    } else if (type === SEGMENT_TYPES.REAL_RETEST) {
+      done = !!getRealRetestResult(activityId);
+    } else {
+      done = !!getSegmentResult(activityId, type);
+    }
     if (!done) {
       return { segmentType: type, name: SEGMENT_NAMES[type] || type };
     }
@@ -392,15 +419,26 @@ function getFirstIncompleteSegment(activityId) {
 }
 
 /** 当前环节的下一环节类型（用于「下一环节」按钮） */
-function getNextSegmentType(currentSegmentType) {
-  const idx = SEGMENT_ORDER.indexOf(currentSegmentType);
-  if (idx === -1 || idx >= SEGMENT_ORDER.length - 1) return null;
-  return SEGMENT_ORDER[idx + 1];
+function getNextSegmentType(currentSegmentType, activityId) {
+  const order = getSegmentOrder(activityId || 'lesson1');
+  const idx = order.indexOf(currentSegmentType);
+  if (idx === -1 || idx >= order.length - 1) return null;
+  return order[idx + 1];
 }
 
 /** 环节类型 → 页面路径（不含 query） */
 function getSegmentPagePath(segmentType) {
   const paths = {
+    [SEGMENT_TYPES.REAL_EXAM_PREPRACTICE]: '/pages/live/real-exam-prep/index',
+    [SEGMENT_TYPES.SIGNAL_WORD_RECOGNITION]: '/pages/live/signal-word/index',
+    [SEGMENT_TYPES.PLURAL_FORM_RECOGNITION]: '/pages/live/plural-form/index',
+    [SEGMENT_TYPES.TRUE_FALSE_JUDGE]: '/pages/live/true-false-judge/index',
+    [SEGMENT_TYPES.ES_PLURAL_CHOICE]: '/pages/live/es-choice/index',
+    [SEGMENT_TYPES.FILL_MOCK]: '/pages/live/fill-mock/index',
+    [SEGMENT_TYPES.REAL_RETEST]: '/pages/live/real-retest/index',
+    [SEGMENT_TYPES.SENTENCE_ERROR_CLICK]: '/pages/live/sentence-error/index',
+    [SEGMENT_TYPES.APPLY_USE]: '/pages/live/apply-use/index',
+    [SEGMENT_TYPES.SUMMARY_CARD]: '/pages/live/summary-card/index',
     [SEGMENT_TYPES.PRE_CLASS_TEST]: '/pages/live/pre-test/index',
     [SEGMENT_TYPES.KEYWORD_CHECK]: '/pages/live/keyword-check/index',
     [SEGMENT_TYPES.FILL_RULE]: '/pages/live/fill-rule/index',
@@ -408,6 +446,243 @@ function getSegmentPagePath(segmentType) {
     [SEGMENT_TYPES.TRANSLATION]: '/pages/live/translation/index'
   };
   return paths[segmentType] || '';
+}
+
+/** 第一环节：真题预练题目（仅 lesson1） */
+function getRealExamPrepracticeQuestions(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return (lesson1.REAL_EXAM_PREPRACTICE || []).map(q => ({
+      ...q,
+      blanks: Array.isArray(q.blanks) ? q.blanks : [q.blanks]
+    }));
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第一环节提示文案 */
+function getRealExamPrepracticeHint(activityId) {
+  if (activityId !== 'lesson1') return '';
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.REAL_EXAM_PREPRACTICE_HINT || '';
+  } catch (e) {
+    return '';
+  }
+}
+
+/** 第二环节：标志词识别三组题目（仅 lesson1） */
+function getSignalWordGroups(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.SIGNAL_WORD_GROUPS || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第三环节：复数形式识别三组题目（仅 lesson1） */
+function getPluralFormGroups(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.PLURAL_FORM_GROUPS || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第四环节：正误判断三组题目（仅 lesson1） */
+function getTrueFalseGroups(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.TRUE_FALSE_GROUPS || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第五环节：es 规则选择题两组（仅 lesson1） */
+function getEsChoiceGroups(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.ES_CHOICE_GROUPS || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第六环节：模拟演练填空两组（仅 lesson1） */
+function getFillMockGroups(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.FILL_MOCK_GROUPS || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第七环节：真题再练题目（仅 lesson1） */
+function getRealRetestQuestions(activityId) {
+  if (activityId !== 'lesson1') return [];
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return (lesson1.REAL_RETEST || []).map(q => ({
+      ...q,
+      blanks: Array.isArray(q.blanks) ? q.blanks : [q.blanks]
+    }));
+  } catch (e) {
+    return [];
+  }
+}
+
+/** 第七环节提示文案 */
+function getRealRetestHint(activityId) {
+  if (activityId !== 'lesson1') return '';
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return lesson1.REAL_RETEST_HINT || '';
+  } catch (e) {
+    return '';
+  }
+}
+
+/** 第八环节：帮同学找错句子（仅 lesson1） */
+function getSentenceErrorData(activityId) {
+  if (activityId !== 'lesson1') return { sentences: [], hint: '' };
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    return {
+      sentences: lesson1.SENTENCE_ERROR_SENTENCES || [],
+      hint: lesson1.SENTENCE_ERROR_HINT || ''
+    };
+  } catch (e) {
+    return { sentences: [], hint: '' };
+  }
+}
+
+/** 第九环节：学以致用填空（仅 lesson1，5题10空） */
+function getApplyUseData(activityId) {
+  if (activityId !== 'lesson1') return { questions: [], hint: '' };
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const questions = (lesson1.APPLY_USE_QUESTIONS || []).map(q => ({
+      ...q,
+      blanks: Array.isArray(q.blanks) ? q.blanks : [q.blanks]
+    }));
+    return {
+      questions,
+      hint: lesson1.APPLY_USE_HINT || ''
+    };
+  } catch (e) {
+    return { questions: [], hint: '' };
+  }
+}
+
+/** 第十环节：一句话卡片填空（仅 lesson1，1句10空） */
+function getSummaryCardData(activityId) {
+  if (activityId !== 'lesson1') return null;
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const card = lesson1.SUMMARY_CARD;
+    if (!card) return null;
+    return {
+      text: card.text,
+      blanks: Array.isArray(card.blanks) ? card.blanks : [card.blanks],
+      hint: lesson1.SUMMARY_CARD_HINT || ''
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+/** 计算第一课星级：退步1星、持平2星、进步3星 */
+function computeLesson1Stars(firstRate, retestRate) {
+  if (firstRate == null || retestRate == null) return 2;
+  if (retestRate > firstRate) return 3;
+  if (retestRate < firstRate) return 1;
+  return 2;
+}
+
+/** 保存第七环节正确率到本地，与第一环节对比，并写入星级到第一课入口卡片 */
+function saveRealRetestResult(activityId, correctRate, score, total) {
+  const key = `${STORAGE_RETEST_RATE}${activityId}`;
+  try {
+    const firstResult = getRealExamPrepracticeResult(activityId);
+    const firstRate = firstResult && firstResult.correctRate != null ? firstResult.correctRate : null;
+    const stars = activityId === 'lesson1' ? computeLesson1Stars(firstRate, correctRate) : null;
+    wx.setStorageSync(key, {
+      activityId,
+      correctRate,
+      score: score ?? 0,
+      total: total ?? 0,
+      firstRate,
+      stars,
+      submitTime: new Date().toISOString()
+    });
+    if (activityId === 'lesson1' && stars != null) {
+      wx.setStorageSync(STORAGE_LESSON1_STARS, stars);
+    }
+    markLessonCompleted(activityId);
+  } catch (e) {
+    console.warn('saveRealRetestResult fail', e);
+  }
+}
+
+/** 读取第七环节结果（本地） */
+function getRealRetestResult(activityId) {
+  try {
+    const key = `${STORAGE_RETEST_RATE}${activityId}`;
+    return wx.getStorageSync(key) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/** 第一课入口卡片显示的星级（1/2/3），无则为 null */
+function getLesson1Stars(activityId) {
+  if (activityId !== 'lesson1') return null;
+  try {
+    const stored = wx.getStorageSync(STORAGE_LESSON1_STARS);
+    if (stored === 1 || stored === 2 || stored === 3) return stored;
+    const retest = getRealRetestResult(activityId);
+    return (retest && retest.stars) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/** 保存第一环节正确率到本地（仅本地，不上传），供最后环节对比 */
+function saveRealExamPrepracticeResult(activityId, correctRate, score, total) {
+  const key = `${STORAGE_PREPRACTICE_RATE}${activityId}`;
+  try {
+    wx.setStorageSync(key, {
+      activityId,
+      correctRate,
+      score: score ?? 0,
+      total: total ?? 0,
+      submitTime: new Date().toISOString()
+    });
+    markLessonCompleted(activityId);
+  } catch (e) {
+    console.warn('saveRealExamPrepracticeResult fail', e);
+  }
+}
+
+/** 读取第一环节正确率（本地） */
+function getRealExamPrepracticeResult(activityId) {
+  try {
+    const key = `${STORAGE_PREPRACTICE_RATE}${activityId}`;
+    return wx.getStorageSync(key) || null;
+  } catch (e) {
+    return null;
+  }
 }
 
 module.exports = {
@@ -430,6 +705,24 @@ module.exports = {
   getFirstIncompleteSegment,
   getNextSegmentType,
   getSegmentPagePath,
+  getSegmentOrder,
+  getRealExamPrepracticeQuestions,
+  getRealExamPrepracticeHint,
+  getSignalWordGroups,
+  getPluralFormGroups,
+  getTrueFalseGroups,
+  getEsChoiceGroups,
+  getFillMockGroups,
+  getRealRetestQuestions,
+  getRealRetestHint,
+  getSentenceErrorData,
+  getApplyUseData,
+  getSummaryCardData,
+  saveRealRetestResult,
+  getRealRetestResult,
+  getLesson1Stars,
+  saveRealExamPrepracticeResult,
+  getRealExamPrepracticeResult,
   SEGMENT_ORDER,
   SEGMENT_TYPES
 };

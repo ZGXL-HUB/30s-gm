@@ -25,19 +25,24 @@
 
 .lesson-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 24rpx;
 }
 
 .lesson-card {
+  width: calc(50% - 12rpx);
+  box-sizing: border-box;
   background: #fff;
   border-radius: 20rpx;
-  padding: 36rpx 32rpx;
+  padding: 28rpx 24rpx;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
   position: relative;
+  min-height: 140rpx;
 }
 
 .lesson-card:active {
@@ -46,19 +51,30 @@
 }
 
 .card-left {
-  flex: 1;
+  text-align: center;
+  width: 100%;
 }
 
 .lesson-name {
-  font-size: 34rpx;
+  font-size: 32rpx;
   font-weight: 600;
   color: #333;
 }
 
+.stars-badge {
+  font-size: 24rpx;
+  color: #ffc107;
+  margin-top: 6rpx;
+  letter-spacing: 2rpx;
+}
+
 .card-right {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
   display: flex;
   align-items: center;
-  gap: 16rpx;
+  gap: 8rpx;
 }
 
 /* 已完成：运动 app 风格对勾 */

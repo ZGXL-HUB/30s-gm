@@ -1,5 +1,6 @@
 // 课前真题检测：做题 + 提交 + 结果（防重复）
 const liveService = require('../../../utils/liveService.js');
+const sound = require('../../../utils/sound.js');
 
 Page({
   data: {
@@ -104,6 +105,7 @@ Page({
     if (nextIndex >= questions.length) {
       liveService.savePreTestResult(this.data.activityId, newScore, questions.length, newResults);
       const correctRate = questions.length > 0 ? Math.round((newScore / questions.length) * 100) : 0;
+      sound.playToast();
       this.setData({
         score: newScore,
         userAnswers: newUserAnswers,
@@ -126,7 +128,7 @@ Page({
   },
 
   goToNextSegment() {
-    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.PRE_CLASS_TEST);
+    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.PRE_CLASS_TEST, this.data.activityId);
     const path = nextType ? liveService.getSegmentPagePath(nextType) : '/pages/live/activity-index/index';
     const url = path ? `${path}?activityId=${this.data.activityId}` : `/pages/live/activity-index/index?activityId=${this.data.activityId}`;
     wx.redirectTo({ url });

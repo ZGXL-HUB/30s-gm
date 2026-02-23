@@ -1,5 +1,21 @@
 // 真题填空：填空 + 即时核对 + 与课前正确率对比 + 挽留
 const liveService = require('../../../utils/liveService.js');
+const sound = require('../../../utils/sound.js');
+
+/** 多空答案顺序无关：同一分句内只要包含所有正确答案即算对，每个标准答案最多匹配一次 */
+function countMatchOrderIndependent(userBlanks, correctBlanks) {
+  const remain = correctBlanks.slice();
+  let ok = 0;
+  for (const u of userBlanks) {
+    if (!u) continue;
+    const idx = remain.indexOf(u);
+    if (idx !== -1) {
+      remain.splice(idx, 1);
+      ok++;
+    }
+  }
+  return ok;
+}
 
 function getEncourage(rate, preRate) {
   if (preRate == null) return rate >= 80 ? '很棒！' : rate >= 60 ? '不错哦，继续加油～' : '再听一遍直播，下次会更好～';
@@ -22,6 +38,7 @@ Page({
     loading: true,
     showLeave: false,
     preRate: null,
+    preRateLabel: '课前',
     currentRate: 0,
     correctRate: 0,
     encourageCopy: '',
@@ -30,9 +47,13 @@ Page({
 
   onLoad(options) {
     const activityId = options.activityId || 'lesson1';
+    const prepracticeResult = activityId === 'lesson1' ? liveService.getRealExamPrepracticeResult(activityId) : null;
     const prevResult = liveService.getPreTestResult(activityId);
-    const preRate = prevResult ? prevResult.correctRate : null;
-    this.setData({ activityId, preRate });
+    const preRate = (prepracticeResult && prepracticeResult.correctRate != null)
+      ? prepracticeResult.correctRate
+      : (prevResult ? prevResult.correctRate : null);
+    const preRateLabel = activityId === 'lesson1' && prepracticeResult ? '第一环节' : '课前';
+    this.setData({ activityId, preRate, preRateLabel });
     wx.setNavigationBarTitle({ title: '真题填空' });
     this.loadQuestions(activityId);
   },
@@ -74,17 +95,10 @@ Page({
   checkQuestion() {
     const { questions, currentIndex, answers } = this.data;
     const q = questions[currentIndex];
-    const userBlanks = (answers[currentIndex] || []);
-    const correctBlanks = q.blanks || [];
-    let ok = 0;
-    const checked = [...(this.data.checked[currentIndex] || [])];
-    for (let i = 0; i < correctBlanks.length; i++) {
-      const u = (userBlanks[i] || '').trim().toLowerCase();
-      const c = (correctBlanks[i] || '').trim().toLowerCase();
-      const right = u === c;
-      checked[i] = true;
-      if (right) ok++;
-    }
+    const userBlanks = (answers[currentIndex] || []).map(x => (x || '').trim().toLowerCase());
+    const correctBlanks = (q.blanks || []).map(x => (x || '').trim().toLowerCase());
+    const ok = countMatchOrderIndependent(userBlanks, correctBlanks);
+    const checked = (q.blanks || []).map(() => true);
     const newChecked = [...this.data.checked];
     newChecked[currentIndex] = checked;
     let score = this.data.score + ok;
@@ -96,18 +110,13 @@ Page({
       const questionResults = [];
       for (let i = 0; i < questions.length; i++) {
         const q = questions[i];
-        const userBlanks = (this.data.answers[i] || []);
-        const correctBlanks = q.blanks || [];
-        let allRight = true;
-        for (let j = 0; j < correctBlanks.length; j++) {
-          const u = (userBlanks[j] || '').trim().toLowerCase();
-          const c = (correctBlanks[j] || '').trim().toLowerCase();
-          if (u !== c) { allRight = false; break; }
-        }
+        const ub = (this.data.answers[i] || []).map(x => (x || '').trim().toLowerCase());
+        const cb = (q.blanks || []).map(x => (x || '').trim().toLowerCase());
+        const allRight = countMatchOrderIndependent(ub, cb) === cb.length;
         questionResults.push({
           text: q.text,
-          userAnswer: userBlanks.join(' / '),
-          correctAnswer: correctBlanks.join(' / '),
+          userAnswer: (this.data.answers[i] || []).join(' / '),
+          correctAnswer: (q.blanks || []).join(' / '),
           isCorrect: allRight,
           analysis: q.analysis || ''
         });
@@ -118,6 +127,7 @@ Page({
         correctRate: currentRate,
         preRate: this.data.preRate
       });
+      sound.playToast();
       this.setData({
         checked: newChecked,
         score,
@@ -164,7 +174,7 @@ Page({
   },
 
   goToNextSegment() {
-    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.FILL_REAL);
+    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.FILL_REAL, this.data.activityId);
     const path = nextType ? liveService.getSegmentPagePath(nextType) : '/pages/live/activity-index/index';
     const url = path ? `${path}?activityId=${this.data.activityId}` : `/pages/live/activity-index/index?activityId=${this.data.activityId}`;
     wx.redirectTo({ url });

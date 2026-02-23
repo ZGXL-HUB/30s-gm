@@ -38,7 +38,8 @@ Page({
       return;
     }
 
-    const path = liveService.getSegmentPagePath(liveService.SEGMENT_TYPES.PRE_CLASS_TEST);
+    const first = liveService.getFirstIncompleteSegment(activityId);
+    const path = first ? liveService.getSegmentPagePath(first.segmentType) : '';
     if (path) {
       wx.redirectTo({
         url: `${path}?activityId=${activityId}`,

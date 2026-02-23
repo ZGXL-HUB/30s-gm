@@ -1,5 +1,39 @@
 // app.js
 const { UserService, FeedbackService } = require('./services/index.js');
+const sound = require('./utils/sound.js');
+
+// 包装 wx.showToast，在显示 Toast 时播放提示音效（含正确率界面等）
+const _showToast = wx.showToast;
+wx.showToast = function (options) {
+  try { sound.playToast(); } catch (e) {}
+  return _showToast.call(wx, options);
+};
+
+// 包装 Page：所有页面的非生命周期方法在调用时先播放 tap 音效，使全小程序按钮/选项点击统一带点击音
+const LIFECYCLE_OR_NON_TAP = [
+  'onLoad', 'onShow', 'onReady', 'onHide', 'onUnload',
+  'onPullDownRefresh', 'onReachBottom', 'onPageScroll',
+  'onShareAppMessage', 'onShareTimeline', 'onTabItemTap', 'onAddToFavorites',
+  'data', 'options', 'externalClasses', 'behaviors', 'relations', 'observers', 'created', 'attached', 'ready', 'moved', 'detached'
+];
+const _Page = Page;
+Page = function (obj) {
+  const wrapped = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const val = obj[key];
+      if (typeof val === 'function' && LIFECYCLE_OR_NON_TAP.indexOf(key) === -1) {
+        wrapped[key] = function () {
+          try { sound.playTap(); } catch (e) {}
+          return val.apply(this, arguments);
+        };
+      } else {
+        wrapped[key] = val;
+      }
+    }
+  }
+  return _Page(wrapped);
+};
 
 App({
   onLaunch: function () {

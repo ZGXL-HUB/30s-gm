@@ -1,0 +1,61 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{allDone}}" class="result-page">
+    <view class="result-title">第三环节：复数形式识别</view>
+    <view class="result-rate">本次正确率 {{finalRate}}%</view>
+    <view class="encourage">{{finalEncourage}}</view>
+    <button class="btn primary" bindtap="goToNextSegment">下一环节</button>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <view wx:elif="{{showGroupResult}}" class="result-page">
+    <view class="result-title">本组完成</view>
+    <view class="result-rate">本组正确率 {{groupResultRate}}%</view>
+    <view class="encourage">{{groupEncourage}}</view>
+    <button class="btn primary" bindtap="nextGroup">{{groupIndex >= groups.length - 1 ? '完成并进入下一环节' : '下一组'}}</button>
+  </view>
+
+  <view wx:elif="{{sentences.length}}" class="content">
+    <view class="section-title">{{sectionTitle}}</view>
+    <view class="action-row">
+      <button class="btn hint-btn" bindtap="showHint">查看提示</button>
+      <button class="btn skip-btn" bindtap="skipSegment">跳过本组练习</button>
+    </view>
+    <view class="progress">第 {{sentenceIndex + 1}} / {{totalInGroup}} 题（第{{groupIndex + 1}}组）</view>
+    <view class="sentence-box">
+      <view class="sentence-line">
+        <text
+          wx:for="{{currentTokens}}"
+          wx:key="index"
+          class="word {{answered[sentenceIndex] && selectedIndex === index ? (feedbackCorrect ? 'word-correct' : 'word-wrong') : ''}}"
+          data-ti="{{index}}"
+          bindtap="tapWord"
+        >{{item.word}}</text>
+      </view>
+    </view>
+    <view wx:if="{{showFeedback}}" class="feedback-box">
+      <text class="feedback-msg {{feedbackCorrect ? 'correct' : 'wrong'}}">{{feedbackCorrect ? '正确' : '错误，答案是：' + feedbackAnswer}}</text>
+    </view>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <view wx:if="{{showHint}}" class="modal-mask" catchtap="hideHint">
+    <view class="modal-box" catchtap="">
+      <view class="modal-title">知识点提示</view>
+      <view class="modal-body">{{hintContent}}</view>
+      <button class="btn primary" bindtap="hideHint">知道了</button>
+    </view>
+  </view>
+
+  <view wx:if="{{showSkipConfirm}}" class="modal-mask" catchtap="skipCancel">
+    <view class="modal-box" catchtap="">
+      <view class="modal-title">跳过</view>
+      <view class="modal-body">{{skipConfirmMsg}}</view>
+      <view class="modal-actions">
+        <button class="btn outline" bindtap="skipCancel">取消</button>
+        <button class="btn primary" bindtap="skipConfirm">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

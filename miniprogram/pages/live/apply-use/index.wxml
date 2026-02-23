@@ -1,30 +1,21 @@
 <view class="container">
   <view wx:if="{{loading}}" class="loading">加载中...</view>
 
-  <view wx:elif="{{completed}}" class="result-page">
-    <view class="result-title">全部完成</view>
-    <view class="result-rate">本次正确率 {{correctRate}}%</view>
-    <view wx:if="{{preRate !== null}}" class="compare">{{preRateLabel}} {{preRate}}% → 现在 {{currentRate}}%</view>
-    <view wx:else class="compare">未参与课前检测，仅展示本次正确率</view>
+  <view wx:elif="{{allDone}}" class="result-page">
+    <view class="result-title">第九环节：学以致用</view>
+    <view class="result-rate">本次正确率 {{correctRate}}%（共{{totalBlanks}}空）</view>
     <view class="encourage">{{encourageCopy}}</view>
-    <view class="result-list">
-      <view wx:for="{{questionResults}}" wx:key="index" class="result-item {{item.isCorrect ? 'correct' : 'wrong'}}">
-        <view class="r-header">
-          <text>第{{index + 1}}题</text>
-          <text>{{item.isCorrect ? '✓' : '✗'}}</text>
-        </view>
-        <view class="r-question">{{item.text}}</view>
-        <view class="r-answer">正确答案：{{item.correctAnswer}}</view>
-        <view class="r-answer">你的答案：{{item.userAnswer}}</view>
-        <view wx:if="{{item.analysis}}" class="r-analysis">解析：{{item.analysis}}</view>
-      </view>
-    </view>
     <button class="btn primary" bindtap="goToNextSegment">下一环节</button>
     <view class="back-link" bindtap="backToActivity">返回活动首页</view>
   </view>
 
   <view wx:elif="{{questions.length}}" class="content">
-    <view class="progress">第 {{currentIndex + 1}} / {{questions.length}} 题</view>
+    <view class="section-title">{{sectionTitle}}</view>
+    <view class="action-row">
+      <button class="btn hint-btn" bindtap="showHint">查看提示</button>
+      <button class="btn skip-btn" bindtap="skipSegment">跳过本组练习</button>
+    </view>
+    <view class="progress">第 {{currentIndex + 1}} / {{questions.length}} 题（共{{totalBlanks}}空）</view>
     <view class="q-box">
       <view class="q-text">{{questions[currentIndex].text}}</view>
       <view class="blanks">
@@ -53,12 +44,21 @@
     <view class="back-link" bindtap="backToActivity">返回活动首页</view>
   </view>
 
-  <view wx:if="{{showLeave}}" class="modal-mask" catchtap="leaveCancel">
+  <view wx:if="{{showHint}}" class="modal-mask" catchtap="hideHint">
     <view class="modal-box" catchtap="">
-      <view class="modal-title">做完再走，效果更好哦～</view>
+      <view class="modal-title">知识点提示</view>
+      <view class="modal-body">{{hintContent}}</view>
+      <button class="btn primary" bindtap="hideHint">知道了</button>
+    </view>
+  </view>
+
+  <view wx:if="{{showSkipConfirm}}" class="modal-mask" catchtap="skipCancel">
+    <view class="modal-box" catchtap="">
+      <view class="modal-title">跳过</view>
+      <view class="modal-body">是否进入一句话总结？</view>
       <view class="modal-actions">
-        <button class="btn outline" bindtap="leaveCancel">继续完成</button>
-        <button class="btn secondary" bindtap="leaveConfirm">暂时离开</button>
+        <button class="btn outline" bindtap="skipCancel">取消</button>
+        <button class="btn primary" bindtap="skipConfirm">确定</button>
       </view>
     </view>
   </view>

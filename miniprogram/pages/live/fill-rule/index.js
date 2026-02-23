@@ -1,5 +1,21 @@
 // 填空运用规则：10 题填空、即时核对、鼓励话术、中途退出挽留
 const liveService = require('../../../utils/liveService.js');
+const sound = require('../../../utils/sound.js');
+
+/** 多空答案顺序无关：同一分句内只要包含所有正确答案即算对，每个标准答案最多匹配一次 */
+function countMatchOrderIndependent(userBlanks, correctBlanks) {
+  const remain = correctBlanks.slice();
+  let ok = 0;
+  for (const u of userBlanks) {
+    if (!u) continue;
+    const idx = remain.indexOf(u);
+    if (idx !== -1) {
+      remain.splice(idx, 1);
+      ok++;
+    }
+  }
+  return ok;
+}
 
 const ENCOURAGE = {
   low: '别灰心，直播里再听一遍规则，下次一定更好～',
@@ -67,17 +83,10 @@ Page({
   checkQuestion() {
     const { questions, currentIndex, answers } = this.data;
     const q = questions[currentIndex];
-    const userBlanks = (answers[currentIndex] || []);
-    const correctBlanks = q.blanks || [];
-    let ok = 0;
-    const checked = [...(this.data.checked[currentIndex] || [])];
-    for (let i = 0; i < correctBlanks.length; i++) {
-      const u = (userBlanks[i] || '').trim().toLowerCase();
-      const c = (correctBlanks[i] || '').trim().toLowerCase();
-      const right = u === c;
-      checked[i] = true;
-      if (right) ok++;
-    }
+    const userBlanks = (answers[currentIndex] || []).map(x => (x || '').trim().toLowerCase());
+    const correctBlanks = (q.blanks || []).map(x => (x || '').trim().toLowerCase());
+    const ok = countMatchOrderIndependent(userBlanks, correctBlanks);
+    const checked = (q.blanks || []).map(() => true);
     const newChecked = [...this.data.checked];
     newChecked[currentIndex] = checked;
     let score = this.data.score + ok;
@@ -89,18 +98,13 @@ Page({
       const questionResults = [];
       for (let i = 0; i < questions.length; i++) {
         const q = questions[i];
-        const userBlanks = (this.data.answers[i] || []);
-        const correctBlanks = q.blanks || [];
-        let allRight = true;
-        for (let j = 0; j < correctBlanks.length; j++) {
-          const u = (userBlanks[j] || '').trim().toLowerCase();
-          const c = (correctBlanks[j] || '').trim().toLowerCase();
-          if (u !== c) { allRight = false; break; }
-        }
+        const ub = (this.data.answers[i] || []).map(x => (x || '').trim().toLowerCase());
+        const cb = (q.blanks || []).map(x => (x || '').trim().toLowerCase());
+        const allRight = countMatchOrderIndependent(ub, cb) === cb.length;
         questionResults.push({
           text: q.text,
-          userAnswer: userBlanks.join(' / '),
-          correctAnswer: correctBlanks.join(' / '),
+          userAnswer: (this.data.answers[i] || []).join(' / '),
+          correctAnswer: (q.blanks || []).join(' / '),
           isCorrect: allRight,
           analysis: q.analysis || ''
         });
@@ -110,6 +114,7 @@ Page({
         total: this.data.totalBlanks,
         correctRate: Math.round(rate)
       });
+      sound.playToast();
       this.setData({
         checked: newChecked,
         score,
@@ -155,7 +160,7 @@ Page({
   },
 
   goToNextSegment() {
-    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.FILL_RULE);
+    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.FILL_RULE, this.data.activityId);
     const path = nextType ? liveService.getSegmentPagePath(nextType) : '/pages/live/activity-index/index';
     const url = path ? `${path}?activityId=${this.data.activityId}` : `/pages/live/activity-index/index?activityId=${this.data.activityId}`;
     wx.redirectTo({ url });

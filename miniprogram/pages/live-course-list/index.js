@@ -13,13 +13,15 @@ Page({
 
   onShow() {
     const completedIds = liveService.getCompletedLessonIds();
+    const lesson1Stars = liveService.getLesson1Stars('lesson1');
     const lessons = [];
     for (let i = 1; i <= 14; i++) {
       const id = `lesson${i}`;
       lessons.push({
         id,
         name: `第${i}课`,
-        completed: completedIds.indexOf(id) !== -1
+        completed: completedIds.indexOf(id) !== -1,
+        stars: id === 'lesson1' ? lesson1Stars : null
       });
     }
     this.setData({ lessons, completedIds });

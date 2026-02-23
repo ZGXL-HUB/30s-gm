@@ -13,6 +13,7 @@
     >
       <view class="card-left">
         <view class="lesson-name">{{item.name}}</view>
+        <view wx:if="{{item.stars}}" class="stars-badge">{{item.stars === 1 ? '★' : ''}}{{item.stars === 2 ? '★★' : ''}}{{item.stars === 3 ? '★★★' : ''}}</view>
       </view>
       <view class="card-right">
         <view wx:if="{{item.completed}}" class="completed-badge">

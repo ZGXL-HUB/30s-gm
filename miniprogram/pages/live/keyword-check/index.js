@@ -1,5 +1,6 @@
 // 关键词识别：8 道选择题 + 2 道反馈题
 const liveService = require('../../../utils/liveService.js');
+const sound = require('../../../utils/sound.js');
 
 Page({
   data: {
@@ -71,6 +72,7 @@ Page({
         userAnswers: newUserAnswers,
         questionResults: newResults
       });
+      sound.playToast();
       this.setData({
         score: newScore,
         userAnswers: newUserAnswers,
@@ -93,7 +95,7 @@ Page({
   },
 
   goToNextSegment() {
-    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.KEYWORD_CHECK);
+    const nextType = liveService.getNextSegmentType(liveService.SEGMENT_TYPES.KEYWORD_CHECK, this.data.activityId);
     const path = nextType ? liveService.getSegmentPagePath(nextType) : '/pages/live/activity-index/index';
     const url = path ? `${path}?activityId=${this.data.activityId}` : `/pages/live/activity-index/index?activityId=${this.data.activityId}`;
     wx.redirectTo({ url });
