@@ -23,5 +23,12 @@ Page({
     wx.navigateTo({
       url: '/pages/teacher/teacher-homework-middle/index'
     });
+  },
+
+  // 跳转到雅雅会考直播配套：十四节课列表
+  goToLiveCourseList() {
+    wx.navigateTo({
+      url: '/pages/live-course-list/index'
+    });
   }
 });

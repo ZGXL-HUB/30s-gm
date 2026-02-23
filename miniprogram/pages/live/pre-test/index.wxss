@@ -1,0 +1,72 @@
+.container { min-height: 100vh; background: #f6f6f6; padding: 30rpx; }
+.loading, .error { text-align: center; padding: 80rpx 0; color: #666; font-size: 30rpx; }
+.error { color: #e74c3c; }
+
+.done-tip {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 60rpx 40rpx;
+  text-align: center;
+}
+.tip-title { font-size: 34rpx; font-weight: bold; color: #333; margin-bottom: 20rpx; }
+.tip-rate { font-size: 48rpx; color: #667eea; margin-bottom: 50rpx; }
+.tip-actions .btn { margin: 16rpx 0; }
+
+.test-area { background: #fff; border-radius: 20rpx; padding: 30rpx; }
+.progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+.score { color: #667eea; font-weight: 500; }
+.question-box { margin-bottom: 40rpx; }
+.q-text {
+  font-size: 32rpx;
+  line-height: 1.6;
+  color: #333;
+  padding: 24rpx;
+  background: #f9f9f9;
+  border-radius: 12rpx;
+  margin-bottom: 28rpx;
+}
+.options { display: flex; flex-direction: column; gap: 20rpx; }
+.option {
+  padding: 28rpx 24rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.option:active { background: #f0f0f0; }
+.back-link { text-align: center; color: #999; font-size: 26rpx; margin-top: 30rpx; }
+
+.result-area { background: #fff; border-radius: 20rpx; padding: 30rpx; }
+.result-head { text-align: center; margin-bottom: 40rpx; }
+.result-title { display: block; font-size: 34rpx; font-weight: bold; color: #333; margin-bottom: 12rpx; }
+.result-score { display: block; font-size: 40rpx; color: #667eea; margin-bottom: 8rpx; }
+.result-hint { display: block; font-size: 26rpx; color: #666; }
+.result-list { margin-bottom: 40rpx; }
+.result-item {
+  padding: 24rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  border-left: 6rpx solid #e0e0e0;
+}
+.result-item.correct { border-left-color: #4caf50; background: #f1f8e9; }
+.result-item.wrong { border-left-color: #f44336; background: #ffebee; }
+.r-header { display: flex; justify-content: space-between; font-size: 26rpx; margin-bottom: 12rpx; }
+.r-question { font-size: 28rpx; color: #333; margin-bottom: 8rpx; }
+.r-answer { font-size: 26rpx; color: #666; margin-bottom: 4rpx; }
+.r-analysis { font-size: 24rpx; color: #999; margin-top: 8rpx; }
+.result-actions .btn { width: 100%; margin-top: 20rpx; }
+
+.btn {
+  padding: 28rpx;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+  border: none;
+}
+.btn.primary { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.btn.secondary { background: #f5f5f5; color: #666; }

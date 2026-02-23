@@ -38,7 +38,7 @@
           <view class="practice-btn" 
                 bindtap="gotoPractice" 
                 data-name="{{item.name}}"
-                catchtap="true">
+                catchtap="stopPropagation">
             立即练5题
           </view>
         </view>

@@ -1,4 +1,5 @@
 // 教师端我的学案页面
+const { stripMarkdown } = require('../../utils/markdown.js');
 
 Page({
   data: {
@@ -617,7 +618,6 @@ Page({
           try {
             // 生成无答案版本的学案内容（Markdown）
             const markdownContent = await this.generateLocalWordContentWithoutAnswers(material, variantCount);
-            const { stripMarkdown } = require('../../utils/markdown.js');
             const plainTextContent = stripMarkdown(markdownContent);
             
             wx.hideLoading();

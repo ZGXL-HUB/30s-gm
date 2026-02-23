@@ -61,6 +61,11 @@
   color: white;
 }
 
+.live-card {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: white;
+}
+
 .card-icon {
   font-size: 60rpx;
   margin-right: 30rpx;

@@ -837,8 +837,6 @@
   box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.1);
 }
 
-}
-
 .rec-details .detail {
   font-size: 20rpx;
   color: #999;

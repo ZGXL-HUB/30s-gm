@@ -1,4 +1,6 @@
 // 统一学案生成流程页面
+const { stripMarkdown } = require('../../../utils/markdown.js');
+
 Page({
   data: {
     // 基础数据
@@ -1613,7 +1615,6 @@ Page({
         textToCopy = questionBlocks.join('\n\n');
       } else {
         // 兜底：如果解析不到题目，尝试从预览内容中提取
-        const { stripMarkdown } = require('../../../utils/markdown.js');
         if (this.data.previewContent) {
           // 从预览内容中提取题目部分
           const previewLines = this.data.previewContent.split('\n');

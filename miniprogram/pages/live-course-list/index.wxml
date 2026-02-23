@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="header">
+    <text class="title">十四节直播课</text>
+    <text class="subtitle">点击课程进入当节课流程，可重复练习</text>
+  </view>
+  <view class="lesson-list">
+    <view
+      wx:for="{{lessons}}"
+      wx:key="id"
+      class="lesson-card"
+      data-id="{{item.id}}"
+      bindtap="goToLesson"
+    >
+      <view class="card-left">
+        <view class="lesson-name">{{item.name}}</view>
+      </view>
+      <view class="card-right">
+        <view wx:if="{{item.completed}}" class="completed-badge">
+          <text class="check-icon">✓</text>
+        </view>
+        <view class="card-arrow">→</view>
+      </view>
+    </view>
+  </view>
+</view>

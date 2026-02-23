@@ -10,6 +10,19 @@ cloud.init({
 
 const db = cloud.database();
 
+// 静态加载所有数据文件（使用静态 require）
+const dataLoaders = {
+  './data/grammar_test_sets.js': require('./data/grammar_test_sets.js'),
+  './writing_exercise_questions.js': require('./writing_exercise_questions.js'),
+  './data/intermediate_questions.js': require('./data/intermediate_questions.js'),
+  './data/writing_pronouns.js': require('./data/writing_pronouns.js'),
+  './data/writing_nouns.js': require('./data/writing_nouns.js'),
+  './data/writing_tenses.js': require('./data/writing_tenses.js'),
+  './data/writing_voices.js': require('./data/writing_voices.js'),
+  './data/writing_comparisons.js': require('./data/writing_comparisons.js'),
+  './data/writing_adverbs.js': require('./data/writing_adverbs.js')
+};
+
 // 迁移配置
 const migrationConfig = {
   // 需要迁移的数据文件
@@ -70,8 +83,11 @@ async function migrateAllData() {
     try {
       console.log(`📦 正在迁移: ${config.description}`);
       
-      // 加载本地数据
-      const localData = require(config.localFile);
+      // 加载本地数据（使用静态 require 映射）
+      const localData = dataLoaders[config.localFile];
+      if (!localData) {
+        throw new Error(`无法找到数据文件: ${config.localFile}`);
+      }
       
       // 准备云端数据
       const cloudData = {

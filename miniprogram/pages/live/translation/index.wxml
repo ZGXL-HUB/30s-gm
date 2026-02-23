@@ -1,0 +1,44 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <!-- 完成页：本课全部完成 + 打卡 -->
+  <view wx:elif="{{done}}" class="done-page">
+    <view class="done-title">本课已全部完成</view>
+    <view class="done-sub">您已完成今日学习，一起进步吧～</view>
+    <button class="btn share" open-type="share">分享给好友</button>
+    <button class="btn primary" bindtap="backToCourseList">返回课程列表</button>
+  </view>
+
+  <!-- 做题：中文 → 写英文 → 核对 -->
+  <view wx:else class="content">
+    <view wx:if="{{current}}" class="question-box">
+      <view class="zh-label">请将下面句子翻译成英文：</view>
+      <view class="zh-text">{{current.zh}}</view>
+      <textarea
+        class="input-en"
+        placeholder="请输入英文句子"
+        value="{{userAnswer}}"
+        bindinput="onInput"
+        disabled="{{checked}}"
+      />
+      <view wx:if="{{!checked}}">
+        <button class="btn primary" bindtap="submitCheck">提交核对</button>
+      </view>
+      <view wx:else class="feedback">
+        <view class="feedback-msg {{isCorrect ? 'correct' : 'wrong'}}">
+          {{isCorrect ? '✓ 正确！' : '✗ 正确答案：'}}
+        </view>
+        <view wx:if="{{!isCorrect}}" class="correct-en">{{correctEn}}</view>
+        <view wx:if="{{!isCorrect && translationHint.length}}" class="hint-box">
+          <text class="hint-title">需注意：</text>
+          <text wx:for="{{translationHint}}" wx:key="*this" class="hint-item">{{item}}</text>
+        </view>
+        <view class="actions">
+          <button wx:if="{{extraCount < 2}}" class="btn outline" bindtap="goExtra">再加练一句</button>
+          <button class="btn primary" bindtap="goDone">完成，去打卡</button>
+        </view>
+      </view>
+    </view>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+</view>

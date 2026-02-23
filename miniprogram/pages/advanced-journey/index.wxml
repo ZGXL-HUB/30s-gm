@@ -63,7 +63,7 @@
           <view class="action-btn" 
                 bindtap="startSpecialPractice" 
                 data-day="{{index}}"
-                catchtap="true">
+                catchtap="stopPropagation">
             开始练习
           </view>
           <view class="plan-arrow">></view>

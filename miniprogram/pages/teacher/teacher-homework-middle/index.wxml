@@ -204,7 +204,6 @@
             </view>
           </view>
           <text class="gaokao-subtitle">共{{zhongkaoRatio.selectedGrammarPoints.length}}个语法点（选择{{zhongkaoRatio.choiceCount}}题+填空{{zhongkaoRatio.fillCount}}题）</text>
-          <button class="btn btn-small btn-white regenerate-btn" bindtap="regenerateZhongkaoCombo">↻ 重选一批</button>
         </view>
         <view class="selected-points-grid">
           <view 
@@ -337,8 +336,20 @@
     bindtap="goToPreview"
   >
     <view class="floating-btn-content">
-      <text class="floating-btn-icon">✓</text>
+      <text class="floating-btn-icon">👁</text>
       <text class="floating-btn-text">我选好了</text>
+    </view>
+  </view>
+  
+  <!-- 悬浮重选按钮（中考配比模式） -->
+  <view 
+    class="floating-regenerate-btn show" 
+    wx:if="{{homeworkType === 'zhongkao' && zhongkaoRatio.selectedGrammarPoints.length > 0}}"
+    bindtap="regenerateZhongkaoCombo"
+  >
+    <view class="floating-btn-content">
+      <text class="floating-btn-icon">↻</text>
+      <text class="floating-btn-text">重选一批</text>
     </view>
   </view>
   

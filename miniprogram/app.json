@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/main/index",
+    "pages/live-course-list/index",
     "pages/index/index",
     "pages/grammar-select/index",
     "pages/grammar-overview/index",
@@ -67,6 +68,18 @@
       "name": "student",
       "pages": [
         "student-assignment-list/index"
+      ]
+    },
+    {
+      "root": "pages/live",
+      "name": "live",
+      "pages": [
+        "activity-index/index",
+        "pre-test/index",
+        "keyword-check/index",
+        "fill-rule/index",
+        "fill-real/index",
+        "translation/index"
       ]
     }
   ],

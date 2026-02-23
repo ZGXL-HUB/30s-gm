@@ -53,16 +53,15 @@ async function migrateDataToCloud() {
     
     // 4. 迁移书写规则数据
     const writingDataFiles = [
-      'writing_pronouns.js',
-      'writing_nouns.js', 
-      'writing_tenses.js',
-      'writing_voices.js',
-      'writing_comparisons.js',
-      'writing_adverbs.js'
+      { fileName: 'writing_pronouns.js', data: require('./data/writing_pronouns.js') },
+      { fileName: 'writing_nouns.js', data: require('./data/writing_nouns.js') },
+      { fileName: 'writing_tenses.js', data: require('./data/writing_tenses.js') },
+      { fileName: 'writing_voices.js', data: require('./data/writing_voices.js') },
+      { fileName: 'writing_comparisons.js', data: require('./data/writing_comparisons.js') },
+      { fileName: 'writing_adverbs.js', data: require('./data/writing_adverbs.js') }
     ];
     
-    for (const fileName of writingDataFiles) {
-      const data = require(`./data/${fileName}`);
+    for (const { fileName, data } of writingDataFiles) {
       await db.collection('writing_rules').add({
         data: {
           fileName: fileName,

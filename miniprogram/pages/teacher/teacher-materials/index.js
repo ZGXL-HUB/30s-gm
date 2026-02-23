@@ -1,4 +1,5 @@
 // 教师端我的学案页面
+const { stripMarkdown } = require('../../../utils/markdown.js');
 
 Page({
   data: {
@@ -442,8 +443,6 @@ Page({
 
               // 复制内容
   copyContent(material) {
-    // 从项目根目录的 utils 中引入 stripMarkdown
-    const { stripMarkdown } = require('../../../utils/markdown.js');
     const markdownContent = `学案标题：${material.title}\n生成时间：${material.createdAt}\n班级正确率：${material.classAccuracy}%`;
     const plainTextContent = stripMarkdown(markdownContent);
 

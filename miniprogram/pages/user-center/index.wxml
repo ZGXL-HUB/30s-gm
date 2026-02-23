@@ -98,6 +98,13 @@
         </view>
         <image class="arrow_icon" src="../../images/arrow.svg" />
       </view>
+      <view class="setting_item" bind:tap="goToLiveActivity">
+        <view class="left">
+          <image class="setting_icon" src="../../images/icons/class.svg" />
+          <view class="setting_text">直播课（学生）</view>
+        </view>
+        <image class="arrow_icon" src="../../images/arrow.svg" />
+      </view>
       <view class="setting_item" bind:tap="goToFeedback">
         <view class="left">
           <image class="setting_icon" src="../../images/icons/feedback.svg" />

@@ -12,6 +12,11 @@ Page({
     weakPoints: []
   },
 
+  // 阻止事件冒泡
+  stopPropagation(e) {
+    // 空函数，仅用于阻止事件冒泡
+  },
+
   onLoad(options) {
     console.log('进阶之旅页面加载');
     

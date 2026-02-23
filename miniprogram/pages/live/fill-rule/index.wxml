@@ -1,0 +1,64 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{completed}}" class="result-page">
+    <view class="result-title">全部完成</view>
+    <view class="result-rate">正确率 {{correctRate}}%</view>
+    <view class="encourage">{{encourageCopy}}</view>
+    <view class="result-list">
+      <view wx:for="{{questionResults}}" wx:key="index" class="result-item {{item.isCorrect ? 'correct' : 'wrong'}}">
+        <view class="r-header">
+          <text>第{{index + 1}}题</text>
+          <text>{{item.isCorrect ? '✓' : '✗'}}</text>
+        </view>
+        <view class="r-question">{{item.text}}</view>
+        <view class="r-answer">正确答案：{{item.correctAnswer}}</view>
+        <view class="r-answer">你的答案：{{item.userAnswer}}</view>
+        <view wx:if="{{item.analysis}}" class="r-analysis">解析：{{item.analysis}}</view>
+      </view>
+    </view>
+    <button class="btn primary" bindtap="goToNextSegment">下一环节</button>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <view wx:elif="{{questions.length}}" class="content">
+    <view class="progress">第 {{currentIndex + 1}} / {{questions.length}} 题</view>
+    <view class="q-box">
+      <view class="q-text">{{questions[currentIndex].text}}</view>
+      <view class="blanks">
+        <block wx:for="{{questions[currentIndex].blanks}}" wx:key="index">
+          <view class="blank-row">
+            <text class="blank-label">空{{index + 1}}：</text>
+            <input
+              class="blank-input"
+              placeholder="填写答案"
+              value="{{answers[currentIndex][index]}}"
+              data-qi="{{currentIndex}}"
+              data-bi="{{index}}"
+              bindinput="onBlankInput"
+              disabled="{{checked[currentIndex][index]}}"
+            />
+            <text wx:if="{{checked[currentIndex][index]}}" class="check-mark">✓</text>
+          </view>
+        </block>
+      </view>
+      <button class="btn primary" bindtap="checkQuestion">核对本题</button>
+    </view>
+    <view class="nav-row">
+      <button class="btn outline" bindtap="prevQuestion" disabled="{{currentIndex <= 0}}">上一题</button>
+      <button class="btn outline" bindtap="nextQuestion" disabled="{{currentIndex >= questions.length - 1}}">下一题</button>
+    </view>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <!-- 挽留弹窗 -->
+  <view wx:if="{{showLeave}}" class="modal-mask" catchtap="leaveCancel">
+    <view class="modal-box" catchtap="">
+      <view class="modal-title">做完再走，效果更好哦～</view>
+      <view class="modal-actions">
+        <button class="btn outline" bindtap="leaveCancel">继续完成</button>
+        <button class="btn secondary" bindtap="leaveConfirm">暂时离开</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <view wx:elif="{{error}}" class="error">{{error}}</view>
+
+  <!-- 本课已全部完成：可再次练习各环节 -->
+  <view wx:elif="{{showCompleted}}" class="content completed-view">
+    <view class="header">
+      <text class="title">{{activity.name}}</text>
+      <text class="lesson">{{activity.lessonName}}</text>
+      <view class="badge">本课已全部完成</view>
+    </view>
+    <view class="subtitle">可点击下方环节再次练习</view>
+    <view class="segments">
+      <view
+        wx:for="{{activity.segments}}"
+        wx:key="type"
+        class="segment-item"
+        data-type="{{item.type}}"
+        bindtap="goSegment"
+      >
+        <text class="segment-name">{{item.name}}</text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+    <button class="btn back-list" bindtap="backToCourseList">返回课程列表</button>
+  </view>
+</view>

@@ -238,6 +238,13 @@ Page({
     });
   },
 
+  // 跳转到直播课活动首页（学生端，默认第1课，实际扫码会带 activityId）
+  goToLiveActivity() {
+    wx.navigateTo({
+      url: '/pages/live/activity-index/index?activityId=lesson1'
+    });
+  },
+
   // 跳转到意见反馈页面
   goToFeedback() {
     wx.navigateTo({

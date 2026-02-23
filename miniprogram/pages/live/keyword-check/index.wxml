@@ -1,0 +1,55 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{testCompleted}}" class="result-page">
+    <view class="result-head">
+      <text class="result-title">完成</text>
+      <text class="result-score">正确率 {{correctRate !== undefined ? correctRate : 0}}%</text>
+      <text class="result-detail">选择题正确：{{score}} / {{choiceCount}} 题</text>
+      <text class="thanks">感谢你的反馈～</text>
+    </view>
+    <view class="result-list">
+      <view
+        wx:for="{{questionResults}}"
+        wx:key="index"
+        wx:if="{{!item.isFeedback}}"
+        class="result-item {{item.isCorrect ? 'correct' : 'wrong'}}"
+      >
+        <view class="r-header">
+          <text>第{{index + 1}}题</text>
+          <text>{{item.isCorrect ? '✓' : '✗'}}</text>
+        </view>
+        <view class="r-question">{{item.question}}</view>
+        <view class="r-answer">正确答案：{{item.correctAnswer}}</view>
+        <view class="r-answer">你的答案：{{item.userAnswer}}</view>
+        <view wx:if="{{item.analysis}}" class="r-analysis">解析：{{item.analysis}}</view>
+      </view>
+    </view>
+    <view class="result-actions">
+      <button class="btn primary" bindtap="goToNextSegment">下一环节</button>
+      <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+    </view>
+  </view>
+
+  <view wx:elif="{{questions.length}}" class="content">
+    <view class="progress">
+      第 {{currentIndex + 1}} / {{totalQuestions}} 题
+      <text wx:if="{{questions[currentIndex].type !== 'feedback'}}" class="score">得分 {{score}}</text>
+    </view>
+    <view class="q-box">
+      <view class="q-text">{{questions[currentIndex].text}}</view>
+      <view class="options">
+        <view
+          wx:for="{{questions[currentIndex].option}}"
+          wx:key="*this"
+          class="option"
+          data-answer="{{item}}"
+          bindtap="selectAnswer"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+</view>

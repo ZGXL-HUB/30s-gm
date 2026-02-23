@@ -1,0 +1,56 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+  <view wx:elif="{{error}}" class="error">{{error}}</view>
+
+  <!-- 做题中 -->
+  <view wx:elif="{{questions.length && !testCompleted}}" class="test-area">
+    <view class="progress">
+      <text>第 {{currentIndex + 1}} 题 / 共 {{total}} 题</text>
+      <text class="score">得分: {{score}}</text>
+    </view>
+    <view class="question-box">
+      <view class="q-text">{{questions[currentIndex].text}}</view>
+      <view class="options">
+        <view
+          wx:for="{{questions[currentIndex].option}}"
+          wx:key="*this"
+          class="option"
+          data-answer="{{item}}"
+          bindtap="selectAnswer"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+    <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+  </view>
+
+  <!-- 测试完成：结果页 -->
+  <view wx:elif="{{testCompleted}}" class="result-area">
+    <view class="result-head">
+      <text class="result-title">检测完成</text>
+      <text class="result-score">正确率 {{correctRate !== undefined ? correctRate : 0}}%</text>
+      <text class="result-hint">直播时重点听错题哦～</text>
+    </view>
+    <view class="result-list">
+      <view
+        wx:for="{{questionResults}}"
+        wx:key="index"
+        class="result-item {{item.isCorrect ? 'correct' : 'wrong'}}"
+      >
+        <view class="r-header">
+          <text>第{{index + 1}}题</text>
+          <text>{{item.isCorrect ? '✓' : '✗'}}</text>
+        </view>
+        <view class="r-question">{{item.question}}</view>
+        <view class="r-answer">正确答案：{{item.correctAnswer}}</view>
+        <view class="r-answer">你的答案：{{item.userAnswer}}</view>
+        <view wx:if="{{item.analysis}}" class="r-analysis">解析：{{item.analysis}}</view>
+      </view>
+    </view>
+    <view class="result-actions">
+      <button class="btn primary" bindtap="goToNextSegment">下一环节</button>
+      <view class="back-link" bindtap="backToActivity">返回活动首页</view>
+    </view>
+  </view>
+</view>

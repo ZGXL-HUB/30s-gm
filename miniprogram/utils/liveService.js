@@ -1,0 +1,435 @@
+/**
+ * 直播课活动 · 学生端服务
+ * 活动配置、题目拉取、提交记录（含 openid）
+ */
+const { getActivityById, getSegmentConfig, SEGMENT_TYPES } = require('../config/liveActivityConfig.js');
+const cloudDataLoader = require('./cloudDataLoader.js');
+
+const STORAGE_KEY_PREFIX = 'live_result_';
+const STORAGE_PRE_TEST_PREFIX = 'live_pre_test_';
+const STORAGE_COMPLETED_LESSONS = 'live_completed_lessons';
+
+function getOpenId() {
+  try {
+    const userInfo = wx.getStorageSync('userInfo');
+    return (userInfo && userInfo.openid) ? userInfo.openid : 'anonymous_' + Date.now();
+  } catch (e) {
+    return 'anonymous_' + Date.now();
+  }
+}
+
+/**
+ * 解析扫码进入的 scene（小程序码场景值）或 query
+ * @param {string} scene - 扫码时的 scene
+ * @param {object} query - 页面 onLoad 的 options
+ * @returns {string|null} activityId
+ */
+function parseActivityId(scene, query) {
+  if (query && query.activityId) return query.activityId;
+  if (!scene || typeof scene !== 'string') return null;
+  const parts = scene.split('&').map(p => p.split('='));
+  for (const [k, v] of parts) {
+    if (k === 'activityId' && v) return decodeURIComponent(v);
+  }
+  return scene;
+}
+
+/**
+ * 获取活动配置
+ */
+function getActivityConfig(activityId) {
+  return getActivityById(activityId);
+}
+
+/**
+ * 课前真题检测：拉取选择题/改错题（真题变式）
+ * 若存在课程专属习题（如 data/liveLesson1Exercises.js），优先使用；否则云/兜底
+ */
+async function getPreTestQuestions(activityId, limit = 10) {
+  const activity = getActivityById(activityId);
+  const segment = getSegmentConfig(activity, SEGMENT_TYPES.PRE_CLASS_TEST);
+  const num = (segment && segment.limit) ? segment.limit : limit;
+
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    if (activityId === 'lesson1' && lesson1.PRE_TEST && lesson1.PRE_TEST.length > 0) {
+      return lesson1.PRE_TEST.slice(0, num);
+    }
+  } catch (e) {
+    // 无专属习题或文件不存在，继续走云/兜底
+  }
+
+  const grammarPoint = (activity && activity.grammarPoint) ? activity.grammarPoint : '一般现在时';
+  const schoolLevel = (activity && activity.schoolLevel) ? activity.schoolLevel : 'middle';
+
+  if (wx.cloud && wx.cloud.database) {
+    try {
+      const list = await cloudDataLoader.getQuestionsByGrammarPoint(grammarPoint, schoolLevel, 'choice', num);
+      if (list && list.length > 0) {
+        return list.map(q => ({
+          _id: q._id,
+          text: q.text,
+          option: Array.isArray(q.option) ? q.option : (q.options || []),
+          answer: q.answer,
+          analysis: q.analysis || '',
+          tag: q.tag || q.grammarPoint || ''
+        }));
+      }
+    } catch (e) {
+      console.warn('getPreTestQuestions cloud fail', e);
+    }
+  }
+
+  return getFallbackChoiceQuestions(num);
+}
+
+/**
+ * 关键词识别：8 道选择题 + 2 道反馈题
+ * 若存在课程专属习题（如 lesson1），优先使用
+ */
+function getKeywordCheckQuestions(activityId) {
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    if (activityId === 'lesson1' && lesson1.KEYWORD_CHOICE && lesson1.KEYWORD_FEEDBACK) {
+      return { choice: lesson1.KEYWORD_CHOICE, feedback: lesson1.KEYWORD_FEEDBACK };
+    }
+  } catch (e) {}
+
+  const choice = [
+    { _id: 'k1', text: '下列哪项是一般现在时的标志词？', option: ['yesterday', 'every day', 'last week'], answer: 'every day', analysis: 'every day 表示经常', tag: '标志词' },
+    { _id: 'k2', text: '下列哪项是一般过去时的标志词？', option: ['now', 'last year', 'tomorrow'], answer: 'last year', analysis: 'last year 表示过去', tag: '标志词' },
+    { _id: 'k3', text: '一般现在时第三人称单数动词要加？', option: ['s', 'ed', 'ing'], answer: 's', analysis: '第三人称单数加 s', tag: '词法' },
+    { _id: 'k4', text: '一般过去时动词通常加？', option: ['s', 'ed', 'ing'], answer: 'ed', analysis: '规则动词加 ed', tag: '词法' },
+    { _id: 'k5', text: '"He ____ to school every day." 正确形式是？', option: ['go', 'goes', 'going'], answer: 'goes', analysis: '第三人称单数', tag: '书写' },
+    { _id: 'k6', text: '"She ____ TV yesterday." 正确形式是？', option: ['watch', 'watches', 'watched'], answer: 'watched', analysis: '过去时', tag: '书写' },
+    { _id: 'k7', text: '现在进行时的结构是？', option: ['do + 动词原形', 'be + 动词ing', 'have + 过去分词'], answer: 'be + 动词ing', analysis: 'be doing', tag: '词法' },
+    { _id: 'k8', text: '现在完成时的结构是？', option: ['be + 动词ing', 'have + 过去分词', 'will + 动词原形'], answer: 'have + 过去分词', analysis: 'have done', tag: '词法' }
+  ];
+  const feedback = [
+    { _id: 'f1', type: 'feedback', text: '你掌握了什么？', option: ['标志词识别', '词法规则', '书写形式', '都掌握了'], answer: '' },
+    { _id: 'f2', type: 'feedback', text: '你偏好用小程序检测还是直接打在公屏上？', option: ['小程序检测', '打在公屏上', '都可以'], answer: '' }
+  ];
+  return { choice, feedback };
+}
+
+/**
+ * 填空运用 / 真题填空：若有课程专属习题优先使用，否则按语法点拉填空或兜底
+ */
+async function getFillQuestions(activityId, segmentType, limit = 10) {
+  const activity = getActivityById(activityId);
+  const seg = activity && activity.segments ? activity.segments.find(s => s.type === segmentType) : null;
+  const num = (seg && seg.limit) ? seg.limit : limit;
+
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    if (activityId === 'lesson1') {
+      if (segmentType === SEGMENT_TYPES.FILL_RULE && lesson1.FILL_RULE && lesson1.FILL_RULE.length > 0) {
+        return lesson1.FILL_RULE.slice(0, num).map(q => ({ ...q, blanks: q.blanks || [] }));
+      }
+      if (segmentType === SEGMENT_TYPES.FILL_REAL && lesson1.FILL_REAL && lesson1.FILL_REAL.length > 0) {
+        return lesson1.FILL_REAL.slice(0, num).map(q => ({ ...q, blanks: q.blanks || [] }));
+      }
+    }
+  } catch (e) {}
+
+  const grammarPoint = (activity && activity.grammarPoint) ? activity.grammarPoint : '一般现在时';
+  const schoolLevel = (activity && activity.schoolLevel) ? activity.schoolLevel : 'middle';
+
+  if (wx.cloud && wx.cloud.database) {
+    try {
+      const list = await cloudDataLoader.getQuestionsByGrammarPoint(grammarPoint, schoolLevel, 'fill', num);
+      if (list && list.length > 0) {
+        return list.map(q => normalizeFillQuestion(q));
+      }
+    } catch (e) {
+      console.warn('getFillQuestions cloud fail', e);
+    }
+  }
+
+  return getFallbackFillQuestions(num);
+}
+
+function normalizeFillQuestion(q) {
+  const text = q.text || '';
+  const answer = q.answer;
+  const blanks = answer ? (Array.isArray(answer) ? answer : [answer]) : [];
+  return {
+    _id: q._id,
+    text,
+    blanks,
+    analysis: q.analysis || '',
+    tag: q.tag || q.grammarPoint || ''
+  };
+}
+
+/**
+ * 翻译题：本课例句（核心句+加练句），随机抽一句；若有课程专属习题优先使用
+ */
+function getTranslationSentences(activityId) {
+  try {
+    const lesson1 = require('../data/liveLesson1Exercises.js');
+    if (activityId === 'lesson1' && lesson1.TRANSLATION_ALL && lesson1.TRANSLATION_ALL.length > 0) {
+      return lesson1.TRANSLATION_ALL;
+    }
+  } catch (e) {}
+
+  const activity = getActivityById(activityId);
+  const seg = getSegmentConfig(activity, SEGMENT_TYPES.TRANSLATION);
+  const sentences = (seg && seg.sentences && seg.sentences.length) ? seg.sentences : require('../config/liveActivityConfig.js').DEFAULT_TRANSLATION_SENTENCES;
+  return sentences;
+}
+
+function pickOneTranslation(sentences) {
+  if (!sentences || sentences.length === 0) return null;
+  const idx = Math.floor(Math.random() * sentences.length);
+  return { index: idx, ...sentences[idx] };
+}
+
+/**
+ * 保存提交结果到本地（云未配置时可先仅本地）
+ */
+function saveResult(activityId, segmentType, payload) {
+  const openid = getOpenId();
+  const key = `${STORAGE_KEY_PREFIX}${activityId}_${segmentType}`;
+  const record = {
+    activityId,
+    segmentType,
+    openid,
+    ...payload,
+    submitTime: new Date().toISOString()
+  };
+  try {
+    wx.setStorageSync(key, record);
+    markLessonCompleted(activityId);
+  } catch (e) {
+    console.warn('saveResult storage fail', e);
+  }
+  return record;
+}
+
+/**
+ * 课前检测结果 key 单独，便于对比
+ */
+function savePreTestResult(activityId, score, total, questionResults) {
+  const openid = getOpenId();
+  const key = `${STORAGE_PRE_TEST_PREFIX}${activityId}`;
+  const record = {
+    activityId,
+    openid,
+    score,
+    total,
+    correctRate: total > 0 ? Math.round((score / total) * 100) : 0,
+    questionResults: questionResults || [],
+    submitTime: new Date().toISOString()
+  };
+  try {
+    wx.setStorageSync(key, record);
+    markLessonCompleted(activityId);
+  } catch (e) {
+    console.warn('savePreTestResult storage fail', e);
+  }
+  return record;
+}
+
+/** 标记某节课已使用（任意环节完成即算），用于课程列表显示对勾 */
+function markLessonCompleted(activityId) {
+  if (!activityId) return;
+  try {
+    const raw = wx.getStorageSync(STORAGE_COMPLETED_LESSONS);
+    const set = raw && Array.isArray(raw) ? [...raw] : [];
+    if (!set.includes(activityId)) {
+      set.push(activityId);
+      wx.setStorageSync(STORAGE_COMPLETED_LESSONS, set);
+    }
+  } catch (e) {
+    console.warn('markLessonCompleted fail', e);
+  }
+}
+
+/** 已使用过的课程 id 列表（用于课程卡片显示对勾） */
+function getCompletedLessonIds() {
+  try {
+    const raw = wx.getStorageSync(STORAGE_COMPLETED_LESSONS);
+    return raw && Array.isArray(raw) ? raw : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function getPreTestResult(activityId) {
+  try {
+    return wx.getStorageSync(`${STORAGE_PRE_TEST_PREFIX}${activityId}`) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function getSegmentResult(activityId, segmentType) {
+  try {
+    return wx.getStorageSync(`${STORAGE_KEY_PREFIX}${activityId}_${segmentType}`) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/** 兜底：选择题 */
+function getFallbackChoiceQuestions(limit) {
+  const all = [
+    { _id: 'f1', text: 'He ____ to school every day.', option: ['go', 'goes', 'going', 'went'], answer: 'goes', analysis: '第三人称单数', tag: '一般现在时' },
+    { _id: 'f2', text: 'She ____ TV yesterday.', option: ['watch', 'watches', 'watched', 'watching'], answer: 'watched', analysis: '过去时', tag: '一般过去时' },
+    { _id: 'f3', text: 'They ____ playing football now.', option: ['is', 'are', 'was', 'were'], answer: 'are', analysis: '现在进行时', tag: '现在进行时' },
+    { _id: 'f4', text: 'I ____ already ____ my homework.', option: ['have, finish', 'has, finished', 'have, finished', 'had, finished'], answer: 'have, finished', analysis: '现在完成时', tag: '现在完成时' },
+    { _id: 'f5', text: 'The book ____ by Tom last week.', option: ['reads', 'is read', 'was read', 'read'], answer: 'was read', analysis: '被动语态', tag: '被动语态' },
+    { _id: 'f6', text: 'We ____ to the park if it is fine tomorrow.', option: ['go', 'went', 'will go', 'going'], answer: 'will go', analysis: '一般将来时', tag: '一般将来时' },
+    { _id: 'f7', text: 'My mother ____ cooking when I got home.', option: ['is', 'was', 'are', 'were'], answer: 'was', analysis: '过去进行时', tag: '过去进行时' },
+    { _id: 'f8', text: 'Lucy ____ English for three years.', option: ['learns', 'has learned', 'learned', 'will learn'], answer: 'has learned', analysis: '现在完成时', tag: '现在完成时' },
+    { _id: 'f9', text: 'There ____ a meeting tomorrow.', option: ['is', 'will be', 'was', 'are'], answer: 'will be', analysis: 'There be 将来时', tag: 'There be句型' },
+    { _id: 'f10', text: 'The room ____ every day.', option: ['cleans', 'is cleaned', 'cleaned', 'cleaning'], answer: 'is cleaned', analysis: '被动语态', tag: '被动语态' }
+  ];
+  return all.slice(0, limit);
+}
+
+/** 兜底：填空题 */
+function getFallbackFillQuestions(limit) {
+  const all = [
+    { _id: 'fill1', text: 'He ____ (go) to school every day.', blanks: ['goes'], analysis: '第三人称单数加 s' },
+    { _id: 'fill2', text: 'She ____ (watch) TV yesterday.', blanks: ['watched'], analysis: '过去时' },
+    { _id: 'fill3', text: 'They ____ (play) football now.', blanks: ['are playing'], analysis: '现在进行时' },
+    { _id: 'fill4', text: 'I ____ already ____ (finish) my homework.', blanks: ['have', 'finished'], analysis: '现在完成时' },
+    { _id: 'fill5', text: 'The window ____ (break) by the boy.', blanks: ['was broken'], analysis: '被动语态' },
+    { _id: 'fill6', text: 'We ____ (visit) the museum next week.', blanks: ['will visit'], analysis: '一般将来时' },
+    { _id: 'fill7', text: 'My sister ____ (read) when I came in.', blanks: ['was reading'], analysis: '过去进行时' },
+    { _id: 'fill8', text: 'He ____ (live) here since 2020.', blanks: ['has lived'], analysis: '现在完成时' },
+    { _id: 'fill9', text: 'There ____ (be) two books on the desk.', blanks: ['are'], analysis: 'There be' },
+    { _id: 'fill10', text: 'The letter ____ (write) by him.', blanks: ['was written'], analysis: '被动语态' }
+  ];
+  return all.slice(0, limit).map(q => ({ ...q, text: q.text, blanks: q.blanks }));
+}
+
+/** 数字转英文单词（用于翻译宽松比对） */
+const NUM_WORDS = { '0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four', '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine', '10': 'ten', '11': 'eleven', '12': 'twelve' };
+function normalizeForTranslation(s) {
+  if (!s || typeof s !== 'string') return '';
+  let t = s.trim().toLowerCase().replace(/\s+/g, ' ').replace(/['']/g, "'");
+  t = t.replace(/[.!?,;]+$/g, '').trim();
+  t = t.replace(/\beveryday\b/g, 'every day');
+  Object.keys(NUM_WORDS).forEach(num => {
+    const word = NUM_WORDS[num];
+    const re = new RegExp('\\b' + num + '\\b', 'g');
+    t = t.replace(re, word);
+  });
+  return t;
+}
+
+/** 翻译答案宽松比对（忽略大小写、空格、句号、everyday/every day、数字与单词） */
+function matchTranslation(userAnswer, correctEn) {
+  const r = matchTranslationWithHint(userAnswer, correctEn);
+  return r.match;
+}
+
+/** 翻译比对并返回错误提示（首字母、数字、everyday、句号等） */
+function matchTranslationWithHint(userAnswer, correctEn) {
+  if (!userAnswer || !correctEn) {
+    return { match: false, hint: ['请填写答案'] };
+  }
+  const u = normalizeForTranslation(userAnswer);
+  const c = normalizeForTranslation(correctEn);
+  if (u === c) return { match: true, hint: [] };
+
+  const hints = [];
+  const rawUser = String(userAnswer).trim();
+  const rawCorrect = String(correctEn).trim();
+  if (rawCorrect.length > 0 && rawUser.length > 0) {
+    const correctFirst = rawCorrect[0];
+    if (correctFirst === correctFirst.toUpperCase() && rawUser[0] !== rawUser[0].toUpperCase()) {
+      hints.push('句首首字母需大写');
+    }
+  }
+  if (/\d/.test(rawUser) && /(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)/.test(correctEn.toLowerCase())) {
+    hints.push('数字建议用英文单词（如 7→seven）');
+  }
+  if (/\beveryday\b/i.test(rawUser) && /\bevery day\b/i.test(correctEn)) {
+    hints.push('everyday（形容词/副词）与 every day（每天）不同，此处应为 every day');
+  }
+  if (rawCorrect.slice(-1) === '.' && rawUser.slice(-1) !== '.') {
+    hints.push('句末可加句号');
+  }
+  if (hints.length === 0) hints.push('请对照正确答案检查拼写或表达');
+  return { match: false, hint: hints };
+}
+
+/** 环节顺序（连贯流程用） */
+const SEGMENT_ORDER = [
+  SEGMENT_TYPES.PRE_CLASS_TEST,
+  SEGMENT_TYPES.KEYWORD_CHECK,
+  SEGMENT_TYPES.FILL_RULE,
+  SEGMENT_TYPES.FILL_REAL,
+  SEGMENT_TYPES.TRANSLATION
+];
+
+const SEGMENT_NAMES = {
+  [SEGMENT_TYPES.PRE_CLASS_TEST]: '课前·真题检测',
+  [SEGMENT_TYPES.KEYWORD_CHECK]: '课中·关键词识别',
+  [SEGMENT_TYPES.FILL_RULE]: '课中·填空运用规则',
+  [SEGMENT_TYPES.FILL_REAL]: '课中·真题填空',
+  [SEGMENT_TYPES.TRANSLATION]: '课中·翻译题'
+};
+
+/** 当前活动第一个未完成的环节，用于进入后自动跳转 */
+function getFirstIncompleteSegment(activityId) {
+  if (!activityId) return null;
+  const order = SEGMENT_ORDER;
+  for (let i = 0; i < order.length; i++) {
+    const type = order[i];
+    const done = type === SEGMENT_TYPES.PRE_CLASS_TEST
+      ? getPreTestResult(activityId)
+      : getSegmentResult(activityId, type);
+    if (!done) {
+      return { segmentType: type, name: SEGMENT_NAMES[type] || type };
+    }
+  }
+  return null;
+}
+
+/** 当前环节的下一环节类型（用于「下一环节」按钮） */
+function getNextSegmentType(currentSegmentType) {
+  const idx = SEGMENT_ORDER.indexOf(currentSegmentType);
+  if (idx === -1 || idx >= SEGMENT_ORDER.length - 1) return null;
+  return SEGMENT_ORDER[idx + 1];
+}
+
+/** 环节类型 → 页面路径（不含 query） */
+function getSegmentPagePath(segmentType) {
+  const paths = {
+    [SEGMENT_TYPES.PRE_CLASS_TEST]: '/pages/live/pre-test/index',
+    [SEGMENT_TYPES.KEYWORD_CHECK]: '/pages/live/keyword-check/index',
+    [SEGMENT_TYPES.FILL_RULE]: '/pages/live/fill-rule/index',
+    [SEGMENT_TYPES.FILL_REAL]: '/pages/live/fill-real/index',
+    [SEGMENT_TYPES.TRANSLATION]: '/pages/live/translation/index'
+  };
+  return paths[segmentType] || '';
+}
+
+module.exports = {
+  parseActivityId,
+  getActivityConfig,
+  getPreTestQuestions,
+  getKeywordCheckQuestions,
+  getFillQuestions,
+  getTranslationSentences,
+  pickOneTranslation,
+  saveResult,
+  savePreTestResult,
+  getPreTestResult,
+  getSegmentResult,
+  getOpenId,
+  matchTranslation,
+  matchTranslationWithHint,
+  markLessonCompleted,
+  getCompletedLessonIds,
+  getFirstIncompleteSegment,
+  getNextSegmentType,
+  getSegmentPagePath,
+  SEGMENT_ORDER,
+  SEGMENT_TYPES
+};
