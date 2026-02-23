@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/main/index",
-    "pages/live-course-list/index",
     "pages/index/index",
     "pages/grammar-select/index",
     "pages/grammar-overview/index",
@@ -74,7 +73,7 @@
       "root": "pages/live",
       "name": "live",
       "pages": [
-        "activity-index/index",
+        "course-list/index","activity-index/index",
         "real-exam-prep/index",
         "signal-word/index",
         "plural-form/index",

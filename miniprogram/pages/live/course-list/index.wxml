@@ -1,6 +1,6 @@
 <view class="container">
   <view class="header">
-    <text class="title">十四节直播课</text>
+    <text class="title">课堂配套练习</text>
     <text class="subtitle">点击课程进入当节课流程，可重复练习</text>
   </view>
   <view class="lesson-list">

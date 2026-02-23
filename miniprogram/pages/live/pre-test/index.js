@@ -1,5 +1,5 @@
 // 课前真题检测：做题 + 提交 + 结果（防重复）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 Page({

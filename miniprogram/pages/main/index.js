@@ -25,10 +25,10 @@ Page({
     });
   },
 
-  // 跳转到雅雅会考直播配套：十四节课列表
+  // 跳转到雅雅会考配套练习：课堂配套练习列表
   goToLiveCourseList() {
     wx.navigateTo({
-      url: '/pages/live-course-list/index'
+      url: '/pages/live/course-list/index'
     });
   }
 });

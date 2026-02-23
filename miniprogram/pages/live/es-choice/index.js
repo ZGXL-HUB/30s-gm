@@ -1,5 +1,5 @@
 // 第五环节：书写名词复数·单选题（2组，es规则，正确率不存云端）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 function getEncourage(rate) {

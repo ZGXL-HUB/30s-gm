@@ -1,10 +1,5 @@
-// 轻量级 Markdown 转纯文本工具
-// 注意：这是针对当前学案生成场景定制的实现，尽量保持简单以控制小程序包体积
-//
-// 使用位置：
-// - pages/teacher/teacher-generate-material/index.js (第1616行)
-// - pages/teacher-materials/index.js (第620行)
-// - pages/teacher/teacher-materials/index.js (第446行)
+// 轻量级 Markdown 转纯文本工具（教师分包内，减少主包体积）
+// 使用位置：teacher-materials、teacher-generate-material
 
 function stripMarkdown(md) {
   if (!md) return '';
@@ -45,5 +40,3 @@ function stripMarkdown(md) {
 module.exports = {
   stripMarkdown
 };
-
-

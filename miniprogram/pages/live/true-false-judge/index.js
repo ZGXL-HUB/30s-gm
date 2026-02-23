@@ -1,5 +1,5 @@
 // 第四环节：正误判断（3组，√×判断句子是否符合 some/many/数字+名词复数，正确率不存云端）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 function getEncourage(rate) {

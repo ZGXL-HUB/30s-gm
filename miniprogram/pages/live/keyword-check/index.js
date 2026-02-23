@@ -1,5 +1,5 @@
 // 关键词识别：8 道选择题 + 2 道反馈题
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 Page({

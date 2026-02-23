@@ -1,5 +1,5 @@
 // 直播课 · 活动首页（连贯流程：自动进入第一个未完成环节，全部完成后可再练）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 
 Page({
   data: {
@@ -15,6 +15,7 @@ Page({
     const activityId = liveService.parseActivityId(scene, options) || options.activityId || 'lesson1';
     const activity = liveService.getActivityConfig(activityId);
     const showMenu = options.showMenu === '1' || options.showMenu === 'true';
+    const restart = options.restart === '1' || options.restart === 'true';
 
     if (!activity) {
       this.setData({
@@ -36,6 +37,11 @@ Page({
       });
       wx.setNavigationBarTitle({ title: activity.lessonName || '直播课' });
       return;
+    }
+
+    // 传 restart=1 时清除本课本地进度，从第一环节重新开始（解决真机因本地有旧进度而直接进第六环节的问题）
+    if (restart) {
+      liveService.clearSegmentProgress(activityId);
     }
 
     const first = liveService.getFirstIncompleteSegment(activityId);
@@ -62,8 +68,16 @@ Page({
     }
   },
 
+  /** 清除本课进度并跳转到第一环节（解决真机因本地有旧进度而直接进第六环节的问题） */
+  restartFromFirst() {
+    const { activityId } = this.data;
+    if (!activityId) return;
+    liveService.clearSegmentProgress(activityId);
+    wx.redirectTo({ url: `/pages/live/activity-index/index?activityId=${activityId}` });
+  },
+
   backToCourseList() {
-    wx.navigateBack({ fail: () => wx.reLaunch({ url: '/pages/live-course-list/index' }) });
+    wx.navigateBack({ fail: () => wx.reLaunch({ url: '/pages/live/course-list/index' }) });
   },
 
   onShareAppMessage() {

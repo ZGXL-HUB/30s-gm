@@ -1,5 +1,5 @@
 // 翻译题：随机抽一句 → 书写 → 核对 → 加练 → 完成页（打卡/分享）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 
 const MAX_EXTRA = 2; // 最多加练 2 句
 
@@ -80,7 +80,7 @@ Page({
   },
 
   backToCourseList() {
-    wx.redirectTo({ url: '/pages/live-course-list/index' });
+    wx.redirectTo({ url: '/pages/live/course-list/index' });
   },
 
   onShareAppMessage() {

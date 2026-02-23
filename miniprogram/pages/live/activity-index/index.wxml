@@ -10,6 +10,7 @@
       <view class="badge">本课已全部完成</view>
     </view>
     <view class="subtitle">可点击下方环节再次练习</view>
+    <button class="btn restart-from-first" bindtap="restartFromFirst">从第一环节重新开始</button>
     <view class="segments">
       <view
         wx:for="{{activity.segments}}"

@@ -1,5 +1,5 @@
 // 第七环节：真题再练（填空，与第一环节对比，存本地+星级，无解析）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 /** 多空答案顺序无关：同一分句内只要包含所有正确答案即算对，每个标准答案最多匹配一次 */

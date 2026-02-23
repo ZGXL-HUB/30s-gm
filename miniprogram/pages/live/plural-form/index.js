@@ -1,5 +1,5 @@
 // 第三环节：复数形式识别（3组，点击句中 some/many/数字 修饰的名词复数，正确率不存云端）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 function normalize(s) {

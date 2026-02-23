@@ -26,13 +26,17 @@
 .lesson-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24rpx;
+  width: 100%;
 }
 
+/* 第一课卡片：固定为界面宽度的 45%（"第1课"所在容器） */
 .lesson-card {
-  width: calc(50% - 12rpx);
+  width: 45vw;
+  min-width: 45vw;
   box-sizing: border-box;
+  flex: 0 0 auto;
   background: #fff;
   border-radius: 20rpx;
   padding: 28rpx 24rpx;

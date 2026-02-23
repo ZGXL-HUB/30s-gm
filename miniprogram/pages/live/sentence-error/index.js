@@ -1,5 +1,5 @@
 // 第八环节：帮同学找出表达里的错误（5句，点击句中错误词汇，正确率不存云端）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 function normalize(s) {

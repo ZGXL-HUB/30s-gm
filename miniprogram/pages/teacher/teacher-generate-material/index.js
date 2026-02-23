@@ -1,5 +1,5 @@
 // 统一学案生成流程页面
-const { stripMarkdown } = require('../../../utils/markdown.js');
+const { stripMarkdown } = require('../utils/markdown.js');
 
 Page({
   data: {

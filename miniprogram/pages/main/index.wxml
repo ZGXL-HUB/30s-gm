@@ -24,11 +24,11 @@
       <view class="card-arrow">→</view>
     </view>
 
-    <!-- 雅雅会考直播配套 -->
+    <!-- 雅雅会考配套练习 -->
     <view class="card live-card" bindtap="goToLiveCourseList">
       <view class="card-icon">🎬</view>
-      <view class="card-title">雅雅会考直播配套</view>
-      <view class="card-desc">十四节直播课 • 课前检测 • 翻译打卡</view>
+      <view class="card-title">雅雅会考配套练习</view>
+      <view class="card-desc">课堂配套练习 • 课前检测 • 翻译打卡</view>
       <view class="card-arrow">→</view>
     </view>
   </view>

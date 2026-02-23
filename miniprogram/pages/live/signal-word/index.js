@@ -1,5 +1,5 @@
 // 第二环节：标志词识别（3组，点击句中标志词判对错，正确率不存云端）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 function normalize(s) {

@@ -1,5 +1,5 @@
 // 第十环节：一句话卡片（1句10空填空，完成后本课显示为已完成）
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 /** 多空答案顺序无关：同一分句内只要包含所有正确答案即算对，每个标准答案最多匹配一次 */

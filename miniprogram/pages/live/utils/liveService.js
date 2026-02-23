@@ -1,9 +1,10 @@
 /**
  * 直播课活动 · 学生端服务
  * 活动配置、题目拉取、提交记录（含 openid）
+ * 位置：live 分包内，避免主包「未使用 JS」报错
  */
 const { getActivityById, getSegmentConfig, SEGMENT_TYPES, LESSON1_SEGMENTS } = require('../config/liveActivityConfig.js');
-const cloudDataLoader = require('./cloudDataLoader.js');
+const cloudDataLoader = require('../../../utils/cloudDataLoader.js');
 
 const STORAGE_KEY_PREFIX = 'live_result_';
 const STORAGE_PRE_TEST_PREFIX = 'live_pre_test_';
@@ -23,9 +24,6 @@ function getOpenId() {
 
 /**
  * 解析扫码进入的 scene（小程序码场景值）或 query
- * @param {string} scene - 扫码时的 scene
- * @param {object} query - 页面 onLoad 的 options
- * @returns {string|null} activityId
  */
 function parseActivityId(scene, query) {
   if (query && query.activityId) return query.activityId;
@@ -37,30 +35,21 @@ function parseActivityId(scene, query) {
   return scene;
 }
 
-/**
- * 获取活动配置
- */
 function getActivityConfig(activityId) {
   return getActivityById(activityId);
 }
 
-/**
- * 课前真题检测：拉取选择题/改错题（真题变式）
- * 若存在课程专属习题（如 data/liveLesson1Exercises.js），优先使用；否则云/兜底
- */
 async function getPreTestQuestions(activityId, limit = 10) {
   const activity = getActivityById(activityId);
   const segment = getSegmentConfig(activity, SEGMENT_TYPES.PRE_CLASS_TEST);
   const num = (segment && segment.limit) ? segment.limit : limit;
 
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     if (activityId === 'lesson1' && lesson1.PRE_TEST && lesson1.PRE_TEST.length > 0) {
       return lesson1.PRE_TEST.slice(0, num);
     }
-  } catch (e) {
-    // 无专属习题或文件不存在，继续走云/兜底
-  }
+  } catch (e) {}
 
   const grammarPoint = (activity && activity.grammarPoint) ? activity.grammarPoint : '一般现在时';
   const schoolLevel = (activity && activity.schoolLevel) ? activity.schoolLevel : 'middle';
@@ -86,13 +75,9 @@ async function getPreTestQuestions(activityId, limit = 10) {
   return getFallbackChoiceQuestions(num);
 }
 
-/**
- * 关键词识别：8 道选择题 + 2 道反馈题
- * 若存在课程专属习题（如 lesson1），优先使用
- */
 function getKeywordCheckQuestions(activityId) {
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     if (activityId === 'lesson1' && lesson1.KEYWORD_CHOICE && lesson1.KEYWORD_FEEDBACK) {
       return { choice: lesson1.KEYWORD_CHOICE, feedback: lesson1.KEYWORD_FEEDBACK };
     }
@@ -115,16 +100,13 @@ function getKeywordCheckQuestions(activityId) {
   return { choice, feedback };
 }
 
-/**
- * 填空运用 / 真题填空：若有课程专属习题优先使用，否则按语法点拉填空或兜底
- */
 async function getFillQuestions(activityId, segmentType, limit = 10) {
   const activity = getActivityById(activityId);
   const seg = activity && activity.segments ? activity.segments.find(s => s.type === segmentType) : null;
   const num = (seg && seg.limit) ? seg.limit : limit;
 
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     if (activityId === 'lesson1') {
       if (segmentType === SEGMENT_TYPES.FILL_RULE && lesson1.FILL_RULE && lesson1.FILL_RULE.length > 0) {
         return lesson1.FILL_RULE.slice(0, num).map(q => ({ ...q, blanks: q.blanks || [] }));
@@ -165,12 +147,9 @@ function normalizeFillQuestion(q) {
   };
 }
 
-/**
- * 翻译题：本课例句（核心句+加练句），随机抽一句；若有课程专属习题优先使用
- */
 function getTranslationSentences(activityId) {
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     if (activityId === 'lesson1' && lesson1.TRANSLATION_ALL && lesson1.TRANSLATION_ALL.length > 0) {
       return lesson1.TRANSLATION_ALL;
     }
@@ -188,9 +167,6 @@ function pickOneTranslation(sentences) {
   return { index: idx, ...sentences[idx] };
 }
 
-/**
- * 保存提交结果到本地（云未配置时可先仅本地）
- */
 function saveResult(activityId, segmentType, payload) {
   const openid = getOpenId();
   const key = `${STORAGE_KEY_PREFIX}${activityId}_${segmentType}`;
@@ -210,9 +186,6 @@ function saveResult(activityId, segmentType, payload) {
   return record;
 }
 
-/**
- * 课前检测结果 key 单独，便于对比
- */
 function savePreTestResult(activityId, score, total, questionResults) {
   const openid = getOpenId();
   const key = `${STORAGE_PRE_TEST_PREFIX}${activityId}`;
@@ -234,7 +207,6 @@ function savePreTestResult(activityId, score, total, questionResults) {
   return record;
 }
 
-/** 标记某节课已使用（任意环节完成即算），用于课程列表显示对勾 */
 function markLessonCompleted(activityId) {
   if (!activityId) return;
   try {
@@ -249,7 +221,6 @@ function markLessonCompleted(activityId) {
   }
 }
 
-/** 已使用过的课程 id 列表（用于课程卡片显示对勾） */
 function getCompletedLessonIds() {
   try {
     const raw = wx.getStorageSync(STORAGE_COMPLETED_LESSONS);
@@ -275,7 +246,6 @@ function getSegmentResult(activityId, segmentType) {
   }
 }
 
-/** 兜底：选择题 */
 function getFallbackChoiceQuestions(limit) {
   const all = [
     { _id: 'f1', text: 'He ____ to school every day.', option: ['go', 'goes', 'going', 'went'], answer: 'goes', analysis: '第三人称单数', tag: '一般现在时' },
@@ -292,7 +262,6 @@ function getFallbackChoiceQuestions(limit) {
   return all.slice(0, limit);
 }
 
-/** 兜底：填空题 */
 function getFallbackFillQuestions(limit) {
   const all = [
     { _id: 'fill1', text: 'He ____ (go) to school every day.', blanks: ['goes'], analysis: '第三人称单数加 s' },
@@ -309,7 +278,6 @@ function getFallbackFillQuestions(limit) {
   return all.slice(0, limit).map(q => ({ ...q, text: q.text, blanks: q.blanks }));
 }
 
-/** 数字转英文单词（用于翻译宽松比对） */
 const NUM_WORDS = { '0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four', '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine', '10': 'ten', '11': 'eleven', '12': 'twelve' };
 function normalizeForTranslation(s) {
   if (!s || typeof s !== 'string') return '';
@@ -324,13 +292,11 @@ function normalizeForTranslation(s) {
   return t;
 }
 
-/** 翻译答案宽松比对（忽略大小写、空格、句号、everyday/every day、数字与单词） */
 function matchTranslation(userAnswer, correctEn) {
   const r = matchTranslationWithHint(userAnswer, correctEn);
   return r.match;
 }
 
-/** 翻译比对并返回错误提示（首字母、数字、everyday、句号等） */
 function matchTranslationWithHint(userAnswer, correctEn) {
   if (!userAnswer || !correctEn) {
     return { match: false, hint: ['请填写答案'] };
@@ -361,7 +327,6 @@ function matchTranslationWithHint(userAnswer, correctEn) {
   return { match: false, hint: hints };
 }
 
-/** 环节顺序（连贯流程用），非第一课使用 */
 const SEGMENT_ORDER = [
   SEGMENT_TYPES.PRE_CLASS_TEST,
   SEGMENT_TYPES.KEYWORD_CHECK,
@@ -370,7 +335,6 @@ const SEGMENT_ORDER = [
   SEGMENT_TYPES.TRANSLATION
 ];
 
-/** 第一课环节顺序（含第一、第二环节） */
 const LESSON1_ORDER = (LESSON1_SEGMENTS || []).map(s => s.type);
 
 function getSegmentOrder(activityId) {
@@ -395,7 +359,6 @@ const SEGMENT_NAMES = {
   [SEGMENT_TYPES.TRANSLATION]: '课中·翻译题'
 };
 
-/** 当前活动第一个未完成的环节，用于进入后自动跳转 */
 function getFirstIncompleteSegment(activityId) {
   if (!activityId) return null;
   const order = getSegmentOrder(activityId);
@@ -418,7 +381,6 @@ function getFirstIncompleteSegment(activityId) {
   return null;
 }
 
-/** 当前环节的下一环节类型（用于「下一环节」按钮） */
 function getNextSegmentType(currentSegmentType, activityId) {
   const order = getSegmentOrder(activityId || 'lesson1');
   const idx = order.indexOf(currentSegmentType);
@@ -426,7 +388,6 @@ function getNextSegmentType(currentSegmentType, activityId) {
   return order[idx + 1];
 }
 
-/** 环节类型 → 页面路径（不含 query） */
 function getSegmentPagePath(segmentType) {
   const paths = {
     [SEGMENT_TYPES.REAL_EXAM_PREPRACTICE]: '/pages/live/real-exam-prep/index',
@@ -448,11 +409,10 @@ function getSegmentPagePath(segmentType) {
   return paths[segmentType] || '';
 }
 
-/** 第一环节：真题预练题目（仅 lesson1） */
 function getRealExamPrepracticeQuestions(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return (lesson1.REAL_EXAM_PREPRACTICE || []).map(q => ({
       ...q,
       blanks: Array.isArray(q.blanks) ? q.blanks : [q.blanks]
@@ -462,77 +422,70 @@ function getRealExamPrepracticeQuestions(activityId) {
   }
 }
 
-/** 第一环节提示文案 */
 function getRealExamPrepracticeHint(activityId) {
   if (activityId !== 'lesson1') return '';
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.REAL_EXAM_PREPRACTICE_HINT || '';
   } catch (e) {
     return '';
   }
 }
 
-/** 第二环节：标志词识别三组题目（仅 lesson1） */
 function getSignalWordGroups(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.SIGNAL_WORD_GROUPS || [];
   } catch (e) {
     return [];
   }
 }
 
-/** 第三环节：复数形式识别三组题目（仅 lesson1） */
 function getPluralFormGroups(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.PLURAL_FORM_GROUPS || [];
   } catch (e) {
     return [];
   }
 }
 
-/** 第四环节：正误判断三组题目（仅 lesson1） */
 function getTrueFalseGroups(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.TRUE_FALSE_GROUPS || [];
   } catch (e) {
     return [];
   }
 }
 
-/** 第五环节：es 规则选择题两组（仅 lesson1） */
 function getEsChoiceGroups(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.ES_CHOICE_GROUPS || [];
   } catch (e) {
     return [];
   }
 }
 
-/** 第六环节：模拟演练填空两组（仅 lesson1） */
 function getFillMockGroups(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.FILL_MOCK_GROUPS || [];
   } catch (e) {
     return [];
   }
 }
 
-/** 第七环节：真题再练题目（仅 lesson1） */
 function getRealRetestQuestions(activityId) {
   if (activityId !== 'lesson1') return [];
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return (lesson1.REAL_RETEST || []).map(q => ({
       ...q,
       blanks: Array.isArray(q.blanks) ? q.blanks : [q.blanks]
@@ -542,22 +495,20 @@ function getRealRetestQuestions(activityId) {
   }
 }
 
-/** 第七环节提示文案 */
 function getRealRetestHint(activityId) {
   if (activityId !== 'lesson1') return '';
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return lesson1.REAL_RETEST_HINT || '';
   } catch (e) {
     return '';
   }
 }
 
-/** 第八环节：帮同学找错句子（仅 lesson1） */
 function getSentenceErrorData(activityId) {
   if (activityId !== 'lesson1') return { sentences: [], hint: '' };
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     return {
       sentences: lesson1.SENTENCE_ERROR_SENTENCES || [],
       hint: lesson1.SENTENCE_ERROR_HINT || ''
@@ -567,11 +518,10 @@ function getSentenceErrorData(activityId) {
   }
 }
 
-/** 第九环节：学以致用填空（仅 lesson1，5题10空） */
 function getApplyUseData(activityId) {
   if (activityId !== 'lesson1') return { questions: [], hint: '' };
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     const questions = (lesson1.APPLY_USE_QUESTIONS || []).map(q => ({
       ...q,
       blanks: Array.isArray(q.blanks) ? q.blanks : [q.blanks]
@@ -585,11 +535,10 @@ function getApplyUseData(activityId) {
   }
 }
 
-/** 第十环节：一句话卡片填空（仅 lesson1，1句10空） */
 function getSummaryCardData(activityId) {
   if (activityId !== 'lesson1') return null;
   try {
-    const lesson1 = require('../data/liveLesson1Exercises.js');
+    const lesson1 = require('../../../data/liveLesson1Exercises.js');
     const card = lesson1.SUMMARY_CARD;
     if (!card) return null;
     return {
@@ -602,7 +551,6 @@ function getSummaryCardData(activityId) {
   }
 }
 
-/** 计算第一课星级：退步1星、持平2星、进步3星 */
 function computeLesson1Stars(firstRate, retestRate) {
   if (firstRate == null || retestRate == null) return 2;
   if (retestRate > firstRate) return 3;
@@ -610,7 +558,6 @@ function computeLesson1Stars(firstRate, retestRate) {
   return 2;
 }
 
-/** 保存第七环节正确率到本地，与第一环节对比，并写入星级到第一课入口卡片 */
 function saveRealRetestResult(activityId, correctRate, score, total) {
   const key = `${STORAGE_RETEST_RATE}${activityId}`;
   try {
@@ -635,7 +582,6 @@ function saveRealRetestResult(activityId, correctRate, score, total) {
   }
 }
 
-/** 读取第七环节结果（本地） */
 function getRealRetestResult(activityId) {
   try {
     const key = `${STORAGE_RETEST_RATE}${activityId}`;
@@ -645,7 +591,6 @@ function getRealRetestResult(activityId) {
   }
 }
 
-/** 第一课入口卡片显示的星级（1/2/3），无则为 null */
 function getLesson1Stars(activityId) {
   if (activityId !== 'lesson1') return null;
   try {
@@ -658,7 +603,6 @@ function getLesson1Stars(activityId) {
   }
 }
 
-/** 保存第一环节正确率到本地（仅本地，不上传），供最后环节对比 */
 function saveRealExamPrepracticeResult(activityId, correctRate, score, total) {
   const key = `${STORAGE_PREPRACTICE_RATE}${activityId}`;
   try {
@@ -675,13 +619,35 @@ function saveRealExamPrepracticeResult(activityId, correctRate, score, total) {
   }
 }
 
-/** 读取第一环节正确率（本地） */
 function getRealExamPrepracticeResult(activityId) {
   try {
     const key = `${STORAGE_PREPRACTICE_RATE}${activityId}`;
     return wx.getStorageSync(key) || null;
   } catch (e) {
     return null;
+  }
+}
+
+function clearSegmentProgress(activityId) {
+  if (!activityId) return;
+  try {
+    const order = getSegmentOrder(activityId);
+    order.forEach((segmentType) => {
+      wx.removeStorageSync(`${STORAGE_KEY_PREFIX}${activityId}_${segmentType}`);
+    });
+    wx.removeStorageSync(`${STORAGE_PRE_TEST_PREFIX}${activityId}`);
+    wx.removeStorageSync(`${STORAGE_PREPRACTICE_RATE}${activityId}`);
+    wx.removeStorageSync(`${STORAGE_RETEST_RATE}${activityId}`);
+    if (activityId === 'lesson1') {
+      wx.removeStorageSync(STORAGE_LESSON1_STARS);
+    }
+    const raw = wx.getStorageSync(STORAGE_COMPLETED_LESSONS);
+    if (raw && Array.isArray(raw)) {
+      const set = raw.filter((id) => id !== activityId);
+      wx.setStorageSync(STORAGE_COMPLETED_LESSONS, set);
+    }
+  } catch (e) {
+    console.warn('clearSegmentProgress fail', e);
   }
 }
 
@@ -723,6 +689,7 @@ module.exports = {
   getLesson1Stars,
   saveRealExamPrepracticeResult,
   getRealExamPrepracticeResult,
+  clearSegmentProgress,
   SEGMENT_ORDER,
   SEGMENT_TYPES
 };

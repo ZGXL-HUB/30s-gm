@@ -1,5 +1,5 @@
 // 真题填空：填空 + 即时核对 + 与课前正确率对比 + 挽留
-const liveService = require('../../../utils/liveService.js');
+const liveService = require('../../utils/liveService.js');
 const sound = require('../../../utils/sound.js');
 
 /** 多空答案顺序无关：同一分句内只要包含所有正确答案即算对，每个标准答案最多匹配一次 */
